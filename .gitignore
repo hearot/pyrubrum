@@ -127,3 +127,14 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Visual Studio Code
+.vscode
+
+# Pyrogram session
+*.session
+*.session-journal
+unknown_errors.txt
+
+# Pyroboard private examples
+*_private.py
