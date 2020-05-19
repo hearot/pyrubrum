@@ -16,24 +16,36 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
-from pyrogram import CallbackQueryHandler, Client, Filters
-from typing import Any, Callable, List
+from .base_handler import BaseHandler, pass_handler
+from dataclasses import dataclass
+from pyrogram import (Client, CallbackQueryHandler, # noqa
+                      CallbackQuery, MessageHandler)
+from pyrogram.client.filters.filters import create
+import re
+
+CALLBACK_REGEX = r"%s(?:%s?-?[\d]+)*"
 
 
-class BaseHandler:
-    def get_menus(self) -> List['BaseMenu']:
-        raise NotImplementedError
+@dataclass
+class ParameterizedHandler(BaseHandler):
+    separator: str = "|"
 
     def setup(self, client: Client):
         for menu in self.get_menus():
             client.add_handler(CallbackQueryHandler(
                 pass_handler(menu.process, self),
-                Filters.callback_data(str(hash(menu)))))
+                callback_data_regex(
+                    CALLBACK_REGEX % (str(hash(menu)),
+                                      re.escape(self.separator)))))
 
 
-def pass_handler(func: Callable[[Client, Any], None],
-                 handler: BaseHandler) -> Callable[[Client, Any], None]:
-    def process(client: Client, context):
-        func(handler, client, context)
+def callback_data_regex(pattern, flags: int = 0):
+    def func(flt, callback: CallbackQuery):
+        if callback.data:
+            callback.matches = list(
+                flt.p.finditer(callback.data)) or None
 
-    return process
+        return bool(callback.matches)
+
+    return create(func, "CallbackDataRegexFilter",
+                  p=re.compile(pattern, flags))

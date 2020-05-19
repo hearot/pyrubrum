@@ -20,7 +20,7 @@ from .base_menu import BaseMenu
 from .base_handler import BaseHandler, pass_handler
 from .node import Node, Optional
 from dataclasses import dataclass
-from pyrogram import CallbackQueryHandler, Client, Filters, MessageHandler
+from pyrogram import Client, MessageHandler
 from typing import Any, Dict, List, Tuple
 
 
@@ -36,10 +36,7 @@ class TreeHandler(BaseHandler):
         return self.main_node.get_menus()
 
     def setup(self, client: Client):
-        for menu in self.get_menus():
-            client.add_handler(CallbackQueryHandler(
-                pass_handler(menu.process, self),
-                Filters.callback_data(str(hash(menu)))))
+        BaseHandler.setup(self, client)
 
         client.add_handler(
             MessageHandler(pass_handler(
@@ -55,11 +52,11 @@ def process_node(menus: Dict[BaseMenu, Any], parent: Node):
             process_node(menus[menu], node)
 
 
-def transform_dict(menus: Dict[BaseMenu, Any]) -> TreeHandler:
+def transform_dict(menus: Dict[BaseMenu, Any]) -> Node:
     main_node = Node(list(menus)[0])
     main_value = list(menus.values())[0]
 
     if main_value:
         process_node(main_value, main_node)
 
-    return TreeHandler(main_node)
+    return main_node

@@ -16,24 +16,16 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
-from pyrogram import CallbackQueryHandler, Client, Filters
-from typing import Any, Callable, List
+from .base_handler import pass_handler
+from .parameterized_handler import ParameterizedHandler
+from .tree_handler import TreeHandler
+from pyrogram import Client, MessageHandler
 
 
-class BaseHandler:
-    def get_menus(self) -> List['BaseMenu']:
-        raise NotImplementedError
-
+class ParameterizedTreeHandler(TreeHandler, ParameterizedHandler):
     def setup(self, client: Client):
-        for menu in self.get_menus():
-            client.add_handler(CallbackQueryHandler(
-                pass_handler(menu.process, self),
-                Filters.callback_data(str(hash(menu)))))
+        ParameterizedHandler.setup(self, client)
 
-
-def pass_handler(func: Callable[[Client, Any], None],
-                 handler: BaseHandler) -> Callable[[Client, Any], None]:
-    def process(client: Client, context):
-        func(handler, client, context)
-
-    return process
+        client.add_handler(
+            MessageHandler(pass_handler(
+                self.main_node.menu.process_text, self)))

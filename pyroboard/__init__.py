@@ -16,5 +16,6 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
+from .parameterized_tree_handler import ParameterizedTreeHandler # noqa
 from .tree_menu import TreeMenu # noqa
-from .tree_handler import transform_dict # noqa
+from .tree_handler import TreeHandler, transform_dict # noqa
