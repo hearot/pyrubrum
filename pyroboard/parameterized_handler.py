@@ -27,6 +27,9 @@ from pyrogram.client.filters.filters import create
 class ParameterizedHandler(BaseHandler):
     separator: str = "|"
 
+    def parameterize(self, *args) -> str:
+        return self.separator.join(args)
+
     def setup(self, client: Client):
         for menu in self.get_menus():
             client.add_handler(CallbackQueryHandler(

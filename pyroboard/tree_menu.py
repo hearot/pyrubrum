@@ -28,7 +28,7 @@ from typing import Optional, Union
 @dataclass(frozen=True)
 class TreeMenu(BaseMenu):
     content: Union[InputMedia, str]
-    limit: Optional[int] = 3
+    limit: Optional[int] = 2
     back_button_text: str = "🔙"
 
     def get_content(self, tree: TreeHandler, client: Client,
