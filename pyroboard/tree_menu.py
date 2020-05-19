@@ -19,8 +19,9 @@
 from .base_menu import BaseMenu
 from .tree_handler import TreeHandler
 from dataclasses import dataclass
-from pyrogram import (Client, CallbackQuery, InlineKeyboardButton,
-                      InlineKeyboardMarkup, InputMedia, Message)
+from pyrogram import (Client, CallbackQuery,
+                      InlineKeyboardMarkup, InputMedia,
+                      Message)
 from typing import Optional, Union
 
 
@@ -30,7 +31,9 @@ class TreeMenu(BaseMenu):
     limit: Optional[int] = 3
     back_button_text: str = "🔙"
 
-    def get_content(self) -> Union[InputMedia, str]:
+    def get_content(self, tree: TreeHandler, client: Client,
+                    context: Union[CallbackQuery,
+                                   Message]) -> Union[InputMedia, str]:
         return self.content
 
     def preliminary(self, tree: TreeHandler, client: Client,
@@ -40,7 +43,7 @@ class TreeMenu(BaseMenu):
     def process(self, tree: TreeHandler, client: Client,
                 callback: CallbackQuery):
         self.preliminary(tree, client, callback)
-        content = self.get_content()
+        content = self.get_content(tree, client, callback)
 
         if isinstance(content, InputMedia):
             callback.edit_message_media(
@@ -55,27 +58,30 @@ class TreeMenu(BaseMenu):
             raise TypeError("content must be of type InputMedia or str")
 
     def process_keyboard(self, tree: TreeHandler, client: Client,
-                         callback: CallbackQuery) -> InlineKeyboardMarkup:
+                         context: Union[CallbackQuery,
+                                        Message]) -> InlineKeyboardMarkup:
         parent, children = tree.get_family(hash(self))
 
         keyboard = []
 
         if children:
-            keyboard = [[child.process_button() for child in
+            keyboard = [[child.process_button(tree, client,
+                                              context) for child in
                         children[i:i+self.limit]] for i in
                         range(0, len(children), self.limit)]
 
         if parent:
-            keyboard = keyboard + [[InlineKeyboardButton(
-                self.back_button_text,
-                callback_data=str(hash(parent)))]]
+            parent_button = parent.process_button(tree, client, context)
+            parent_button.text = self.back_button_text
+
+            keyboard = keyboard + [[parent_button]]
 
         return InlineKeyboardMarkup(keyboard) if keyboard else None
 
     def process_text(self, tree: TreeHandler, client: Client,
                      message: Message):
         self.preliminary(tree, client, message)
-        content = self.get_content()
+        content = self.get_content(tree, client, message)
 
         if isinstance(content, InputMedia):
             raise NotImplementedError  # TODO: handle media

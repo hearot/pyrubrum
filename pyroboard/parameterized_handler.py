@@ -21,9 +21,6 @@ from dataclasses import dataclass
 from pyrogram import (Client, CallbackQueryHandler, # noqa
                       CallbackQuery, MessageHandler)
 from pyrogram.client.filters.filters import create
-import re
-
-CALLBACK_REGEX = r"%s(?:%s?-?[\d]+)*"
 
 
 @dataclass
@@ -34,18 +31,22 @@ class ParameterizedHandler(BaseHandler):
         for menu in self.get_menus():
             client.add_handler(CallbackQueryHandler(
                 pass_handler(menu.process, self),
-                callback_data_regex(
-                    CALLBACK_REGEX % (str(hash(menu)),
-                                      re.escape(self.separator)))))
+                parameterized_callback_data_filter(
+                    str(hash(menu)), self.separator)))
 
 
-def callback_data_regex(pattern, flags: int = 0):
+def parameterized_callback_data_filter(unique_str: str, separator: str):
     def func(flt, callback: CallbackQuery):
-        if callback.data:
-            callback.matches = list(
-                flt.p.finditer(callback.data)) or None
+        if callback.data == unique_str:
+            callback.matches = []
+            return True
 
-        return bool(callback.matches)
+        if callback.data.startswith(unique_str + separator):
+            callback.matches = callback.data[
+                                 len(unique_str) +
+                                 len(separator):].split(separator)
+            return True
 
-    return create(func, "CallbackDataRegexFilter",
-                  p=re.compile(pattern, flags))
+        return False
+
+    return create(func, "ParameterizedCallbackData")

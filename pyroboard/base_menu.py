@@ -36,11 +36,15 @@ class BaseMenu:
                 client: Client, callback: CallbackQuery):
         raise NotImplementedError
 
-    def process_button(self) -> InlineKeyboardButton:
+    def process_button(self, handler: BaseHandler, client: Client,
+                       context: Union[CallbackQuery,
+                                      Message]) -> InlineKeyboardButton:
         return InlineKeyboardButton(self.name,
                                     callback_data=str(hash(self)))
 
-    def process_keyboard(self) -> InlineKeyboardMarkup:
+    def process_keyboard(self, handler: BaseHandler, client: Client,
+                         context: Union[CallbackQuery,
+                                        Message]) -> InlineKeyboardMarkup:
         raise NotImplementedError
 
     def process_text(self, handler: BaseHandler,
