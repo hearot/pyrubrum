@@ -16,10 +16,12 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
+from dataclasses import dataclass
 from pyrogram import CallbackQueryHandler, Client, Filters
 from typing import Any, Callable, List
 
 
+@dataclass(eq=False, init=False, repr=True)
 class BaseHandler:
     def get_menus(self) -> List['BaseMenu']:
         raise NotImplementedError
@@ -27,13 +29,13 @@ class BaseHandler:
     def setup(self, client: Client):
         for menu in self.get_menus():
             client.add_handler(CallbackQueryHandler(
-                pass_handler(menu.process, self),
-                Filters.callback_data(str(hash(menu)))))
+                pass_handler(menu.on_callback, self),
+                Filters.callback_data(menu.unique_id)))
 
 
 def pass_handler(func: Callable[[Client, Any], None],
                  handler: BaseHandler) -> Callable[[Client, Any], None]:
-    def process(client: Client, context):
+    def on_callback(client: Client, context):
         func(handler, client, context)
 
-    return process
+    return on_callback

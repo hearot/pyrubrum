@@ -23,19 +23,22 @@ from pyrogram import (Client, CallbackQueryHandler, # noqa
 from pyrogram.client.filters.filters import create
 
 
-@dataclass
+@dataclass(eq=False, init=False, repr=True)
 class ParameterizedHandler(BaseHandler):
     separator: str = "|"
 
+    def __init__(self, separator: str = "|"):
+        self.separator = separator
+
     def parameterize(self, *args) -> str:
-        return self.separator.join(args)
+        return self.separator.join(map(str, args))
 
     def setup(self, client: Client):
         for menu in self.get_menus():
             client.add_handler(CallbackQueryHandler(
-                pass_handler(menu.process, self),
+                pass_handler(menu.on_callback, self),
                 parameterized_callback_data_filter(
-                    str(hash(menu)), self.separator)))
+                    menu.unique_id, self.separator)))
 
 
 def parameterized_callback_data_filter(unique_str: str, separator: str):

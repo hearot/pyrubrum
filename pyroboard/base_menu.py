@@ -25,28 +25,36 @@ from pyrogram import (CallbackQuery, Client,
 from typing import Union
 
 
-@dataclass(frozen=True)
+@dataclass(eq=False, init=False, repr=True)
 class BaseMenu:
     name: str
+    unique_id: str
+
+    def __hash__(self):
+        return hash(self.unique_id)
+
+    def __init__(self, name: str, unique_id: str):
+        self.name = name
+        self.unique_id = unique_id
 
     def get_content(self) -> Union[InputMedia, str]:
         raise NotImplementedError
 
-    def process(self, handler: BaseHandler,
-                client: Client, callback: CallbackQuery):
+    def on_callback(self, handler: BaseHandler,
+                    client: Client, callback: CallbackQuery):
         raise NotImplementedError
 
-    def process_button(self, handler: BaseHandler, client: Client,
-                       context: Union[CallbackQuery,
-                                      Message]) -> InlineKeyboardButton:
+    def button(self, handler: BaseHandler, client: Client,
+               context: Union[CallbackQuery,
+                              Message]) -> InlineKeyboardButton:
         return InlineKeyboardButton(self.name,
-                                    callback_data=str(hash(self)))
+                                    callback_data=self.unique_id)
 
-    def process_keyboard(self, handler: BaseHandler, client: Client,
-                         context: Union[CallbackQuery,
-                                        Message]) -> InlineKeyboardMarkup:
+    def keyboard(self, handler: BaseHandler, client: Client,
+                 context: Union[CallbackQuery,
+                                Message]) -> InlineKeyboardMarkup:
         raise NotImplementedError
 
-    def process_text(self, handler: BaseHandler,
-                     client: Client, message: Message):
+    def on_message(self, handler: BaseHandler,
+                   client: Client, message: Message):
         raise NotImplementedError

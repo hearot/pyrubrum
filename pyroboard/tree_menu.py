@@ -25,11 +25,20 @@ from pyrogram import (Client, CallbackQuery,
 from typing import Optional, Union
 
 
-@dataclass(frozen=True)
+@dataclass(eq=False, init=False, repr=True)
 class TreeMenu(BaseMenu):
     content: Union[InputMedia, str]
+    back_button_text: Optional[str] = "🔙"
     limit: Optional[int] = 2
-    back_button_text: str = "🔙"
+
+    def __init__(self, name: str, unique_id: str,
+                 content: Union[InputMedia, str],
+                 back_button_text: Optional[str] = "🔙",
+                 limit: Optional[int] = 2):
+        BaseMenu.__init__(self, name, unique_id)
+        self.back_button_text = back_button_text
+        self.content = content
+        self.limit = limit
 
     def get_content(self, tree: TreeHandler, client: Client,
                     context: Union[CallbackQuery,
@@ -40,46 +49,46 @@ class TreeMenu(BaseMenu):
                     context: Union[CallbackQuery, Message]):
         pass
 
-    def process(self, tree: TreeHandler, client: Client,
-                callback: CallbackQuery):
+    def on_callback(self, tree: TreeHandler, client: Client,
+                    callback: CallbackQuery):
         self.preliminary(tree, client, callback)
         content = self.get_content(tree, client, callback)
 
         if isinstance(content, InputMedia):
             callback.edit_message_media(
-                content, self.process_keyboard(
+                content, self.keyboard(
                     tree, client, callback))
         elif isinstance(content, str):
             callback.edit_message_text(
                 content,
-                reply_markup=self.process_keyboard(
+                reply_markup=self.keyboard(
                     tree, client, callback))
         else:
             raise TypeError("content must be of type InputMedia or str")
 
-    def process_keyboard(self, tree: TreeHandler, client: Client,
-                         context: Union[CallbackQuery,
-                                        Message]) -> InlineKeyboardMarkup:
-        parent, children = tree.get_family(hash(self))
+    def keyboard(self, tree: TreeHandler, client: Client,
+                 context: Union[CallbackQuery,
+                                Message]) -> InlineKeyboardMarkup:
+        parent, children = tree.get_family(self.unique_id)
 
         keyboard = []
 
         if children:
-            keyboard = [[child.process_button(tree, client,
-                                              context) for child in
+            keyboard = [[child.button(tree, client,
+                                      context) for child in
                         children[i:i+self.limit]] for i in
                         range(0, len(children), self.limit)]
 
         if parent:
-            parent_button = parent.process_button(tree, client, context)
+            parent_button = parent.button(tree, client, context)
             parent_button.text = self.back_button_text
 
             keyboard = keyboard + [[parent_button]]
 
         return InlineKeyboardMarkup(keyboard) if keyboard else None
 
-    def process_text(self, tree: TreeHandler, client: Client,
-                     message: Message):
+    def on_message(self, tree: TreeHandler, client: Client,
+                   message: Message):
         self.preliminary(tree, client, message)
         content = self.get_content(tree, client, message)
 
@@ -87,7 +96,7 @@ class TreeMenu(BaseMenu):
             raise NotImplementedError  # TODO: handle media
         elif isinstance(content, str):
             message.reply_text(content,
-                               reply_markup=self.process_keyboard(
+                               reply_markup=self.keyboard(
                                    tree, client, message
                                ))
         else:

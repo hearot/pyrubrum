@@ -18,18 +18,20 @@
 
 from .parameterized_tree_handler import ParameterizedTreeHandler
 from .tree_menu import TreeMenu
+from dataclasses import dataclass
 from pyrogram import (Client, CallbackQuery,
                       InlineKeyboardButton,
                       InlineKeyboardMarkup, Message)
 from typing import Union
 
 
+@dataclass(eq=False, init=False, repr=True)
 class PageItemMenu(TreeMenu):
-    def process_keyboard(self, tree: ParameterizedTreeHandler,
-                         client: Client,
-                         context: Union[CallbackQuery,
-                                        Message]) -> InlineKeyboardMarkup:
-        parent, children = tree.get_family(hash(self))
+    def keyboard(self, tree: ParameterizedTreeHandler,
+                 client: Client,
+                 context: Union[CallbackQuery,
+                                Message]) -> InlineKeyboardMarkup:
+        parent, children = tree.get_family(self.unique_id)
 
         if isinstance(context, Message):
             raise TypeError("PageItemMenu supports only CallbackQuery")
@@ -39,8 +41,8 @@ class PageItemMenu(TreeMenu):
         keyboard = []
 
         if children:
-            keyboard = [[child.process_button(tree, client,
-                                              context) for child in
+            keyboard = [[child.button(tree, client,
+                                      context) for child in
                         children[i:i+self.limit]] for i in
                         range(0, len(children), self.limit)]
 
@@ -48,7 +50,7 @@ class PageItemMenu(TreeMenu):
             parent_button = InlineKeyboardButton(
                 self.back_button_text,
                 callback_data=tree.parameterize(
-                    str(hash(parent)),
+                    parent.unique_id,
                     str(page)
                 )
             )

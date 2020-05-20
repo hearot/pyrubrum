@@ -19,6 +19,7 @@
 from .page_item_menu import PageItemMenu # noqa
 from .parameterized_tree_handler import ParameterizedTreeHandler
 from .tree_menu import TreeMenu
+from dataclasses import dataclass
 from pyrogram import (CallbackQuery, Client,
                       InlineKeyboardButton,
                       InlineKeyboardMarkup,
@@ -26,39 +27,39 @@ from pyrogram import (CallbackQuery, Client,
 from typing import Dict, Optional, Union
 
 
+@dataclass(eq=False, init=False, repr=True)
 class PageMenu(TreeMenu):
     items: Dict[str, PageItemMenu]
     limit_page: Optional[int] = 4
-    next_page_button_text: str = "▶️"
-    previous_page_button: str = "◀️"
-
-    def __hash__(self):
-        return hash(
-            str(super().__hash__()) + str(self.limit_page) +
-            str(self.next_page_button_text) + self.previous_page_button
-        )
+    next_page_button_text: Optional[str] = "▶️"
+    previous_page_button: Optional[str] = "◀️"
 
     def __init__(self, name: str,
+                 unique_id: str,
                  content: Union[InputMedia, str],
                  items: Dict[str, PageItemMenu],
-                 limit_page: Optional[int] = 4,
+                 back_button_text: Optional[str] = "🔙",
                  limit: Optional[int] = 2,
-                 back_button_text: str = "🔙",
-                 next_page_button_text: str = "▶️",
-                 previous_page_button: str = "◀️"):
-        TreeMenu.__init__(self, name, content, limit, back_button_text)
+                 limit_page: Optional[int] = 4,
+                 next_page_button_text: Optional[str] = "▶️",
+                 previous_page_button: Optional[str] = "◀️"):
+        TreeMenu.__init__(self, name, unique_id, content,
+                          back_button_text=back_button_text,
+                          limit=limit)
         self.items = items
         self.limit_page = limit_page
+        self.next_page_button_text = next_page_button_text
+        self.previous_page_button = previous_page_button
 
     def get_items(self) -> Dict[str, PageItemMenu]:
         return self.items
 
-    def process_keyboard(self, tree: ParameterizedTreeHandler,
-                         client: Client,
-                         context: Union[CallbackQuery,
-                                        Message]) -> InlineKeyboardMarkup:
+    def keyboard(self, tree: ParameterizedTreeHandler,
+                 client: Client,
+                 context: Union[CallbackQuery,
+                                Message]) -> InlineKeyboardMarkup:
         page = 0
-        parent, children = tree.get_family(hash(self))
+        parent, children = tree.get_family(self.unique_id)
 
         if context.matches and context.matches[0].isdigit():
             page = int(context.matches[0])
@@ -81,14 +82,14 @@ class PageMenu(TreeMenu):
 
                 keyboard = [[InlineKeyboardButton(
                     item[0], callback_data=tree.parameterize(
-                        str(hash(page_item_menu)),
+                        page_item_menu.unique_id,
                         str(page), item[1])) for item in
                             page_items[i:i+self.limit]] for i in
                             range(0, len(page_items), self.limit)]
 
         if children:
-            keyboard += [[child.process_button(tree, client,
-                                               context) for child in
+            keyboard += [[child.button(tree, client,
+                                       context) for child in
                          children[i:i+self.limit]] for i in
                          range(0, len(children), self.limit)]
 
@@ -98,21 +99,21 @@ class PageMenu(TreeMenu):
             teleport_row.append(
                 InlineKeyboardButton(self.previous_page_button,
                                      tree.parameterize(
-                                        str(hash(self)), str(page-1)))
+                                        self.unique_id, str(page-1)))
             )
 
         if (page+1)*self.limit_page < len(items):
             teleport_row.append(
                 InlineKeyboardButton(self.next_page_button_text,
                                      tree.parameterize(
-                                        str(hash(self)), str(page+1)))
+                                        self.unique_id, str(page+1)))
             )
 
         if teleport_row:
             keyboard += [teleport_row]
 
         if parent:
-            parent_button = parent.process_button(tree, client, context)
+            parent_button = parent.button(tree, client, context)
             parent_button.text = self.back_button_text
 
             keyboard = keyboard + [[parent_button]]

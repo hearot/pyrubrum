@@ -17,14 +17,23 @@
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
 from .base_menu import BaseMenu
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import List, Optional, Tuple
 
 
-@dataclass
+@dataclass(eq=False, init=False, repr=True)
 class Node:
     menu: BaseMenu
-    children: Optional[List['Node']] = field(default_factory=list)
+    children: Optional[List['Node']] = None
+
+    def __init__(self, menu: BaseMenu,
+                 children: Optional[List['Node']] = None):
+        if children:
+            self.children = children
+        else:
+            self.children = []
+
+        self.menu = menu
 
     def add_child(self, node: 'Node'):
         self.children.append(node)
@@ -33,11 +42,11 @@ class Node:
         children = [child.menu for child in self.children]
         return children if children else None
 
-    def get_family(self, unique_id: int,
+    def get_family(self, unique_id: str,
                    parent: Optional['Node']) -> Tuple[Optional[BaseMenu],
                                                       Optional[
                                                           List[BaseMenu]]]:
-        if hash(self.menu) == unique_id:
+        if self.menu.unique_id == unique_id:
             return (parent.menu if isinstance(parent, Node) else None,
                     self.get_children_menus())
 
@@ -53,6 +62,7 @@ class Node:
         menus = [self.menu]
 
         for child in self.children:
-            menus += child.get_menus()
+            if child.menu.unique_id != self.menu.unique_id:
+                menus += child.get_menus()
 
         return menus

@@ -24,11 +24,14 @@ from pyrogram import Client, MessageHandler
 from typing import Any, Dict, List, Tuple
 
 
-@dataclass
+@dataclass(eq=False, init=False, repr=True)
 class TreeHandler(BaseHandler):
     main_node: Node
 
-    def get_family(self, unique_id: int) -> Tuple[Optional[BaseMenu],
+    def __init__(self, main_node: Node):
+        self.main_node = main_node
+
+    def get_family(self, unique_id: str) -> Tuple[Optional[BaseMenu],
                                                   Optional[List[BaseMenu]]]:
         return self.main_node.get_family(unique_id, None)
 
@@ -40,16 +43,16 @@ class TreeHandler(BaseHandler):
 
         client.add_handler(
             MessageHandler(pass_handler(
-                self.main_node.menu.process_text, self)))
+                self.main_node.menu.on_message, self)))
 
 
-def process_node(menus: Dict[BaseMenu, Any], parent: Node):
+def on_callback_node(menus: Dict[BaseMenu, Any], parent: Node):
     for menu in menus:
         node = Node(menu)
         parent.add_child(node)
 
         if isinstance(menus[menu], dict):
-            process_node(menus[menu], node)
+            on_callback_node(menus[menu], node)
 
 
 def transform_dict(menus: Dict[BaseMenu, Any]) -> Node:
@@ -57,6 +60,6 @@ def transform_dict(menus: Dict[BaseMenu, Any]) -> Node:
     main_value = list(menus.values())[0]
 
     if main_value:
-        process_node(main_value, main_node)
+        on_callback_node(main_value, main_node)
 
     return main_node

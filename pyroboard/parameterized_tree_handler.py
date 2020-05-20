@@ -17,15 +17,24 @@
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
 from .base_handler import pass_handler
+from .node import Node
 from .parameterized_handler import ParameterizedHandler
 from .tree_handler import TreeHandler
+from dataclasses import dataclass
 from pyrogram import Client, MessageHandler
+from typing import Optional
 
 
+@dataclass(eq=False, init=False, repr=True)
 class ParameterizedTreeHandler(TreeHandler, ParameterizedHandler):
+    def __init__(self, main_node: Node,
+                 separator: Optional[str] = "|"):
+        TreeHandler.__init__(self, main_node)
+        ParameterizedHandler.__init__(self, separator)
+
     def setup(self, client: Client):
         ParameterizedHandler.setup(self, client)
 
         client.add_handler(
             MessageHandler(pass_handler(
-                self.main_node.menu.process_text, self)))
+                self.main_node.menu.on_message, self)))
