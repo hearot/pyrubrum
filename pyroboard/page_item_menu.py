@@ -30,13 +30,12 @@ class PageItemMenu(TreeMenu):
     def keyboard(self, tree: ParameterizedTreeHandler,
                  client: Client,
                  context: Union[CallbackQuery,
-                                Message]) -> InlineKeyboardMarkup:
+                                Message],
+                 page=0, **_) -> InlineKeyboardMarkup:
         parent, children = tree.get_family(self.unique_id)
 
         if isinstance(context, Message):
             raise TypeError("PageItemMenu supports only CallbackQuery")
-
-        page = context.matches[0]
 
         keyboard = []
 
@@ -51,7 +50,7 @@ class PageItemMenu(TreeMenu):
                 self.back_button_text,
                 callback_data=tree.parameterize(
                     parent.unique_id,
-                    str(page)
+                    page=page
                 )
             )
 

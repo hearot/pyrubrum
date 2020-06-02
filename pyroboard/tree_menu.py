@@ -42,45 +42,47 @@ class TreeMenu(BaseMenu):
 
     def get_content(self, tree: TreeHandler, client: Client,
                     context: Union[CallbackQuery,
-                                   Message]) -> Union[InputMedia, str]:
+                                   Message],
+                    **_) -> Union[InputMedia, str]:
         return self.content
 
     def preliminary(self, tree: TreeHandler, client: Client,
-                    context: Union[CallbackQuery, Message]):
+                    context: Union[CallbackQuery, Message],
+                    **_):
         pass
 
     def on_callback(self, tree: TreeHandler, client: Client,
-                    callback: CallbackQuery):
-        self.preliminary(tree, client, callback)
-        content = self.get_content(tree, client, callback)
+                    callback: CallbackQuery, **kwargs):
+        self.preliminary(tree, client, callback, **kwargs)
+        content = self.get_content(tree, client, callback, **kwargs)
 
         if isinstance(content, InputMedia):
             callback.edit_message_media(
                 content, self.keyboard(
-                    tree, client, callback))
+                    tree, client, callback, **kwargs))
         elif isinstance(content, str):
             callback.edit_message_text(
                 content,
                 reply_markup=self.keyboard(
-                    tree, client, callback))
+                    tree, client, callback, **kwargs))
         else:
             raise TypeError("content must be of type InputMedia or str")
 
     def keyboard(self, tree: TreeHandler, client: Client,
                  context: Union[CallbackQuery,
-                                Message]) -> InlineKeyboardMarkup:
+                                Message], **kwargs) -> InlineKeyboardMarkup:
         parent, children = tree.get_family(self.unique_id)
 
         keyboard = []
 
         if children:
             keyboard = [[child.button(tree, client,
-                                      context) for child in
+                                      context, **kwargs) for child in
                         children[i:i+self.limit]] for i in
                         range(0, len(children), self.limit)]
 
         if parent:
-            parent_button = parent.button(tree, client, context)
+            parent_button = parent.button(tree, client, context, **kwargs)
             parent_button.text = self.back_button_text
 
             keyboard = keyboard + [[parent_button]]

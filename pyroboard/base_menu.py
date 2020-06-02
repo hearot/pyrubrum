@@ -41,20 +41,21 @@ class BaseMenu:
         raise NotImplementedError
 
     def on_callback(self, handler: BaseHandler,
-                    client: Client, callback: CallbackQuery):
+                    client: Client, callback: CallbackQuery, **_):
         raise NotImplementedError
 
     def button(self, handler: BaseHandler, client: Client,
                context: Union[CallbackQuery,
-                              Message]) -> InlineKeyboardButton:
+                              Message],
+               **_) -> InlineKeyboardButton:
         return InlineKeyboardButton(self.name,
                                     callback_data=self.unique_id)
 
     def keyboard(self, handler: BaseHandler, client: Client,
                  context: Union[CallbackQuery,
-                                Message]) -> InlineKeyboardMarkup:
+                                Message], **_) -> InlineKeyboardMarkup:
         raise NotImplementedError
 
     def on_message(self, handler: BaseHandler,
-                   client: Client, message: Message):
+                   client: Client, message: Message, **_):
         raise NotImplementedError

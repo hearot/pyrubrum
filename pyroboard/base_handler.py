@@ -17,7 +17,7 @@
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
 from dataclasses import dataclass
-from pyrogram import CallbackQueryHandler, Client, Filters
+from pyrogram import CallbackQuery, CallbackQueryHandler, Client, Filters
 from typing import Any, Callable, List
 
 
@@ -36,6 +36,9 @@ class BaseHandler:
 def pass_handler(func: Callable[[Client, Any], None],
                  handler: BaseHandler) -> Callable[[Client, Any], None]:
     def on_callback(client: Client, context):
-        func(handler, client, context)
+        if isinstance(context, CallbackQuery):
+            func(handler, client, context, **context.matches)
+        else:
+            func(handler, client, context)
 
     return on_callback

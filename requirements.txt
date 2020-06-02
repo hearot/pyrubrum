@@ -1,2 +1,3 @@
 dataclasses
+orjson[fast]
 pyrogram

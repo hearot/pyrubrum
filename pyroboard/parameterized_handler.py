@@ -18,9 +18,15 @@
 
 from .base_handler import BaseHandler, pass_handler
 from dataclasses import dataclass
+from json import JSONDecodeError
 from pyrogram import (Client, CallbackQueryHandler, # noqa
                       CallbackQuery, MessageHandler)
 from pyrogram.client.filters.filters import create
+
+try:
+    import orjson as json # noqa
+except ImportError:
+    import json # noqa
 
 
 @dataclass(eq=False, init=False, repr=True)
@@ -30,29 +36,33 @@ class ParameterizedHandler(BaseHandler):
     def __init__(self, separator: str = "|"):
         self.separator = separator
 
-    def parameterize(self, *args) -> str:
-        return self.separator.join(map(str, args))
+    @staticmethod
+    def filter(unique_str: str, separator: str):
+        def func(flt, callback: CallbackQuery):
+            callback.matches = {}
+
+            if callback.data == unique_str:
+                return True
+
+            if callback.data.startswith(unique_str + separator):
+                try:
+                    callback.matches = json.loads(
+                        callback.data[len(unique_str) + len(separator):])
+                    return True
+                except JSONDecodeError:
+                    return False
+
+            return False
+
+        return create(func, "ParameterizedCallbackData")
+
+    def parameterize(self, unique_str: str, **kwargs) -> str:
+        return self.separator.join(
+            [unique_str, json.dumps(kwargs)])
 
     def setup(self, client: Client):
         for menu in self.get_menus():
             client.add_handler(CallbackQueryHandler(
                 pass_handler(menu.on_callback, self),
-                parameterized_callback_data_filter(
+                ParameterizedHandler.filter(
                     menu.unique_id, self.separator)))
-
-
-def parameterized_callback_data_filter(unique_str: str, separator: str):
-    def func(flt, callback: CallbackQuery):
-        if callback.data == unique_str:
-            callback.matches = []
-            return True
-
-        if callback.data.startswith(unique_str + separator):
-            callback.matches = callback.data[
-                                 len(unique_str) +
-                                 len(separator):].split(separator)
-            return True
-
-        return False
-
-    return create(func, "ParameterizedCallbackData")

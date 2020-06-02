@@ -57,12 +57,9 @@ class PageMenu(TreeMenu):
     def keyboard(self, tree: ParameterizedTreeHandler,
                  client: Client,
                  context: Union[CallbackQuery,
-                                Message]) -> InlineKeyboardMarkup:
-        page = 0
+                                Message],
+                 page=0, **_) -> InlineKeyboardMarkup:
         parent, children = tree.get_family(self.unique_id)
-
-        if context.matches and context.matches[0].isdigit():
-            page = int(context.matches[0])
 
         keyboard = []
 
@@ -83,7 +80,7 @@ class PageMenu(TreeMenu):
                 keyboard = [[InlineKeyboardButton(
                     item[0], callback_data=tree.parameterize(
                         page_item_menu.unique_id,
-                        str(page), item[1])) for item in
+                        page=page, item=item[1])) for item in
                             page_items[i:i+self.limit]] for i in
                             range(0, len(page_items), self.limit)]
 
@@ -99,14 +96,14 @@ class PageMenu(TreeMenu):
             teleport_row.append(
                 InlineKeyboardButton(self.previous_page_button,
                                      tree.parameterize(
-                                        self.unique_id, str(page-1)))
+                                        self.unique_id, page=page-1))
             )
 
         if (page+1)*self.limit_page < len(items):
             teleport_row.append(
                 InlineKeyboardButton(self.next_page_button_text,
                                      tree.parameterize(
-                                        self.unique_id, str(page+1)))
+                                        self.unique_id, page=page+1))
             )
 
         if teleport_row:
