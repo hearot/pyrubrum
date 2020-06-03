@@ -16,9 +16,10 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
-from .action import Action # noqa
-from .page_item_menu import PageItemMenu # noqa
-from .page_menu import PageMenu # noqa
-from .parameterized_tree_handler import ParameterizedTreeHandler # noqa
-from .tree_menu import TreeMenu # noqa
-from .tree_handler import TreeHandler, transform_dict # noqa
+from dataclasses import dataclass
+
+
+@dataclass
+class Action:
+    name: str
+    id: str

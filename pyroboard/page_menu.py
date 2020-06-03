@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
+from .action import Action
 from .page_item_menu import PageItemMenu # noqa
 from .parameterized_tree_handler import ParameterizedTreeHandler
 from .tree_menu import TreeMenu
@@ -24,12 +25,12 @@ from pyrogram import (CallbackQuery, Client,
                       InlineKeyboardButton,
                       InlineKeyboardMarkup,
                       InputMedia, Message)
-from typing import Dict, Optional, Union
+from typing import List, Optional, Union
 
 
 @dataclass(eq=False, init=False, repr=True)
 class PageMenu(TreeMenu):
-    items: Dict[str, PageItemMenu]
+    items: List[Action]
     limit_page: Optional[int] = 4
     next_page_button_text: Optional[str] = "▶️"
     previous_page_button: Optional[str] = "◀️"
@@ -37,7 +38,7 @@ class PageMenu(TreeMenu):
     def __init__(self, name: str,
                  unique_id: str,
                  content: Union[InputMedia, str],
-                 items: Dict[str, PageItemMenu],
+                 items: List[Action],
                  back_button_text: Optional[str] = "🔙",
                  limit: Optional[int] = 2,
                  limit_page: Optional[int] = 4,
@@ -51,7 +52,7 @@ class PageMenu(TreeMenu):
         self.next_page_button_text = next_page_button_text
         self.previous_page_button = previous_page_button
 
-    def get_items(self) -> Dict[str, PageItemMenu]:
+    def get_items(self) -> List[Action]:
         return self.items
 
     def keyboard(self, tree: ParameterizedTreeHandler,
@@ -73,16 +74,16 @@ class PageMenu(TreeMenu):
                     break
 
             if page_item_menu:
-                items = self.get_items()
-                page_items = list(items.items())[
+                items = self.get_items()[
                     page*self.limit_page:][:self.limit_page]
 
                 keyboard = [[InlineKeyboardButton(
-                    item[0], callback_data=tree.parameterize(
+                    item.name, callback_data=tree.parameterize(
                         page_item_menu.unique_id,
-                        page=page, item=item[1])) for item in
-                            page_items[i:i+self.limit]] for i in
-                            range(0, len(page_items), self.limit)]
+                        page=page,
+                        id=item.id)) for item in
+                            items[i:i+self.limit]] for i in
+                            range(0, len(items), self.limit)]
 
         if children:
             keyboard += [[child.button(tree, client,
