@@ -20,6 +20,6 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Action:
+class Element:
     name: str
-    id: str
+    element_id: str
