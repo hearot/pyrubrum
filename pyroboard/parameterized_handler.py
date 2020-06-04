@@ -16,12 +16,16 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
-from .base_handler import BaseHandler, pass_handler
+from .base_handler import BaseHandler
+from .button import Button
+from .database.base_database import BaseDatabase
 from dataclasses import dataclass
 from json import JSONDecodeError
 from pyrogram import (Client, CallbackQueryHandler, # noqa
-                      CallbackQuery, MessageHandler)
+                      CallbackQuery, InlineKeyboardButton,
+                      MessageHandler)
 from pyrogram.client.filters.filters import create
+from typing import Any, Callable, List
 
 try:
     import orjson as json # noqa
@@ -31,24 +35,34 @@ except ImportError:
 
 @dataclass(eq=False, init=False, repr=True)
 class ParameterizedHandler(BaseHandler):
-    separator: str = "|"
+    database: BaseDatabase
 
-    def __init__(self, separator: str = "|"):
-        self.separator = separator
+    def __init__(self, database: BaseDatabase):
+        self.database = database
 
-    @staticmethod
-    def filter(unique_str: str, separator: str):
+    def filter(self, menu_id: str):
         def func(flt, callback: CallbackQuery):
-            callback.matches = {}
+            parameters = callback.data.split()
 
-            if callback.data == unique_str:
-                return True
+            if parameters[1] != menu_id:
+                return False
 
-            if callback.data.startswith(unique_str + separator):
+            result = self.database.get(parameters[0])
+
+            if result:
                 try:
-                    callback.matches = json.loads(
-                        callback.data[len(unique_str) + len(separator):])
-                    return True
+                    content = json.loads(result)
+                    pattern = parameters[1]
+
+                    if pattern in content:
+                        callback.matches = content[pattern]
+
+                        if len(parameters) > 2:
+                            callback.matches['element_id'] = parameters[2]
+
+                        return True
+
+                    return False
                 except JSONDecodeError:
                     return False
 
@@ -56,13 +70,40 @@ class ParameterizedHandler(BaseHandler):
 
         return create(func, "ParameterizedCallbackData")
 
-    def parameterize(self, unique_str: str, **kwargs) -> str:
-        return self.separator.join(
-            [unique_str, json.dumps(kwargs)])
+    def process_keyboard(self, keyboard: List[List[Button]],
+                         callback_query_id: str) -> List[
+                             List[InlineKeyboardButton]]:
+        content = {}
+
+        for row in keyboard:
+            for button in row:
+                content[button.button_id] = {
+                    "callback_query_id": callback_query_id,
+                    **button.parameters}
+
+        self.database.insert(callback_query_id, json.dumps(content))
+
+        return [[InlineKeyboardButton(
+            button.name, " ".join(map(str,
+                [callback_query_id, button.button_id,
+                 button.element_id])).strip().rstrip())
+                 for button in row] for row in keyboard]
 
     def setup(self, client: Client):
         for menu in self.get_menus():
             client.add_handler(CallbackQueryHandler(
-                pass_handler(menu.on_callback, self),
-                ParameterizedHandler.filter(
-                    menu.unique_id, self.separator)))
+                pass_handler_and_clean(menu.on_callback, self),
+                self.filter(menu.menu_id)))
+
+
+def pass_handler_and_clean(func: Callable[[Client, Any], None],
+                           handler: ParameterizedHandler) -> Callable[
+                               [Client, Any], None]:
+    def on_callback(client: Client, context):
+        if isinstance(context, CallbackQuery):
+            func(handler, client, context, **context.matches)
+            handler.database.delete(context.matches['callback_query_id'])
+        else:
+            func(handler, client, context)
+
+    return on_callback

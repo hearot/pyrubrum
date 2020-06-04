@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 # Pyroboard - Keyboard manager for Pyrogram
 # Copyright (C) 2020 Hearot <https://github.com/hearot>
 #
@@ -18,14 +16,15 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
-from setuptools import find_packages, setup
+from .base_handler import BaseHandler
+from .button import Button
+from pyrogram import InlineKeyboardMarkup
+from typing import List
 
-setup(
-    name='pyroboard',
-    version='0.0.1',
-    author='Hearot',
-    author_email='gabriel@hearot.it',
-    packages=find_packages(),
-    python_requires=">=3.6.*",
-    install_requires=['dataclasses', 'pyrogram'],
-)
+
+class Keyboard(InlineKeyboardMarkup):
+    def __init__(self, inline_keyboard: List[List[Button]],
+                 handler: BaseHandler, callback_query_id: str):
+        super().__init__(
+            handler.process_keyboard(inline_keyboard,
+                                     str(callback_query_id)))

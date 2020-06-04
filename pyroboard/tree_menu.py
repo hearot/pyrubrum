@@ -17,6 +17,7 @@
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
 from .base_menu import BaseMenu
+from .keyboard import Keyboard
 from .tree_handler import TreeHandler
 from dataclasses import dataclass
 from pyrogram import (Client, CallbackQuery,
@@ -31,11 +32,11 @@ class TreeMenu(BaseMenu):
     back_button_text: Optional[str] = "🔙"
     limit: Optional[int] = 2
 
-    def __init__(self, name: str, unique_id: str,
+    def __init__(self, name: str, menu_id: str,
                  content: Union[InputMedia, str],
                  back_button_text: Optional[str] = "🔙",
                  limit: Optional[int] = 2):
-        BaseMenu.__init__(self, name, unique_id)
+        BaseMenu.__init__(self, name, menu_id)
         self.back_button_text = back_button_text
         self.content = content
         self.limit = limit
@@ -58,7 +59,7 @@ class TreeMenu(BaseMenu):
 
         if isinstance(content, InputMedia):
             callback.edit_message_media(
-                content, self.keyboard(
+                content, reply_markup=self.keyboard(
                     tree, client, callback, **kwargs))
         elif isinstance(content, str):
             callback.edit_message_text(
@@ -71,7 +72,7 @@ class TreeMenu(BaseMenu):
     def keyboard(self, tree: TreeHandler, client: Client,
                  context: Union[CallbackQuery,
                                 Message], **kwargs) -> InlineKeyboardMarkup:
-        parent, children = tree.get_family(self.unique_id)
+        parent, children = tree.get_family(self.menu_id)
 
         keyboard = []
 
@@ -83,11 +84,18 @@ class TreeMenu(BaseMenu):
 
         if parent:
             parent_button = parent.button(tree, client, context, **kwargs)
-            parent_button.text = self.back_button_text
+            parent_button.name = self.back_button_text
 
             keyboard = keyboard + [[parent_button]]
 
-        return InlineKeyboardMarkup(keyboard) if keyboard else None
+        if isinstance(context, Message):
+            return (Keyboard(keyboard, tree,
+                    str(context.message_id) +
+                    str(context.from_user.id))
+                    if keyboard else None)
+        elif isinstance(context, CallbackQuery):
+            return (Keyboard(keyboard, tree,
+                    context.id) if keyboard else None)
 
     def on_message(self, tree: TreeHandler, client: Client,
                    message: Message):

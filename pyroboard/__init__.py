@@ -16,7 +16,10 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
+from .button import Button # noqa
+from .database.dict_database import DictDatabase # noqa
 from .element import Element # noqa
+from .keyboard import Keyboard # noqa
 from .page_item_menu import PageItemMenu # noqa
 from .page_menu import PageMenu # noqa
 from .parameterized_tree_handler import ParameterizedTreeHandler # noqa

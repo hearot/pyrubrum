@@ -16,8 +16,10 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
+from .button import Button
 from dataclasses import dataclass
-from pyrogram import CallbackQuery, CallbackQueryHandler, Client, Filters
+from pyrogram import (CallbackQuery, CallbackQueryHandler, Client,
+                      InlineKeyboardButton, Filters)
 from typing import Any, Callable, List
 
 
@@ -26,11 +28,19 @@ class BaseHandler:
     def get_menus(self) -> List['BaseMenu']:
         raise NotImplementedError
 
+    def process_keyboard(self, keyboard: List[List[Button]],
+                         callback_query_id: str) -> List[
+                             List[InlineKeyboardButton]]:
+        return [[InlineKeyboardButton(
+            button.name,
+            callback_data=button.button_id)
+                 for button in row] for row in keyboard]
+
     def setup(self, client: Client):
         for menu in self.get_menus():
             client.add_handler(CallbackQueryHandler(
                 pass_handler(menu.on_callback, self),
-                Filters.callback_data(menu.unique_id)))
+                Filters.callback_data(menu.menu_id)))
 
 
 def pass_handler(func: Callable[[Client, Any], None],

@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 # Pyroboard - Keyboard manager for Pyrogram
 # Copyright (C) 2020 Hearot <https://github.com/hearot>
 #
@@ -18,14 +16,21 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
-from setuptools import find_packages, setup
+from .base_database import BaseDatabase
+from typing import Optional
 
-setup(
-    name='pyroboard',
-    version='0.0.1',
-    author='Hearot',
-    author_email='gabriel@hearot.it',
-    packages=find_packages(),
-    python_requires=">=3.6.*",
-    install_requires=['dataclasses', 'pyrogram'],
-)
+
+class DictDatabase(dict, BaseDatabase):
+    def get(self, callback_query_id: str) -> Optional[str]:
+        return dict.get(self, callback_query_id)
+
+    def insert(self, callback_query_id: str, data: str) -> bool:
+        self.update({callback_query_id: data})
+        return True
+
+    def delete(self, callback_query_id: str) -> bool:
+        try:
+            self.pop(callback_query_id)
+            return True
+        except KeyError:
+            return False

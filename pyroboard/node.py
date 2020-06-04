@@ -42,16 +42,16 @@ class Node:
         children = [child.menu for child in self.children]
         return children if children else None
 
-    def get_family(self, unique_id: str,
+    def get_family(self, menu_id: str,
                    parent: Optional['Node']) -> Tuple[Optional[BaseMenu],
                                                       Optional[
                                                           List[BaseMenu]]]:
-        if self.menu.unique_id == unique_id:
+        if self.menu.menu_id == menu_id:
             return (parent.menu if isinstance(parent, Node) else None,
                     self.get_children_menus())
 
         for child in self.children:
-            child_menus = child.get_family(unique_id, self)
+            child_menus = child.get_family(menu_id, self)
 
             if child_menus[0]:
                 return child_menus
@@ -62,7 +62,7 @@ class Node:
         menus = [self.menu]
 
         for child in self.children:
-            if child.menu.unique_id != self.menu.unique_id:
+            if child.menu.menu_id != self.menu.menu_id:
                 menus += child.get_menus()
 
         return menus

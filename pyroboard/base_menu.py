@@ -17,9 +17,9 @@
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
 from .base_handler import BaseHandler
+from .button import Button
 from dataclasses import dataclass
 from pyrogram import (CallbackQuery, Client,
-                      InlineKeyboardButton,
                       InlineKeyboardMarkup,
                       InputMedia, Message)
 from typing import Union
@@ -28,14 +28,14 @@ from typing import Union
 @dataclass(eq=False, init=False, repr=True)
 class BaseMenu:
     name: str
-    unique_id: str
+    menu_id: str
 
     def __hash__(self):
-        return hash(self.unique_id)
+        return hash(self.menu_id)
 
-    def __init__(self, name: str, unique_id: str):
+    def __init__(self, name: str, menu_id: str):
         self.name = name
-        self.unique_id = unique_id
+        self.menu_id = menu_id
 
     def get_content(self) -> Union[InputMedia, str]:
         raise NotImplementedError
@@ -47,9 +47,8 @@ class BaseMenu:
     def button(self, handler: BaseHandler, client: Client,
                context: Union[CallbackQuery,
                               Message],
-               **_) -> InlineKeyboardButton:
-        return InlineKeyboardButton(self.name,
-                                    callback_data=self.unique_id)
+               **_) -> Button:
+        return Button(self.name, self.menu_id)
 
     def keyboard(self, handler: BaseHandler, client: Client,
                  context: Union[CallbackQuery,

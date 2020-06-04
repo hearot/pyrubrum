@@ -16,11 +16,12 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
+from .button import Button
+from .keyboard import Keyboard
 from .parameterized_tree_handler import ParameterizedTreeHandler
 from .tree_menu import TreeMenu
 from dataclasses import dataclass
 from pyrogram import (Client, CallbackQuery,
-                      InlineKeyboardButton,
                       InlineKeyboardMarkup, Message)
 from typing import Union
 
@@ -32,7 +33,7 @@ class PageItemMenu(TreeMenu):
                  context: Union[CallbackQuery,
                                 Message],
                  page=0, **_) -> InlineKeyboardMarkup:
-        parent, children = tree.get_family(self.unique_id)
+        parent, children = tree.get_family(self.menu_id)
 
         if isinstance(context, Message):
             raise TypeError("PageItemMenu supports only CallbackQuery")
@@ -46,14 +47,12 @@ class PageItemMenu(TreeMenu):
                         range(0, len(children), self.limit)]
 
         if parent:
-            parent_button = InlineKeyboardButton(
+            parent_button = Button(
                 self.back_button_text,
-                callback_data=tree.parameterize(
-                    parent.unique_id,
-                    page=page
-                )
-            )
+                parent.menu_id,
+                page=page)
 
             keyboard = keyboard + [[parent_button]]
 
-        return InlineKeyboardMarkup(keyboard) if keyboard else None
+        return (Keyboard(keyboard, tree,
+                         context.id) if keyboard else None)

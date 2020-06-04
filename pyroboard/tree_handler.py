@@ -31,9 +31,9 @@ class TreeHandler(BaseHandler):
     def __init__(self, main_node: Node):
         self.main_node = main_node
 
-    def get_family(self, unique_id: str) -> Tuple[Optional[BaseMenu],
-                                                  Optional[List[BaseMenu]]]:
-        return self.main_node.get_family(unique_id, None)
+    def get_family(self, menu_id: str) -> Tuple[Optional[BaseMenu],
+                                                Optional[List[BaseMenu]]]:
+        return self.main_node.get_family(menu_id, None)
 
     def get_menus(self) -> List[BaseMenu]:
         return self.main_node.get_menus()

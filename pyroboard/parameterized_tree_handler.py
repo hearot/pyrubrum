@@ -16,25 +16,25 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
-from .base_handler import pass_handler
+from .database.base_database import BaseDatabase
 from .node import Node
-from .parameterized_handler import ParameterizedHandler
+from .parameterized_handler import ParameterizedHandler, pass_handler_and_clean
 from .tree_handler import TreeHandler
 from dataclasses import dataclass
 from pyrogram import Client, MessageHandler
-from typing import Optional
 
 
 @dataclass(eq=False, init=False, repr=True)
 class ParameterizedTreeHandler(TreeHandler, ParameterizedHandler):
     def __init__(self, main_node: Node,
-                 separator: Optional[str] = "|"):
+                 database: BaseDatabase):
         TreeHandler.__init__(self, main_node)
-        ParameterizedHandler.__init__(self, separator)
+        ParameterizedHandler.__init__(self, database)
 
     def setup(self, client: Client):
         ParameterizedHandler.setup(self, client)
 
         client.add_handler(
-            MessageHandler(pass_handler(
-                self.main_node.menu.on_message, self)))
+            MessageHandler(
+                pass_handler_and_clean(
+                    self.main_node.menu.on_message, self)))
