@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
-from .button import Button # noqa
+from .button import Button, clean_parameters # noqa
 from .database import DictDatabase, RedisDatabase # noqa
 from .element import Element # noqa
 from .keyboard import Keyboard # noqa

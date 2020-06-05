@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
-from .button import Button
+from .button import Button, clean_parameters
 from .keyboard import Keyboard
 from .parameterized_tree_handler import ParameterizedTreeHandler
 from .tree_menu import TreeMenu
@@ -32,7 +32,7 @@ class PageItemMenu(TreeMenu):
                  client: Client,
                  context: Union[CallbackQuery,
                                 Message],
-                 page=0, **_) -> InlineKeyboardMarkup:
+                 page=0, **kwargs) -> InlineKeyboardMarkup:
         parent, children = tree.get_family(self.menu_id)
 
         if isinstance(context, Message):
@@ -42,15 +42,17 @@ class PageItemMenu(TreeMenu):
 
         if children:
             keyboard = [[child.button(tree, client,
-                                      context) for child in
+                                      context, **kwargs) for child in
                         children[i:i+self.limit]] for i in
                         range(0, len(children), self.limit)]
 
         if parent:
+            kwargs['page'] = page
+
             parent_button = Button(
                 self.back_button_text,
                 parent.menu_id,
-                page=page)
+                **clean_parameters(kwargs))
 
             keyboard = keyboard + [[parent_button]]
 

@@ -34,3 +34,16 @@ class Button:
 
         if "element_id" in kwargs:
             self.element_id = kwargs['element_id']
+
+
+def clean_parameters(parameters):
+    if 'button_id' in parameters:
+        parameters.pop('button_id')
+
+    if 'element_id' in parameters:
+        parameters.pop('element_id')
+
+    if 'name' in parameters:
+        parameters.pop('name')
+
+    return parameters

@@ -17,7 +17,7 @@
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
 from .base_handler import BaseHandler
-from .button import Button
+from .button import Button, clean_parameters
 from dataclasses import dataclass
 from pyrogram import (CallbackQuery, Client,
                       InlineKeyboardMarkup,
@@ -47,8 +47,9 @@ class BaseMenu:
     def button(self, handler: BaseHandler, client: Client,
                context: Union[CallbackQuery,
                               Message],
-               **_) -> Button:
-        return Button(self.name, self.menu_id)
+               **kwargs) -> Button:
+        return Button(self.name, self.menu_id,
+                      **clean_parameters(kwargs))
 
     def keyboard(self, handler: BaseHandler, client: Client,
                  context: Union[CallbackQuery,

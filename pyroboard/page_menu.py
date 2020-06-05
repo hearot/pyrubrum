@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
-from .button import Button
+from .button import Button, clean_parameters
 from .element import Element
 from .keyboard import Keyboard
 from .page_item_menu import PageItemMenu # noqa
@@ -60,7 +60,7 @@ class PageMenu(TreeMenu):
                  client: Client,
                  context: Union[CallbackQuery,
                                 Message],
-                 page=0, **_) -> InlineKeyboardMarkup:
+                 page=0, **kwargs) -> InlineKeyboardMarkup:
         parent, children = tree.get_family(self.menu_id)
 
         keyboard = []
@@ -81,35 +81,46 @@ class PageMenu(TreeMenu):
 
                 keyboard = [[Button(
                     element.name, page_item_menu.menu_id,
-                    page=page, element_id=element.element_id) for element in
+                    page=page, element_id=element.element_id,
+                    **clean_parameters(kwargs)) for element in
                             elements[i:i+self.limit]] for i in
                             range(0, len(elements), self.limit)]
 
         if children:
+            kwargs['page'] = page
+
             keyboard += [[child.button(tree, client,
-                                       context) for child in
+                                       context, **kwargs) for child in
                          children[i:i+self.limit]] for i in
                          range(0, len(children), self.limit)]
 
         teleport_row = []
 
         if page > 0:
+            parameters = kwargs.copy()
+            parameters['page'] = page - 1
+
             teleport_row.append(
                 Button(self.previous_page_button_text,
                        self.menu_id,
-                       page=page-1))
+                       **clean_parameters(
+                           parameters)))
 
         if (page+1)*self.limit_page < len(items):
+            parameters = kwargs.copy()
+            parameters['page'] = page + 1
+
             teleport_row.append(
                 Button(self.next_page_button_text,
                        self.menu_id,
-                       page=page+1))
+                       **clean_parameters(
+                           parameters)))
 
         if teleport_row:
             keyboard += [teleport_row]
 
         if parent:
-            parent_button = parent.button(tree, client, context)
+            parent_button = parent.button(tree, client, context, **kwargs)
             parent_button.name = self.back_button_text
 
             keyboard = keyboard + [[parent_button]]
