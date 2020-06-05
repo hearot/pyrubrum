@@ -17,3 +17,4 @@
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
 from .dict_database import DictDatabase # noqa
+from .redis_database import RedisDatabase # noqa

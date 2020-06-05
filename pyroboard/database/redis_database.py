@@ -16,15 +16,30 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
+from .base_database import BaseDatabase
+from .errors import DeleteError, SetError
 from typing import Optional
+import redis # noqa
 
 
-class BaseDatabase:
+class RedisDatabase(BaseDatabase):
+    encoding = 'utf-8'
+    server: redis.Redis
+
+    def __init__(self, server: redis.Redis, encoding='utf-8'):
+        self.encoding = encoding
+        self.server = server
+
     def get(self, callback_query_id: str) -> Optional[str]:
-        raise NotImplementedError
+        content = self.server.get(callback_query_id)
+        return content.decode(self.encoding) if content else None
 
-    def set(self, callback_query_id: str, data: str) -> bool:
-        raise NotImplementedError
+    def set(self, callback_query_id: str, data: str):
+        if not self.server.set(callback_query_id, data):
+            raise SetError
 
-    def delete(self, callback_query_id: str) -> bool:
-        raise NotImplementedError
+    def delete(self, callback_query_id: str):
+        try:
+            self.server.delete(callback_query_id)
+        except redis.RedisError:
+            raise DeleteError

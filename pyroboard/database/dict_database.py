@@ -17,6 +17,7 @@
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
 from .base_database import BaseDatabase
+from .errors import DeleteError
 from typing import Optional
 
 
@@ -24,13 +25,11 @@ class DictDatabase(dict, BaseDatabase):
     def get(self, callback_query_id: str) -> Optional[str]:
         return dict.get(self, callback_query_id)
 
-    def insert(self, callback_query_id: str, data: str) -> bool:
+    def set(self, callback_query_id: str, data: str):
         self.update({callback_query_id: data})
-        return True
 
-    def delete(self, callback_query_id: str) -> bool:
+    def delete(self, callback_query_id: str):
         try:
             self.pop(callback_query_id)
-            return True
         except KeyError:
-            return False
+            raise DeleteError

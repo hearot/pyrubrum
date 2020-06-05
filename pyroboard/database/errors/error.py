@@ -16,15 +16,6 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Optional
 
-
-class BaseDatabase:
-    def get(self, callback_query_id: str) -> Optional[str]:
-        raise NotImplementedError
-
-    def set(self, callback_query_id: str, data: str) -> bool:
-        raise NotImplementedError
-
-    def delete(self, callback_query_id: str) -> bool:
-        raise NotImplementedError
+class DatabaseError(Exception):
+    pass

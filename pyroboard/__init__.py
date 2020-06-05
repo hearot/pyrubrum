@@ -17,7 +17,7 @@
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
 from .button import Button # noqa
-from .database.dict_database import DictDatabase # noqa
+from .database import DictDatabase, RedisDatabase # noqa
 from .element import Element # noqa
 from .keyboard import Keyboard # noqa
 from .page_item_menu import PageItemMenu # noqa

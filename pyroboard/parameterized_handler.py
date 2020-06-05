@@ -81,7 +81,7 @@ class ParameterizedHandler(BaseHandler):
                     "callback_query_id": callback_query_id,
                     **button.parameters}
 
-        self.database.insert(callback_query_id, json.dumps(content))
+        self.database.set(callback_query_id, json.dumps(content))
 
         return [[InlineKeyboardButton(
             button.name, " ".join(map(str,

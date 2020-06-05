@@ -1,3 +1,4 @@
 dataclasses
 orjson[fast]
 pyrogram
+redis
