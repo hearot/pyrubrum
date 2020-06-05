@@ -17,17 +17,22 @@
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
 from .base_database import BaseDatabase
-from .errors import DeleteError, SetError
-from typing import Optional
+from .errors import DeleteError, ExpireError, SetError
+from datetime import timedelta
+from typing import Optional, Union
 import redis # noqa
 
 
 class RedisDatabase(BaseDatabase):
     encoding = 'utf-8'
+    expire: Optional[Union[int, timedelta]] = 86400
     server: redis.Redis
 
-    def __init__(self, server: redis.Redis, encoding='utf-8'):
+    def __init__(self, server: redis.Redis,
+                 encoding='utf-8',
+                 expire: Optional[Union[int, timedelta]] = 86400):
         self.encoding = encoding
+        self.expire = expire
         self.server = server
 
     def get(self, callback_query_id: str) -> Optional[str]:
@@ -37,6 +42,10 @@ class RedisDatabase(BaseDatabase):
     def set(self, callback_query_id: str, data: str):
         if not self.server.set(callback_query_id, data):
             raise SetError
+
+        if self.expire and not self.server.expire(callback_query_id,
+                                                  self.expire):
+            raise ExpireError
 
     def delete(self, callback_query_id: str):
         try:

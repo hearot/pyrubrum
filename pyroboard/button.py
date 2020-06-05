@@ -17,6 +17,7 @@
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
 from dataclasses import dataclass
+from typing import Any, Dict
 
 
 @dataclass(init=False)
@@ -26,24 +27,20 @@ class Button:
     name: str
     parameters: dict
 
-    def __init__(self, name: str, button_id: str, **kwargs):
+    def __init__(self, name: str, button_id: str,
+                 parameters: Dict[str, Any],
+                 element_id: str = "",
+                 **kwargs):
         self.button_id = button_id
+        self.element_id = element_id
         self.name = name
-        self.parameters = kwargs
+        self.parameters = parameters
+        self.parameters.update(kwargs)
+
+        self.parameters['button_id'] = button_id
+        self.parameters['element_id'] = element_id
         self.parameters['name'] = name
 
-        if "element_id" in kwargs:
-            self.element_id = kwargs['element_id']
-
-
-def clean_parameters(parameters):
-    if 'button_id' in parameters:
-        parameters.pop('button_id')
-
-    if 'element_id' in parameters:
-        parameters.pop('element_id')
-
-    if 'name' in parameters:
-        parameters.pop('name')
-
-    return parameters
+    def set_name(self, name: str):
+        self.name = name
+        self.parameters['name'] = name

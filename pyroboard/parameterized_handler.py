@@ -55,10 +55,10 @@ class ParameterizedHandler(BaseHandler):
                     pattern = parameters[1]
 
                     if pattern in content:
-                        callback.matches = content[pattern]
+                        callback.parameters = content[pattern]
 
                         if len(parameters) > 2:
-                            callback.matches['element_id'] = parameters[2]
+                            callback.parameters['element_id'] = parameters[2]
 
                         return True
 
@@ -78,7 +78,7 @@ class ParameterizedHandler(BaseHandler):
         for row in keyboard:
             for button in row:
                 content[button.button_id] = {
-                    "callback_query_id": callback_query_id,
+                    'callback_query_id': callback_query_id,
                     **button.parameters}
 
         self.database.set(callback_query_id, json.dumps(content))
@@ -101,8 +101,8 @@ def pass_handler_and_clean(func: Callable[[Client, Any], None],
                                [Client, Any], None]:
     def on_callback(client: Client, context):
         if isinstance(context, CallbackQuery):
-            func(handler, client, context, **context.matches)
-            handler.database.delete(context.matches['callback_query_id'])
+            func(handler, client, context, context.parameters)
+            handler.database.delete(context.parameters['callback_query_id'])
         else:
             func(handler, client, context)
 

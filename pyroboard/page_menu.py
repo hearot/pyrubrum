@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
-from .button import Button, clean_parameters
+from .button import Button
 from .element import Element
 from .keyboard import Keyboard
 from .page_item_menu import PageItemMenu # noqa
@@ -26,7 +26,7 @@ from dataclasses import dataclass
 from pyrogram import (CallbackQuery, Client,
                       InlineKeyboardMarkup,
                       InputMedia, Message)
-from typing import List, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 
 
 @dataclass(eq=False, init=False, repr=True)
@@ -60,11 +60,14 @@ class PageMenu(TreeMenu):
                  client: Client,
                  context: Union[CallbackQuery,
                                 Message],
-                 page=0, **kwargs) -> InlineKeyboardMarkup:
+                 parameters: Dict[str, Any]) -> InlineKeyboardMarkup:
         parent, children = tree.get_family(self.menu_id)
 
         keyboard = []
         items = []
+
+        if 'page' not in parameters:
+            parameters['page'] = 0
 
         if children:
             page_item_menu = None
@@ -77,51 +80,48 @@ class PageMenu(TreeMenu):
 
             if page_item_menu:
                 items = self.get_items()
-                elements = items[page*self.limit_page:][:self.limit_page]
+                elements = items[
+                    parameters['page']*self.limit_page:][:self.limit_page]
 
                 keyboard = [[Button(
                     element.name, page_item_menu.menu_id,
-                    page=page, element_id=element.element_id,
-                    **clean_parameters(kwargs)) for element in
+                    parameters,
+                    element.element_id) for element in
                             elements[i:i+self.limit]] for i in
                             range(0, len(elements), self.limit)]
 
         if children:
-            kwargs['page'] = page
-
             keyboard += [[child.button(tree, client,
-                                       context, **kwargs) for child in
+                                       context, parameters) for child in
                          children[i:i+self.limit]] for i in
                          range(0, len(children), self.limit)]
 
         teleport_row = []
 
-        if page > 0:
-            parameters = kwargs.copy()
-            parameters['page'] = page - 1
+        if parameters['page'] > 0:
+            previous_page_parameters = parameters.copy()
 
             teleport_row.append(
                 Button(self.previous_page_button_text,
                        self.menu_id,
-                       **clean_parameters(
-                           parameters)))
+                       previous_page_parameters,
+                       page=parameters['page']-1))
 
-        if (page+1)*self.limit_page < len(items):
-            parameters = kwargs.copy()
-            parameters['page'] = page + 1
+        if (parameters['page']+1)*self.limit_page < len(items):
+            next_page_parameters = parameters.copy()
 
             teleport_row.append(
                 Button(self.next_page_button_text,
                        self.menu_id,
-                       **clean_parameters(
-                           parameters)))
+                       next_page_parameters,
+                       page=parameters['page']+1))
 
         if teleport_row:
             keyboard += [teleport_row]
 
         if parent:
-            parent_button = parent.button(tree, client, context, **kwargs)
-            parent_button.name = self.back_button_text
+            parent_button = parent.button(tree, client, context, parameters)
+            parent_button.set_name(self.back_button_text)
 
             keyboard = keyboard + [[parent_button]]
 

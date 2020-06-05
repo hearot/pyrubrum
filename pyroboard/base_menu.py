@@ -17,12 +17,12 @@
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
 from .base_handler import BaseHandler
-from .button import Button, clean_parameters
+from .button import Button
 from dataclasses import dataclass
 from pyrogram import (CallbackQuery, Client,
                       InlineKeyboardMarkup,
                       InputMedia, Message)
-from typing import Union
+from typing import Any, Dict, Union
 
 
 @dataclass(eq=False, init=False, repr=True)
@@ -41,21 +41,24 @@ class BaseMenu:
         raise NotImplementedError
 
     def on_callback(self, handler: BaseHandler,
-                    client: Client, callback: CallbackQuery, **_):
+                    client: Client, callback: CallbackQuery,
+                    parameters: Dict[str, Any]):
         raise NotImplementedError
 
     def button(self, handler: BaseHandler, client: Client,
                context: Union[CallbackQuery,
                               Message],
-               **kwargs) -> Button:
+               parameters: Dict[str, Any]) -> Button:
         return Button(self.name, self.menu_id,
-                      **clean_parameters(kwargs))
+                      parameters)
 
     def keyboard(self, handler: BaseHandler, client: Client,
                  context: Union[CallbackQuery,
-                                Message], **_) -> InlineKeyboardMarkup:
+                                Message],
+                 parameters: Dict[str, Any]) -> InlineKeyboardMarkup:
         raise NotImplementedError
 
     def on_message(self, handler: BaseHandler,
-                   client: Client, message: Message, **_):
+                   client: Client, message: Message,
+                   parameters: Dict[str, Any]):
         raise NotImplementedError

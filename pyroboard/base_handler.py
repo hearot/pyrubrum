@@ -47,7 +47,7 @@ def pass_handler(func: Callable[[Client, Any], None],
                  handler: BaseHandler) -> Callable[[Client, Any], None]:
     def on_callback(client: Client, context):
         if isinstance(context, CallbackQuery):
-            func(handler, client, context, **context.matches)
+            func(handler, client, context, context.parameters)
         else:
             func(handler, client, context)
 
