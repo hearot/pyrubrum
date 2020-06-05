@@ -23,17 +23,25 @@ from dataclasses import dataclass
 from pyrogram import (Client, CallbackQuery,
                       InlineKeyboardMarkup, InputMedia,
                       Message)
-from typing import Any, Dict, Optional, Union
+from typing import Any, Callable, Dict, Optional, Union
 
 
 @dataclass(eq=False, init=False, repr=True)
 class TreeMenu(BaseMenu):
-    content: Union[InputMedia, str]
+    content: Union[Union[InputMedia, str],
+                   Callable[[TreeHandler, Client,
+                             Union[CallbackQuery, Message],
+                             Dict[str, Any]],
+                            Union[InputMedia, str]]]
     back_button_text: Optional[str] = "🔙"
     limit: Optional[int] = 2
 
     def __init__(self, name: str, menu_id: str,
-                 content: Union[InputMedia, str],
+                 content: Union[Union[InputMedia, str],
+                                Callable[[TreeHandler, Client,
+                                          Union[CallbackQuery, Message],
+                                          Dict[str, Any]],
+                                         Union[InputMedia, str]]],
                  back_button_text: Optional[str] = "🔙",
                  limit: Optional[int] = 2):
         BaseMenu.__init__(self, name, menu_id)
@@ -45,6 +53,9 @@ class TreeMenu(BaseMenu):
                     context: Union[CallbackQuery,
                                    Message],
                     parameters: Dict[str, Any]) -> Union[InputMedia, str]:
+        if callable(self.content):
+            return self.content(tree, client, context, parameters)
+
         return self.content
 
     def preliminary(self, tree: TreeHandler, client: Client,

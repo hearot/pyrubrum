@@ -30,16 +30,16 @@ class Button:
     def __init__(self, name: str, button_id: str,
                  parameters: Dict[str, Any],
                  element_id: str = "",
+                 same_menu: bool = False,
                  **kwargs):
         self.button_id = button_id
         self.element_id = element_id
         self.name = name
-        self.parameters = parameters
+        self.parameters = parameters.copy()
         self.parameters.update(kwargs)
 
         self.parameters['button_id'] = button_id
-        self.parameters['element_id'] = element_id
-        self.parameters['name'] = name
+        self.parameters['same_menu'] = same_menu
 
     def set_name(self, name: str):
         self.name = name

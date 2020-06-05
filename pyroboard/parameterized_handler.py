@@ -52,13 +52,20 @@ class ParameterizedHandler(BaseHandler):
             if result:
                 try:
                     content = json.loads(result)
-                    pattern = parameters[1]
 
-                    if pattern in content:
-                        callback.parameters = content[pattern]
+                    if parameters[1] in content:
+                        callback.parameters = content[parameters[1]]
+                        callback.parameters[
+                            'callback_query_id'] = parameters[0]
+                        callback.parameters[
+                            'menu_id'] = parameters[1]
 
                         if len(parameters) > 2:
                             callback.parameters['element_id'] = parameters[2]
+
+                            if not callback.parameters['same_menu']:
+                                callback.parameters[
+                                    parameters[1] + "_id"] = parameters[2]
 
                         return True
 
@@ -78,7 +85,7 @@ class ParameterizedHandler(BaseHandler):
         for row in keyboard:
             for button in row:
                 content[button.button_id] = {
-                    'callback_query_id': callback_query_id,
+                    'callback_query_id': str(callback_query_id),
                     **button.parameters}
 
         self.database.set(callback_query_id, json.dumps(content))
