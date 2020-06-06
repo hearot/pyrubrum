@@ -4,12 +4,14 @@
     </a>
     <br>
     <b>A simple and intuitive menu handler for Pyrogram</b>
-    <i>Create your own in less than 100 lines!</i>
+    <br>
+    <i>Create your own bot in less than 100 lines!</i>
     <br>
     <br>
     <a href="https://github.com/hearot/pyroboard/blob/master/LICENSE">
         <img src="https://img.shields.io/badge/License-GPL%20v3-red.svg" alt="License: GPLv3"/>
     </a>
+    •
     <a href="https://t.me/hearot">
         <img src="https://img.shields.io/badge/Developer-@hearot-blue.svg" alt="Developer: @hearot"/>
     </a>
