@@ -20,6 +20,7 @@ from .button import Button # noqa
 from .database import DictDatabase, RedisDatabase # noqa
 from .element import Element # noqa
 from .keyboard import Keyboard # noqa
+from .node import Node # noqa
 from .page_item_menu import PageItemMenu # noqa
 from .page_menu import PageMenu # noqa
 from .parameterized_tree_handler import ParameterizedTreeHandler # noqa
