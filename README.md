@@ -2,12 +2,10 @@
     <a href="https://github.com/hearot/pyroboard">
         <img src="https://i.imgur.com/XhInvbp.gif" alt="Pyroboard" width="150"/>
     </a>
-
     <br>
     <b>A simple and intuitive menu handler for Pyrogram</b>
     <i>Create your own in less than 100 lines!</i>
     <br>
-
     <a href="https://github.com/hearot/pyroboard/blob/master/LICENSE">
         <img src="https://img.shields.io/badge/License-GPL%20v3-red.svg" alt="License: GPLv3"/>
     </a>
