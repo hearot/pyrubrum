@@ -64,12 +64,12 @@ tree = transform_dict(
         PageMenu(
             "Main menu", "main",
             "📅 Choose a year.",
-            generate_years(1970, 2049),
-            limit_page=10): {
+            generate_years(1970, 2044),
+            limit_page=15, limit=4): {
                 PageMenu(
                     "Month menu", "year",
                     "📅 Choose a month.",
-                    generate_months(), limit=4,
+                    generate_months(), limit=5,
                     limit_page=12): {
                         PageMenu(
                             "Day menu", "month",

@@ -138,3 +138,6 @@ unknown_errors.txt
 
 # Pyroboard private examples
 *_private.py
+
+# Assets
+assets/
