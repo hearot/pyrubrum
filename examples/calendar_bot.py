@@ -78,7 +78,7 @@ tree = transform_dict(
                             limit=5): {
                                 TreeMenu("Choose day menu",
                                          "day",
-                                         tell_about_the_day): None
+                                         tell_about_the_day)
                             }
                     }
             }

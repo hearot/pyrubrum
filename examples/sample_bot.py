@@ -16,22 +16,39 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
 
-from pyroboard import TreeHandler, TreeMenu, transform_dict
+from environs import Env
+from pyroboard import Node, transform_dict, TreeHandler, TreeMenu
 from pyrogram import Client
 
-bot = Client("sample_bot", api_hash=input("API hash: "),
-             api_id=input("API ID: "),
-             bot_token=input("Bot token: "))
-
-handler = TreeHandler(transform_dict(
+tree = transform_dict(
     {
         TreeMenu("Main", "main", "Hello!"): {
-            TreeMenu("About me", "about_me", "I'm just a bot"): None,
+            TreeMenu("About me", "about_me", "I'm just a bot!"),
             TreeMenu("Thoughts", "thoughts",
-                     "I'm a bot, I cannot think properly..."): None
+                     "I'm a bot, I cannot think properly...")
         }
     }
-))
+)
 
-handler.setup(bot)
-bot.run()
+
+def main(api_hash: str, api_id: int, bot_token: str,
+         session_name: str, tree: Node):
+    bot = Client(session_name, api_hash=api_hash,
+                 api_id=api_id, bot_token=bot_token)
+    handler = TreeHandler(tree)
+    handler.setup(bot)
+
+    bot.run()
+
+
+if __name__ == "__main__":
+    env = Env()
+    env.read_env()
+
+    api_hash = env("API_HASH")
+    api_id = env.int("API_ID")
+    bot_token = env("BOT_TOKEN")
+    session_name = env("SESSION_NAME")
+
+    main(api_hash, api_id, bot_token,
+         session_name, tree)

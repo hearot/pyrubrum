@@ -21,7 +21,7 @@ from .base_handler import BaseHandler, pass_handler
 from .node import Node, Optional
 from dataclasses import dataclass
 from pyrogram import Client, MessageHandler
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, Iterable, List, Tuple, Union
 
 
 @dataclass(eq=False, init=False, repr=True)
@@ -46,18 +46,21 @@ class TreeHandler(BaseHandler):
                 self.main_node.menu.on_message, self)))
 
 
-def on_callback_node(menus: Dict[BaseMenu, Any], parent: Node):
+def on_callback_node(menus: Union[Dict[BaseMenu, Any],
+                                  Iterable[BaseMenu]],
+                     parent: Node):
     for menu in menus:
         node = Node(menu)
         parent.add_child(node)
 
-        if isinstance(menus[menu], dict):
+        if isinstance(menus, dict) and isinstance(menus[menu], Iterable):
             on_callback_node(menus[menu], node)
 
 
-def transform_dict(menus: Dict[BaseMenu, Any]) -> Node:
+def transform_dict(menus: Union[Dict[BaseMenu, Any],
+                                Iterable[BaseMenu]]) -> Node:
     main_node = Node(list(menus)[0])
-    main_value = list(menus.values())[0]
+    main_value = list(menus.values())[0] if isinstance(menus, dict) else None
 
     if main_value:
         on_callback_node(main_value, main_node)

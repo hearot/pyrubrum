@@ -20,7 +20,7 @@
 ## Pyroboard
 
 ```python
-from pyroboard import TreeHandler, TreeMenu, transform_dict
+from pyroboard import transform_dict, TreeHandler, TreeMenu
 from pyrogram import Client
 
 bot = Client("sample_bot", api_hash=input("API hash: "),
@@ -30,9 +30,9 @@ bot = Client("sample_bot", api_hash=input("API hash: "),
 handler = TreeHandler(transform_dict(
     {
         TreeMenu("Main", "main", "Hello!"): {
-            TreeMenu("About me", "about_me", "I'm just a bot"): None,
+            TreeMenu("About me", "about_me", "I'm just a bot!"),
             TreeMenu("Thoughts", "thoughts",
-                     "I'm a bot, I cannot think properly..."): None
+                     "I'm a bot, I cannot think properly...")
         }
     }
 ))
