@@ -97,7 +97,7 @@ class TreeMenu(BaseMenu):
 
         if parent:
             parent_button = parent.button(tree, client, context, parameters)
-            parent_button.set_name(self.back_button_text)
+            parent_button.name = self.back_button_text
 
             keyboard = keyboard + [[parent_button]]
 

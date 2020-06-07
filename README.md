@@ -3,7 +3,7 @@
         <img src="https://i.imgur.com/XhInvbp.gif" alt="Pyroboard" width="150"/>
     </a>
     <br>
-    <b>A simple and intuitive menu handler for Pyrogram</b>
+    <b>A simple framework based on Pyrogram for creating Telegram bots.</b>
     <br>
     <i>Create your own bot in less than 100 lines!</i>
     <br>
@@ -23,9 +23,7 @@
 from pyroboard import transform_dict, TreeHandler, TreeMenu
 from pyrogram import Client
 
-bot = Client("sample_bot", api_hash=input("API hash: "),
-             api_id=input("API ID: "),
-             bot_token=input("Bot token: "))
+bot = Client(...)
 
 handler = TreeHandler(transform_dict(
     {
@@ -41,7 +39,16 @@ handler.setup(bot)
 bot.run()
 ```
 
+**Pyroboard** is an intuitive framework for creating jointly with [Pyrogram](https://github.com/pyrogram/pyrogram) [Telegram](https://telegram.org) [bots](https://core.telegram.org/bots).
+
+### Examples
+
+In order to make use of the proposed examples, you need to create your own environment file by renaming [sample.env](./examples/sample.env) into `.env` and editing all the necessary variables.
+
+   - [Calendar](./examples/calendar.py) - Get what day of the week a day is by simply choosing a year, a month and a day while discovering the potential of Pyroboard page menus.
+   - [Sample](./examples/sample.py) - Interact with inline menus while understanding how Pyroboard works.
+
 ### Copyright & License
 
 - Copyright (C) 2020 [Hearot](https://github.com/hearot)
-- Licensed under the terms of the [GNU General Public License v3 (GPLv3)](LICENSE)
+- Licensed under the terms of the [GNU General Public License v3 (GPLv3)](./LICENSE)

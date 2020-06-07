@@ -40,7 +40,3 @@ class Button:
 
         self.parameters['button_id'] = button_id
         self.parameters['same_menu'] = same_menu
-
-    def set_name(self, name: str):
-        self.name = name
-        self.parameters['name'] = name
