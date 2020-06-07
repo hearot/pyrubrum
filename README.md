@@ -50,7 +50,16 @@ In order to make use of the proposed examples, you need to create your own envir
 
 ### Commit messages
 
-This project makes use of the [Conventional Commits](https://www.conventionalcommits.org) specification.
+> *See [Conventional Commits](https://www.conventionalcommits.org).*
+
+### Versioning
+
+> *See [PEP 440](https://www.python.org/dev/peps/pep-0440/).*
+
+### Thanks
+
+   - [veggero/tytg](https://github.com/veggero/tytg) for giving me the idea of developing a simple framework which you can code a folder-like bot with.
+   - [IlhomBahoraliev/pyromenu](https://github.com/IlhomBahoraliev/pyromenu) for letting me understand that an object-oriented library would make the difference in developing this project.
 
 ### Copyright & License
 
