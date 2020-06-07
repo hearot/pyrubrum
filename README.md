@@ -21,16 +21,16 @@
 
 ```python
 from pyrogram import Client
-from pyrubrum import transform_dict, TreeHandler, TreeMenu
+from pyrubrum import Handler, transform_dict, Menu
 
 bot = Client(...)
 
-handler = TreeHandler(transform_dict(
+handler = Handler(transform_dict(
     {
-        TreeMenu("Main", "main", "Hello!"): {
-            TreeMenu("About me", "about_me", "I'm just a bot!"),
-            TreeMenu("Thoughts", "thoughts",
-                     "I'm a bot, I cannot think properly...")
+        Menu("Main", "main", "Hello!"): {
+            Menu("About me", "about_me", "I'm just a bot!"),
+            Menu("Thoughts", "thoughts",
+                 "I'm a bot, I cannot think properly...")
         }
     }
 ))
@@ -47,6 +47,10 @@ In order to make use of the proposed examples, you need to create your own envir
 
    - [Calendar](./examples/calendar_bot.py) - Get what day of the week a day is by simply choosing a year, a month and a day while discovering the potential of Pyrubrum page menus.
    - [Sample](./examples/sample_bot.py) - Interact with inline menus while understanding how Pyrubrum works.
+
+### Commit messages
+
+This project makes use of the [Conventional Commits](https://www.conventionalcommits.org) specification.
 
 ### Copyright & License
 

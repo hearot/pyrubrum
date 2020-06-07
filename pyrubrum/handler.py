@@ -25,7 +25,7 @@ from typing import Any, Dict, Iterable, List, Tuple, Union
 
 
 @dataclass(eq=False, init=False, repr=True)
-class TreeHandler(BaseHandler):
+class Handler(BaseHandler):
     main_node: Node
 
     def __init__(self, main_node: Node):

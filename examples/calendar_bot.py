@@ -21,12 +21,11 @@ from environs import Env
 from datetime import datetime
 from pyrogram import Client
 from pyrubrum import (DictDatabase,
-                      Element, Node,
-                      PageMenu,
-                      ParameterizedTreeHandler,
+                      Element, Menu,
+                      Node, PageMenu,
+                      ParameterizedHandler,
                       RedisDatabase,
-                      transform_dict,
-                      TreeMenu)
+                      transform_dict)
 from redis import Redis
 from typing import Union
 
@@ -76,9 +75,9 @@ tree = transform_dict(
                             "📅 Choose a day.",
                             generate_days, limit_page=31,
                             limit=5): {
-                                TreeMenu("Choose day menu",
-                                         "day",
-                                         tell_about_the_day)
+                                Menu("Choose day menu",
+                                     "day",
+                                     tell_about_the_day)
                             }
                     }
             }
@@ -92,7 +91,7 @@ def main(api_hash: str, api_id: int, bot_token: str,
     bot = Client(session_name, api_hash=api_hash,
                  api_id=api_id, bot_token=bot_token)
 
-    handler = ParameterizedTreeHandler(tree, database)
+    handler = ParameterizedHandler(tree, database)
     handler.setup(bot)
 
     bot.run()

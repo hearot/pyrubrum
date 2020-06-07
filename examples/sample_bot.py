@@ -18,14 +18,14 @@
 
 from environs import Env
 from pyrogram import Client
-from pyrubrum import Node, transform_dict, TreeHandler, TreeMenu
+from pyrubrum import Handler, Menu, Node, transform_dict
 
 tree = transform_dict(
     {
-        TreeMenu("Main", "main", "Hello!"): {
-            TreeMenu("About me", "about_me", "I'm just a bot!"),
-            TreeMenu("Thoughts", "thoughts",
-                     "I'm a bot, I cannot think properly...")
+        Menu("Main", "main", "Hello!"): {
+            Menu("About me", "about_me", "I'm just a bot!"),
+            Menu("Thoughts", "thoughts",
+                 "I'm a bot, I cannot think properly...")
         }
     }
 )
@@ -35,7 +35,7 @@ def main(api_hash: str, api_id: int, bot_token: str,
          session_name: str, tree: Node):
     bot = Client(session_name, api_hash=api_hash,
                  api_id=api_id, bot_token=bot_token)
-    handler = TreeHandler(tree)
+    handler = Handler(tree)
     handler.setup(bot)
 
     bot.run()

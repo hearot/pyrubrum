@@ -19,16 +19,16 @@
 from .button import Button # noqa
 from .database import DictDatabase, RedisDatabase # noqa
 from .element import Element # noqa
+from .handler import Handler, transform_dict # noqa
 from .keyboard import Keyboard # noqa
+from .menu import Menu # noqa
 from .node import Node # noqa
 from .page_menu import PageMenu # noqa
-from .parameterized_tree_handler import ParameterizedTreeHandler # noqa
-from .tree_menu import TreeMenu # noqa
-from .tree_handler import TreeHandler, transform_dict # noqa
+from .parameterized_handler import ParameterizedHandler # noqa
 
 __author__ = "Hearot"
 __author_email__ = "gabriel@hearot.it"
 __license__ = "GNU General Public License v3"
 __package__ = "pyrubrum"
 __url__ = "https://github.com/hearot/pyrubrum"
-__version__ = "0.1a0"
+__version__ = "0.1a1.dev0"

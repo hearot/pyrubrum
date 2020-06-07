@@ -19,8 +19,8 @@
 from .button import Button
 from .element import Element
 from .keyboard import Keyboard
-from .parameterized_tree_handler import ParameterizedTreeHandler
-from .tree_menu import TreeMenu
+from .menu import Menu
+from .parameterized_handler import ParameterizedHandler
 from dataclasses import dataclass
 from pyrogram import (CallbackQuery, Client,
                       InlineKeyboardMarkup,
@@ -29,9 +29,9 @@ from typing import Any, Callable, Dict, List, Optional, Union
 
 
 @dataclass(eq=False, init=False, repr=True)
-class PageMenu(TreeMenu):
+class PageMenu(Menu):
     items: Union[List[Element],
-                 Callable[[ParameterizedTreeHandler, Client,
+                 Callable[[ParameterizedHandler, Client,
                            Union[CallbackQuery, Message],
                            Dict[str, Any]],
                           List[Element]]]
@@ -43,7 +43,7 @@ class PageMenu(TreeMenu):
                  menu_id: str,
                  content: Union[InputMedia, str],
                  items: Union[List[Element],
-                              Callable[[ParameterizedTreeHandler, Client,
+                              Callable[[ParameterizedHandler, Client,
                                         Union[CallbackQuery, Message],
                                         Dict[str, Any]],
                                        List[Element]]],
@@ -52,16 +52,16 @@ class PageMenu(TreeMenu):
                  limit_page: Optional[int] = 4,
                  next_page_button_text: Optional[str] = "▶️",
                  previous_page_button_text: Optional[str] = "◀️"):
-        TreeMenu.__init__(self, name, menu_id, content,
-                          back_button_text=back_button_text,
-                          limit=limit)
+        Menu.__init__(self, name, menu_id, content,
+                      back_button_text=back_button_text,
+                      limit=limit)
 
         self.items = items
         self.limit_page = limit_page
         self.next_page_button_text = next_page_button_text
         self.previous_page_button_text = previous_page_button_text
 
-    def keyboard(self, tree: ParameterizedTreeHandler,
+    def keyboard(self, tree: ParameterizedHandler,
                  client: Client,
                  context: Union[CallbackQuery,
                                 Message],

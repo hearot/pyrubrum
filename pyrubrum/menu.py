@@ -17,8 +17,8 @@
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
 from .base_menu import BaseMenu
+from .handler import Handler
 from .keyboard import Keyboard
-from .tree_handler import TreeHandler
 from dataclasses import dataclass
 from pyrogram import (Client, CallbackQuery,
                       InlineKeyboardMarkup, InputMedia,
@@ -27,9 +27,9 @@ from typing import Any, Callable, Dict, Optional, Union
 
 
 @dataclass(eq=False, init=False, repr=True)
-class TreeMenu(BaseMenu):
+class Menu(BaseMenu):
     content: Union[Union[InputMedia, str],
-                   Callable[[TreeHandler, Client,
+                   Callable[[Handler, Client,
                              Union[CallbackQuery, Message],
                              Dict[str, Any]],
                             Union[InputMedia, str]]]
@@ -38,7 +38,7 @@ class TreeMenu(BaseMenu):
 
     def __init__(self, name: str, menu_id: str,
                  content: Union[Union[InputMedia, str],
-                                Callable[[TreeHandler, Client,
+                                Callable[[Handler, Client,
                                           Union[CallbackQuery, Message],
                                           Dict[str, Any]],
                                          Union[InputMedia, str]]],
@@ -49,7 +49,7 @@ class TreeMenu(BaseMenu):
         self.content = content
         self.limit = limit
 
-    def get_content(self, tree: TreeHandler, client: Client,
+    def get_content(self, tree: Handler, client: Client,
                     context: Union[CallbackQuery,
                                    Message],
                     parameters: Dict[str, Any]) -> Union[InputMedia, str]:
@@ -58,12 +58,12 @@ class TreeMenu(BaseMenu):
 
         return self.content
 
-    def preliminary(self, tree: TreeHandler, client: Client,
+    def preliminary(self, tree: Handler, client: Client,
                     context: Union[CallbackQuery, Message],
                     parameters: Dict[str, Any]):
         pass
 
-    def on_callback(self, tree: TreeHandler, client: Client,
+    def on_callback(self, tree: Handler, client: Client,
                     callback: CallbackQuery,
                     parameters: Dict[str, Any]):
         self.preliminary(tree, client, callback, parameters)
@@ -81,7 +81,7 @@ class TreeMenu(BaseMenu):
         else:
             raise TypeError("content must be of type InputMedia or str")
 
-    def keyboard(self, tree: TreeHandler, client: Client,
+    def keyboard(self, tree: Handler, client: Client,
                  context: Union[CallbackQuery,
                                 Message],
                  parameters: Dict[str, Any]) -> InlineKeyboardMarkup:
@@ -110,7 +110,7 @@ class TreeMenu(BaseMenu):
             return (Keyboard(keyboard, tree,
                     context.id) if keyboard else None)
 
-    def on_message(self, tree: TreeHandler, client: Client,
+    def on_message(self, tree: Handler, client: Client,
                    message: Message):
         parameters = {}
 
