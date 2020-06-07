@@ -57,7 +57,7 @@ setup(
         "Topic :: Communications :: Chat",
         "Topic :: Software Development :: Libraries",
         "Topic :: Software Development :: Libraries :: Python Modules",
-        "Topic :: Software Development :: Libraries :: Application Frameworks"
+        "Topic :: Software Development :: Libraries :: Application Frameworks",
         "Typing :: Typed"
     ],
     description="An intuitive framework for creating Telegram bots",
