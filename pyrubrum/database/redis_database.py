@@ -20,15 +20,19 @@ from .base_database import BaseDatabase
 from .errors import DeleteError, ExpireError, SetError
 from datetime import timedelta
 from typing import Optional, Union
-import redis
+
+try:
+    import redis
+except (ImportError, ModuleNotFoundError):
+    pass
 
 
 class RedisDatabase(BaseDatabase):
     encoding = 'utf-8'
     expire: Optional[Union[int, timedelta]] = 86400
-    server: redis.Redis
+    server: 'redis.Redis'
 
-    def __init__(self, server: redis.Redis,
+    def __init__(self, server: 'redis.Redis',
                  encoding='utf-8',
                  expire: Optional[Union[int, timedelta]] = 86400):
         self.encoding = encoding
