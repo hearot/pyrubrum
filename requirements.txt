@@ -1,4 +1,3 @@
-dataclasses
-orjson[fast]
+dataclasses;python_version<'3.7'
 pyrogram
 redis

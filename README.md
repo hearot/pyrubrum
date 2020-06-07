@@ -1,14 +1,14 @@
 <p align="center">
-    <a href="https://github.com/hearot/pyroboard">
-        <img src="https://i.imgur.com/XhInvbp.gif" alt="Pyroboard" width="150"/>
+    <a href="https://github.com/hearot/pyrubrum">
+        <img src="https://i.imgur.com/XhInvbp.gif" alt="Pyrubrum" width="150"/>
     </a>
     <br>
-    <b>A simple framework based on Pyrogram for creating Telegram bots.</b>
+    <b>An intuitive framework for creating Telegram bots.</b>
     <br>
     <i>Create your own bot in less than 100 lines!</i>
     <br>
     <br>
-    <a href="https://github.com/hearot/pyroboard/blob/master/LICENSE">
+    <a href="https://github.com/hearot/pyrubrum/blob/master/LICENSE">
         <img src="https://img.shields.io/badge/License-GPL%20v3-red.svg" alt="License: GPLv3"/>
     </a>
     •
@@ -17,11 +17,11 @@
     </a>
 </p>
 
-## Pyroboard
+## Pyrubrum
 
 ```python
-from pyroboard import transform_dict, TreeHandler, TreeMenu
 from pyrogram import Client
+from pyrubrum import transform_dict, TreeHandler, TreeMenu
 
 bot = Client(...)
 
@@ -39,14 +39,14 @@ handler.setup(bot)
 bot.run()
 ```
 
-**Pyroboard** is an intuitive framework for creating jointly with [Pyrogram](https://github.com/pyrogram/pyrogram) [Telegram](https://telegram.org) [bots](https://core.telegram.org/bots).
+**Pyrubrum** is a versatile, charming framework for creating [Telegram](https://telegram.org) [bots](https://core.telegram.org/bots), jointly with [Pyrogram](https://github.com/pyrogram/pyrogram).
 
 ### Examples
 
 In order to make use of the proposed examples, you need to create your own environment file by renaming [sample.env](./examples/sample.env) into `.env` and editing all the necessary variables.
 
-   - [Calendar](./examples/calendar.py) - Get what day of the week a day is by simply choosing a year, a month and a day while discovering the potential of Pyroboard page menus.
-   - [Sample](./examples/sample.py) - Interact with inline menus while understanding how Pyroboard works.
+   - [Calendar](./examples/calendar_bot.py) - Get what day of the week a day is by simply choosing a year, a month and a day while discovering the potential of Pyrubrum page menus.
+   - [Sample](./examples/sample_bot.py) - Interact with inline menus while understanding how Pyrubrum works.
 
 ### Copyright & License
 

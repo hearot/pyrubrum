@@ -1,25 +1,24 @@
-# Pyroboard - Keyboard manager for Pyrogram
+# Pyrubrum - An intuitive framework for creating Telegram bots
 # Copyright (C) 2020 Hearot <https://github.com/hearot>
 #
-# This file is part of Pyroboard.
+# This file is part of Pyrubrum.
 #
-# Pyroboard is free software: you can redistribute it and/or modify
+# Pyrubrum is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# Pyroboard is distributed in the hope that it will be useful,
+# Pyrubrum is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU Lesser General Public License for more details.
 #
 # You should have received a copy of the GNU Lesser General Public License
-# along with Pyroboard. If not, see <http://www.gnu.org/licenses/>.
+# along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
 from .button import Button
 from .element import Element
 from .keyboard import Keyboard
-from .page_item_menu import PageItemMenu # noqa
 from .parameterized_tree_handler import ParameterizedTreeHandler
 from .tree_menu import TreeMenu
 from dataclasses import dataclass
