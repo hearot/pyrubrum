@@ -28,7 +28,7 @@ from typing import Any, Callable, List
 
 try:
     import orjson as json # noqa
-except ImportError:
+except (ImportError, ModuleNotFoundError):
     import json
 
 
