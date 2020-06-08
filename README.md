@@ -50,6 +50,7 @@ bot.run()
 In order to make use of the proposed examples, you need to create your own environment file by renaming [sample.env](./examples/sample.env) into `.env` and editing all the necessary variables.
 
    - [Calendar](./examples/calendar_bot.py) - Get what day of the week a day is by simply choosing a year, a month and a day while discovering the potential of Pyrubrum page menus.
+   - [Hitchhiker](./examples/hitchhiker_bot.py) - Come to know how media are handled with Pyrubrum and...[get an existential question answered](https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#The_Answer_to_the_Ultimate_Question_of_Life,_the_Universe,_and_Everything_is_42).
    - [Sample](./examples/sample_bot.py) - Interact with inline menus while understanding how Pyrubrum works.
 
 ### Commit messages
