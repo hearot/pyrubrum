@@ -118,12 +118,16 @@ class Menu(BaseMenu):
         content = self.get_content(tree, client, message, parameters)
 
         if isinstance(content, InputMedia):
-            message.reply_cached_media(content.media)
+            message.reply_cached_media(
+                file_id=content.media, file_ref=content.file_ref,
+                caption=content.caption,
+                reply_markup=self.keyboard(
+                    tree, client,
+                    message, parameters))
         elif isinstance(content, str):
             message.reply_text(content,
                                reply_markup=self.keyboard(
                                    tree, client,
-                                   message, parameters
-                               ))
+                                   message, parameters))
         else:
             raise TypeError("content must be of type InputMedia or str")
