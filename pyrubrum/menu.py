@@ -118,7 +118,7 @@ class Menu(BaseMenu):
         content = self.get_content(tree, client, message, parameters)
 
         if isinstance(content, InputMedia):
-            raise NotImplementedError  # TODO: handle media
+            message.reply_cached_media(content.media)
         elif isinstance(content, str):
             message.reply_text(content,
                                reply_markup=self.keyboard(
