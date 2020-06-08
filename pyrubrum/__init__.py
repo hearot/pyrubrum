@@ -19,7 +19,7 @@
 from .button import Button # noqa
 from .database import DictDatabase, RedisDatabase # noqa
 from .element import Element # noqa
-from .handler import Handler, transform_dict # noqa
+from .handler import Handler, transform # noqa
 from .keyboard import Keyboard # noqa
 from .menu import Menu # noqa
 from .node import Node # noqa

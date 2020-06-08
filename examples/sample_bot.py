@@ -18,9 +18,9 @@
 
 from environs import Env
 from pyrogram import Client
-from pyrubrum import Handler, Menu, Node, transform_dict
+from pyrubrum import Handler, Menu, Node, transform
 
-tree = transform_dict(
+tree = transform(
     {
         Menu("Main", "main", "Hello!"): {
             Menu("About me", "about_me", "I'm just a bot!"),

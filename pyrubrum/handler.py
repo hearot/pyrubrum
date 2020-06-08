@@ -57,8 +57,8 @@ def on_callback_node(menus: Union[Dict[BaseMenu, Any],
             on_callback_node(menus[menu], node)
 
 
-def transform_dict(menus: Union[Dict[BaseMenu, Any],
-                                Iterable[BaseMenu]]) -> Node:
+def transform(menus: Union[Dict[BaseMenu, Any],
+                           Iterable[BaseMenu]]) -> Node:
     main_node = Node(list(menus)[0])
     main_value = list(menus.values())[0] if isinstance(menus, dict) else None
 

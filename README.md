@@ -25,11 +25,11 @@
 
 ```python
 from pyrogram import Client
-from pyrubrum import Handler, Menu, transform_dict
+from pyrubrum import Handler, Menu, transform
 
 bot = Client(...)
 
-handler = Handler(transform_dict(
+handler = Handler(transform(
     {
         Menu("Main", "main", "Hello!"): {
             Menu("About me", "about_me", "I'm just a bot!"),

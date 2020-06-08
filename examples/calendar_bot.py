@@ -25,7 +25,7 @@ from pyrubrum import (DictDatabase,
                       Node, PageMenu,
                       ParameterizedHandler,
                       RedisDatabase,
-                      transform_dict)
+                      transform)
 from redis import Redis
 from typing import Union
 
@@ -58,7 +58,7 @@ def tell_about_the_day(tree, client, context, parameters):
                            day).strftime("%d/%m/%Y is a %A.")
 
 
-tree = transform_dict(
+tree = transform(
     {
         PageMenu(
             "Main menu", "main",
