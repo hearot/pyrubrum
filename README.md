@@ -8,12 +8,16 @@
     <i>Create your own bot in less than 100 lines!</i>
     <br>
     <br>
-    <a href="https://github.com/hearot/pyrubrum/blob/master/LICENSE">
-        <img src="https://img.shields.io/badge/License-GPL%20v3-red.svg" alt="License: GPLv3"/>
+    <a href="https://t.me/pyrubrum">
+        <img src="https://img.shields.io/badge/Channel-@pyrubrum-red.svg" alt="Channel: @pyrubrum"/>
     </a>
-    •
+    •    
     <a href="https://t.me/hearot">
         <img src="https://img.shields.io/badge/Developer-@hearot-blue.svg" alt="Developer: @hearot"/>
+    </a>
+    •
+    <a href="https://github.com/hearot/pyrubrum/blob/master/LICENSE">
+        <img src="https://img.shields.io/badge/License-GPLv3-green.svg" alt="License: GPLv3"/>
     </a>
 </p>
 
@@ -21,7 +25,7 @@
 
 ```python
 from pyrogram import Client
-from pyrubrum import Handler, transform_dict, Menu
+from pyrubrum import Handler, Menu, transform_dict
 
 bot = Client(...)
 
@@ -60,6 +64,10 @@ In order to make use of the proposed examples, you need to create your own envir
 
    - [veggero/tytg](https://github.com/veggero/tytg) for giving me the idea of developing a simple framework which you can code a folder-like bot with.
    - [IlhomBahoraliev/pyromenu](https://github.com/IlhomBahoraliev/pyromenu) for letting me understand that an object-oriented library would make the difference in developing this project.
+
+### Branding
+
+> *See [hearot/pyrubrum-assets](https://github.com/hearot/pyrubrum-assets).*
 
 ### Copyright & License
 
