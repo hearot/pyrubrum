@@ -14,7 +14,8 @@
 
 ### Documentation
 
-   - Add the official pronunciation for Pyrubrum
+   - Add the official pronunciation for Pyrubrum ([b6d1fe8e01f79007338cd4a6dfe409c406c12cba](https://github.com/hearot/pyrubrum/commit/b6d1fe8e01f79007338cd4a6dfe409c406c12cba))
+   - Update the disclaimer notices
 
 ### Fixes
 
