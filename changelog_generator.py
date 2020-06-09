@@ -124,9 +124,11 @@ def generate_changelog():
                 for commit in sorted(commits):
                     f.write("   - %s\n" % commit)
 
-    repo.git.add(CHANGELOG_FILE)
-    repo.git.commit("--amend", "--no-edit")
-    os.remove(TEMP_FILE)
+    try:
+        repo.git.add(CHANGELOG_FILE)
+        repo.git.commit("--amend", "--no-edit", "--no-verify", "-S")
+    finally:
+        os.remove(TEMP_FILE)
 
 
 if __name__ == "__main__":

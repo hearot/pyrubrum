@@ -19,7 +19,8 @@
 ### Fixes
 
    - Correct a typo regarding `hitchhiker_bot.py` (a43bf4bc97e024237a447443be402b5f990384b7)
-   - Generate changelog using the previous commit (f729f6ba6e8b41566a97aec4c011319d98c28e0f)
+   - Do not use git hooks while generating the changelog (a3dee0e8d951b81ec6fa290d314a28652e0d8a2e)
+   - Generate changelog using the previous commit (7eecd3ad26d0586077f4a65b443f24b490eda207)
 
 ### New features
 
