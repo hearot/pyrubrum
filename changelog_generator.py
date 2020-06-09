@@ -20,6 +20,7 @@
 
 import os
 import re
+import sys
 from collections import defaultdict
 
 from git import Repo
@@ -49,14 +50,19 @@ titles.update(TITLES)
 version_tree = defaultdict(lambda: defaultdict(list))
 
 
+def commit_amend(repo: Repo):
+    try:
+        repo.git.add(CHANGELOG_FILE)
+        repo.git.commit("--amend", "--no-edit", "--no-verify", "-S")
+    finally:
+        os.remove(TEMP_FILE)
+
+
 def upper_first_letter(s: str):
     return s[0].upper() + s[1:]
 
 
-def generate_changelog():
-    repo = Repo(os.path.dirname(os.path.realpath(__file__)))
-    Path(TEMP_FILE).touch()
-
+def generate_changelog(repo: Repo):
     tags_list = sorted(repo.tags, key=lambda t: t.commit.committed_date) + [""]
     tags = iter(tags_list)
     tag = ""
@@ -93,7 +99,6 @@ def generate_changelog():
 
                     if commit != repo.head.commit:
                         suffix = "([%s](%s))" % (
-                            upper_first_letter(brief_message),
                             str(commit),
                             COMMIT_URL_FORMAT % str(commit),
                         )
@@ -142,13 +147,14 @@ def generate_changelog():
                 for commit in sorted(commits):
                     f.write("   - %s\n" % commit)
 
-    try:
-        repo.git.add(CHANGELOG_FILE)
-        repo.git.commit("--amend", "--no-edit", "--no-verify", "-S")
-    finally:
-        os.remove(TEMP_FILE)
-
 
 if __name__ == "__main__":
-    if not os.path.isfile(TEMP_FILE):
-        generate_changelog()
+    repo = Repo(os.path.dirname(os.path.realpath(__file__)))
+    first_post_commit = not os.path.isfile(TEMP_FILE)
+
+    if sys.argv[-1] == "generate":
+        generate_changelog(repo)
+    elif first_post_commit:
+        Path(TEMP_FILE).touch()
+        generate_changelog(repo)
+        commit_amend(repo)
