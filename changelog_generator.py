@@ -26,6 +26,7 @@ from git import Repo
 from pathlib import Path
 
 CHANGELOG_FILE = "CHANGELOG.md"
+COMMIT_URL_FORMAT = "https://github.com/hearot/pyrubrum/commit/%s"
 CONVENTIONAL_COMMITS_REGEX = r"^([a-z]+)(!)?(?:\([a-z]+\)+)?: ([^\n]+)+$"
 TEMP_FILE = ".temp_post_commit"
 TITLES = {
@@ -77,11 +78,21 @@ def generate_changelog():
 
                     if breaking_change == "!":
                         version_tree[next_tag]["Breaking changes"].append(
-                            "%s %s" % (brief_message.capitalize(), str(commit))
+                            "%s ([%s](%s))"
+                            % (
+                                brief_message.capitalize(),
+                                str(commit),
+                                COMMIT_URL_FORMAT % str(commit),
+                            )
                         )
                     else:
                         version_tree[next_tag][titles[type_commit]].append(
-                            "%s %s" % (brief_message.capitalize(), str(commit))
+                            "%s ([%s](%s))"
+                            % (
+                                brief_message.capitalize(),
+                                str(commit),
+                                COMMIT_URL_FORMAT % str(commit),
+                            )
                         )
 
                     print(
