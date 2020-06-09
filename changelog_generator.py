@@ -89,7 +89,7 @@ def generate_changelog(repo: Repo):
                         breaking_change if breaking_change else ""
                     )
                     brief_message = match.group(3)
-                    suffix = ""
+                    suffix = " "
 
                     if (
                         isinstance(breaking_change, str)
@@ -98,7 +98,7 @@ def generate_changelog(repo: Repo):
                         type_commit = "!"
 
                     if commit != repo.head.commit:
-                        suffix = "([%s](%s))" % (
+                        suffix += "([%s](%s))" % (
                             str(commit),
                             COMMIT_URL_FORMAT % str(commit),
                         )
