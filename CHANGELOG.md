@@ -24,11 +24,13 @@
    - Add space before reference links ([dfbf7a55f3a7de666703b1dced404d1ce7b0ee7a](https://github.com/hearot/pyrubrum/commit/dfbf7a55f3a7de666703b1dced404d1ce7b0ee7a))
    - Capitalize only the first character of a commit message ([2996f7c91723902b4e998fb94b6d31c60685d386](https://github.com/hearot/pyrubrum/commit/2996f7c91723902b4e998fb94b6d31c60685d386))
    - Do no more raise `TypeError` while formatting commits ([56f1e533c12bdf75e63714d125319bb72da7d916](https://github.com/hearot/pyrubrum/commit/56f1e533c12bdf75e63714d125319bb72da7d916))
+   - Fix `commit-message` for Dependabot
    - Hide the sha-1 hash of the current commit ([ab6478e610ef828744d5c6e54a1d54fff92372e8](https://github.com/hearot/pyrubrum/commit/ab6478e610ef828744d5c6e54a1d54fff92372e8))
 
 ### New features
 
    - Include the release dates inside changelog ([d4397f396c64eeec6549cd90c64cef6359017dd5](https://github.com/hearot/pyrubrum/commit/d4397f396c64eeec6549cd90c64cef6359017dd5))
+   - Integrate Dependabot ([2bb0a43b0f7f8266c7d0544209194c2b26b878a4](https://github.com/hearot/pyrubrum/commit/2bb0a43b0f7f8266c7d0544209194c2b26b878a4))
 
 ### Testing changes
 
@@ -36,7 +38,7 @@
 
 ### ‼️ Breaking changes
 
-   - Use `abstractmethod` for the methods of base classes
+   - Use `abstractmethod` for the methods of base classes ([d5d2edd51cc2137287568a353dd3dc821c29a16c](https://github.com/hearot/pyrubrum/commit/d5d2edd51cc2137287568a353dd3dc821c29a16c))
 
 ## v0.1a1.dev4 - 2020-06-09
 
