@@ -14,6 +14,7 @@
 ### Documentation
 
    - Add a reference to `hitchhiker_bot.py` ([b14423f7586f193a0024d016eb4c98b1e5165ba8](https://github.com/hearot/pyrubrum/commit/b14423f7586f193a0024d016eb4c98b1e5165ba8))
+   - Add reference to the changelog ([208fcfd92a69ba3108a38d1e3ba0fed04891d11a](https://github.com/hearot/pyrubrum/commit/208fcfd92a69ba3108a38d1e3ba0fed04891d11a))
    - Add the official logo ([d9da10bada6335c1d50c6be9e663259313c5d333](https://github.com/hearot/pyrubrum/commit/d9da10bada6335c1d50c6be9e663259313c5d333))
 
 ### Fixes
@@ -21,7 +22,7 @@
    - Correct a typo regarding `hitchhiker_bot.py` ([a43bf4bc97e024237a447443be402b5f990384b7](https://github.com/hearot/pyrubrum/commit/a43bf4bc97e024237a447443be402b5f990384b7))
    - Do not use git hooks while generating the changelog ([ef705c3451f8c5b028153664598a4734f4f2a16a](https://github.com/hearot/pyrubrum/commit/ef705c3451f8c5b028153664598a4734f4f2a16a))
    - Generate changelog using the previous commit ([7eecd3ad26d0586077f4a65b443f24b490eda207](https://github.com/hearot/pyrubrum/commit/7eecd3ad26d0586077f4a65b443f24b490eda207))
-   - Render sha-1 hashes as links ([0e1e9c9fa1ab1b081eb03ea35ea0be6907de663a](https://github.com/hearot/pyrubrum/commit/0e1e9c9fa1ab1b081eb03ea35ea0be6907de663a))
+   - Render sha-1 hashes as links ([415e34c8f467d2f21db47fbfcc2875a3a5a0a8d1](https://github.com/hearot/pyrubrum/commit/415e34c8f467d2f21db47fbfcc2875a3a5a0a8d1))
    - Render sha-1 hashes in a proper way ([0dd5b36883b314c640813fb84635d34937a5d274](https://github.com/hearot/pyrubrum/commit/0dd5b36883b314c640813fb84635d34937a5d274))
 
 ### New features

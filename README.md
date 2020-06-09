@@ -53,6 +53,10 @@ In order to make use of the proposed examples, you need to create your own envir
    - [Hitchhiker](./examples/hitchhiker_bot.py) - Come to know how media are handled with Pyrubrum and...[get an existential question answered](https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#The_Answer_to_the_Ultimate_Question_of_Life,_the_Universe,_and_Everything_is_42).
    - [Sample](./examples/sample_bot.py) - Interact with inline menus while understanding how Pyrubrum works.
 
+### Changelog
+
+> *See [CHANGELOG.md](./CHANGELOG.md).*
+
 ### Commit messages
 
 > *See [Conventional Commits](https://www.conventionalcommits.org).*
