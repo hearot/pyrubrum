@@ -3,12 +3,12 @@
 ## Table of contents
 
    * [Current version](#Current-version)
-   * [v0.1a1.dev4](#v01a1dev4)
-   * [v0.1a1.dev3](#v01a1dev3)
-   * [v0.1a1.dev2](#v01a1dev2)
-   * [v0.1a1.dev1](#v01a1dev1)
-   * [v0.1a1.dev0](#v01a1dev0)
-   * [v0.1a0](#v01a0)
+   * [v0.1a1.dev4 - 2020-06-09](#v01a1dev4---2020-06-09)
+   * [v0.1a1.dev3 - 2020-06-09](#v01a1dev3---2020-06-09)
+   * [v0.1a1.dev2 - 2020-06-09](#v01a1dev2---2020-06-09)
+   * [v0.1a1.dev1 - 2020-06-09](#v01a1dev1---2020-06-09)
+   * [v0.1a1.dev0 - 2020-06-09](#v01a1dev0---2020-06-09)
+   * [v0.1a0 - 2020-06-09](#v01a0---2020-06-09)
 
 ## Current version
 
@@ -16,7 +16,7 @@
 
    - Add issue templates ([64c006258e373a97d0a9f83318af02c4310b585b](https://github.com/hearot/pyrubrum/commit/64c006258e373a97d0a9f83318af02c4310b585b))
    - Add the official pronunciation for Pyrubrum ([b6d1fe8e01f79007338cd4a6dfe409c406c12cba](https://github.com/hearot/pyrubrum/commit/b6d1fe8e01f79007338cd4a6dfe409c406c12cba))
-   - Delete duplicate issue templates
+   - Delete duplicate issue templates ([10cba65c31a5c3556b39cc328d097b62dfbd5e1b](https://github.com/hearot/pyrubrum/commit/10cba65c31a5c3556b39cc328d097b62dfbd5e1b))
    - Update the disclaimer notices ([b5039179f28a24ecf967b66200c9440cb6b6c6ec](https://github.com/hearot/pyrubrum/commit/b5039179f28a24ecf967b66200c9440cb6b6c6ec))
 
 ### Fixes
@@ -26,11 +26,15 @@
    - Do no more raise `TypeError` while formatting commits ([56f1e533c12bdf75e63714d125319bb72da7d916](https://github.com/hearot/pyrubrum/commit/56f1e533c12bdf75e63714d125319bb72da7d916))
    - Hide the sha-1 hash of the current commit ([ab6478e610ef828744d5c6e54a1d54fff92372e8](https://github.com/hearot/pyrubrum/commit/ab6478e610ef828744d5c6e54a1d54fff92372e8))
 
+### New features
+
+   - Include the release dates inside changelog
+
 ### Testing changes
 
    - Version is now tested to be compliant with PEP 440 ([5f5928bd49e7457d331229440c008665d91647ea](https://github.com/hearot/pyrubrum/commit/5f5928bd49e7457d331229440c008665d91647ea))
 
-## v0.1a1.dev4
+## v0.1a1.dev4 - 2020-06-09
 
 ### Documentation
 
@@ -62,7 +66,7 @@
 
    - Reorder classifiers ([2bd2de48916a8ba2c794ad0dac6b9e2d7b3919b8](https://github.com/hearot/pyrubrum/commit/2bd2de48916a8ba2c794ad0dac6b9e2d7b3919b8))
 
-## v0.1a1.dev3
+## v0.1a1.dev3 - 2020-06-09
 
 ### Fixes
 
@@ -77,7 +81,7 @@
 
    - Update version to 0.1a1.dev3 ([0459153cd238bf3d73318e5908c418bf35523fbe](https://github.com/hearot/pyrubrum/commit/0459153cd238bf3d73318e5908c418bf35523fbe))
 
-## v0.1a1.dev2
+## v0.1a1.dev2 - 2020-06-09
 
 ### Build changes
 
@@ -93,7 +97,7 @@
 
    - Update version to 0.1a1.dev2 ([24e68eb18a2691f88938bdf30d1caa90216cfb07](https://github.com/hearot/pyrubrum/commit/24e68eb18a2691f88938bdf30d1caa90216cfb07))
 
-## v0.1a1.dev1
+## v0.1a1.dev1 - 2020-06-09
 
 ### Build changes
 
@@ -103,13 +107,13 @@
 
    - Update version to 0.1a1.dev1 ([068ae25d49632d11082ddc9c2f539ecca5f512ec](https://github.com/hearot/pyrubrum/commit/068ae25d49632d11082ddc9c2f539ecca5f512ec))
 
-## v0.1a1.dev0
+## v0.1a1.dev0 - 2020-06-09
 
 ### ‼️ Breaking changes
 
    - Rename handlers & menus ([22eec554399fe3f250b414f79c45f5af9b9dd2b0](https://github.com/hearot/pyrubrum/commit/22eec554399fe3f250b414f79c45f5af9b9dd2b0))
 
-## v0.1a0
+## v0.1a0 - 2020-06-09
 
 ### New features
 

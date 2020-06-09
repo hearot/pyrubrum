@@ -21,6 +21,7 @@
 import os
 import re
 import sys
+import time
 from collections import defaultdict
 
 from git import Repo
@@ -50,6 +51,18 @@ titles.update(TITLES)
 version_tree = defaultdict(lambda: defaultdict(list))
 
 
+def add_date(repo: Repo, version: str) -> str:
+    if version == "Current version":
+        return version
+
+    commit = repo.commit(version)
+
+    return "%s - %s" % (
+        version,
+        time.strftime("%Y-%m-%d", time.gmtime(commit.committed_date)),
+    )
+
+
 def commit_amend(repo: Repo):
     try:
         repo.git.add(CHANGELOG_FILE)
@@ -58,8 +71,8 @@ def commit_amend(repo: Repo):
         os.remove(TEMP_FILE)
 
 
-def upper_first_letter(s: str):
-    return s[0].upper() + s[1:]
+def upper_first_letter(text: str) -> str:
+    return text[0].upper() + text[1:]
 
 
 def generate_changelog(repo: Repo):
@@ -128,6 +141,7 @@ def generate_changelog(repo: Repo):
 
         for version in map(str, reversed(tags_list)):
             version = version if version else "Current version"
+            version = add_date(repo, version)
             f.write(
                 "   * [%s](#%s)\n"
                 % (version, version.replace(".", "").replace(" ", "-"))
@@ -137,7 +151,7 @@ def generate_changelog(repo: Repo):
             version = version if version else "Current version"
             types = version_tree[version]
 
-            f.write("\n## %s\n" % version)
+            f.write("\n## %s\n" % add_date(repo, version))
 
             for type_commit in sorted(types.keys()):
                 commits = types[type_commit]
