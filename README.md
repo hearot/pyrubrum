@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://github.com/hearot/pyrubrum">
-        <img src="https://i.imgur.com/XhInvbp.gif" alt="Pyrubrum" width="150"/>
+        <img src="https://i.imgur.com/gfkh9bR.png" alt="Pyrubrum" width="600"/>
     </a>
     <br>
     <b>An intuitive framework for creating Telegram bots.</b>
