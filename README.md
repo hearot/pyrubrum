@@ -43,7 +43,7 @@ handler.setup(bot)
 bot.run()
 ```
 
-**Pyrubrum** is a versatile, charming framework for creating [Telegram bots](https://core.telegram.org/bots), jointly with [Pyrogram](https://github.com/pyrogram/pyrogram).
+**Pyrubrum** ([*/ˈpaɪɹˈuːbɹəm/*](http://ipa-reader.xyz/?text=%CB%88pa%C9%AA%C9%B9%CB%88u%CB%90b%C9%B9%C9%99m&voice=Russell)) is a versatile, charming framework for creating [Telegram bots](https://core.telegram.org/bots), jointly with [Pyrogram](https://github.com/pyrogram/pyrogram).
 
 ### Examples
 
