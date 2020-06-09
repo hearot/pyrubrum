@@ -30,6 +30,7 @@ COMMIT_URL_FORMAT = "https://github.com/hearot/pyrubrum/commit/%s"
 CONVENTIONAL_COMMITS_REGEX = r"^([a-z]+)(!)?(?:\([a-z]+\)+)?: ([^\n]+)+$"
 TEMP_FILE = ".temp_post_commit"
 TITLES = {
+    "!": "‼️ Breaking changes",
     "build": "Build changes",
     "chore": "Other changes",
     "docs": "Documentation",
@@ -82,25 +83,26 @@ def generate_changelog():
                         breaking_change if breaking_change else ""
                     )
                     brief_message = match.group(3)
+                    suffix = ""
 
-                    if breaking_change == "!":
-                        version_tree[next_tag]["Breaking changes"].append(
-                            "%s ([%s](%s))"
-                            % (
-                                upper_first_letter(brief_message),
-                                str(commit),
-                                COMMIT_URL_FORMAT % str(commit),
-                            )
+                    if (
+                        isinstance(breaking_change, str)
+                        and breaking_change == "!"
+                    ):
+                        type_commit = "!"
+
+                    if commit != repo.head.commit:
+                        suffix = "([%s](%s))" % (
+                            upper_first_letter(brief_message),
+                            str(commit),
+                            COMMIT_URL_FORMAT % str(commit),
                         )
-                    else:
-                        version_tree[next_tag][titles[type_commit]].append(
-                            "%s ([%s](%s))"
-                            % (
-                                upper_first_letter(brief_message),
-                                str(commit),
-                                COMMIT_URL_FORMAT % str(commit),
-                            )
-                        )
+
+                    version_tree[next_tag][titles[type_commit]].append(
+                        (
+                            ("%s" + suffix) % upper_first_letter(brief_message)
+                        ).rstrip()
+                    )
 
                     print(
                         "    " + type_commit + breaking_change + ":",
