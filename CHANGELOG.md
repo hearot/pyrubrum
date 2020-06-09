@@ -14,8 +14,10 @@
 
 ### Documentation
 
+   - Add issue templates ([64c006258e373a97d0a9f83318af02c4310b585b](https://github.com/hearot/pyrubrum/commit/64c006258e373a97d0a9f83318af02c4310b585b))
    - Add the official pronunciation for Pyrubrum ([b6d1fe8e01f79007338cd4a6dfe409c406c12cba](https://github.com/hearot/pyrubrum/commit/b6d1fe8e01f79007338cd4a6dfe409c406c12cba))
-   - Update the disclaimer notices
+   - Delete duplicate issue templates
+   - Update the disclaimer notices ([b5039179f28a24ecf967b66200c9440cb6b6c6ec](https://github.com/hearot/pyrubrum/commit/b5039179f28a24ecf967b66200c9440cb6b6c6ec))
 
 ### Fixes
 
