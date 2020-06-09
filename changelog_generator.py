@@ -35,6 +35,9 @@ TITLES = {
     "docs": "Documentation",
     "feat": "New features",
     "fix": "Fixes",
+    "refactor": "Refactoring",
+    "style": "Style changes",
+    "test": "Testing changes",
 }
 
 match_commit = re.compile(CONVENTIONAL_COMMITS_REGEX)
@@ -43,6 +46,10 @@ titles = defaultdict(lambda: "New features")
 titles.update(TITLES)
 
 version_tree = defaultdict(lambda: defaultdict(list))
+
+
+def upper_first_letter(s: str):
+    return s[0].upper() + s[1:]
 
 
 def generate_changelog():
@@ -80,7 +87,7 @@ def generate_changelog():
                         version_tree[next_tag]["Breaking changes"].append(
                             "%s ([%s](%s))"
                             % (
-                                brief_message.capitalize(),
+                                upper_first_letter(brief_message),
                                 str(commit),
                                 COMMIT_URL_FORMAT % str(commit),
                             )
@@ -89,7 +96,7 @@ def generate_changelog():
                         version_tree[next_tag][titles[type_commit]].append(
                             "%s ([%s](%s))"
                             % (
-                                brief_message.capitalize(),
+                                upper_first_letter(brief_message),
                                 str(commit),
                                 COMMIT_URL_FORMAT % str(commit),
                             )
