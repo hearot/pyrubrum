@@ -16,21 +16,14 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
-__author__ = "Hearot"
-__author_email__ = "gabriel@hearot.it"
-__license__ = "GNU General Public License v3"
-__package__ = "pyrubrum"
-__url__ = "https://github.com/hearot/pyrubrum"
-__version__ = "0.1a1.dev5"
+from packaging import version
 
-from .button import Button  # noqa
-from .database import DictDatabase  # noqa
-from .database import RedisDatabase  # noqa
-from .element import Element  # noqa
-from .handler import Handler  # noqa
-from .handler import transform  # noqa
-from .keyboard import Keyboard  # noqa
-from .menu import Menu  # noqa
-from .node import Node  # noqa
-from .page_menu import PageMenu  # noqa
-from .parameterized_handler import ParameterizedHandler  # noqa
+import pyrubrum
+
+
+class TestVersion:
+    def test_type(self):
+        assert isinstance(pyrubrum.__version__, str)
+
+    def test_pattern(self):
+        version.Version(pyrubrum.__version__)

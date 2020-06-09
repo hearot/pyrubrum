@@ -1,2 +1,4 @@
 GitPython
+packaging
 pre-commit
+pytest

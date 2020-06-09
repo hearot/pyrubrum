@@ -3,6 +3,7 @@
 ## Table of contents
 
    * [Current version](#Current-version)
+   * [v0.1a1.dev4](#v01a1dev4)
    * [v0.1a1.dev3](#v01a1dev3)
    * [v0.1a1.dev2](#v01a1dev2)
    * [v0.1a1.dev1](#v01a1dev1)
@@ -11,10 +12,16 @@
 
 ## Current version
 
+### New features
+
+   - Version is now tested to be compliant with pep 440 ([bd1436c962d65cc0074d062e76f50bdc934b66f2](https://github.com/hearot/pyrubrum/commit/bd1436c962d65cc0074d062e76f50bdc934b66f2))
+
+## v0.1a1.dev4
+
 ### Documentation
 
    - Add a reference to `hitchhiker_bot.py` ([b14423f7586f193a0024d016eb4c98b1e5165ba8](https://github.com/hearot/pyrubrum/commit/b14423f7586f193a0024d016eb4c98b1e5165ba8))
-   - Add reference to the changelog ([208fcfd92a69ba3108a38d1e3ba0fed04891d11a](https://github.com/hearot/pyrubrum/commit/208fcfd92a69ba3108a38d1e3ba0fed04891d11a))
+   - Add reference to the changelog ([862839c9cb33c80a512485148c2f132e59ce659b](https://github.com/hearot/pyrubrum/commit/862839c9cb33c80a512485148c2f132e59ce659b))
    - Add the official logo ([d9da10bada6335c1d50c6be9e663259313c5d333](https://github.com/hearot/pyrubrum/commit/d9da10bada6335c1d50c6be9e663259313c5d333))
 
 ### Fixes

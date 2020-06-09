@@ -9,8 +9,16 @@ repos:
 -   repo: https://github.com/ambv/black
     rev: stable
     hooks:
-    - id: black
+    -   id: black
 -   repo: https://gitlab.com/pycqa/flake8
     rev: 3.7.9
     hooks:
-    - id: flake8
+    -   id: flake8
+-   repo: local
+    hooks:
+    -   id: pytest
+        name: Run all tests using pytest
+        entry: pytest
+        pass_filenames: false
+        language: system
+        types: [python]
