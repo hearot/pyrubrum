@@ -16,19 +16,21 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
+from dataclasses import dataclass
+
+from pyrogram import Client
+from pyrogram import MessageHandler
+
 from .database.base_database import BaseDatabase
 from .handler import Handler
 from .node import Node
-from .parameterized_base_handler import (ParameterizedBaseHandler,
-                                         pass_handler_and_clean)
-from dataclasses import dataclass
-from pyrogram import Client, MessageHandler
+from .parameterized_base_handler import ParameterizedBaseHandler
+from .parameterized_base_handler import pass_handler_and_clean
 
 
 @dataclass(eq=False, init=False, repr=True)
 class ParameterizedHandler(Handler, ParameterizedBaseHandler):
-    def __init__(self, main_node: Node,
-                 database: BaseDatabase):
+    def __init__(self, main_node: Node, database: BaseDatabase):
         Handler.__init__(self, main_node)
         ParameterizedBaseHandler.__init__(self, database)
 
@@ -37,5 +39,6 @@ class ParameterizedHandler(Handler, ParameterizedBaseHandler):
 
         client.add_handler(
             MessageHandler(
-                pass_handler_and_clean(
-                    self.main_node.menu.on_message, self)))
+                pass_handler_and_clean(self.main_node.menu.on_message, self)
+            )
+        )

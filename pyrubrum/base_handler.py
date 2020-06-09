@@ -16,35 +16,51 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
-from .button import Button
 from dataclasses import dataclass
-from pyrogram import (CallbackQuery, CallbackQueryHandler, Client,
-                      InlineKeyboardButton, Filters)
-from typing import Any, Callable, List
+from typing import Any
+from typing import Callable
+from typing import List
+
+from pyrogram import CallbackQuery
+from pyrogram import CallbackQueryHandler
+from pyrogram import Client
+from pyrogram import Filters
+from pyrogram import InlineKeyboardButton
+
+from .button import Button
 
 
 @dataclass(eq=False, init=False, repr=True)
 class BaseHandler:
-    def get_menus(self) -> List['BaseMenu']:
+    def get_menus(self) -> List["BaseMenu"]:
         raise NotImplementedError
 
-    def process_keyboard(self, keyboard: List[List[Button]],
-                         callback_query_id: str) -> List[
-                             List[InlineKeyboardButton]]:
-        return [[InlineKeyboardButton(
-            button.name,
-            callback_data=button.button_id)
-                 for button in row] for row in keyboard]
+    def process_keyboard(
+        self, keyboard: List[List[Button]], callback_query_id: str
+    ) -> List[List[InlineKeyboardButton]]:
+        return [
+            [
+                InlineKeyboardButton(
+                    button.name, callback_data=button.button_id
+                )
+                for button in row
+            ]
+            for row in keyboard
+        ]
 
     def setup(self, client: Client):
         for menu in self.get_menus():
-            client.add_handler(CallbackQueryHandler(
-                pass_handler(menu.on_callback, self),
-                Filters.callback_data(menu.menu_id)))
+            client.add_handler(
+                CallbackQueryHandler(
+                    pass_handler(menu.on_callback, self),
+                    Filters.callback_data(menu.menu_id),
+                )
+            )
 
 
-def pass_handler(func: Callable[[Client, Any], None],
-                 handler: BaseHandler) -> Callable[[Client, Any], None]:
+def pass_handler(
+    func: Callable[[Client, Any], None], handler: BaseHandler
+) -> Callable[[Client, Any], None]:
     def on_callback(client: Client, context):
         if isinstance(context, CallbackQuery):
             func(handler, client, context, {})

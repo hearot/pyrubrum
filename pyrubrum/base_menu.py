@@ -16,13 +16,19 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
+from dataclasses import dataclass
+from typing import Any
+from typing import Dict
+from typing import Union
+
+from pyrogram import CallbackQuery
+from pyrogram import Client
+from pyrogram import InlineKeyboardMarkup
+from pyrogram import InputMedia
+from pyrogram import Message
+
 from .base_handler import BaseHandler
 from .button import Button
-from dataclasses import dataclass
-from pyrogram import (CallbackQuery, Client,
-                      InlineKeyboardMarkup,
-                      InputMedia, Message)
-from typing import Any, Dict, Union
 
 
 @dataclass(eq=False, init=False, repr=True)
@@ -40,25 +46,38 @@ class BaseMenu:
     def get_content(self) -> Union[InputMedia, str]:
         raise NotImplementedError
 
-    def on_callback(self, handler: BaseHandler,
-                    client: Client, callback: CallbackQuery,
-                    parameters: Dict[str, Any]):
+    def on_callback(
+        self,
+        handler: BaseHandler,
+        client: Client,
+        callback: CallbackQuery,
+        parameters: Dict[str, Any],
+    ):
         raise NotImplementedError
 
-    def button(self, handler: BaseHandler, client: Client,
-               context: Union[CallbackQuery,
-                              Message],
-               parameters: Dict[str, Any]) -> Button:
-        return Button(self.name, self.menu_id,
-                      parameters)
+    def button(
+        self,
+        handler: BaseHandler,
+        client: Client,
+        context: Union[CallbackQuery, Message],
+        parameters: Dict[str, Any],
+    ) -> Button:
+        return Button(self.name, self.menu_id, parameters)
 
-    def keyboard(self, handler: BaseHandler, client: Client,
-                 context: Union[CallbackQuery,
-                                Message],
-                 parameters: Dict[str, Any]) -> InlineKeyboardMarkup:
+    def keyboard(
+        self,
+        handler: BaseHandler,
+        client: Client,
+        context: Union[CallbackQuery, Message],
+        parameters: Dict[str, Any],
+    ) -> InlineKeyboardMarkup:
         raise NotImplementedError
 
-    def on_message(self, handler: BaseHandler,
-                   client: Client, message: Message,
-                   parameters: Dict[str, Any]):
+    def on_message(
+        self,
+        handler: BaseHandler,
+        client: Client,
+        message: Message,
+        parameters: Dict[str, Any],
+    ):
         raise NotImplementedError

@@ -16,19 +16,21 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
-from .button import Button # noqa
-from .database import DictDatabase, RedisDatabase # noqa
-from .element import Element # noqa
-from .handler import Handler, transform # noqa
-from .keyboard import Keyboard # noqa
-from .menu import Menu # noqa
-from .node import Node # noqa
-from .page_menu import PageMenu # noqa
-from .parameterized_handler import ParameterizedHandler # noqa
-
 __author__ = "Hearot"
 __author_email__ = "gabriel@hearot.it"
 __license__ = "GNU General Public License v3"
 __package__ = "pyrubrum"
 __url__ = "https://github.com/hearot/pyrubrum"
 __version__ = "0.1a1.dev4"
+
+from .button import Button  # noqa
+from .database import DictDatabase  # noqa
+from .database import RedisDatabase  # noqa
+from .element import Element  # noqa
+from .handler import Handler  # noqa
+from .handler import transform  # noqa
+from .keyboard import Keyboard  # noqa
+from .menu import Menu  # noqa
+from .node import Node  # noqa
+from .page_menu import PageMenu  # noqa
+from .parameterized_handler import ParameterizedHandler  # noqa

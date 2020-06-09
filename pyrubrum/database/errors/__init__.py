@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
-from .delete_error import DeleteError # noqa
-from .expire_error import ExpireError # noqa
-from .error import DatabaseError # noqa
-from .set_error import SetError # noqa
+from .delete_error import DeleteError  # noqa
+from .error import DatabaseError  # noqa
+from .expire_error import ExpireError  # noqa
+from .set_error import SetError  # noqa

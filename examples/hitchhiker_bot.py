@@ -17,31 +17,40 @@
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
 from environs import Env
-from pyrogram import Client, InputMediaPhoto
-from pyrubrum import Handler, Menu, transform
+from pyrogram import Client
+from pyrogram import InputMediaPhoto
+
+from pyrubrum import Handler
+from pyrubrum import Menu
+from pyrubrum import transform
 
 answer_image_link = "https://i.imgur.com/ZsDhqqt.png"
 forty_two_image_link = "https://i.imgur.com/q0mZf3z.png"
 
 
-def main(api_hash: str, api_id: int, bot_token: str,
-         media_chat_id: int, session_name: str):
-    bot = Client(session_name, api_hash=api_hash,
-                 api_id=api_id, bot_token=bot_token)
+def main(
+    api_hash: str,
+    api_id: int,
+    bot_token: str,
+    media_chat_id: int,
+    session_name: str,
+):
+    bot = Client(
+        session_name, api_hash=api_hash, api_id=api_id, bot_token=bot_token
+    )
 
     with bot:
         answer_image_id = InputMediaPhoto(
-            bot.send_photo(media_chat_id,
-                           answer_image_link).photo.file_id)
+            bot.send_photo(media_chat_id, answer_image_link).photo.file_id
+        )
         forty_two_image_id = InputMediaPhoto(
-            bot.send_photo(media_chat_id,
-                           forty_two_image_link).photo.file_id)
+            bot.send_photo(media_chat_id, forty_two_image_link).photo.file_id
+        )
 
     tree = transform(
         {
             Menu("Main", "main", answer_image_id): {
-                Menu("🌌 Get the answer", "forty_two",
-                     forty_two_image_id),
+                Menu("🌌 Get the answer", "forty_two", forty_two_image_id),
             }
         }
     )
@@ -62,5 +71,4 @@ if __name__ == "__main__":
     media_chat_id = env.int("MEDIA_CHAT_ID")
     session_name = env("SESSION_NAME")
 
-    main(api_hash, api_id, bot_token,
-         media_chat_id, session_name)
+    main(api_hash, api_id, bot_token, media_chat_id, session_name)

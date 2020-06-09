@@ -16,10 +16,14 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
-from .base_database import BaseDatabase
-from .errors import DeleteError, ExpireError, SetError
 from datetime import timedelta
-from typing import Optional, Union
+from typing import Optional
+from typing import Union
+
+from .base_database import BaseDatabase
+from .errors import DeleteError
+from .errors import ExpireError
+from .errors import SetError
 
 try:
     import redis
@@ -28,13 +32,16 @@ except (ImportError, ModuleNotFoundError):
 
 
 class RedisDatabase(BaseDatabase):
-    encoding = 'utf-8'
+    encoding = "utf-8"
     expire: Optional[Union[int, timedelta]] = 86400
-    server: 'redis.Redis'
+    server: "redis.Redis"
 
-    def __init__(self, server: 'redis.Redis',
-                 encoding='utf-8',
-                 expire: Optional[Union[int, timedelta]] = 86400):
+    def __init__(
+        self,
+        server: "redis.Redis",
+        encoding="utf-8",
+        expire: Optional[Union[int, timedelta]] = 86400,
+    ):
         self.encoding = encoding
         self.expire = expire
         self.server = server
@@ -47,8 +54,9 @@ class RedisDatabase(BaseDatabase):
         if not self.server.set(callback_query_id, data):
             raise SetError
 
-        if self.expire and not self.server.expire(callback_query_id,
-                                                  self.expire):
+        if self.expire and not self.server.expire(
+            callback_query_id, self.expire
+        ):
             raise ExpireError
 
     def delete(self, callback_query_id: str):

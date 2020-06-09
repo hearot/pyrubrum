@@ -16,15 +16,21 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
+from typing import List
+
+from pyrogram import InlineKeyboardMarkup
+
 from .base_handler import BaseHandler
 from .button import Button
-from pyrogram import InlineKeyboardMarkup
-from typing import List
 
 
 class Keyboard(InlineKeyboardMarkup):
-    def __init__(self, inline_keyboard: List[List[Button]],
-                 handler: BaseHandler, callback_query_id: str):
+    def __init__(
+        self,
+        inline_keyboard: List[List[Button]],
+        handler: BaseHandler,
+        callback_query_id: str,
+    ):
         super().__init__(
-            handler.process_keyboard(inline_keyboard,
-                                     str(callback_query_id)))
+            handler.process_keyboard(inline_keyboard, str(callback_query_id))
+        )

@@ -21,5 +21,6 @@ from .error import DatabaseError
 
 class SetError(DatabaseError):
     def __init__(self):
-        super().__init__("An error occured while inserting "
-                         "a new value into the database")
+        super().__init__(
+            "An error occured while inserting a new value into the database"
+        )

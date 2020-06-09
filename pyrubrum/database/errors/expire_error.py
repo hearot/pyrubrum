@@ -21,6 +21,8 @@ from .error import DatabaseError
 
 class ExpireError(DatabaseError):
     def __init__(self):
-        super().__init__("An error occured while setting "
-                         "an expire flag on a value in the "
-                         "database")
+        super().__init__(
+            "An error occured while setting "
+            "an expire flag on a value in the "
+            "database"
+        )

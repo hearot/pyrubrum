@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 # Pyrubrum - An intuitive framework for creating Telegram bots
 # Copyright (C) 2020 Hearot <https://github.com/hearot>
 #
@@ -20,7 +19,8 @@
 
 import re
 
-from setuptools import find_packages, setup
+from setuptools import find_packages
+from setuptools import setup
 
 
 with open("fast-requirements.txt", encoding="utf-8") as r:
@@ -58,12 +58,10 @@ setup(
         "Topic :: Software Development :: Libraries",
         "Topic :: Software Development :: Libraries :: Application Frameworks",
         "Topic :: Software Development :: Libraries :: Python Modules",
-        "Typing :: Typed"
+        "Typing :: Typed",
     ],
     description="An intuitive framework for creating Telegram bots",
-    extras_require={
-        'fast': fast_requirements
-    },
+    extras_require={"fast": fast_requirements},
     install_requires=requirements,
     keywords="bot bots chat messenger mtproto pyrogram python telegram",
     license="GPLv3",

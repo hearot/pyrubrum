@@ -17,7 +17,8 @@
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
 from dataclasses import dataclass
-from typing import Any, Dict
+from typing import Any
+from typing import Dict
 
 
 @dataclass(init=False)
@@ -27,16 +28,20 @@ class Button:
     name: str
     parameters: dict
 
-    def __init__(self, name: str, button_id: str,
-                 parameters: Dict[str, Any],
-                 element_id: str = "",
-                 same_menu: bool = False,
-                 **kwargs):
+    def __init__(
+        self,
+        name: str,
+        button_id: str,
+        parameters: Dict[str, Any],
+        element_id: str = "",
+        same_menu: bool = False,
+        **kwargs
+    ):
         self.button_id = button_id
         self.element_id = element_id
         self.name = name
         self.parameters = parameters.copy()
         self.parameters.update(kwargs)
 
-        self.parameters['button_id'] = button_id
-        self.parameters['same_menu'] = same_menu
+        self.parameters["button_id"] = button_id
+        self.parameters["same_menu"] = same_menu

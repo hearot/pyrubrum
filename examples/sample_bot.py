@@ -18,23 +18,30 @@
 
 from environs import Env
 from pyrogram import Client
-from pyrubrum import Handler, Menu, Node, transform
+
+from pyrubrum import Handler
+from pyrubrum import Menu
+from pyrubrum import Node
+from pyrubrum import transform
 
 tree = transform(
     {
         Menu("Main", "main", "Hello!"): {
             Menu("About me", "about_me", "I'm just a bot!"),
-            Menu("Thoughts", "thoughts",
-                 "I'm a bot, I cannot think properly...")
+            Menu(
+                "Thoughts", "thoughts", "I'm a bot, I cannot think properly..."
+            ),
         }
     }
 )
 
 
-def main(api_hash: str, api_id: int, bot_token: str,
-         session_name: str, tree: Node):
-    bot = Client(session_name, api_hash=api_hash,
-                 api_id=api_id, bot_token=bot_token)
+def main(
+    api_hash: str, api_id: int, bot_token: str, session_name: str, tree: Node
+):
+    bot = Client(
+        session_name, api_hash=api_hash, api_id=api_id, bot_token=bot_token
+    )
     handler = Handler(tree)
     handler.setup(bot)
 
@@ -50,5 +57,4 @@ if __name__ == "__main__":
     bot_token = env("BOT_TOKEN")
     session_name = env("SESSION_NAME")
 
-    main(api_hash, api_id, bot_token,
-         session_name, tree)
+    main(api_hash, api_id, bot_token, session_name, tree)

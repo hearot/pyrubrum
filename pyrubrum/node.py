@@ -16,18 +16,22 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
-from .base_menu import BaseMenu
 from dataclasses import dataclass
-from typing import List, Optional, Tuple
+from typing import List
+from typing import Optional
+from typing import Tuple
+
+from .base_menu import BaseMenu
 
 
 @dataclass(eq=False, init=False, repr=True)
 class Node:
     menu: BaseMenu
-    children: Optional[List['Node']] = None
+    children: Optional[List["Node"]] = None
 
-    def __init__(self, menu: BaseMenu,
-                 children: Optional[List['Node']] = None):
+    def __init__(
+        self, menu: BaseMenu, children: Optional[List["Node"]] = None
+    ):
         if children:
             self.children = children
         else:
@@ -35,20 +39,21 @@ class Node:
 
         self.menu = menu
 
-    def add_child(self, node: 'Node'):
+    def add_child(self, node: "Node"):
         self.children.append(node)
 
     def get_children_menus(self) -> List[BaseMenu]:
         children = [child.menu for child in self.children]
         return children if children else None
 
-    def get_family(self, menu_id: str,
-                   parent: Optional['Node']) -> Tuple[Optional[BaseMenu],
-                                                      Optional[
-                                                          List[BaseMenu]]]:
+    def get_family(
+        self, menu_id: str, parent: Optional["Node"]
+    ) -> Tuple[Optional[BaseMenu], Optional[List[BaseMenu]]]:
         if self.menu.menu_id == menu_id:
-            return (parent.menu if isinstance(parent, Node) else None,
-                    self.get_children_menus())
+            return (
+                parent.menu if isinstance(parent, Node) else None,
+                self.get_children_menus(),
+            )
 
         for child in self.children:
             child_menus = child.get_family(menu_id, self)

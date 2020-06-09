@@ -16,12 +16,22 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
-from .base_menu import BaseMenu
-from .base_handler import BaseHandler, pass_handler
-from .node import Node, Optional
 from dataclasses import dataclass
-from pyrogram import Client, MessageHandler
-from typing import Any, Dict, Iterable, List, Tuple, Union
+from typing import Any
+from typing import Dict
+from typing import Iterable
+from typing import List
+from typing import Tuple
+from typing import Union
+
+from pyrogram import Client
+from pyrogram import MessageHandler
+
+from .base_handler import BaseHandler
+from .base_handler import pass_handler
+from .base_menu import BaseMenu
+from .node import Node
+from .node import Optional
 
 
 @dataclass(eq=False, init=False, repr=True)
@@ -31,8 +41,9 @@ class Handler(BaseHandler):
     def __init__(self, main_node: Node):
         self.main_node = main_node
 
-    def get_family(self, menu_id: str) -> Tuple[Optional[BaseMenu],
-                                                Optional[List[BaseMenu]]]:
+    def get_family(
+        self, menu_id: str
+    ) -> Tuple[Optional[BaseMenu], Optional[List[BaseMenu]]]:
         return self.main_node.get_family(menu_id, None)
 
     def get_menus(self) -> List[BaseMenu]:
@@ -42,13 +53,13 @@ class Handler(BaseHandler):
         BaseHandler.setup(self, client)
 
         client.add_handler(
-            MessageHandler(pass_handler(
-                self.main_node.menu.on_message, self)))
+            MessageHandler(pass_handler(self.main_node.menu.on_message, self))
+        )
 
 
-def on_callback_node(menus: Union[Dict[BaseMenu, Any],
-                                  Iterable[BaseMenu]],
-                     parent: Node):
+def on_callback_node(
+    menus: Union[Dict[BaseMenu, Any], Iterable[BaseMenu]], parent: Node
+):
     for menu in menus:
         node = Node(menu)
         parent.add_child(node)
@@ -57,8 +68,7 @@ def on_callback_node(menus: Union[Dict[BaseMenu, Any],
             on_callback_node(menus[menu], node)
 
 
-def transform(menus: Union[Dict[BaseMenu, Any],
-                           Iterable[BaseMenu]]) -> Node:
+def transform(menus: Union[Dict[BaseMenu, Any], Iterable[BaseMenu]]) -> Node:
     main_node = Node(list(menus)[0])
     main_value = list(menus.values())[0] if isinstance(menus, dict) else None
 

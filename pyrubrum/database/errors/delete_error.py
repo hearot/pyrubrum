@@ -21,5 +21,6 @@ from .error import DatabaseError
 
 class DeleteError(DatabaseError):
     def __init__(self):
-        super().__init__("An error occured while deleting "
-                         "a value from the database")
+        super().__init__(
+            "An error occured while deleting a value from the database"
+        )

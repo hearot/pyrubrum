@@ -16,94 +16,136 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
+from dataclasses import dataclass
+from typing import Any
+from typing import Callable
+from typing import Dict
+from typing import List
+from typing import Optional
+from typing import Union
+
+from pyrogram import CallbackQuery
+from pyrogram import Client
+from pyrogram import InlineKeyboardMarkup
+from pyrogram import InputMedia
+from pyrogram import Message
+
 from .button import Button
 from .element import Element
 from .keyboard import Keyboard
 from .menu import Menu
 from .parameterized_handler import ParameterizedHandler
-from dataclasses import dataclass
-from pyrogram import (CallbackQuery, Client,
-                      InlineKeyboardMarkup,
-                      InputMedia, Message)
-from typing import Any, Callable, Dict, List, Optional, Union
 
 
 @dataclass(eq=False, init=False, repr=True)
 class PageMenu(Menu):
-    items: Union[List[Element],
-                 Callable[[ParameterizedHandler, Client,
-                           Union[CallbackQuery, Message],
-                           Dict[str, Any]],
-                          List[Element]]]
+    items: Union[
+        List[Element],
+        Callable[
+            [
+                ParameterizedHandler,
+                Client,
+                Union[CallbackQuery, Message],
+                Dict[str, Any],
+            ],
+            List[Element],
+        ],
+    ]
     limit_page: Optional[int] = 4
     next_page_button_text: Optional[str] = "▶️"
     previous_page_button_text: Optional[str] = "◀️"
 
-    def __init__(self, name: str,
-                 menu_id: str,
-                 content: Union[InputMedia, str],
-                 items: Union[List[Element],
-                              Callable[[ParameterizedHandler, Client,
-                                        Union[CallbackQuery, Message],
-                                        Dict[str, Any]],
-                                       List[Element]]],
-                 back_button_text: Optional[str] = "🔙",
-                 limit: Optional[int] = 2,
-                 limit_page: Optional[int] = 4,
-                 next_page_button_text: Optional[str] = "▶️",
-                 previous_page_button_text: Optional[str] = "◀️"):
-        Menu.__init__(self, name, menu_id, content,
-                      back_button_text=back_button_text,
-                      limit=limit)
+    def __init__(
+        self,
+        name: str,
+        menu_id: str,
+        content: Union[InputMedia, str],
+        items: Union[
+            List[Element],
+            Callable[
+                [
+                    ParameterizedHandler,
+                    Client,
+                    Union[CallbackQuery, Message],
+                    Dict[str, Any],
+                ],
+                List[Element],
+            ],
+        ],
+        back_button_text: Optional[str] = "🔙",
+        limit: Optional[int] = 2,
+        limit_page: Optional[int] = 4,
+        next_page_button_text: Optional[str] = "▶️",
+        previous_page_button_text: Optional[str] = "◀️",
+    ):
+        Menu.__init__(
+            self,
+            name,
+            menu_id,
+            content,
+            back_button_text=back_button_text,
+            limit=limit,
+        )
 
         self.items = items
         self.limit_page = limit_page
         self.next_page_button_text = next_page_button_text
         self.previous_page_button_text = previous_page_button_text
 
-    def keyboard(self, tree: ParameterizedHandler,
-                 client: Client,
-                 context: Union[CallbackQuery,
-                                Message],
-                 parameters: Dict[str, Any]) -> InlineKeyboardMarkup:
+    def keyboard(
+        self,
+        tree: ParameterizedHandler,
+        client: Client,
+        context: Union[CallbackQuery, Message],
+        parameters: Dict[str, Any],
+    ) -> InlineKeyboardMarkup:
         parent, children = tree.get_family(self.menu_id)
 
         keyboard = []
         items = []
-        page_id = 'page_' + self.menu_id
+        page_id = "page_" + self.menu_id
 
         if page_id not in parameters:
             parameters[page_id] = 0
 
-        if 'same_menu' in parameters and parameters['same_menu']:
-            parameters[page_id] = int(parameters['element_id'])
+        if "same_menu" in parameters and parameters["same_menu"]:
+            parameters[page_id] = int(parameters["element_id"])
 
         if children:
             page_item_menu = children.pop(0)
 
             if callable(self.items):
-                items = self.items(tree, client,
-                                   context, parameters)
+                items = self.items(tree, client, context, parameters)
             elif isinstance(self.items, list):
                 items = self.items
             else:
                 raise TypeError("items must be either callable or a list")
 
-            elements = items[
-                parameters[page_id]*self.limit_page:][:self.limit_page]
+            elements = items[parameters[page_id] * self.limit_page :][
+                : self.limit_page
+            ]
 
-            keyboard = [[Button(
-                element.name, page_item_menu.menu_id,
-                parameters,
-                element.element_id) for element in
-                        elements[i:i+self.limit]] for i in
-                        range(0, len(elements), self.limit)]
+            keyboard = [
+                [
+                    Button(
+                        element.name,
+                        page_item_menu.menu_id,
+                        parameters,
+                        element.element_id,
+                    )
+                    for element in elements[i : i + self.limit]
+                ]
+                for i in range(0, len(elements), self.limit)
+            ]
 
         if children:
-            keyboard += [[child.button(tree, client,
-                                       context, parameters) for child in
-                         children[i:i+self.limit]] for i in
-                         range(0, len(children), self.limit)]
+            keyboard += [
+                [
+                    child.button(tree, client, context, parameters)
+                    for child in children[i : i + self.limit]
+                ]
+                for i in range(0, len(children), self.limit)
+            ]
 
         teleport_row = []
 
@@ -112,26 +154,30 @@ class PageMenu(Menu):
                 self.previous_page_button_text,
                 self.menu_id,
                 parameters.copy(),
-                parameters[page_id]-1,
-                True)
+                parameters[page_id] - 1,
+                True,
+            )
 
             if self.menu_id + "_id" in parameters:
                 previous_page_button.parameters[
-                    self.menu_id + "_id"] = parameters[self.menu_id + "_id"]
+                    self.menu_id + "_id"
+                ] = parameters[self.menu_id + "_id"]
 
             teleport_row.append(previous_page_button)
 
-        if (parameters[page_id]+1)*self.limit_page < len(items):
+        if (parameters[page_id] + 1) * self.limit_page < len(items):
             next_page_button = Button(
                 self.next_page_button_text,
                 self.menu_id,
                 parameters.copy(),
-                parameters[page_id]+1,
-                True)
+                parameters[page_id] + 1,
+                True,
+            )
 
             if self.menu_id + "_id" in parameters:
-                next_page_button.parameters[
-                    self.menu_id + "_id"] = parameters[self.menu_id + "_id"]
+                next_page_button.parameters[self.menu_id + "_id"] = parameters[
+                    self.menu_id + "_id"
+                ]
 
             teleport_row.append(next_page_button)
 
@@ -145,10 +191,14 @@ class PageMenu(Menu):
             keyboard = keyboard + [[parent_button]]
 
         if isinstance(context, Message):
-            return (Keyboard(keyboard, tree,
-                    str(context.message_id) +
-                    str(context.from_user.id))
-                    if keyboard else None)
+            return (
+                Keyboard(
+                    keyboard,
+                    tree,
+                    str(context.message_id) + str(context.from_user.id),
+                )
+                if keyboard
+                else None
+            )
         elif isinstance(context, CallbackQuery):
-            return (Keyboard(keyboard, tree,
-                    context.id) if keyboard else None)
+            return Keyboard(keyboard, tree, context.id) if keyboard else None
