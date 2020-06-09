@@ -20,13 +20,14 @@
 
 import os
 import re
-import sys
 from collections import defaultdict
 
 from git import Repo
+from pathlib import Path
 
 CHANGELOG_FILE = "CHANGELOG.md"
 CONVENTIONAL_COMMITS_REGEX = r"^([a-z]+)(!)?(?:\([a-z]+\)+)?: ([^\n]+)+$"
+TEMP_FILE = ".temp_post_commit"
 TITLES = {
     "build": "Build changes",
     "chore": "Other changes",
@@ -43,8 +44,9 @@ titles.update(TITLES)
 version_tree = defaultdict(lambda: defaultdict(list))
 
 
-def generate_changelog(last_commit_message: str):
+def generate_changelog():
     repo = Repo(os.path.dirname(os.path.realpath(__file__)))
+    Path(TEMP_FILE).touch()
 
     tags_list = sorted(repo.tags, key=lambda t: t.commit.committed_date) + [""]
     tags = iter(tags_list)
@@ -94,28 +96,6 @@ def generate_changelog(last_commit_message: str):
     if "" in version_tree:
         version_tree["Current version"] = version_tree.pop("")
 
-    match = match_commit.search(last_commit_message)
-
-    if match:
-        type_commit = match.group(1)
-        breaking_change = match.group(2)
-        breaking_change = breaking_change if breaking_change else ""
-        brief_message = match.group(3)
-
-        if breaking_change == "!":
-            version_tree["Current version"]["Breaking changes"].append(
-                "%s (%s)" % (brief_message.capitalize(), str(commit))
-            )
-        else:
-            version_tree["Current version"][titles[type_commit]].append(
-                "%s (%s)" % (brief_message.capitalize(), str(commit))
-            )
-
-        print(
-            "LAST COMMIT MESSAGE: " + type_commit + breaking_change + ":",
-            brief_message,
-        )
-
     changelog_file = os.path.join(
         os.path.dirname(os.path.realpath(__file__)), CHANGELOG_FILE
     )
@@ -145,12 +125,10 @@ def generate_changelog(last_commit_message: str):
                     f.write("   - %s\n" % commit)
 
     repo.git.add(CHANGELOG_FILE)
-    repo.git.update_index(CHANGELOG_FILE, add=True)
+    repo.git.commit("--amend", "--no-edit")
+    os.remove(TEMP_FILE)
 
 
 if __name__ == "__main__":
-    with open(sys.argv[-1], "r") as commit_message_file:
-        commit_message = commit_message_file.read().split("\n")[0]
-
-    generate_changelog(commit_message)
-    sys.exit(0)
+    if not os.path.isfile(TEMP_FILE):
+        generate_changelog()
