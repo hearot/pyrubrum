@@ -77,13 +77,11 @@ def generate_changelog():
 
                     if breaking_change == "!":
                         version_tree[next_tag]["Breaking changes"].append(
-                            "%s (%s)"
-                            % (brief_message.capitalize(), str(commit))
+                            "%s %s" % (brief_message.capitalize(), str(commit))
                         )
                     else:
                         version_tree[next_tag][titles[type_commit]].append(
-                            "%s (%s)"
-                            % (brief_message.capitalize(), str(commit))
+                            "%s %s" % (brief_message.capitalize(), str(commit))
                         )
 
                     print(
