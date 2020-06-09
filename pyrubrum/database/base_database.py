@@ -16,15 +16,20 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
+from abc import ABC
+from abc import abstractmethod
 from typing import Optional
 
 
-class BaseDatabase:
+class BaseDatabase(ABC):
+    @abstractmethod
     def get(self, callback_query_id: str) -> Optional[str]:
         raise NotImplementedError
 
+    @abstractmethod
     def set(self, callback_query_id: str, data: str) -> bool:
         raise NotImplementedError
 
+    @abstractmethod
     def delete(self, callback_query_id: str) -> bool:
         raise NotImplementedError

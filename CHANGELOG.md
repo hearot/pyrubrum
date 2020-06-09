@@ -28,11 +28,15 @@
 
 ### New features
 
-   - Include the release dates inside changelog
+   - Include the release dates inside changelog ([d4397f396c64eeec6549cd90c64cef6359017dd5](https://github.com/hearot/pyrubrum/commit/d4397f396c64eeec6549cd90c64cef6359017dd5))
 
 ### Testing changes
 
    - Version is now tested to be compliant with PEP 440 ([5f5928bd49e7457d331229440c008665d91647ea](https://github.com/hearot/pyrubrum/commit/5f5928bd49e7457d331229440c008665d91647ea))
+
+### ‼️ Breaking changes
+
+   - Use `abstractmethod` for the methods of base classes
 
 ## v0.1a1.dev4 - 2020-06-09
 

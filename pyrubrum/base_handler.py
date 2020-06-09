@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
+from abc import ABC
+from abc import abstractmethod
 from dataclasses import dataclass
 from typing import Any
 from typing import Callable
@@ -31,7 +33,8 @@ from .button import Button
 
 
 @dataclass(eq=False, init=False, repr=True)
-class BaseHandler:
+class BaseHandler(ABC):
+    @abstractmethod
     def get_menus(self) -> List["BaseMenu"]:
         raise NotImplementedError
 

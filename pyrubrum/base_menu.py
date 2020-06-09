@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
+from abc import ABC
+from abc import abstractmethod
 from dataclasses import dataclass
 from typing import Any
 from typing import Dict
@@ -32,7 +34,7 @@ from .button import Button
 
 
 @dataclass(eq=False, init=False, repr=True)
-class BaseMenu:
+class BaseMenu(ABC):
     name: str
     menu_id: str
 
@@ -43,9 +45,11 @@ class BaseMenu:
         self.name = name
         self.menu_id = menu_id
 
+    @abstractmethod
     def get_content(self) -> Union[InputMedia, str]:
         raise NotImplementedError
 
+    @abstractmethod
     def on_callback(
         self,
         handler: BaseHandler,
@@ -64,6 +68,7 @@ class BaseMenu:
     ) -> Button:
         return Button(self.name, self.menu_id, parameters)
 
+    @abstractmethod
     def keyboard(
         self,
         handler: BaseHandler,
@@ -73,6 +78,7 @@ class BaseMenu:
     ) -> InlineKeyboardMarkup:
         raise NotImplementedError
 
+    @abstractmethod
     def on_message(
         self,
         handler: BaseHandler,
