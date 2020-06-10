@@ -22,14 +22,66 @@ from typing import Optional
 
 
 class BaseDatabase(ABC):
+    """Basic representation of a database, which, by definition, implements the
+    three fundamental operations `delete`, `get` and `set`.
+
+    The purpose of this class is to give a general interface for a database,
+    as it does not implement anything.
+
+    A sample implementation of this interface is `RedisDatabase`.
+
+    Note:
+        In order to create a subclass or to access this interface, you will
+        need to implement all the abstract methods, which are `delete`, `get`
+        and `set`. Otherwise, you will get an error.
+    """
+
     @abstractmethod
-    def get(self, callback_query_id: str) -> Optional[str]:
+    def get(self, key: str) -> Optional[str]:
+        """This abstract method is intended to be implemented in order to get the value
+        which is stored with a certain key inside the database, if any.
+        Otherwise, it will just return ``None``.
+
+        Args:
+            key (str): The key you are retrieving the value of.
+
+        Returns:
+            Optional[str]: The value which is associated to the key, if any.
+                Otherwise, it is set to be ``None``.
+        """
         raise NotImplementedError
 
     @abstractmethod
-    def set(self, callback_query_id: str, data: str) -> bool:
+    def set(self, key: str, value: str, expire: Optional[int] = None):
+        """This abstract method is intended to be implemented in order to assign a
+        value to a certain key inside the database. It may even be marked with
+        an expire as to avoid having too much unused data stored inside the
+        database.
+
+        Args:
+            key (str): The key you are adding or updating the value of.
+            value (str): The value which is being assigned to the key.
+            expire (Optional[int]): The expire in seconds. Defaults to
+                ``None``.
+
+        Raises:
+            ExpireError: If an error occured while setting the expire for the
+                key.
+            SetError: If an error occured while inserting the key into the
+                database.
+        """
         raise NotImplementedError
 
     @abstractmethod
-    def delete(self, callback_query_id: str) -> bool:
+    def delete(self, key: str):
+        """This abstract method is intended to be implemented in order to delete a
+        certain key from the database, together with its stored value.
+
+        Args:
+            key (str): The key which is being deleted from the database,
+                together with its linked data.
+
+        Raises:
+            DeleteError: If an error occured while deleting the key.
+        """
         raise NotImplementedError
