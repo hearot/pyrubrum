@@ -23,14 +23,14 @@ from .errors import DeleteError
 
 
 class DictDatabase(dict, BaseDatabase):
-    def get(self, callback_query_id: str) -> Optional[str]:
-        return dict.get(self, callback_query_id)
+    def get(self, key: str) -> Optional[str]:
+        return dict.get(self, key)
 
-    def set(self, callback_query_id: str, data: str):
-        self.update({callback_query_id: data})
+    def set(self, key: str, value: str, expire: Optional[int] = None):
+        self.update({key: value})
 
-    def delete(self, callback_query_id: str):
+    def delete(self, key: str):
         try:
-            self.pop(callback_query_id)
+            self.pop(key)
         except KeyError:
             raise DeleteError

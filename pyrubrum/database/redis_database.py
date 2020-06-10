@@ -33,34 +33,36 @@ except (ImportError, ModuleNotFoundError):
 
 class RedisDatabase(BaseDatabase):
     encoding = "utf-8"
-    expire: Optional[Union[int, timedelta]] = 86400
+    default_expire: Optional[Union[int, timedelta]] = 86400
     server: "redis.Redis"
 
     def __init__(
         self,
         server: "redis.Redis",
         encoding="utf-8",
-        expire: Optional[Union[int, timedelta]] = 86400,
+        default_expire: Optional[Union[int, timedelta]] = 86400,
     ):
+        self.default_expire = default_expire
         self.encoding = encoding
-        self.expire = expire
         self.server = server
 
-    def get(self, callback_query_id: str) -> Optional[str]:
-        content = self.server.get(callback_query_id)
+    def get(self, key: str) -> Optional[str]:
+        content = self.server.get(key)
         return content.decode(self.encoding) if content else None
 
-    def set(self, callback_query_id: str, data: str):
-        if not self.server.set(callback_query_id, data):
+    def set(self, key: str, value: str, expire: int = None):
+        if not self.server.set(key, value):
             raise SetError
 
-        if self.expire and not self.server.expire(
-            callback_query_id, self.expire
+        if expire and not self.server.expire(key, expire):
+            raise ExpireError
+        elif self.default_expire and not self.server.expire(
+            key, self.default_expire
         ):
             raise ExpireError
 
-    def delete(self, callback_query_id: str):
+    def delete(self, key: str):
         try:
-            self.server.delete(callback_query_id)
+            self.server.delete(key)
         except redis.RedisError:
             raise DeleteError
