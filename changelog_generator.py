@@ -28,7 +28,9 @@ from git import Repo
 from pathlib import Path
 
 CHANGELOG_FILE = "CHANGELOG.md"
-COMMIT_URL_FORMAT = "https://github.com/hearot/pyrubrum/commit/%s"
+COMMIT_URL_FORMAT = "https://github.com/%s/%s/commit/%%s"
+COMMIT_URL = ""
+COMMIT_URL_REGEX = r"git@github.com:(.+)\/(.+).git"
 CONVENTIONAL_COMMITS_REGEX = r"^([a-z]+)(!)?(?:\([a-z]+\)+)?: ([^\n]+)+$"
 TEMP_FILE = ".temp_post_commit"
 TITLES = {
@@ -43,6 +45,7 @@ TITLES = {
     "test": "Testing changes",
 }
 
+commit_url_format = re.compile(COMMIT_URL_REGEX)
 match_commit = re.compile(CONVENTIONAL_COMMITS_REGEX)
 
 titles = defaultdict(lambda: "New features")
@@ -113,7 +116,7 @@ def generate_changelog(repo: Repo):
                     if commit != repo.head.commit:
                         suffix += "([%s](%s))" % (
                             str(commit),
-                            COMMIT_URL_FORMAT % str(commit),
+                            COMMIT_URL % str(commit),
                         )
 
                     version_tree[next_tag][titles[type_commit]].append(
@@ -165,7 +168,22 @@ def generate_changelog(repo: Repo):
 if __name__ == "__main__":
     repo = Repo(os.path.dirname(os.path.realpath(__file__)))
     first_post_commit = not os.path.isfile(TEMP_FILE)
+    origin_url = next(repo.remotes.origin.urls)
 
+    if origin_url.startswith("https://"):
+        COMMIT_URL = (
+            origin_url.replace(".git/", "").replace(".git", "") + "/commit/%s"
+        )
+    else:
+        match_url = commit_url_format.search(origin_url)
+
+        if not match_url:
+            raise ValueError("origin must be a valid reference")
+
+        author, repository_name = match_url.group(1), match_url.group(2)
+        COMMIT_URL = COMMIT_URL_FORMAT % (author, repository_name)
+
+    print("COMMIT PREFIX URL: %s" % COMMIT_URL)
     if sys.argv[-1] == "generate":
         generate_changelog(repo)
     elif first_post_commit:
