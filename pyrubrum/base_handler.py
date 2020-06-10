@@ -93,7 +93,7 @@ class BaseHandler(ABC):
             keyboard (List[List[Button]]): The inline keyboard you want to
                 process.
             callback_query_id (str): The unique identifier of the callback
-                which the keyboard is generated for.
+                for which the keyboard is generated.
 
         Returns:
             List[List[InlineKeyboardButton]]: The generated keyboard in a
@@ -117,7 +117,7 @@ class BaseHandler(ABC):
             client (Client): The client which is being set up.
 
         Warning:
-            The functions which the handlers make use of are not set up in the
+            The functions the handlers make use of are not set up in the
             same way objects defined using Pyrogram decorators are. Pyrubrum
             implements the following pattern:
                 ``callback(handler, client, context, parameters)``
@@ -135,7 +135,7 @@ def pass_handler(
     callback: Callback, handler: BaseHandler,
 ) -> PyrogramHandlerCallback:
     """Generate a function which, whenever it is called, subsequently calls
-    `callback`, passing the handler which this object was generated from.
+    `callback`, passing the handler from which this object was generated.
 
     Args:
         callback (Callback): The callback function which
@@ -149,7 +149,7 @@ def pass_handler(
             a Pyrogram handler.
 
     Warning:
-        The functions which the handlers make use of are not set up in the
+        The functions the handlers make use of are not set up in the
         same way objects defined using Pyrogram decorators are. Pyrubrum
         implements the following pattern:
             ``callback(handler, client, context, parameters)``
