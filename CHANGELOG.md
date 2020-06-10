@@ -14,6 +14,7 @@
 
 ### Documentation
 
+   - Add docstrings to `BaseMenu`
    - Add issue templates ([64c006258e373a97d0a9f83318af02c4310b585b](https://github.com/hearot/pyrubrum/commit/64c006258e373a97d0a9f83318af02c4310b585b))
    - Add the official pronunciation for Pyrubrum ([b6d1fe8e01f79007338cd4a6dfe409c406c12cba](https://github.com/hearot/pyrubrum/commit/b6d1fe8e01f79007338cd4a6dfe409c406c12cba))
    - Delete duplicate issue templates ([10cba65c31a5c3556b39cc328d097b62dfbd5e1b](https://github.com/hearot/pyrubrum/commit/10cba65c31a5c3556b39cc328d097b62dfbd5e1b))
@@ -24,7 +25,7 @@
    - Add space before reference links ([dfbf7a55f3a7de666703b1dced404d1ce7b0ee7a](https://github.com/hearot/pyrubrum/commit/dfbf7a55f3a7de666703b1dced404d1ce7b0ee7a))
    - Capitalize only the first character of a commit message ([2996f7c91723902b4e998fb94b6d31c60685d386](https://github.com/hearot/pyrubrum/commit/2996f7c91723902b4e998fb94b6d31c60685d386))
    - Do no more raise `TypeError` while formatting commits ([56f1e533c12bdf75e63714d125319bb72da7d916](https://github.com/hearot/pyrubrum/commit/56f1e533c12bdf75e63714d125319bb72da7d916))
-   - Fix `commit-message` for Dependabot
+   - Fix `commit-message` for Dependabot ([a13cfeae848d83339a902373ddcb0287fc306d87](https://github.com/hearot/pyrubrum/commit/a13cfeae848d83339a902373ddcb0287fc306d87))
    - Hide the sha-1 hash of the current commit ([ab6478e610ef828744d5c6e54a1d54fff92372e8](https://github.com/hearot/pyrubrum/commit/ab6478e610ef828744d5c6e54a1d54fff92372e8))
 
 ### New features
