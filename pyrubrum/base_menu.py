@@ -21,6 +21,7 @@ from abc import abstractmethod
 from dataclasses import dataclass
 from typing import Any
 from typing import Dict
+from typing import Optional
 from typing import Union
 
 from pyrogram import CallbackQuery
@@ -36,7 +37,7 @@ from .button import Button
 @dataclass(eq=False, init=False, repr=True)
 class BaseMenu(ABC):
     """Basic represention of a menu, which is an entity that has got by definition
-    a name and a unique identifier.
+    at least a name and a unique identifier.
 
     The purpose of this class is to give a general interface for a menu, as it
     doesn't implement anything except for the generation of both buttons and
@@ -172,7 +173,7 @@ class BaseMenu(ABC):
         handler: BaseHandler,
         client: Client,
         callback: CallbackQuery,
-        parameters: Dict[str, Any],
+        parameters: Optional[Dict[str, Any]] = None,
     ):
         """This abstract method is intended to be implemented and is called
         whenever a callback query is handled and refers to this menu.
@@ -183,8 +184,8 @@ class BaseMenu(ABC):
             client (Client): The client which is linked to the handler.
             context (Union[CallbackQuery, Message]): The context which the
                 button is generated for.
-            parameters (Dict[str, Any]): The parameters which were passed to
-                to the handler.
+            parameters (Optional[Dict[str, Any]]): The parameters which were
+                passed to to the handler. Defaults to None.
         """
         raise NotImplementedError
 
@@ -194,7 +195,7 @@ class BaseMenu(ABC):
         handler: BaseHandler,
         client: Client,
         message: Message,
-        parameters: Dict[str, Any],
+        parameters: Optional[Dict[str, Any]] = None,
     ):
         """This abstract method is intended to be implemented and is called
         whenever a message is handled and refers to this menu.
@@ -205,7 +206,7 @@ class BaseMenu(ABC):
             client (Client): The client which is linked to the handler.
             context (Union[CallbackQuery, Message]): The context which the
                 button is generated for.
-            parameters (Dict[str, Any]): The parameters which were passed to
-                to the handler.
+            parameters (Optional[Dict[str, Any]]): The parameters which were
+                passed to to the handler. Defaults to None.
         """
         raise NotImplementedError

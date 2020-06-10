@@ -14,7 +14,7 @@
 
 ### Documentation
 
-   - Add docstrings to `BaseHandler`
+   - Add docstrings to `BaseHandler` ([455a0a94977c1652b445b623df561f9606a0615e](https://github.com/hearot/pyrubrum/commit/455a0a94977c1652b445b623df561f9606a0615e))
    - Add docstrings to `BaseMenu` ([3a7ad4e3b23bfb85a9faa8c3c056e76abb87b771](https://github.com/hearot/pyrubrum/commit/3a7ad4e3b23bfb85a9faa8c3c056e76abb87b771))
    - Add issue templates ([64c006258e373a97d0a9f83318af02c4310b585b](https://github.com/hearot/pyrubrum/commit/64c006258e373a97d0a9f83318af02c4310b585b))
    - Add the official pronunciation for Pyrubrum ([b6d1fe8e01f79007338cd4a6dfe409c406c12cba](https://github.com/hearot/pyrubrum/commit/b6d1fe8e01f79007338cd4a6dfe409c406c12cba))
@@ -33,6 +33,7 @@
 
    - Include the release dates inside changelog ([d4397f396c64eeec6549cd90c64cef6359017dd5](https://github.com/hearot/pyrubrum/commit/d4397f396c64eeec6549cd90c64cef6359017dd5))
    - Integrate Dependabot ([2bb0a43b0f7f8266c7d0544209194c2b26b878a4](https://github.com/hearot/pyrubrum/commit/2bb0a43b0f7f8266c7d0544209194c2b26b878a4))
+   - Make parameters optional for `on_callback` and `on_message`
 
 ### Testing changes
 

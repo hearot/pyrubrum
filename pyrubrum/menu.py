@@ -96,8 +96,11 @@ class Menu(BaseMenu):
         tree: Handler,
         client: Client,
         callback: CallbackQuery,
-        parameters: Dict[str, Any],
+        parameters: Optional[Dict[str, Any]] = None,
     ):
+        if not parameters:
+            parameters = {}
+
         self.preliminary(tree, client, callback, parameters)
         content = self.get_content(tree, client, callback, parameters)
 
@@ -153,8 +156,15 @@ class Menu(BaseMenu):
         elif isinstance(context, CallbackQuery):
             return Keyboard(keyboard, tree, context.id) if keyboard else None
 
-    def on_message(self, tree: Handler, client: Client, message: Message):
-        parameters = {}
+    def on_message(
+        self,
+        tree: Handler,
+        client: Client,
+        message: Message,
+        parameters: Optional[Dict[str, Any]] = None,
+    ):
+        if not parameters:
+            parameters = {}
 
         self.preliminary(tree, client, message, parameters)
         content = self.get_content(tree, client, message, parameters)
