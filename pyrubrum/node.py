@@ -17,6 +17,7 @@
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
 from dataclasses import dataclass
+from functools import lru_cache
 from typing import List
 from typing import Optional
 from typing import Tuple
@@ -65,6 +66,7 @@ class Node:
         """
         self.children.append(node)
 
+    @lru_cache(maxsize=1)
     def get_children_menus(self) -> List[BaseMenu]:
         """Get all the menus that are linked to the children belonging to
         this instance.
@@ -75,6 +77,7 @@ class Node:
         children = [child.menu for child in self.children]
         return children if children else None
 
+    @lru_cache(maxsize=None)
     def get_family(self, menu_id: str, parent: Optional["Node"]) -> Family:
         """Retrieve the menus which are linked to both parent and children of this
         instance if this instance matches the provided identifier. Otherwise it
@@ -107,6 +110,7 @@ class Node:
 
         return (None, None)
 
+    @lru_cache(maxsize=1)
     def get_menus(self) -> List[BaseMenu]:
         """Retrieve the list of all the menus which are linked to the nodes belonging
         to the descent of this class (i.e. the children, the children of the

@@ -11,7 +11,7 @@
    - Add docstrings to `RedisDatabase` ([784b8f112d561b9a346b7f986710df2b1455e691](https://github.com/hearot/pyrubrum/commit/784b8f112d561b9a346b7f986710df2b1455e691))
    - Add docstrings to all the database exceptions ([0e561554d9d37ef755202cb7ef2905aadbd84700](https://github.com/hearot/pyrubrum/commit/0e561554d9d37ef755202cb7ef2905aadbd84700))
    - Add issue templates ([64c006258e373a97d0a9f83318af02c4310b585b](https://github.com/hearot/pyrubrum/commit/64c006258e373a97d0a9f83318af02c4310b585b))
-   - Add reference to the features list
+   - Add reference to the features list ([72a01dafbf42b0bb1140a62371959702040be230](https://github.com/hearot/pyrubrum/commit/72a01dafbf42b0bb1140a62371959702040be230))
    - Add the official pronunciation for Pyrubrum ([b6d1fe8e01f79007338cd4a6dfe409c406c12cba](https://github.com/hearot/pyrubrum/commit/b6d1fe8e01f79007338cd4a6dfe409c406c12cba))
    - Create the changelog of the current release separately ([318172a986e666ac4abf6f7a4480922cb135e734](https://github.com/hearot/pyrubrum/commit/318172a986e666ac4abf6f7a4480922cb135e734))
    - Delete duplicate issue templates ([10cba65c31a5c3556b39cc328d097b62dfbd5e1b](https://github.com/hearot/pyrubrum/commit/10cba65c31a5c3556b39cc328d097b62dfbd5e1b))
@@ -36,6 +36,7 @@
    - Import the base classes as well ([1d11b934967258164d0f4fc57e01e4116d19b72c](https://github.com/hearot/pyrubrum/commit/1d11b934967258164d0f4fc57e01e4116d19b72c))
    - Include the release dates inside changelog ([d4397f396c64eeec6549cd90c64cef6359017dd5](https://github.com/hearot/pyrubrum/commit/d4397f396c64eeec6549cd90c64cef6359017dd5))
    - Integrate Dependabot ([2bb0a43b0f7f8266c7d0544209194c2b26b878a4](https://github.com/hearot/pyrubrum/commit/2bb0a43b0f7f8266c7d0544209194c2b26b878a4))
+   - Integrate memoization into `Node`
    - Make parameters optional for `on_callback` and `on_message` ([562f323da2d19913405a5efcfe531e37fa54baf5](https://github.com/hearot/pyrubrum/commit/562f323da2d19913405a5efcfe531e37fa54baf5))
    - Support `datetime.timedelta` as an expire object ([6b3453f5a888fe758f868592c17a88ed1678936f](https://github.com/hearot/pyrubrum/commit/6b3453f5a888fe758f868592c17a88ed1678936f))
 
