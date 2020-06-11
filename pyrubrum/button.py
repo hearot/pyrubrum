@@ -18,25 +18,68 @@
 
 from dataclasses import dataclass
 from typing import Any
+from typing import Optional
 from typing import Dict
 
 
 @dataclass(init=False)
 class Button:
+    """Representation of a button which belongs to an inline keyboard and has got,
+    by definition, a unique identifier, which actually represents the menu this
+    object is referring to, an `Element` identifier (i.e. the identifier of the
+    object that is carried by the button and is then passed to the menu it is
+    referring to, if any), a name, which is displayed inside the text field of
+    the inline button, and a dictionary of parameters.
+
+    Attributes:
+        button_id (str): The unique identifier of the button, which is the same
+            as the one of the menu the button is referring to.
+        element_id (str): The unique identifier of the `Element` the button is
+            carrying, if any. Defaults to an empty string.
+        name (str): The name which is displayed inside the text field of the
+            inline button this object will be converted to.
+        parameters (Dict[str, Any]): The parameters that will be passed to the
+            menu this button is referring to.
+
+    Warning:
+        There is a special group of names which are not available for being
+        used as keys for parameters. These are ``button_id`` and
+        ``same_menu``.
+    """
+
     button_id: str
-    element_id: str = ""
+    element_id: Optional[str] = ""
     name: str
-    parameters: dict
+    parameters: Dict[str, Any]
 
     def __init__(
         self,
         name: str,
         button_id: str,
         parameters: Dict[str, Any],
-        element_id: str = "",
-        same_menu: bool = False,
+        element_id: Optional[str] = "",
+        same_menu: Optional[bool] = False,
         **kwargs
     ):
+        """Initialize the button by setting the attributes of this object and copying
+        the dictionary of parameters.
+
+        Args:
+            name (str): The name which is displayed inside the text field of
+                the inline button this object will be converted to.
+            button_id (str): The unique identifier of the button, which is the
+                same as the one of the menu the button is referring to.
+            parameters (Dict[str, Any]): The parameters that will be passed to
+                the menu this button is referring to.
+            element_id (Optional[str]): The unique identifier of the `Element`
+                the button is carrying, if any. Defaults to an empty string.
+            same_menu (Optional[bool]): If the button is referring to the same
+                menu by which it was initialized. Defaults to False.
+            **kwargs: Arbitrary keyword arguments which can be used as a way to
+                define a new parameter (``key=value``) that will be added to
+                the dictionary of parameters.
+        """
+
         self.button_id = button_id
         self.element_id = element_id
         self.name = name
