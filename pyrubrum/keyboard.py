@@ -25,12 +25,31 @@ from .button import Button
 
 
 class Keyboard(InlineKeyboardMarkup):
+    """Simple shortcut for calling `BaseHandler.process_keyboard` and storing the
+    processed keyboard in the same object."""
+
     def __init__(
         self,
         inline_keyboard: List[List[Button]],
         handler: BaseHandler,
         callback_query_id: str,
     ):
+        """Initialize an `InlineKeyboardMarkup` object with the processed keyboard
+        from `BaseHandler.process_keyboard`.
+
+        It is useful since it automatically processes the content of buttons
+        and, at the same time, behaves like a normal `InlineKeyboardMarkup`
+        instance.
+
+        Args:
+            inline_keyboard (List[List[Button]]): The keyboard which is going
+                to be converted.
+            handler (BaseHandler): The handler from which the function
+                `BaseHandler.process_function` is going to be called.
+            callback_query_id (str): The unique identifier of the query, which
+                will be used to make the call that is made by the inline
+                buttons unique.
+        """
         super().__init__(
             handler.process_keyboard(inline_keyboard, str(callback_query_id))
         )
