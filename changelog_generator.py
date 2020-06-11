@@ -31,6 +31,8 @@ CHANGELOG_FILE = "CHANGELOG.md"
 COMMIT_URL_FORMAT = "https://github.com/%s/%s/commit/%%s"
 COMMIT_URL = ""
 COMMIT_URL_REGEX = r"git@github.com:(.+)\/(.+).git"
+CURRENT_VERSION = "Current version"
+FEATURES_FILE = "FEATURES.md"
 CONVENTIONAL_COMMITS_REGEX = r"^([a-z]+)(!)?(?:\([a-z]+\)+)?: ([^\n]+)+$"
 TEMP_FILE = ".temp_post_commit"
 TITLES = {
@@ -55,9 +57,6 @@ version_tree = defaultdict(lambda: defaultdict(list))
 
 
 def add_date(repo: Repo, version: str) -> str:
-    if version == "Current version":
-        return version
-
     commit = repo.commit(version)
 
     return "%s - %s" % (
@@ -69,6 +68,7 @@ def add_date(repo: Repo, version: str) -> str:
 def commit_amend(repo: Repo):
     try:
         repo.git.add(CHANGELOG_FILE)
+        repo.git.add(FEATURES_FILE)
         repo.git.commit("--amend", "--no-edit", "--no-verify", "-S")
     finally:
         os.remove(TEMP_FILE)
@@ -133,28 +133,38 @@ def generate_changelog(repo: Repo):
         pass
 
     if "" in version_tree:
-        version_tree["Current version"] = version_tree.pop("")
+        version_tree[CURRENT_VERSION] = version_tree.pop("")
 
     changelog_file = os.path.join(
         os.path.dirname(os.path.realpath(__file__)), CHANGELOG_FILE
+    )
+
+    features_file = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)), FEATURES_FILE
     )
 
     with open(changelog_file, "w", encoding="utf-8") as f:
         f.write("# Changelog\n\n## Table of contents\n\n")
 
         for version in map(str, reversed(tags_list)):
-            version = version if version else "Current version"
-            version = add_date(repo, version)
+            version = version if version else CURRENT_VERSION
+
+            if version != CURRENT_VERSION:
+                version = add_date(repo, version)
+
             f.write(
                 "   * [%s](#%s)\n"
                 % (version, version.replace(".", "").replace(" ", "-"))
             )
 
         for version in map(str, reversed(tags_list)):
-            version = version if version else "Current version"
+            version = version if version else CURRENT_VERSION
             types = version_tree[version]
 
-            f.write("\n## %s\n" % add_date(repo, version))
+            if version != CURRENT_VERSION:
+                f.write("\n## %s\n" % add_date(repo, version))
+            else:
+                f.write("\n## %s\n" % CURRENT_VERSION)
 
             for type_commit in sorted(types.keys()):
                 commits = types[type_commit]
@@ -163,6 +173,21 @@ def generate_changelog(repo: Repo):
 
                 for commit in sorted(commits):
                     f.write("   - %s\n" % commit)
+
+    with open(features_file, "w", encoding="utf-8") as f:
+        types = version_tree[CURRENT_VERSION]
+        len_keys = sum(1 for _ in types.keys())
+
+        for index, type_commit in enumerate(sorted(types.keys())):
+            commits = types[type_commit]
+
+            f.write("### %s\n\n" % type_commit)
+
+            for commit in sorted(commits):
+                f.write("   - %s\n" % commit)
+
+            if index != len_keys - 1:
+                f.write("\n")
 
 
 if __name__ == "__main__":
