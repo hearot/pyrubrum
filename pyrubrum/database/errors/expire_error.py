@@ -20,9 +20,11 @@ from .error import DatabaseError
 
 
 class ExpireError(DatabaseError):
+    """Exception which is raised whenever an error occurs while setting an expire
+    to a certain key inside a database"""
+
     def __init__(self):
         super().__init__(
-            "An error occured while setting "
-            "an expire flag on a value in the "
+            "An error occured while setting an expire to a key inside the"
             "database"
         )

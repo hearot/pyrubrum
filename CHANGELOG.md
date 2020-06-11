@@ -17,11 +17,12 @@
    - Add docstrings to `BaseDatabase` ([d3fd9a769e62196f01d3764b87896761bbaf77d6](https://github.com/hearot/pyrubrum/commit/d3fd9a769e62196f01d3764b87896761bbaf77d6))
    - Add docstrings to `BaseHandler` ([455a0a94977c1652b445b623df561f9606a0615e](https://github.com/hearot/pyrubrum/commit/455a0a94977c1652b445b623df561f9606a0615e))
    - Add docstrings to `BaseMenu` ([3a7ad4e3b23bfb85a9faa8c3c056e76abb87b771](https://github.com/hearot/pyrubrum/commit/3a7ad4e3b23bfb85a9faa8c3c056e76abb87b771))
+   - Add docstrings to all the database exceptions
    - Add issue templates ([64c006258e373a97d0a9f83318af02c4310b585b](https://github.com/hearot/pyrubrum/commit/64c006258e373a97d0a9f83318af02c4310b585b))
    - Add the official pronunciation for Pyrubrum ([b6d1fe8e01f79007338cd4a6dfe409c406c12cba](https://github.com/hearot/pyrubrum/commit/b6d1fe8e01f79007338cd4a6dfe409c406c12cba))
    - Delete duplicate issue templates ([10cba65c31a5c3556b39cc328d097b62dfbd5e1b](https://github.com/hearot/pyrubrum/commit/10cba65c31a5c3556b39cc328d097b62dfbd5e1b))
    - Make relative clauses more formal ([6b0d84effd65838668b3ba070a677d03ce016581](https://github.com/hearot/pyrubrum/commit/6b0d84effd65838668b3ba070a677d03ce016581))
-   - Stop using `typing.NewType` and use aliases instead
+   - Stop using `typing.NewType` and use aliases instead ([600191f337178baf21ea5ffe3e9caaa19dbf22e0](https://github.com/hearot/pyrubrum/commit/600191f337178baf21ea5ffe3e9caaa19dbf22e0))
    - Update the disclaimer notices ([b5039179f28a24ecf967b66200c9440cb6b6c6ec](https://github.com/hearot/pyrubrum/commit/b5039179f28a24ecf967b66200c9440cb6b6c6ec))
 
 ### Fixes

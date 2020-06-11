@@ -20,7 +20,10 @@ from .error import DatabaseError
 
 
 class DeleteError(DatabaseError):
+    """Exception which is raised whenever an error occurs while deleting a certain
+    key from a database"""
+
     def __init__(self):
         super().__init__(
-            "An error occured while deleting a value from the database"
+            "An error occured while deleting a key from the database"
         )
