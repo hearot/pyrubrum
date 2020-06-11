@@ -7,10 +7,11 @@
    - Add docstrings to `DictDatabase` ([7776cdc6f50e5fdda3774dd4e59a0c7bc81b41d2](https://github.com/hearot/pyrubrum/commit/7776cdc6f50e5fdda3774dd4e59a0c7bc81b41d2))
    - Add docstrings to `Element` ([9dc20b8ad7f93b170da48d6287337f3ec5fa0fe1](https://github.com/hearot/pyrubrum/commit/9dc20b8ad7f93b170da48d6287337f3ec5fa0fe1))
    - Add docstrings to `Keyboard` ([c3b4f5f879eec2d953ed47be26e03241a7b0cfe7](https://github.com/hearot/pyrubrum/commit/c3b4f5f879eec2d953ed47be26e03241a7b0cfe7))
-   - Add docstrings to `Node`
+   - Add docstrings to `Node` ([caf69bb8f7c6542bb731b7df6bf0f7ab7b3d4bd9](https://github.com/hearot/pyrubrum/commit/caf69bb8f7c6542bb731b7df6bf0f7ab7b3d4bd9))
    - Add docstrings to `RedisDatabase` ([784b8f112d561b9a346b7f986710df2b1455e691](https://github.com/hearot/pyrubrum/commit/784b8f112d561b9a346b7f986710df2b1455e691))
    - Add docstrings to all the database exceptions ([0e561554d9d37ef755202cb7ef2905aadbd84700](https://github.com/hearot/pyrubrum/commit/0e561554d9d37ef755202cb7ef2905aadbd84700))
    - Add issue templates ([64c006258e373a97d0a9f83318af02c4310b585b](https://github.com/hearot/pyrubrum/commit/64c006258e373a97d0a9f83318af02c4310b585b))
+   - Add reference to the features list
    - Add the official pronunciation for Pyrubrum ([b6d1fe8e01f79007338cd4a6dfe409c406c12cba](https://github.com/hearot/pyrubrum/commit/b6d1fe8e01f79007338cd4a6dfe409c406c12cba))
    - Create the changelog of the current release separately ([318172a986e666ac4abf6f7a4480922cb135e734](https://github.com/hearot/pyrubrum/commit/318172a986e666ac4abf6f7a4480922cb135e734))
    - Delete duplicate issue templates ([10cba65c31a5c3556b39cc328d097b62dfbd5e1b](https://github.com/hearot/pyrubrum/commit/10cba65c31a5c3556b39cc328d097b62dfbd5e1b))

@@ -56,6 +56,7 @@ In order to make use of the proposed examples, you need to create your own envir
 ### Changelog
 
 > *See [CHANGELOG.md](./CHANGELOG.md).*
+> *Find new features in [FEATURES.md](./FEATURES.md).*
 
 ### Commit messages
 
