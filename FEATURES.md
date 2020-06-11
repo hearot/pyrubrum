@@ -27,7 +27,8 @@
 ### New features
 
    - Automatically detect the commit URL for changelog ([a5be95bf1f782bff658552ee4b54552f611409c4](https://github.com/hearot/pyrubrum/commit/a5be95bf1f782bff658552ee4b54552f611409c4))
-   - Do not set an expire if `False` is provided
+   - Do not set an expire if `False` is provided ([3378a6177ff896417025447a8a35df094eb13799](https://github.com/hearot/pyrubrum/commit/3378a6177ff896417025447a8a35df094eb13799))
+   - Import the base classes as well
    - Include the release dates inside changelog ([d4397f396c64eeec6549cd90c64cef6359017dd5](https://github.com/hearot/pyrubrum/commit/d4397f396c64eeec6549cd90c64cef6359017dd5))
    - Integrate Dependabot ([2bb0a43b0f7f8266c7d0544209194c2b26b878a4](https://github.com/hearot/pyrubrum/commit/2bb0a43b0f7f8266c7d0544209194c2b26b878a4))
    - Make parameters optional for `on_callback` and `on_message` ([562f323da2d19913405a5efcfe531e37fa54baf5](https://github.com/hearot/pyrubrum/commit/562f323da2d19913405a5efcfe531e37fa54baf5))

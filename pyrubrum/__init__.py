@@ -23,7 +23,10 @@ __package__ = "pyrubrum"
 __url__ = "https://github.com/hearot/pyrubrum"
 __version__ = "0.1a1.dev5"
 
+from .base_handler import BaseHandler  # noqa
+from .base_menu import BaseMenu  # noqa
 from .button import Button  # noqa
+from .database import BaseDatabase  # noqa
 from .database import DictDatabase  # noqa
 from .database import RedisDatabase  # noqa
 from .element import Element  # noqa
