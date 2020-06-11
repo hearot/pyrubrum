@@ -21,5 +21,15 @@ from dataclasses import dataclass
 
 @dataclass
 class Element:
+    """Representation of a general flag which refers to a particular state of a
+    menu. It can be passed as an argument to `Button`.
+
+    Attributes:
+        name (str): The text which will be displayed in the text field of a
+            button inside an inline keyboard.
+        element_id (str): The unique identifier for this object which makes a
+            menu recognise it.
+    """
+
     name: str
     element_id: str
