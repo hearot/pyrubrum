@@ -21,7 +21,6 @@ from abc import abstractmethod
 from dataclasses import dataclass
 from typing import Callable
 from typing import List
-from typing import NewType
 from typing import Union
 
 from pyrogram import CallbackQuery
@@ -33,25 +32,14 @@ from pyrogram import InlineKeyboardButton
 
 from .button import Button
 
-Callback = NewType(
-    "Callback",
-    (
-        Union[
-            Callable[["BaseHandler", Client, CallbackQuery], None],
-            Callable[["BaseHandler", Client, Message], None],
-        ]
-    ),
-)
+Callback = Union[
+    Callable[["BaseHandler", Client, CallbackQuery], None],
+    Callable[["BaseHandler", Client, Message], None],
+]
 
-PyrogramHandlerCallback = NewType(
-    "PyrogramHandlerCallback",
-    (
-        Union[
-            Callable[[Client, CallbackQuery], None],
-            Callable[[Client, Message], None],
-        ]
-    ),
-)
+PyrogramHandlerCallback = Union[
+    Callable[[Client, CallbackQuery], None], Callable[[Client, Message], None],
+]
 
 
 @dataclass(eq=False, init=False, repr=True)
