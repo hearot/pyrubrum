@@ -19,6 +19,7 @@
 from typing import Optional
 
 from .base_database import BaseDatabase
+from .base_database import Expire
 from .errors import DeleteError
 
 
@@ -26,7 +27,7 @@ class DictDatabase(dict, BaseDatabase):
     def get(self, key: str) -> Optional[str]:
         return dict.get(self, key)
 
-    def set(self, key: str, value: str, expire: Optional[int] = None):
+    def set(self, key: str, value: str, expire: Expire = None):
         self.update({key: value})
 
     def delete(self, key: str):

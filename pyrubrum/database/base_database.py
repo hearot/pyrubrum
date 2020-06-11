@@ -18,7 +18,11 @@
 
 from abc import ABC
 from abc import abstractmethod
+from datetime import timedelta
 from typing import Optional
+from typing import Union
+
+Expire = Optional[Union[int, timedelta]]
 
 
 class BaseDatabase(ABC):
@@ -52,7 +56,7 @@ class BaseDatabase(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def set(self, key: str, value: str, expire: Optional[int] = None):
+    def set(self, key: str, value: str, expire: Expire = None):
         """This abstract method is intended to be implemented in order to assign a
         value to a certain key inside the database. It may even be marked with
         an expire as to avoid having too much unused data stored inside the
@@ -61,8 +65,8 @@ class BaseDatabase(ABC):
         Args:
             key (str): The key you are adding or updating the value of.
             value (str): The value which is being assigned to the key.
-            expire (Optional[int]): The expire in seconds. Defaults to
-                ``None``.
+            expire (Expire): The expire in seconds or as a `timedelta` object.
+                Defaults to ``None``.
 
         Raises:
             ExpireError: If an error occured while setting the expire for the
