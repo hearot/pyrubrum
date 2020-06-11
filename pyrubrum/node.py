@@ -45,7 +45,11 @@ class Node:
 
     def __hash__(self) -> int:
         """The hash generator for a node, relying on the hash of the linked
-        menu"""
+        menu.
+
+        Returns:
+            int: The hash of the menu which is linked to this instance.
+        """
         return hash(self.menu)
 
     def __init__(self, menu: BaseMenu, children: Optional[Set["Node"]] = None):
