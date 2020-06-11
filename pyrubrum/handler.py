@@ -20,7 +20,7 @@ from dataclasses import dataclass
 from typing import Any
 from typing import Dict
 from typing import Iterable
-from typing import List
+from typing import Set
 from typing import Tuple
 from typing import Union
 
@@ -43,10 +43,10 @@ class Handler(BaseHandler):
 
     def get_family(
         self, menu_id: str
-    ) -> Tuple[Optional[BaseMenu], Optional[List[BaseMenu]]]:
+    ) -> Tuple[Optional[BaseMenu], Optional[Set[BaseMenu]]]:
         return self.main_node.get_family(menu_id, None)
 
-    def get_menus(self) -> List[BaseMenu]:
+    def get_menus(self) -> Set[BaseMenu]:
         return self.main_node.get_menus()
 
     def setup(self, client: Client):

@@ -125,6 +125,7 @@ class Menu(BaseMenu):
         parameters: Dict[str, Any],
     ) -> InlineKeyboardMarkup:
         parent, children = tree.get_family(self.menu_id)
+        children = list(children) if children else []
 
         keyboard = []
 

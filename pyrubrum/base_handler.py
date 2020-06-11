@@ -21,6 +21,7 @@ from abc import abstractmethod
 from dataclasses import dataclass
 from typing import Callable
 from typing import List
+from typing import Set
 from typing import Union
 
 from pyrogram import CallbackQuery
@@ -60,12 +61,12 @@ class BaseHandler(ABC):
     """
 
     @abstractmethod
-    def get_menus(self) -> List["BaseMenu"]:
+    def get_menus(self) -> Set["BaseMenu"]:
         """This abstract method is intended to be implemented as a collector
         of all the menus which were defined while initializing this object.
 
         Returns:
-            List[BaseMenu]: The list of the menus that were collected during
+            Set[BaseMenu]: The set of the menus that were collected during
                 the lookup process.
         """
         raise NotImplementedError

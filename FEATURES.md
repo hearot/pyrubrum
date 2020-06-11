@@ -28,6 +28,7 @@
    - Hide the sha-1 hash of the current commit ([ab6478e610ef828744d5c6e54a1d54fff92372e8](https://github.com/hearot/pyrubrum/commit/ab6478e610ef828744d5c6e54a1d54fff92372e8))
    - Make `Element` docstrings consistent with `Button` ones ([9a035a35439077a9f12371bc96e6508020f3ecd6](https://github.com/hearot/pyrubrum/commit/9a035a35439077a9f12371bc96e6508020f3ecd6))
    - Make databases consistent with the documentation ([d5debbfa52eb16e012ad8e022a5b3d8a06051a59](https://github.com/hearot/pyrubrum/commit/d5debbfa52eb16e012ad8e022a5b3d8a06051a59))
+   - Menus are now collected using sets instead of unhashable lists
 
 ### New features
 
@@ -36,7 +37,7 @@
    - Import the base classes as well ([1d11b934967258164d0f4fc57e01e4116d19b72c](https://github.com/hearot/pyrubrum/commit/1d11b934967258164d0f4fc57e01e4116d19b72c))
    - Include the release dates inside changelog ([d4397f396c64eeec6549cd90c64cef6359017dd5](https://github.com/hearot/pyrubrum/commit/d4397f396c64eeec6549cd90c64cef6359017dd5))
    - Integrate Dependabot ([2bb0a43b0f7f8266c7d0544209194c2b26b878a4](https://github.com/hearot/pyrubrum/commit/2bb0a43b0f7f8266c7d0544209194c2b26b878a4))
-   - Integrate memoization into `Node`
+   - Integrate memoization into `Node` ([d80faabfaa9daceef632f7ce55bbff49a56d2986](https://github.com/hearot/pyrubrum/commit/d80faabfaa9daceef632f7ce55bbff49a56d2986))
    - Make parameters optional for `on_callback` and `on_message` ([562f323da2d19913405a5efcfe531e37fa54baf5](https://github.com/hearot/pyrubrum/commit/562f323da2d19913405a5efcfe531e37fa54baf5))
    - Support `datetime.timedelta` as an expire object ([6b3453f5a888fe758f868592c17a88ed1678936f](https://github.com/hearot/pyrubrum/commit/6b3453f5a888fe758f868592c17a88ed1678936f))
 
