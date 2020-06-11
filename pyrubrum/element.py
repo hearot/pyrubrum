@@ -22,7 +22,7 @@ from dataclasses import dataclass
 @dataclass
 class Element:
     """Representation of a general flag which refers to a particular state of a
-    menu. It can be passed as an argument to `Button`.
+    menu. Its unique identifier can be passed as an argument to `Button`.
 
     Attributes:
         name (str): The text which will be displayed in the text field of a

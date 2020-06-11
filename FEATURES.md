@@ -5,7 +5,7 @@
    - Add docstrings to `BaseMenu` ([3a7ad4e3b23bfb85a9faa8c3c056e76abb87b771](https://github.com/hearot/pyrubrum/commit/3a7ad4e3b23bfb85a9faa8c3c056e76abb87b771))
    - Add docstrings to `Button` ([73a0848e8bd7159599d2023d86249f192fde65b4](https://github.com/hearot/pyrubrum/commit/73a0848e8bd7159599d2023d86249f192fde65b4))
    - Add docstrings to `DictDatabase` ([7776cdc6f50e5fdda3774dd4e59a0c7bc81b41d2](https://github.com/hearot/pyrubrum/commit/7776cdc6f50e5fdda3774dd4e59a0c7bc81b41d2))
-   - Add docstrings to `Element`
+   - Add docstrings to `Element` ([9dc20b8ad7f93b170da48d6287337f3ec5fa0fe1](https://github.com/hearot/pyrubrum/commit/9dc20b8ad7f93b170da48d6287337f3ec5fa0fe1))
    - Add docstrings to `RedisDatabase` ([784b8f112d561b9a346b7f986710df2b1455e691](https://github.com/hearot/pyrubrum/commit/784b8f112d561b9a346b7f986710df2b1455e691))
    - Add docstrings to all the database exceptions ([0e561554d9d37ef755202cb7ef2905aadbd84700](https://github.com/hearot/pyrubrum/commit/0e561554d9d37ef755202cb7ef2905aadbd84700))
    - Add issue templates ([64c006258e373a97d0a9f83318af02c4310b585b](https://github.com/hearot/pyrubrum/commit/64c006258e373a97d0a9f83318af02c4310b585b))
@@ -23,6 +23,7 @@
    - Do no more raise `TypeError` while formatting commits ([56f1e533c12bdf75e63714d125319bb72da7d916](https://github.com/hearot/pyrubrum/commit/56f1e533c12bdf75e63714d125319bb72da7d916))
    - Fix `commit-message` for Dependabot ([a13cfeae848d83339a902373ddcb0287fc306d87](https://github.com/hearot/pyrubrum/commit/a13cfeae848d83339a902373ddcb0287fc306d87))
    - Hide the sha-1 hash of the current commit ([ab6478e610ef828744d5c6e54a1d54fff92372e8](https://github.com/hearot/pyrubrum/commit/ab6478e610ef828744d5c6e54a1d54fff92372e8))
+   - Make `Element` docstrings consistent with `Button` ones
    - Make databases consistent with the documentation ([d5debbfa52eb16e012ad8e022a5b3d8a06051a59](https://github.com/hearot/pyrubrum/commit/d5debbfa52eb16e012ad8e022a5b3d8a06051a59))
 
 ### New features
