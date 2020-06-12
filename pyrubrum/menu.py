@@ -17,6 +17,7 @@
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
 from dataclasses import dataclass
+from itertools import islice
 from typing import Any
 from typing import Callable
 from typing import Dict
@@ -125,18 +126,24 @@ class Menu(BaseMenu):
         parameters: Dict[str, Any],
     ) -> InlineKeyboardMarkup:
         parent, children = tree.get_family(self.menu_id)
-        children = list(children) if children else []
 
         keyboard = []
 
         if children:
-            keyboard = [
-                [
-                    child.button(tree, client, context, parameters)
-                    for child in children[i : i + self.limit]
-                ]
-                for i in range(0, len(children), self.limit)
-            ]
+            iterable = iter(children)
+            keyboard = list(
+                iter(
+                    lambda: list(
+                        map(
+                            lambda child: child.button(
+                                tree, client, context, parameters
+                            ),
+                            islice(iterable, self.limit),
+                        )
+                    ),
+                    [],
+                )
+            )
 
         if parent:
             parent_button = parent.button(tree, client, context, parameters)

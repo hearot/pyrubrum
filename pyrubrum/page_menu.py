@@ -17,6 +17,7 @@
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
 from dataclasses import dataclass
+from itertools import islice
 from typing import Any
 from typing import Callable
 from typing import Dict
@@ -100,7 +101,6 @@ class PageMenu(Menu):
         parameters: Dict[str, Any],
     ) -> InlineKeyboardMarkup:
         parent, children = tree.get_family(self.menu_id)
-        children = list(children) if children else []
 
         keyboard = []
         items = []
@@ -113,7 +113,8 @@ class PageMenu(Menu):
             parameters[page_id] = int(parameters["element_id"])
 
         if children:
-            page_item_menu = children.pop(0)
+            iterable = iter(children)
+            page_item_menu = next(iterable)
 
             if callable(self.items):
                 items = self.items(tree, client, context, parameters)
@@ -140,13 +141,19 @@ class PageMenu(Menu):
             ]
 
         if children:
-            keyboard += [
-                [
-                    child.button(tree, client, context, parameters)
-                    for child in children[i : i + self.limit]
-                ]
-                for i in range(0, len(children), self.limit)
-            ]
+            keyboard += list(
+                iter(
+                    lambda: list(
+                        map(
+                            lambda child: child.button(
+                                tree, client, context, parameters
+                            ),
+                            islice(iterable, self.limit),
+                        )
+                    ),
+                    [],
+                )
+            )
 
         teleport_row = []
 

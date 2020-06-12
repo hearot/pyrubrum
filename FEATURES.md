@@ -1,6 +1,6 @@
 ### Documentation
 
-   - Add a statement about the return value of `Node.__hash__()`
+   - Add a statement about the return value of `Node.__hash__()` ([5a9a257ef122bd47f0a010dc5e1ebcb5e1cb1b90](https://github.com/hearot/pyrubrum/commit/5a9a257ef122bd47f0a010dc5e1ebcb5e1cb1b90))
    - Add docstrings to `BaseDatabase` ([d3fd9a769e62196f01d3764b87896761bbaf77d6](https://github.com/hearot/pyrubrum/commit/d3fd9a769e62196f01d3764b87896761bbaf77d6))
    - Add docstrings to `BaseHandler` ([455a0a94977c1652b445b623df561f9606a0615e](https://github.com/hearot/pyrubrum/commit/455a0a94977c1652b445b623df561f9606a0615e))
    - Add docstrings to `BaseMenu` ([3a7ad4e3b23bfb85a9faa8c3c056e76abb87b771](https://github.com/hearot/pyrubrum/commit/3a7ad4e3b23bfb85a9faa8c3c056e76abb87b771))
@@ -41,6 +41,7 @@
    - Integrate memoization into `Node` ([d80faabfaa9daceef632f7ce55bbff49a56d2986](https://github.com/hearot/pyrubrum/commit/d80faabfaa9daceef632f7ce55bbff49a56d2986))
    - Make parameters optional for `on_callback` and `on_message` ([562f323da2d19913405a5efcfe531e37fa54baf5](https://github.com/hearot/pyrubrum/commit/562f323da2d19913405a5efcfe531e37fa54baf5))
    - Support `datetime.timedelta` as an expire object ([6b3453f5a888fe758f868592c17a88ed1678936f](https://github.com/hearot/pyrubrum/commit/6b3453f5a888fe758f868592c17a88ed1678936f))
+   - Use the set of children without conversion to list (resolve #3)
 
 ### Testing changes
 
