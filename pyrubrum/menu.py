@@ -256,7 +256,7 @@ class Menu(BaseMenu):
 
         Returns:
             InlineKeyboardMarkup: The generated inline keyboard, which is then
-                displayed to the user
+                displayed to the user.
         """
 
         parent, children = tree.get_family(self.menu_id)

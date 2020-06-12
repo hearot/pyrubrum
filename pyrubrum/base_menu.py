@@ -163,7 +163,7 @@ class BaseMenu(ABC):
 
         Returns:
             InlineKeyboardMarkup: The generated inline keyboard, which is then
-                displayed to the user
+                displayed to the user.
         """
         raise NotImplementedError
 

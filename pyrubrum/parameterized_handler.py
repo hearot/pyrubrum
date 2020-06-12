@@ -43,9 +43,11 @@ class ParameterizedHandler(Handler, ParameterizedBaseHandler):
         Args:
             main_node (Node): The node whose linked menu is used when the user
                 texts the bot (i.e. when a `Message` object is being handled).
-                In other words, it represents the ``/start`` menu.
+                In other words, it represents the ``/start`` menu. See
+                `Handler` for more information.
             database (BaseDatabase): The storage for all the query parameters.
-                It is used to pass parameters between menus.
+                It is used to pass parameters between menus. See
+                `ParameterizedBaseHandler` for more information.
         """
 
         Handler.__init__(self, main_node)

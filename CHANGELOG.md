@@ -16,6 +16,7 @@
 
    - Add `callback_query_id` as a special key for parameters ([7222fcc6eb3c2a037c2b71109c9163028ef4eea4](https://github.com/hearot/pyrubrum/commit/7222fcc6eb3c2a037c2b71109c9163028ef4eea4))
    - Add a code of conduct ([95694f93986ede7545a782e6b34b8ec7ca2a2c93](https://github.com/hearot/pyrubrum/commit/95694f93986ede7545a782e6b34b8ec7ca2a2c93))
+   - Add a notice about the keys starting with `page_`
    - Add a security policy ([ba507a8b2a6a386d7ad2d561d9b805d341e8b284](https://github.com/hearot/pyrubrum/commit/ba507a8b2a6a386d7ad2d561d9b805d341e8b284))
    - Add a statement about the return value of `Node.__hash__()` ([5a9a257ef122bd47f0a010dc5e1ebcb5e1cb1b90](https://github.com/hearot/pyrubrum/commit/5a9a257ef122bd47f0a010dc5e1ebcb5e1cb1b90))
    - Add disclaimer notice ([a7a6060a7243a1ed7857b2b78649d573cbe7feab](https://github.com/hearot/pyrubrum/commit/a7a6060a7243a1ed7857b2b78649d573cbe7feab))
@@ -29,7 +30,7 @@
    - Add docstrings to `Keyboard` ([c3b4f5f879eec2d953ed47be26e03241a7b0cfe7](https://github.com/hearot/pyrubrum/commit/c3b4f5f879eec2d953ed47be26e03241a7b0cfe7))
    - Add docstrings to `Menu` ([15c11e4f737c0c63bad29d6c3c758d2b775c9ea4](https://github.com/hearot/pyrubrum/commit/15c11e4f737c0c63bad29d6c3c758d2b775c9ea4))
    - Add docstrings to `Node` ([caf69bb8f7c6542bb731b7df6bf0f7ab7b3d4bd9](https://github.com/hearot/pyrubrum/commit/caf69bb8f7c6542bb731b7df6bf0f7ab7b3d4bd9))
-   - Add docstrings to `PageMenu`
+   - Add docstrings to `PageMenu` ([1e90e66bddb6da14a75df2b0c1dd141d1688484e](https://github.com/hearot/pyrubrum/commit/1e90e66bddb6da14a75df2b0c1dd141d1688484e))
    - Add docstrings to `ParameterizedBaseHandler` ([579ad0916dc138c0d3117ae6f90e92a1cf11c1ea](https://github.com/hearot/pyrubrum/commit/579ad0916dc138c0d3117ae6f90e92a1cf11c1ea))
    - Add docstrings to `ParameterizedHandler` ([9b3e293e2e1a63fa79c557ca496a22facf36c76b](https://github.com/hearot/pyrubrum/commit/9b3e293e2e1a63fa79c557ca496a22facf36c76b))
    - Add docstrings to `RedisDatabase` ([784b8f112d561b9a346b7f986710df2b1455e691](https://github.com/hearot/pyrubrum/commit/784b8f112d561b9a346b7f986710df2b1455e691))

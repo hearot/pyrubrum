@@ -45,7 +45,11 @@ class Button:
         There is a special group of names which are not available for being
         used as keys for parameters. These are ``button_id``,
         ``callback_query_id`` and ``same_menu``. If provided, they will be
-        overwritten.
+        overwritten. As a result of being passed as parameter inside a
+        callback query (see `ParameterizedBaseHandler.process_keyboard`),
+        ``element_id`` does not maintain its type and will always be
+        initialized as a string. Keys starting with ``page_`` shall be
+        avoided accordingly to `PageMenu.keyboard.
     """
 
     button_id: str
