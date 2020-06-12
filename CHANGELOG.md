@@ -17,7 +17,7 @@
    - Add a code of conduct ([95694f93986ede7545a782e6b34b8ec7ca2a2c93](https://github.com/hearot/pyrubrum/commit/95694f93986ede7545a782e6b34b8ec7ca2a2c93))
    - Add a security policy ([ba507a8b2a6a386d7ad2d561d9b805d341e8b284](https://github.com/hearot/pyrubrum/commit/ba507a8b2a6a386d7ad2d561d9b805d341e8b284))
    - Add a statement about the return value of `Node.__hash__()` ([5a9a257ef122bd47f0a010dc5e1ebcb5e1cb1b90](https://github.com/hearot/pyrubrum/commit/5a9a257ef122bd47f0a010dc5e1ebcb5e1cb1b90))
-   - Add disclaimer notice
+   - Add disclaimer notice ([a7a6060a7243a1ed7857b2b78649d573cbe7feab](https://github.com/hearot/pyrubrum/commit/a7a6060a7243a1ed7857b2b78649d573cbe7feab))
    - Add docstrings to `BaseDatabase` ([d3fd9a769e62196f01d3764b87896761bbaf77d6](https://github.com/hearot/pyrubrum/commit/d3fd9a769e62196f01d3764b87896761bbaf77d6))
    - Add docstrings to `BaseHandler` ([455a0a94977c1652b445b623df561f9606a0615e](https://github.com/hearot/pyrubrum/commit/455a0a94977c1652b445b623df561f9606a0615e))
    - Add docstrings to `BaseMenu` ([3a7ad4e3b23bfb85a9faa8c3c056e76abb87b771](https://github.com/hearot/pyrubrum/commit/3a7ad4e3b23bfb85a9faa8c3c056e76abb87b771))
@@ -28,6 +28,7 @@
    - Add docstrings to `Keyboard` ([c3b4f5f879eec2d953ed47be26e03241a7b0cfe7](https://github.com/hearot/pyrubrum/commit/c3b4f5f879eec2d953ed47be26e03241a7b0cfe7))
    - Add docstrings to `Menu` ([15c11e4f737c0c63bad29d6c3c758d2b775c9ea4](https://github.com/hearot/pyrubrum/commit/15c11e4f737c0c63bad29d6c3c758d2b775c9ea4))
    - Add docstrings to `Node` ([caf69bb8f7c6542bb731b7df6bf0f7ab7b3d4bd9](https://github.com/hearot/pyrubrum/commit/caf69bb8f7c6542bb731b7df6bf0f7ab7b3d4bd9))
+   - Add docstrings to `ParameterizedBaseHandler`
    - Add docstrings to `RedisDatabase` ([784b8f112d561b9a346b7f986710df2b1455e691](https://github.com/hearot/pyrubrum/commit/784b8f112d561b9a346b7f986710df2b1455e691))
    - Add docstrings to all the database exceptions ([0e561554d9d37ef755202cb7ef2905aadbd84700](https://github.com/hearot/pyrubrum/commit/0e561554d9d37ef755202cb7ef2905aadbd84700))
    - Add issue templates ([64c006258e373a97d0a9f83318af02c4310b585b](https://github.com/hearot/pyrubrum/commit/64c006258e373a97d0a9f83318af02c4310b585b))

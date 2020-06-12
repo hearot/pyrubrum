@@ -18,8 +18,6 @@
 
 from dataclasses import dataclass
 from json import JSONDecodeError
-from typing import Any
-from typing import Callable
 from typing import List
 
 from pyrogram import CallbackQuery
@@ -27,8 +25,11 @@ from pyrogram import CallbackQueryHandler
 from pyrogram import Client
 from pyrogram import InlineKeyboardButton
 from pyrogram.client.filters.filters import create
+from pyrogram.client.filters.filters import Filter
 
 from .base_handler import BaseHandler
+from .base_handler import Callback
+from .base_handler import PyrogramHandlerCallback
 from .button import Button
 from .database.base_database import BaseDatabase
 
@@ -40,13 +41,62 @@ except (ImportError, ModuleNotFoundError):
 
 @dataclass(eq=False, init=False, repr=True)
 class ParameterizedBaseHandler(BaseHandler):
+    """Basic implementation of an handler which has got, by definition, a database,
+    with which it is able to perform parameterization (i.e. supports
+    parameters).
+
+    The purpose of this class is to give a general interface for an handler
+    which supports parameterization, as it doesn't implement anything except
+    for a basic setup of the client (see `setup`) and a filter that allows the
+    recognition of parameterized queries (see `filter`).
+
+    Attributes:
+        database (BaseDatabase): The storage for all the query parameters. It
+            is used to pass parameters between menus.
+    """
+
     database: BaseDatabase
 
     def __init__(self, database: BaseDatabase):
+        """Initialize the object.
+
+        Attributes:
+            database (BaseDatabase): The storage for all the query parameters.
+                It is used to pass parameters between menus.
+        """
         self.database = database
 
-    def filter(self, menu_id: str):
-        def func(flt, callback: CallbackQuery):
+    def filter(self, menu_id: str) -> Filter:
+        """Generate a function which is used by `CallbackQueryHandler` in order to
+        filter callback queries relying on the content of the provided menu
+        identifier.
+
+        A callback query is valid if its content follows the following pattern:
+            ``[CALLBACK_QUERY_ID] [MENU_ID] [ELEMENT_ID, optional]``
+
+        If the query that is being handled matches ``MENU_ID``, database is
+        queried with the content of ``CALLBACK_QUERY_ID``. If a valid match
+        is found, its content is converted from JSON and then parameters are
+        collected and stored in ``callback.parameters``.
+
+        If ``ELEMENT_ID``is provided, ``element_id`` is set to be equal to it
+        in ``callback.parameters``. If ``same_menu`` in ``callback.parameters``
+        is ``False``, a new key named ``[MENU_ID]_id`` is set to be equal to
+        ``ELEMENT_ID`` in ``callback.parameters``.
+
+        The filter returns ``True`` if the query is valid and matches
+        ``menu_id``. Otherwise, it returns ``False``.
+
+        Args:
+            menu_id (str): The unique identifier of the menu that has to be
+                matched.
+
+        Returns:
+            Filter: The function that gets called whenever a callback query is
+            being handled.
+        """
+
+        def func(_, callback: CallbackQuery):
             parameters = callback.data.split()
 
             if parameters[1] != menu_id:
@@ -86,6 +136,32 @@ class ParameterizedBaseHandler(BaseHandler):
     def process_keyboard(
         self, keyboard: List[List[Button]], callback_query_id: str
     ) -> List[List[InlineKeyboardButton]]:
+        """Given a list of a list of buttons which represents an inline keyboard and a
+        unique identifier for the callback, generate a Pyrogram-compatible
+        inline keyboard. It also creates a dictionary ``content``, whose keys
+        represent the identifiers of the menu collected in the keyboard and
+        values their own parameters. Finally, it converts ``content`` to JSON
+        and stores it inside the database using the provided query identifier
+        as key.
+
+        The returned inline keyboard does not store any parameters. Instead,
+        its buttons stores the data needed to get the parameters from the
+        database, in accordance with the following pattern:
+            ``[CALLBACK_QUERY_ID] [MENU_ID] [ELEMENT_ID, optional]``
+
+        See `ParameterizedBaseHandler.filter` for more information.
+
+        Args:
+            keyboard (List[List[Button]]): The inline keyboard you want to
+                process.
+            callback_query_id (str): The unique identifier of the callback
+                for which the keyboard is generated.
+
+        Returns:
+            List[List[InlineKeyboardButton]]: The generated keyboard in a
+            Pyrogram-compatible type.
+        """
+
         content = {}
 
         for row in keyboard:
@@ -120,6 +196,23 @@ class ParameterizedBaseHandler(BaseHandler):
         ]
 
     def setup(self, client: Client):
+        """Make all the defined menus reachable by the client by adding handlers that
+        catch all their identifiers to it. It adds support to parameterization
+        by applying ``ParameterizedBaseHandler.filter` to all the handled
+        callback queries. It also calls `pass_handler_and_clean`, which lets
+        the callback functions get this handler as argument and deletes
+        handled callback queries from the database relying on the passed
+        identifiers.
+
+        Args:
+            client (Client): The client which is being set up.
+
+        Warning:
+            The functions the handlers make use of are not set up in the
+            same way objects added using Pyrogram handlers are. Pyrubrum
+            implements the following pattern:
+                ``callback(handler, client, context, parameters)``
+        """
         for menu in self.get_menus():
             client.add_handler(
                 CallbackQueryHandler(
@@ -130,8 +223,32 @@ class ParameterizedBaseHandler(BaseHandler):
 
 
 def pass_handler_and_clean(
-    func: Callable[[Client, Any], None], handler: ParameterizedBaseHandler
-) -> Callable[[Client, Any], None]:
+    func: Callback, handler: ParameterizedBaseHandler
+) -> PyrogramHandlerCallback:
+    """Generate a function which, whenever it is called, subsequently calls
+    `callback`, passing the handler from which this object was generated, and
+    then deletes the key which is associated to the handled query from the
+    database. It requires a subclass of `ParameterizedBaseHandler`to be
+    provided in order to work.
+
+    Args:
+        callback (Callback): The callback function which
+            automatically gets called by the generated function.
+        handler (ParameterizedBaseHandler): The handler object which made
+            use of this function in order to provide this one as a callback
+            to a Pyrogram handler.
+
+    Returns:
+        PyrogramHandlerCallback: The function which is being added to
+            a Pyrogram handler.
+
+    Warning:
+        The functions the handlers make use of are not set up in the
+        same way objects added using Pyrogram handlers are. Pyrubrum
+        implements the following pattern:
+            ``callback(handler, client, context, parameters)``
+    """
+
     def on_callback(client: Client, context):
         if isinstance(context, CallbackQuery):
             func(handler, client, context, context.parameters)
