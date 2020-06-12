@@ -88,7 +88,7 @@ class Node:
     def get_family(self, menu_id: str, parent: Optional["Node"]) -> Family:
         """Retrieve the menus which are linked to both parent and children of this
         instance if this instance matches the provided identifier. Otherwise it
-        will search the menu matching it in his children and return its family,
+        will search the menu matching it in its children and return its family,
         if matched. On failure, it will return a tuple of length two filled
         with null values (i.e. ``None``).
 

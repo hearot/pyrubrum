@@ -21,6 +21,7 @@
    - Add docstrings to `Button` ([73a0848e8bd7159599d2023d86249f192fde65b4](https://github.com/hearot/pyrubrum/commit/73a0848e8bd7159599d2023d86249f192fde65b4))
    - Add docstrings to `DictDatabase` ([7776cdc6f50e5fdda3774dd4e59a0c7bc81b41d2](https://github.com/hearot/pyrubrum/commit/7776cdc6f50e5fdda3774dd4e59a0c7bc81b41d2))
    - Add docstrings to `Element` ([9dc20b8ad7f93b170da48d6287337f3ec5fa0fe1](https://github.com/hearot/pyrubrum/commit/9dc20b8ad7f93b170da48d6287337f3ec5fa0fe1))
+   - Add docstrings to `Handler` and its relative functions
    - Add docstrings to `Keyboard` ([c3b4f5f879eec2d953ed47be26e03241a7b0cfe7](https://github.com/hearot/pyrubrum/commit/c3b4f5f879eec2d953ed47be26e03241a7b0cfe7))
    - Add docstrings to `Node` ([caf69bb8f7c6542bb731b7df6bf0f7ab7b3d4bd9](https://github.com/hearot/pyrubrum/commit/caf69bb8f7c6542bb731b7df6bf0f7ab7b3d4bd9))
    - Add docstrings to `RedisDatabase` ([784b8f112d561b9a346b7f986710df2b1455e691](https://github.com/hearot/pyrubrum/commit/784b8f112d561b9a346b7f986710df2b1455e691))
@@ -55,7 +56,7 @@
    - Integrate memoization into `Node` ([d80faabfaa9daceef632f7ce55bbff49a56d2986](https://github.com/hearot/pyrubrum/commit/d80faabfaa9daceef632f7ce55bbff49a56d2986))
    - Make parameters optional for `on_callback` and `on_message` ([562f323da2d19913405a5efcfe531e37fa54baf5](https://github.com/hearot/pyrubrum/commit/562f323da2d19913405a5efcfe531e37fa54baf5))
    - Support `datetime.timedelta` as an expire object ([6b3453f5a888fe758f868592c17a88ed1678936f](https://github.com/hearot/pyrubrum/commit/6b3453f5a888fe758f868592c17a88ed1678936f))
-   - Use the set of children without conversion to list (resolve #3)
+   - Use the set of children without conversion to list (resolve #3) ([e81143b154b415531ee82dfe85613e8fd01b1644](https://github.com/hearot/pyrubrum/commit/e81143b154b415531ee82dfe85613e8fd01b1644))
 
 ### Testing changes
 
