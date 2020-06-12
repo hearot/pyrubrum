@@ -17,6 +17,7 @@
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
 from dataclasses import dataclass
+from functools import lru_cache
 from typing import Any
 from typing import Dict
 from typing import Iterable
@@ -63,6 +64,7 @@ class Handler(BaseHandler):
         """
         self.main_node = main_node
 
+    @lru_cache
     def get_family(
         self, menu_id: str
     ) -> Tuple[Optional[BaseMenu], Optional[Set[BaseMenu]]]:
@@ -84,6 +86,7 @@ class Handler(BaseHandler):
         """
         return self.main_node.get_family(menu_id, None)
 
+    @lru_cache(maxsize=1)
     def get_menus(self) -> Set[BaseMenu]:
         """Retrieve the set of all the menus which are linked to the nodes belonging
         to the descent of the main node of this class (i.e. the children, the
