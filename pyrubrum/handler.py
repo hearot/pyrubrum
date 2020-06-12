@@ -39,7 +39,9 @@ MenuIterable = Union[Dict[BaseMenu, Any], Iterable[BaseMenu]]
 
 @dataclass(eq=False, init=False, repr=True)
 class Handler(BaseHandler):
-    """Implementation of a simple handler for non parameterized menus.
+    """Implementation of a simple handler for non parameterized menus which has
+    got, by definition, a main node whose linked menu is displayed to the user
+    whenever a message is being handled.
 
     Attributes:
         main_node (Node): The node whose linked menu is used when the user

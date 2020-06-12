@@ -42,7 +42,7 @@ except (ImportError, ModuleNotFoundError):
 @dataclass(eq=False, init=False, repr=True)
 class ParameterizedBaseHandler(BaseHandler):
     """Basic implementation of an handler which has got, by definition, a database,
-    with which it is able to perform parameterization (i.e. supports
+    with which it is able to perform parameterization (i.e. it supports
     parameters).
 
     The purpose of this class is to give a general interface for an handler
