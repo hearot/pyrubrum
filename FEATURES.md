@@ -3,6 +3,7 @@
    - Add a code of conduct ([95694f93986ede7545a782e6b34b8ec7ca2a2c93](https://github.com/hearot/pyrubrum/commit/95694f93986ede7545a782e6b34b8ec7ca2a2c93))
    - Add a security policy ([ba507a8b2a6a386d7ad2d561d9b805d341e8b284](https://github.com/hearot/pyrubrum/commit/ba507a8b2a6a386d7ad2d561d9b805d341e8b284))
    - Add a statement about the return value of `Node.__hash__()` ([5a9a257ef122bd47f0a010dc5e1ebcb5e1cb1b90](https://github.com/hearot/pyrubrum/commit/5a9a257ef122bd47f0a010dc5e1ebcb5e1cb1b90))
+   - Add disclaimer notice
    - Add docstrings to `BaseDatabase` ([d3fd9a769e62196f01d3764b87896761bbaf77d6](https://github.com/hearot/pyrubrum/commit/d3fd9a769e62196f01d3764b87896761bbaf77d6))
    - Add docstrings to `BaseHandler` ([455a0a94977c1652b445b623df561f9606a0615e](https://github.com/hearot/pyrubrum/commit/455a0a94977c1652b445b623df561f9606a0615e))
    - Add docstrings to `BaseMenu` ([3a7ad4e3b23bfb85a9faa8c3c056e76abb87b771](https://github.com/hearot/pyrubrum/commit/3a7ad4e3b23bfb85a9faa8c3c056e76abb87b771))
@@ -51,7 +52,7 @@
 
 ### Other changes
 
-   - Add `__copyright__`
+   - Add `__copyright__` ([af247708db3ddf033d1c4addac31d1ef3ce0590a](https://github.com/hearot/pyrubrum/commit/af247708db3ddf033d1c4addac31d1ef3ce0590a))
 
 ### Testing changes
 
