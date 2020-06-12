@@ -34,17 +34,38 @@ from .base_menu import BaseMenu
 from .handler import Handler
 from .keyboard import Keyboard
 
+Content = Union[
+    Union[InputMedia, str],
+    Callable[
+        [Handler, Client, Union[CallbackQuery, Message], Dict[str, Any]],
+        Union[InputMedia, str],
+    ],
+]
+
 
 @dataclass(eq=False, init=False, repr=True)
 class Menu(BaseMenu):
-    content: Union[
-        Union[InputMedia, str],
-        Callable[
-            [Handler, Client, Union[CallbackQuery, Message], Dict[str, Any]],
-            Union[InputMedia, str],
-        ],
-    ]
+    """Implementation of a menu who has got, by definition, a content to display
+    (i.e. what the user will see by accessing it), a limit of buttons displayed
+    per row and a custom text displayed for going back to the parent menu, if
+    any.
+
+    Attributes:
+        back_button_text (Optional[str]): The text which will be displayed
+            inside the button that lets the user go back to the parent menu.
+            Defaults to "🔙".
+        content (Content): What will be displayed whenever a user accesses this
+            menu. Both text and media can be provided. A function can be
+            provided as well and must follow the following arguments pattern:
+                ``func(handler, client, context, parameters)``
+        limit (Optional[int]): The limit of buttons per row. Defaults to 2.
+
+    Note:
+        This implementation is compatible with a non parameterized handler.
+    """
+
     back_button_text: Optional[str] = "🔙"
+    content: Content
     limit: Optional[int] = 2
 
     def __init__(
@@ -66,6 +87,27 @@ class Menu(BaseMenu):
         back_button_text: Optional[str] = "🔙",
         limit: Optional[int] = 2,
     ):
+        """Initialize the object.
+
+        Args:
+            name (str): The name you give to the menu, which will be used as
+                the text of callback button, if needed. See `BaseMenu` for more
+                information.
+            menu_id (str): The unique identifier given to the menu, which will
+                refer unequivocally to this entity. The hash for this class is
+                generated relying on the content of this field. See `BaseMenu`
+                for more information.
+            content (Content): What will be displayed whenever a user accesses
+                this menu. Both text and media can be provided. A function can
+                be provided as well and must follow the following arguments
+                pattern:
+                    ``func(handler, client, context, parameters)``
+            back_button_text (Optional[str]): The text which will be displayed
+                inside the button that lets the user go back to the parent
+                menu. Defaults to "🔙".
+            limit (Optional[int]): The limit of buttons per row. Defaults to 2.
+        """
+
         BaseMenu.__init__(self, name, menu_id)
         self.back_button_text = back_button_text
         self.content = content
@@ -78,19 +120,27 @@ class Menu(BaseMenu):
         context: Union[CallbackQuery, Message],
         parameters: Dict[str, Any],
     ) -> Union[InputMedia, str]:
+        """Get the content of the menu, if defined. Otherwise call an already provided
+        function and returns its value.
+
+        Args:
+            handler (BaseHandler): The handler which coordinates the management
+                of the menus.
+            client (Client): The client which is linked to the handler.
+            context (Union[CallbackQuery, Message]): The context for which the
+                button is generated.
+            parameters (Dict[str, Any]): The parameters which were passed to
+                the handler.
+
+        Returns:
+            Union[InputMedia, str]: The content of the menu, which is then
+                displayed to the user as a media (if it is a subclass of
+                `InputMedia`) or a message (if it is just a string).
+        """
         if callable(self.content):
             return self.content(tree, client, context, parameters)
 
         return self.content
-
-    def preliminary(
-        self,
-        tree: Handler,
-        client: Client,
-        context: Union[CallbackQuery, Message],
-        parameters: Dict[str, Any],
-    ):
-        pass
 
     def on_callback(
         self,
@@ -99,6 +149,27 @@ class Menu(BaseMenu):
         callback: CallbackQuery,
         parameters: Optional[Dict[str, Any]] = None,
     ):
+        """Each time a callback query is handled, this function calls the preliminary
+        function (i.e. `Menu.preliminary`), then gets the content that is going
+        to be provided to the user (both text and media are compatible), sets
+        up an inline keyboard filled with all the references to the menus that
+        are linked to the children of this menu node, including a special
+        button for going back to the parent menu, whose text is defined using
+        `Menu.back_button_text`, which overwrites the text of the parent menu
+        which usually should be displayed (see `Menu.keyboard`), and finally
+        edits the message with `CallbackQuery.edit_message_text` (if the
+        content is a string, i.e. a text) or `CallbackQuery.edit_message_media`
+        (if the content is an instance of `InputMedia`, i.e. a media).
+
+        Args:
+            handler (BaseHandler): The handler which coordinates the management
+                of the menus.
+            client (Client): The client which is linked to the handler.
+            context (CallbackQuery): The callback query for which the button is
+                generated.
+            parameters (Dict[str, Any]): The parameters which were passed to
+                the handler.
+        """
         if not parameters:
             parameters = {}
 
@@ -118,6 +189,51 @@ class Menu(BaseMenu):
         else:
             raise TypeError("content must be of type InputMedia or str")
 
+    def on_message(
+        self,
+        tree: Handler,
+        client: Client,
+        message: Message,
+        parameters: Optional[Dict[str, Any]] = None,
+    ):
+        """Each time a message is handled, this function calls the preliminary
+        function (i.e. `Menu.preliminary`), then gets the content that is going
+        to be provided to the user (both text and media are compatible), sets
+        up an inline keyboard filled with all the references to the menus that
+        are linked to the children of this menu node), and finally sends the
+        message with `Message.reply_text` (if the content is a string, i.e. a
+        text) or `Message.reply_cached_media` (if the content is an instance of
+        `InputMedia`, i.e. a media).
+
+        Args:
+            handler (BaseHandler): The handler which coordinates the management
+                of the menus.
+            client (Client): The client which is linked to the handler.
+            context (Message): The message for which the button is generated.
+            parameters (Dict[str, Any]): The parameters which were passed to
+                the handler.
+        """
+        if not parameters:
+            parameters = {}
+
+        self.preliminary(tree, client, message, parameters)
+        content = self.get_content(tree, client, message, parameters)
+
+        if isinstance(content, InputMedia):
+            message.reply_cached_media(
+                file_id=content.media,
+                file_ref=content.file_ref,
+                caption=content.caption,
+                reply_markup=self.keyboard(tree, client, message, parameters),
+            )
+        elif isinstance(content, str):
+            message.reply_text(
+                content,
+                reply_markup=self.keyboard(tree, client, message, parameters),
+            )
+        else:
+            raise TypeError("content must be of type InputMedia or str")
+
     def keyboard(
         self,
         tree: Handler,
@@ -125,6 +241,24 @@ class Menu(BaseMenu):
         context: Union[CallbackQuery, Message],
         parameters: Dict[str, Any],
     ) -> InlineKeyboardMarkup:
+        """Provide a keyboard, filled with all the buttons which refer to the menus
+        that are linked to the children of this menu node and a special button
+        for linking the user to the parent menu, if any.
+
+        Args:
+            handler (BaseHandler): The handler which coordinates the management
+                of the menus.
+            client (Client): The client which is linked to the handler.
+            context (Union[CallbackQuery, Message]): The context for which the
+                button is generated.
+            parameters (Dict[str, Any]): The parameters which were passed to
+                the handler.
+
+        Returns:
+            InlineKeyboardMarkup: The generated inline keyboard, which is then
+                displayed to the user
+        """
+
         parent, children = tree.get_family(self.menu_id)
 
         keyboard = []
@@ -164,30 +298,25 @@ class Menu(BaseMenu):
         elif isinstance(context, CallbackQuery):
             return Keyboard(keyboard, tree, context.id) if keyboard else None
 
-    def on_message(
+    def preliminary(
         self,
         tree: Handler,
         client: Client,
-        message: Message,
-        parameters: Optional[Dict[str, Any]] = None,
+        context: Union[CallbackQuery, Message],
+        parameters: Dict[str, Any],
     ):
-        if not parameters:
-            parameters = {}
+        """Execute some steps before getting the content which is displayed
+        inside the menu. It doesn't do anything by default. In order to give
+        an actual meaning to this method, you should implement it by yourself
+        by creating a subclass.
 
-        self.preliminary(tree, client, message, parameters)
-        content = self.get_content(tree, client, message, parameters)
-
-        if isinstance(content, InputMedia):
-            message.reply_cached_media(
-                file_id=content.media,
-                file_ref=content.file_ref,
-                caption=content.caption,
-                reply_markup=self.keyboard(tree, client, message, parameters),
-            )
-        elif isinstance(content, str):
-            message.reply_text(
-                content,
-                reply_markup=self.keyboard(tree, client, message, parameters),
-            )
-        else:
-            raise TypeError("content must be of type InputMedia or str")
+        Args:
+            handler (BaseHandler): The handler which coordinates the management
+                of the menus.
+            client (Client): The client which is linked to the handler.
+            context (Union[CallbackQuery, Message]): The context for which the
+                button is generated.
+            parameters (Dict[str, Any]): The parameters which were passed to
+                the handler.
+        """
+        pass
