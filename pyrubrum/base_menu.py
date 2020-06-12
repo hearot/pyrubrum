@@ -182,8 +182,8 @@ class BaseMenu(ABC):
             handler (BaseHandler): The handler which coordinates the management
                 of the menus.
             client (Client): The client which is linked to the handler.
-            context (Union[CallbackQuery, Message]): The context for which the
-                button is generated.
+            callback (CallbackQuery): The callback query for which the button
+                is generated.
             parameters (Optional[Dict[str, Any]]): The parameters which were
                 passed to to the handler. Defaults to None.
         """
@@ -204,8 +204,7 @@ class BaseMenu(ABC):
             handler (BaseHandler): The handler which coordinates the management
                 of the menus.
             client (Client): The client which is linked to the handler.
-            context (Union[CallbackQuery, Message]): The context for which the
-                button is generated.
+            message (Message): The message for which the button is generated.
             parameters (Optional[Dict[str, Any]]): The parameters which were
                 passed to to the handler. Defaults to None.
         """

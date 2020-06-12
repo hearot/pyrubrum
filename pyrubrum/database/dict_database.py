@@ -24,7 +24,7 @@ from .errors import DeleteError
 
 
 class DictDatabase(dict, BaseDatabase):
-    """Reduced Implementation of a database using a dictionary, without the
+    """Reduced implementation of a database using a dictionary, without the
     assignment of an expire to a key whenever one is added to the database.
 
     Warning:
