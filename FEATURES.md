@@ -29,7 +29,7 @@
    - Add space before reference links ([dfbf7a55f3a7de666703b1dced404d1ce7b0ee7a](https://github.com/hearot/pyrubrum/commit/dfbf7a55f3a7de666703b1dced404d1ce7b0ee7a))
    - Capitalize only the first character of a commit message ([2996f7c91723902b4e998fb94b6d31c60685d386](https://github.com/hearot/pyrubrum/commit/2996f7c91723902b4e998fb94b6d31c60685d386))
    - Do no more raise `TypeError` while formatting commits ([56f1e533c12bdf75e63714d125319bb72da7d916](https://github.com/hearot/pyrubrum/commit/56f1e533c12bdf75e63714d125319bb72da7d916))
-   - Edit the documentation for `on_callback` and `on_message`
+   - Edit the documentation for `on_callback` and `on_message` ([3af2b75fb062727b748f9319cea5a4632dc2cb56](https://github.com/hearot/pyrubrum/commit/3af2b75fb062727b748f9319cea5a4632dc2cb56))
    - Fix `commit-message` for Dependabot ([a13cfeae848d83339a902373ddcb0287fc306d87](https://github.com/hearot/pyrubrum/commit/a13cfeae848d83339a902373ddcb0287fc306d87))
    - Hide the sha-1 hash of the current commit ([ab6478e610ef828744d5c6e54a1d54fff92372e8](https://github.com/hearot/pyrubrum/commit/ab6478e610ef828744d5c6e54a1d54fff92372e8))
    - Make `Element` docstrings consistent with `Button` ones ([9a035a35439077a9f12371bc96e6508020f3ecd6](https://github.com/hearot/pyrubrum/commit/9a035a35439077a9f12371bc96e6508020f3ecd6))
@@ -48,6 +48,10 @@
    - Make parameters optional for `on_callback` and `on_message` ([562f323da2d19913405a5efcfe531e37fa54baf5](https://github.com/hearot/pyrubrum/commit/562f323da2d19913405a5efcfe531e37fa54baf5))
    - Support `datetime.timedelta` as an expire object ([6b3453f5a888fe758f868592c17a88ed1678936f](https://github.com/hearot/pyrubrum/commit/6b3453f5a888fe758f868592c17a88ed1678936f))
    - Use the set of children without conversion to list (resolve #3) ([e81143b154b415531ee82dfe85613e8fd01b1644](https://github.com/hearot/pyrubrum/commit/e81143b154b415531ee82dfe85613e8fd01b1644))
+
+### Other changes
+
+   - Add `__copyright__`
 
 ### Testing changes
 

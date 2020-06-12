@@ -18,6 +18,7 @@
 
 __author__ = "Hearot"
 __author_email__ = "gabriel@hearot.it"
+__copyright__ = "Copyright (C) 2020 Hearot <https://github.com/hearot>"
 __license__ = "GNU General Public License v3"
 __package__ = "pyrubrum"
 __url__ = "https://github.com/hearot/pyrubrum"
