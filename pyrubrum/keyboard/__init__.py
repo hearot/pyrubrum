@@ -16,25 +16,6 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
-__author__ = "Hearot"
-__author_email__ = "gabriel@hearot.it"
-__copyright__ = "Copyright (C) 2020 Hearot <https://github.com/hearot>"
-__license__ = "GNU General Public License v3"
-__package__ = "pyrubrum"
-__url__ = "https://github.com/hearot/pyrubrum"
-__version__ = "0.1a1.dev5"
-
-from .database import BaseDatabase  # noqa
-from .database import DictDatabase  # noqa
-from .database import RedisDatabase  # noqa
-from .handlers import BaseHandler  # noqa
-from .handlers import Handler  # noqa
-from .handlers import ParameterizedHandler  # noqa
-from .handlers import transform  # noqa
-from .keyboard import Button  # noqa
-from .keyboard import Element  # noqa
+from .button import Button  # noqa
+from .element import Element  # noqa
 from .keyboard import Keyboard  # noqa
-from .menus import BaseMenu  # noqa
-from .menus import Menu  # noqa
-from .menus import PageMenu  # noqa
-from .tree import Node  # noqa

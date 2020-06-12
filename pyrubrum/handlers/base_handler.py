@@ -31,7 +31,7 @@ from pyrogram import Message
 from pyrogram import Filters
 from pyrogram import InlineKeyboardButton
 
-from .button import Button
+from pyrubrum.keyboard import Button
 
 Callback = Union[
     Callable[["BaseHandler", Client, CallbackQuery], None],

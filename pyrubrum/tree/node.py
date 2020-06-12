@@ -22,7 +22,7 @@ from typing import Optional
 from typing import Set
 from typing import Tuple
 
-from .base_menu import BaseMenu
+from pyrubrum.menus import BaseMenu
 
 Family = Tuple[Optional[BaseMenu], Optional[Set[BaseMenu]]]
 

@@ -20,7 +20,6 @@ from typing import List
 
 from pyrogram import InlineKeyboardMarkup
 
-from .base_handler import BaseHandler
 from .button import Button
 
 
@@ -31,7 +30,7 @@ class Keyboard(InlineKeyboardMarkup):
     def __init__(
         self,
         inline_keyboard: List[List[Button]],
-        handler: BaseHandler,
+        handler: "BaseHandler",  # noqa
         callback_query_id: str,
     ):
         """Initialize an `InlineKeyboardMarkup` object with the processed keyboard

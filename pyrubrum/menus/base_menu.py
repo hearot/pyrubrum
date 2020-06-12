@@ -30,8 +30,8 @@ from pyrogram import InlineKeyboardMarkup
 from pyrogram import InputMedia
 from pyrogram import Message
 
-from .base_handler import BaseHandler
-from .button import Button
+from pyrubrum.handlers import BaseHandler
+from pyrubrum.keyboard import Button
 
 
 @dataclass(eq=False, init=False, repr=True)

@@ -31,17 +31,16 @@ from pyrogram import InlineKeyboardMarkup
 from pyrogram import InputMedia
 from pyrogram import Message
 
-from .button import Button
-from .element import Element
-from .keyboard import Keyboard
+from pyrubrum.keyboard import Button
+from pyrubrum.keyboard import Element
+from pyrubrum.keyboard import Keyboard
 from .menu import Menu
-from .parameterized_handler import ParameterizedHandler
 
 Items = Union[
     List[Element],
     Callable[
         [
-            ParameterizedHandler,
+            "ParameterizedHandler",
             Client,
             Union[CallbackQuery, Message],
             Dict[str, Any],
@@ -141,7 +140,7 @@ class PageMenu(Menu):
 
     def keyboard(
         self,
-        tree: ParameterizedHandler,
+        tree: "ParameterizedHandler",  # noqa
         client: Client,
         context: Union[CallbackQuery, Message],
         parameters: Dict[str, Any],

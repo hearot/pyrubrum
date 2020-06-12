@@ -21,9 +21,9 @@ from dataclasses import dataclass
 from pyrogram import Client
 from pyrogram import MessageHandler
 
-from .database.base_database import BaseDatabase
+from pyrubrum.database import BaseDatabase
+from pyrubrum.tree import Node
 from .handler import Handler
-from .node import Node
 from .parameterized_base_handler import ParameterizedBaseHandler
 from .parameterized_base_handler import pass_handler_and_clean
 

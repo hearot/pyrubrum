@@ -30,14 +30,13 @@ from pyrogram import InlineKeyboardMarkup
 from pyrogram import InputMedia
 from pyrogram import Message
 
+from pyrubrum.keyboard import Keyboard
 from .base_menu import BaseMenu
-from .handler import Handler
-from .keyboard import Keyboard
 
 Content = Union[
     Union[InputMedia, str],
     Callable[
-        [Handler, Client, Union[CallbackQuery, Message], Dict[str, Any]],
+        ["Handler", Client, Union[CallbackQuery, Message], Dict[str, Any]],
         Union[InputMedia, str],
     ],
 ]
@@ -76,7 +75,7 @@ class Menu(BaseMenu):
             Union[InputMedia, str],
             Callable[
                 [
-                    Handler,
+                    "Handler",
                     Client,
                     Union[CallbackQuery, Message],
                     Dict[str, Any],
@@ -115,7 +114,7 @@ class Menu(BaseMenu):
 
     def get_content(
         self,
-        tree: Handler,
+        tree: "Handler",  # noqa
         client: Client,
         context: Union[CallbackQuery, Message],
         parameters: Dict[str, Any],
@@ -144,7 +143,7 @@ class Menu(BaseMenu):
 
     def on_callback(
         self,
-        tree: Handler,
+        tree: "Handler",  # noqa
         client: Client,
         callback: CallbackQuery,
         parameters: Optional[Dict[str, Any]] = None,
@@ -191,7 +190,7 @@ class Menu(BaseMenu):
 
     def on_message(
         self,
-        tree: Handler,
+        tree: "Handler",  # noqa
         client: Client,
         message: Message,
         parameters: Optional[Dict[str, Any]] = None,
@@ -236,7 +235,7 @@ class Menu(BaseMenu):
 
     def keyboard(
         self,
-        tree: Handler,
+        tree: "Handler",  # noqa
         client: Client,
         context: Union[CallbackQuery, Message],
         parameters: Dict[str, Any],
@@ -300,7 +299,7 @@ class Menu(BaseMenu):
 
     def preliminary(
         self,
-        tree: Handler,
+        tree: "Handler",  # noqa
         client: Client,
         context: Union[CallbackQuery, Message],
         parameters: Dict[str, Any],

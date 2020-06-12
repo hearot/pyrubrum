@@ -21,6 +21,7 @@ from functools import lru_cache
 from typing import Any
 from typing import Dict
 from typing import Iterable
+from typing import Optional
 from typing import Set
 from typing import Tuple
 from typing import Union
@@ -28,11 +29,10 @@ from typing import Union
 from pyrogram import Client
 from pyrogram import MessageHandler
 
+from pyrubrum.menus import BaseMenu
+from pyrubrum.tree import Node
 from .base_handler import BaseHandler
 from .base_handler import pass_handler
-from .base_menu import BaseMenu
-from .node import Node
-from .node import Optional
 
 MenuIterable = Union[Dict[BaseMenu, Any], Iterable[BaseMenu]]
 
