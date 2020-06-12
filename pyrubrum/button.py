@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
+from copy import deepcopy
 from dataclasses import dataclass
 from typing import Any
 from typing import Optional
@@ -66,8 +67,8 @@ class Button:
         same_menu: Optional[bool] = False,
         **kwargs
     ):
-        """Initialize the button by setting the attributes of this object and copying
-        the dictionary of parameters.
+        """Initialize the button by setting the attributes of this object and deep
+        copying the dictionary of parameters.
 
         Args:
             name (str): The name which is displayed inside the text field of
@@ -88,7 +89,7 @@ class Button:
         self.button_id = button_id
         self.element_id = element_id
         self.name = name
-        self.parameters = parameters.copy()
+        self.parameters = deepcopy(parameters)
         self.parameters.update(kwargs)
 
         self.parameters["button_id"] = button_id

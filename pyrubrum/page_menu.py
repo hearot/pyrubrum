@@ -245,7 +245,7 @@ class PageMenu(Menu):
             previous_page_button = Button(
                 self.previous_page_button_text,
                 self.menu_id,
-                parameters.copy(),
+                parameters,
                 parameters[page_id] - 1,
                 True,
             )
@@ -261,7 +261,7 @@ class PageMenu(Menu):
             next_page_button = Button(
                 self.next_page_button_text,
                 self.menu_id,
-                parameters.copy(),
+                parameters,
                 parameters[page_id] + 1,
                 True,
             )

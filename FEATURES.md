@@ -2,7 +2,7 @@
 
    - Add `callback_query_id` as a special key for parameters ([7222fcc6eb3c2a037c2b71109c9163028ef4eea4](https://github.com/hearot/pyrubrum/commit/7222fcc6eb3c2a037c2b71109c9163028ef4eea4))
    - Add a code of conduct ([95694f93986ede7545a782e6b34b8ec7ca2a2c93](https://github.com/hearot/pyrubrum/commit/95694f93986ede7545a782e6b34b8ec7ca2a2c93))
-   - Add a notice about the keys starting with `page_`
+   - Add a notice about the keys starting with `page_` ([18bdd9c336fb41a89984e97ee39f81b33c5809a2](https://github.com/hearot/pyrubrum/commit/18bdd9c336fb41a89984e97ee39f81b33c5809a2))
    - Add a security policy ([ba507a8b2a6a386d7ad2d561d9b805d341e8b284](https://github.com/hearot/pyrubrum/commit/ba507a8b2a6a386d7ad2d561d9b805d341e8b284))
    - Add a statement about the return value of `Node.__hash__()` ([5a9a257ef122bd47f0a010dc5e1ebcb5e1cb1b90](https://github.com/hearot/pyrubrum/commit/5a9a257ef122bd47f0a010dc5e1ebcb5e1cb1b90))
    - Add disclaimer notice ([a7a6060a7243a1ed7857b2b78649d573cbe7feab](https://github.com/hearot/pyrubrum/commit/a7a6060a7243a1ed7857b2b78649d573cbe7feab))
@@ -42,6 +42,7 @@
    - Make `Element` docstrings consistent with `Button` ones ([9a035a35439077a9f12371bc96e6508020f3ecd6](https://github.com/hearot/pyrubrum/commit/9a035a35439077a9f12371bc96e6508020f3ecd6))
    - Make databases consistent with the documentation ([d5debbfa52eb16e012ad8e022a5b3d8a06051a59](https://github.com/hearot/pyrubrum/commit/d5debbfa52eb16e012ad8e022a5b3d8a06051a59))
    - Menus are now collected using sets instead of unhashable lists ([46755e471bb94efd963af3bd7b9da95de39bdbed](https://github.com/hearot/pyrubrum/commit/46755e471bb94efd963af3bd7b9da95de39bdbed))
+   - Use deep copying instead of just making a shallow copy
 
 ### New features
 
