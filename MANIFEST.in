@@ -1,0 +1,11 @@
+include CHANGELOG.md
+include examples/sample.env
+include examples/requirements.txt
+recursive-include examples *.py
+include FEATURES.md
+include LICENSE
+include NOTICE
+include README.md
+include requirements.txt
+include SECURITY.md
+recursive-include tests *.py

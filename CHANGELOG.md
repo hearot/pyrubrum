@@ -56,10 +56,11 @@
    - Make `Element` docstrings consistent with `Button` ones ([9a035a35439077a9f12371bc96e6508020f3ecd6](https://github.com/hearot/pyrubrum/commit/9a035a35439077a9f12371bc96e6508020f3ecd6))
    - Make databases consistent with the documentation ([d5debbfa52eb16e012ad8e022a5b3d8a06051a59](https://github.com/hearot/pyrubrum/commit/d5debbfa52eb16e012ad8e022a5b3d8a06051a59))
    - Menus are now collected using sets instead of unhashable lists ([46755e471bb94efd963af3bd7b9da95de39bdbed](https://github.com/hearot/pyrubrum/commit/46755e471bb94efd963af3bd7b9da95de39bdbed))
-   - Use deep copying instead of just making a shallow copy
+   - Use deep copying instead of just making a shallow copy ([2c98a3c281db85cec19eb0e7027a0438827aa236](https://github.com/hearot/pyrubrum/commit/2c98a3c281db85cec19eb0e7027a0438827aa236))
 
 ### New features
 
+   - Add `MANIFEST.in` for managing files included in the distribution
    - Automatically detect the commit URL for changelog ([a5be95bf1f782bff658552ee4b54552f611409c4](https://github.com/hearot/pyrubrum/commit/a5be95bf1f782bff658552ee4b54552f611409c4))
    - Do not set an expire if `False` is provided ([3378a6177ff896417025447a8a35df094eb13799](https://github.com/hearot/pyrubrum/commit/3378a6177ff896417025447a8a35df094eb13799))
    - Import the base classes as well ([1d11b934967258164d0f4fc57e01e4116d19b72c](https://github.com/hearot/pyrubrum/commit/1d11b934967258164d0f4fc57e01e4116d19b72c))
