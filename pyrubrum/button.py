@@ -43,8 +43,9 @@ class Button:
 
     Warning:
         There is a special group of names which are not available for being
-        used as keys for parameters. These are ``button_id`` and
-        ``same_menu``.
+        used as keys for parameters. These are ``button_id``,
+        ``callback_query_id`` and ``same_menu``. If provided, they will be
+        overwritten.
     """
 
     button_id: str

@@ -100,14 +100,15 @@ class BaseHandler(ABC):
 
     def setup(self, client: Client):
         """Make all the defined menus reachable by the client by adding handlers that
-        catch all their identifiers to it.
+        catch all their identifiers to it. It also calls `pass_handler`, which
+        lets the callback functions get this handler as argument.
 
         Args:
             client (Client): The client which is being set up.
 
         Warning:
             The functions the handlers make use of are not set up in the
-            same way objects defined using Pyrogram decorators are. Pyrubrum
+            same way objects added using Pyrogram handlers are. Pyrubrum
             implements the following pattern:
                 ``callback(handler, client, context, parameters)``
         """
@@ -130,7 +131,7 @@ def pass_handler(
         callback (Callback): The callback function which
             automatically gets called by the generated function.
         handler (BaseHandler): The handler object which made use of this
-            function in order to provide it as the callback argument to a
+            function in order to provide this one as a callback to a
             Pyrogram handler.
 
     Returns:
@@ -139,7 +140,7 @@ def pass_handler(
 
     Warning:
         The functions the handlers make use of are not set up in the
-        same way objects defined using Pyrogram decorators are. Pyrubrum
+        same way objects added using Pyrogram handlers are. Pyrubrum
         implements the following pattern:
             ``callback(handler, client, context, parameters)``
     """
