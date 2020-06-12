@@ -15,6 +15,7 @@
    - Add docstrings to `Keyboard` ([c3b4f5f879eec2d953ed47be26e03241a7b0cfe7](https://github.com/hearot/pyrubrum/commit/c3b4f5f879eec2d953ed47be26e03241a7b0cfe7))
    - Add docstrings to `Menu` ([15c11e4f737c0c63bad29d6c3c758d2b775c9ea4](https://github.com/hearot/pyrubrum/commit/15c11e4f737c0c63bad29d6c3c758d2b775c9ea4))
    - Add docstrings to `Node` ([caf69bb8f7c6542bb731b7df6bf0f7ab7b3d4bd9](https://github.com/hearot/pyrubrum/commit/caf69bb8f7c6542bb731b7df6bf0f7ab7b3d4bd9))
+   - Add docstrings to `PageMenu`
    - Add docstrings to `ParameterizedBaseHandler` ([579ad0916dc138c0d3117ae6f90e92a1cf11c1ea](https://github.com/hearot/pyrubrum/commit/579ad0916dc138c0d3117ae6f90e92a1cf11c1ea))
    - Add docstrings to `ParameterizedHandler` ([9b3e293e2e1a63fa79c557ca496a22facf36c76b](https://github.com/hearot/pyrubrum/commit/9b3e293e2e1a63fa79c557ca496a22facf36c76b))
    - Add docstrings to `RedisDatabase` ([784b8f112d561b9a346b7f986710df2b1455e691](https://github.com/hearot/pyrubrum/commit/784b8f112d561b9a346b7f986710df2b1455e691))
@@ -24,7 +25,7 @@
    - Add the official pronunciation for Pyrubrum ([b6d1fe8e01f79007338cd4a6dfe409c406c12cba](https://github.com/hearot/pyrubrum/commit/b6d1fe8e01f79007338cd4a6dfe409c406c12cba))
    - Create the changelog of the current release separately ([318172a986e666ac4abf6f7a4480922cb135e734](https://github.com/hearot/pyrubrum/commit/318172a986e666ac4abf6f7a4480922cb135e734))
    - Delete duplicate issue templates ([10cba65c31a5c3556b39cc328d097b62dfbd5e1b](https://github.com/hearot/pyrubrum/commit/10cba65c31a5c3556b39cc328d097b62dfbd5e1b))
-   - Extend the definition of `ParameterizedBaseHandler`
+   - Extend the definition of `ParameterizedBaseHandler` ([08b258866b4182afae6fc7e439a74b5e30d86f4e](https://github.com/hearot/pyrubrum/commit/08b258866b4182afae6fc7e439a74b5e30d86f4e))
    - Make relative clauses more formal ([6b0d84effd65838668b3ba070a677d03ce016581](https://github.com/hearot/pyrubrum/commit/6b0d84effd65838668b3ba070a677d03ce016581))
    - Stop using `typing.NewType` and use aliases instead ([600191f337178baf21ea5ffe3e9caaa19dbf22e0](https://github.com/hearot/pyrubrum/commit/600191f337178baf21ea5ffe3e9caaa19dbf22e0))
    - Update the disclaimer notices ([b5039179f28a24ecf967b66200c9440cb6b6c6ec](https://github.com/hearot/pyrubrum/commit/b5039179f28a24ecf967b66200c9440cb6b6c6ec))
