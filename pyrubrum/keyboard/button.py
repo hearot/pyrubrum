@@ -91,7 +91,7 @@ class Button:
         self.element_id = element_id
         self.name = name
 
-        if parameters:
+        if isinstance(parameters, dict):
             self.parameters = deepcopy(parameters)
             self.parameters.update(kwargs)
 

@@ -4,10 +4,11 @@
 
 ### New features
 
+   - Do not pass parameters to content functions if not supported
    - Import all the public functions ([c0a7deb30fbe75d6b8c37f71dcaaa49ba8b3ab8f](https://github.com/hearot/pyrubrum/commit/c0a7deb30fbe75d6b8c37f71dcaaa49ba8b3ab8f))
    - Import database errors by default ([eb6bb8b5320676e1f474097e3738d54ddddb31e7](https://github.com/hearot/pyrubrum/commit/eb6bb8b5320676e1f474097e3738d54ddddb31e7))
    - Support providing multiple preliminary functions ([3938e308c2176bd280454cdab1875abbae470a28](https://github.com/hearot/pyrubrum/commit/3938e308c2176bd280454cdab1875abbae470a28))
-   - Use `None` if parameterization is not supported
+   - Use `None` if parameterization is not supported (resolve #5) ([fd3af3fda4747a6ab4bf5f978bb15e4390aed5d1](https://github.com/hearot/pyrubrum/commit/fd3af3fda4747a6ab4bf5f978bb15e4390aed5d1))
 
 ### Other changes
 

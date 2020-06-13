@@ -171,7 +171,10 @@ class Menu(BaseMenu):
                 `InputMedia`) or a message (if it is just a string).
         """
         if callable(self.content):
-            return self.content(handler, client, context, parameters)
+            if isinstance(parameters, dict):
+                return self.content(handler, client, context, parameters)
+            else:
+                return self.content(handler, client, context)
 
         return self.content
 
