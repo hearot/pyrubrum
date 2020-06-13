@@ -27,6 +27,12 @@ __version__ = "0.1a1.dev6"
 from .database import BaseDatabase  # noqa
 from .database import DictDatabase  # noqa
 from .database import RedisDatabase  # noqa
+from .database.errors import DatabaseError  # noqa
+from .database.errors import DeleteError  # noqa
+from .database.errors import ExpireError  # noqa
+from .database.errors import GetError  # noqa
+from .database.errors import NotFoundError  # noqa
+from .database.errors import SetError  # noqa
 from .handlers import BaseHandler  # noqa
 from .handlers import Handler  # noqa
 from .handlers import on_callback_node  # noqa
