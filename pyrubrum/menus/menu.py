@@ -151,7 +151,7 @@ class Menu(BaseMenu):
         handler: "Handler",  # noqa
         client: Client,
         context: Union[CallbackQuery, Message],
-        parameters: Dict[str, Any],
+        parameters: Optional[Dict[str, Any]] = None,
     ) -> Union[InputMedia, str]:
         """Get the content of the menu, if defined. Otherwise call an already provided
         function and returns its value.
@@ -162,8 +162,8 @@ class Menu(BaseMenu):
             client (Client): The client which is linked to the handler.
             context (Union[CallbackQuery, Message]): The context for which the
                 button is generated.
-            parameters (Dict[str, Any]): The parameters which were passed to
-                the handler.
+            parameters (Optional[Dict[str, Any]]): The parameters which were
+                passed to the handler. Defaults to ``None``.
 
         Returns:
             Union[InputMedia, str]: The content of the menu, which is then
@@ -201,14 +201,15 @@ class Menu(BaseMenu):
             client (Client): The client which is linked to the handler.
             context (CallbackQuery): The callback query for which the button is
                 generated.
-            parameters (Dict[str, Any]): The parameters which were passed to
-                the handler.
+            parameters (Optional[Dict[str, Any]]): The parameters which were
+                passed to the handler. Defaults to ``None``.
         """
-        if not parameters:
-            parameters = {}
 
         if callable(self.preliminary):
             self.preliminary(handler, client, callback, parameters)
+        elif isinstance(self.preliminary, list):
+            for func in self.preliminary:
+                func(handler, client, callback, parameters)
 
         content = self.get_content(handler, client, callback, parameters)
 
@@ -250,11 +251,9 @@ class Menu(BaseMenu):
                 of the menus.
             client (Client): The client which is linked to the handler.
             context (Message): The message for which the button is generated.
-            parameters (Dict[str, Any]): The parameters which were passed to
-                the handler.
+            parameters (Optional[Dict[str, Any]]): The parameters which were
+                passed to the handler. Defaults to ``None``.
         """
-        if not parameters:
-            parameters = {}
 
         if callable(self.preliminary):
             self.preliminary(handler, client, message, parameters)
@@ -288,7 +287,7 @@ class Menu(BaseMenu):
         handler: "Handler",  # noqa
         client: Client,
         context: Union[CallbackQuery, Message],
-        parameters: Dict[str, Any],
+        parameters: Optional[Dict[str, Any]] = None,
     ) -> InlineKeyboardMarkup:
         """Provide a keyboard, filled with all the buttons which refer to the menus
         that are linked to the children of this menu node and a special button

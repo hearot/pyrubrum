@@ -21,7 +21,8 @@
 
    - Import all the public functions ([c0a7deb30fbe75d6b8c37f71dcaaa49ba8b3ab8f](https://github.com/hearot/pyrubrum/commit/c0a7deb30fbe75d6b8c37f71dcaaa49ba8b3ab8f))
    - Import database errors by default ([eb6bb8b5320676e1f474097e3738d54ddddb31e7](https://github.com/hearot/pyrubrum/commit/eb6bb8b5320676e1f474097e3738d54ddddb31e7))
-   - Support providing multiple preliminary functions
+   - Support providing multiple preliminary functions ([3938e308c2176bd280454cdab1875abbae470a28](https://github.com/hearot/pyrubrum/commit/3938e308c2176bd280454cdab1875abbae470a28))
+   - Use `None` if parameterization is not supported
 
 ### Other changes
 

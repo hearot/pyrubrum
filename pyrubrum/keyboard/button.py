@@ -56,13 +56,13 @@ class Button:
     button_id: str
     element_id: Optional[str] = ""
     name: str
-    parameters: Dict[str, Any]
+    parameters: Optional[Dict[str, Any]] = None
 
     def __init__(
         self,
         name: str,
         button_id: str,
-        parameters: Dict[str, Any],
+        parameters: Optional[Dict[str, Any]] = None,
         element_id: Optional[str] = "",
         same_menu: Optional[bool] = False,
         **kwargs
@@ -75,12 +75,13 @@ class Button:
                 the inline button this object will be converted to.
             button_id (str): The unique identifier of the button, which is the
                 same as the one of the menu the button is referring to.
-            parameters (Dict[str, Any]): The parameters that will be passed to
-                the menu this button is referring to.
+            parameters (Optional[Dict[str, Any]]): The parameters that will be
+                passed to the menu this button is referring to. Defaults to
+                ``None`` (i.e. the handler does not support parameterization).
             element_id (Optional[str]): The unique identifier of the `Element`
                 the button is carrying, if any. Defaults to an empty string.
             same_menu (Optional[bool]): If the button is referring to the same
-                menu by which it was initialized. Defaults to False.
+                menu by which it was initialized. Defaults to ``False``.
             **kwargs: Arbitrary keyword arguments which can be used as a way to
                 define a new parameter (``key=value``) that will be added to
                 the dictionary of parameters.
@@ -89,8 +90,10 @@ class Button:
         self.button_id = button_id
         self.element_id = element_id
         self.name = name
-        self.parameters = deepcopy(parameters)
-        self.parameters.update(kwargs)
 
-        self.parameters["button_id"] = button_id
-        self.parameters["same_menu"] = same_menu
+        if parameters:
+            self.parameters = deepcopy(parameters)
+            self.parameters.update(kwargs)
+
+            self.parameters["button_id"] = button_id
+            self.parameters["same_menu"] = same_menu

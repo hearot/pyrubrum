@@ -93,7 +93,7 @@ class BaseMenu(ABC):
         handler: BaseHandler,
         client: Client,
         context: Union[CallbackQuery, Message],
-        parameters: Dict[str, Any],
+        parameters: Optional[Dict[str, Any]] = None,
     ) -> Button:
         """Create an inline button which refers to this menu, using `name` as
         the content of the text field and `menu_id` as the unique identifier
@@ -105,8 +105,8 @@ class BaseMenu(ABC):
             client (Client): The client which is linked to the handler.
             context (Union[CallbackQuery, Message]): The context for which
                 button is generated for.
-            parameters (Dict[str, Any]): The parameters which were passed to
-                the handler.
+            parameters (Optional[Dict[str, Any]]): The parameters which were
+                passed to the handler. Defaults to ``None``.
 
         Returns:
             Button: The generated button.
@@ -119,7 +119,7 @@ class BaseMenu(ABC):
         handler: BaseHandler,
         client: Client,
         context: Union[CallbackQuery, Message],
-        parameters: Dict[str, Any],
+        parameters: Optional[Dict[str, Any]] = None,
     ) -> Union[InputMedia, str]:
         """This abstract method is intended to be implemented as a generator
         for the content of the menu (i.e. what the user will see after clicking
@@ -131,8 +131,8 @@ class BaseMenu(ABC):
             client (Client): The client which is linked to the handler.
             context (Union[CallbackQuery, Message]): The context for which the
                 button is generated.
-            parameters (Dict[str, Any]): The parameters which were passed to
-                the handler.
+            parameters (Optional[Dict[str, Any]]): The parameters which were
+                passed to the handler. Defaults to ``None``.
 
         Returns:
             Union[InputMedia, str]: The content of the menu, which is then
@@ -147,7 +147,7 @@ class BaseMenu(ABC):
         handler: BaseHandler,
         client: Client,
         context: Union[CallbackQuery, Message],
-        parameters: Dict[str, Any],
+        parameters: Optional[Dict[str, Any]] = None,
     ) -> InlineKeyboardMarkup:
         """This abstract method is intended to be implemented as a generator
         for the keyboard of the menu (aka the inline keyboard).
@@ -158,8 +158,8 @@ class BaseMenu(ABC):
             client (Client): The client which is linked to the handler.
             context (Union[CallbackQuery, Message]): The context for which the
                 button is generated.
-            parameters (Dict[str, Any]): The parameters which were passed to
-                the handler.
+            parameters (Optional[Dict[str, Any]]): The parameters which were
+                passed to the handler. Defaults to ``None``.
 
         Returns:
             InlineKeyboardMarkup: The generated inline keyboard, which is then
@@ -185,7 +185,7 @@ class BaseMenu(ABC):
             callback (CallbackQuery): The callback query for which the button
                 is generated.
             parameters (Optional[Dict[str, Any]]): The parameters which were
-                passed to to the handler. Defaults to None.
+                passed to to the handler. Defaults to ``None``.
         """
         raise NotImplementedError
 
@@ -206,6 +206,6 @@ class BaseMenu(ABC):
             client (Client): The client which is linked to the handler.
             message (Message): The message for which the button is generated.
             parameters (Optional[Dict[str, Any]]): The parameters which were
-                passed to to the handler. Defaults to None.
+                passed to to the handler. Defaults to ``None``.
         """
         raise NotImplementedError

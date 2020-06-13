@@ -254,6 +254,6 @@ def pass_handler_and_clean(
             func(handler, client, context, context.parameters)
             handler.database.delete(context.parameters["callback_query_id"])
         else:
-            func(handler, client, context)
+            func(handler, client, context, {})
 
     return on_callback
