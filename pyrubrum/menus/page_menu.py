@@ -35,6 +35,7 @@ from pyrubrum.keyboard import Button
 from pyrubrum.keyboard import Element
 from pyrubrum.keyboard import Keyboard
 from .menu import Menu
+from .menu import Preliminary
 
 Items = Union[
     List[Element],
@@ -90,6 +91,7 @@ class PageMenu(Menu):
         limit: Optional[int] = 2,
         limit_page: Optional[int] = 4,
         next_page_button_text: Optional[str] = "▶️",
+        preliminary: Preliminary = None,
         previous_page_button_text: Optional[str] = "◀️",
     ):
         """Initialize the object.
@@ -120,6 +122,10 @@ class PageMenu(Menu):
             next_page_button_text (Optional[str]): The text which is displayed
                 inside the button that lets the user move on to the next page,
                 if any. Defaults to "▶️".
+            preliminary (Preliminary): A function which is executed each time
+                before doing anything else in `on_callback` and `on_message`.
+                Defaults to ``None``, which means that no function is going to
+                be executed.
             previous_page_button_text (Optional[str]): The text which is
                 displayed inside the button that lets the user go back to the
                 previous page, if any. Defaults to "◀️".
@@ -131,6 +137,7 @@ class PageMenu(Menu):
             content,
             back_button_text=back_button_text,
             limit=limit,
+            preliminary=preliminary,
         )
 
         self.items = items

@@ -41,6 +41,13 @@ Content = Union[
     ],
 ]
 
+Preliminary = Optional[
+    Callable[
+        ["Handler", Client, Union[CallbackQuery, Message], Dict[str, Any]],
+        None,
+    ]
+]
+
 
 @dataclass(eq=False, init=False, repr=True)
 class Menu(BaseMenu):
@@ -58,6 +65,10 @@ class Menu(BaseMenu):
             provided as well and must follow the following arguments pattern:
                 ``func(handler, client, context, parameters)``
         limit (Optional[int]): The limit of buttons per row. Defaults to 2.
+        preliminary (Preliminary): A function which is executed each time
+            before doing anything else in `on_callback` and `on_message`.
+            Defaults to ``None``, which means that no function is going to
+            be executed.
 
     Note:
         This implementation is compatible with a non parameterized handler.
@@ -85,6 +96,7 @@ class Menu(BaseMenu):
         ],
         back_button_text: Optional[str] = "🔙",
         limit: Optional[int] = 2,
+        preliminary: Preliminary = None,
     ):
         """Initialize the object.
 
@@ -105,12 +117,17 @@ class Menu(BaseMenu):
                 inside the button that lets the user go back to the parent
                 menu. Defaults to "🔙".
             limit (Optional[int]): The limit of buttons per row. Defaults to 2.
+            preliminary (Preliminary): A function which is executed each time
+                before doing anything else in `on_callback` and `on_message`.
+                Defaults to ``None``, which means that no function is going to
+                be executed.
         """
 
         BaseMenu.__init__(self, name, menu_id)
         self.back_button_text = back_button_text
         self.content = content
         self.limit = limit
+        self.preliminary = preliminary
 
     def get_content(
         self,
@@ -149,16 +166,17 @@ class Menu(BaseMenu):
         parameters: Optional[Dict[str, Any]] = None,
     ):
         """Each time a callback query is handled, this function calls the preliminary
-        function (i.e. `Menu.preliminary`), then gets the content that is going
-        to be provided to the user (both text and media are compatible), sets
-        up an inline keyboard filled with all the references to the menus that
-        are linked to the children of this menu node, including a special
-        button for going back to the parent menu, whose text is defined using
-        `Menu.back_button_text`, which overwrites the text of the parent menu
-        which usually should be displayed (see `Menu.keyboard`), and finally
-        edits the message with `CallbackQuery.edit_message_text` (if the
-        content is a string, i.e. a text) or `CallbackQuery.edit_message_media`
-        (if the content is an instance of `InputMedia`, i.e. a media).
+        function (i.e. `Menu.preliminary`), if callable, then gets the content
+        that is going to be provided to the user (both text and media are
+        compatible), sets up an inline keyboard filled with all the references
+        to the menus that are linked to the children of this menu node,
+        including a special button for going back to the parent menu, whose
+        text is defined using `Menu.back_button_text`, which overwrites the
+        text of the parent menu which usually should be displayed (see
+        `Menu.keyboard`), and finally edits the message with
+        `CallbackQuery.edit_message_text` (if the content is a string, i.e. a
+        text) or `CallbackQuery.edit_message_media` (if the content is an
+        instance of `InputMedia`, i.e. a media).
 
         Args:
             handler (BaseHandler): The handler which coordinates the management
@@ -172,7 +190,9 @@ class Menu(BaseMenu):
         if not parameters:
             parameters = {}
 
-        self.preliminary(handler, client, callback, parameters)
+        if callable(self.preliminary):
+            self.preliminary(handler, client, callback, parameters)
+
         content = self.get_content(handler, client, callback, parameters)
 
         if isinstance(content, InputMedia):
@@ -200,13 +220,13 @@ class Menu(BaseMenu):
         parameters: Optional[Dict[str, Any]] = None,
     ):
         """Each time a message is handled, this function calls the preliminary
-        function (i.e. `Menu.preliminary`), then gets the content that is going
-        to be provided to the user (both text and media are compatible), sets
-        up an inline keyboard filled with all the references to the menus that
-        are linked to the children of this menu node), and finally sends the
-        message with `Message.reply_text` (if the content is a string, i.e. a
-        text) or `Message.reply_cached_media` (if the content is an instance of
-        `InputMedia`, i.e. a media).
+        function (i.e. `Menu.preliminary`), if callable, then gets the content
+        that is going to be provided to the user (both text and media are
+        compatible), sets up an inline keyboard filled with all the references
+        to the menus that are linked to the children of this menu node), and
+        finally sends the message with `Message.reply_text` (if the content is
+        a string, i.e. a text) or `Message.reply_cached_media` (if the content
+        is an instance of `InputMedia`, i.e. a media).
 
         Args:
             handler (BaseHandler): The handler which coordinates the management
@@ -219,7 +239,9 @@ class Menu(BaseMenu):
         if not parameters:
             parameters = {}
 
-        self.preliminary(handler, client, message, parameters)
+        if callable(self.preliminary):
+            self.preliminary(handler, client, message, parameters)
+
         content = self.get_content(handler, client, message, parameters)
 
         if isinstance(content, InputMedia):
