@@ -328,26 +328,3 @@ class Menu(BaseMenu):
             return (
                 Keyboard(keyboard, handler, context.id) if keyboard else None
             )
-
-    def preliminary(
-        self,
-        handler: "Handler",  # noqa
-        client: Client,
-        context: Union[CallbackQuery, Message],
-        parameters: Dict[str, Any],
-    ):
-        """Execute some steps before getting the content which is displayed
-        inside the menu. It doesn't do anything by default. In order to give
-        an actual meaning to this method, you should implement it by yourself
-        by creating a subclass.
-
-        Args:
-            handler (BaseHandler): The handler which coordinates the management
-                of the menus.
-            client (Client): The client which is linked to the handler.
-            context (Union[CallbackQuery, Message]): The context for which the
-                button is generated.
-            parameters (Dict[str, Any]): The parameters which were passed to
-                the handler.
-        """
-        pass
