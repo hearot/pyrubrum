@@ -35,12 +35,10 @@ from .database.errors import NotFoundError  # noqa
 from .database.errors import SetError  # noqa
 from .handlers import BaseHandler  # noqa
 from .handlers import Handler  # noqa
-from .handlers import recursive_add  # noqa
 from .handlers import ParameterizedBaseHandler  # noqa
 from .handlers import ParameterizedHandler  # noqa
 from .handlers import pass_handler  # noqa
 from .handlers import pass_handler_and_clean  # noqa
-from .handlers import transform  # noqa
 from .keyboard import Button  # noqa
 from .keyboard import Element  # noqa
 from .keyboard import Keyboard  # noqa
@@ -48,3 +46,5 @@ from .menus import BaseMenu  # noqa
 from .menus import Menu  # noqa
 from .menus import PageMenu  # noqa
 from .tree import Node  # noqa
+from .tree import recursive_add  # noqa
+from .tree import transform  # noqa

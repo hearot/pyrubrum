@@ -18,13 +18,9 @@
 
 from dataclasses import dataclass
 from functools import lru_cache
-from typing import Any
-from typing import Dict
-from typing import Iterable
 from typing import Optional
 from typing import Set
 from typing import Tuple
-from typing import Union
 
 from pyrogram import Client
 from pyrogram import MessageHandler
@@ -33,8 +29,6 @@ from pyrubrum.menus import BaseMenu
 from pyrubrum.tree import Node
 from .base_handler import BaseHandler
 from .base_handler import pass_handler
-
-MenuIterable = Union[Dict[BaseMenu, Any], Iterable[BaseMenu]]
 
 
 @dataclass(eq=False, init=False, repr=True)
@@ -114,47 +108,3 @@ class Handler(BaseHandler):
         client.add_handler(
             MessageHandler(pass_handler(self.main_node.menu.on_message, self))
         )
-
-
-def recursive_add(menus: MenuIterable, parent: Node):
-    """Link the provided menus to `Node` instances and add these ones to a provided
-    parent. Finally, for each found value which is iterable, this function is
-    called in a recursive way in order to link its elements to its parent
-    `Node`.
-
-    Args:
-        menus (MenuIterable): The provided iterable of the menus which are
-            being added to the parent node. If it is a dictionary, the stored
-            value for each key, if iterable, will be recursively provided as
-            argument to a new call of this function, together with the parent
-            node, which is the key.
-        parent (Node): The parent the nodes are being added to.
-    """
-    for menu in menus:
-        node = Node(menu)
-        parent.add_child(node)
-
-        if isinstance(menus, dict) and isinstance(menus[menu], Iterable):
-            recursive_add(menus[menu], node)
-
-
-def transform(menus: MenuIterable) -> Node:
-    """Transform an iterable compounded of menus into a `Node` object. If a
-    dictionary is provided as argument, its values will be transformed as
-    well and added as children using ``recursive_add``.
-
-    Args:
-        menus (Union[Dict[BaseMenu, Any], Iterable[BaseMenu]]): The iterable
-            whose elements are `BaseMenu` instances.
-
-    Returns:
-        Node: The `Node` object which collects all the menus as children.
-    """
-
-    main_node = Node(list(menus)[0])
-    main_value = list(menus.values())[0] if isinstance(menus, dict) else None
-
-    if main_value:
-        recursive_add(main_value, main_node)
-
-    return main_node

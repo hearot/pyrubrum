@@ -33,8 +33,9 @@
 ### ‼️ Breaking changes
 
    - Create specific directories for module entities ([25593e6d40fa34dbc47528ff3fa6fdc30c0a41b9](https://github.com/hearot/pyrubrum/commit/25593e6d40fa34dbc47528ff3fa6fdc30c0a41b9))
+   - Move `recursive_add` and `transform`to `pyrubrum.tree.node`
    - Preliminary functions are now passed as arguments (resolve #6) ([45687a4a0a2b407b8085ec78d008536bd598897a](https://github.com/hearot/pyrubrum/commit/45687a4a0a2b407b8085ec78d008536bd598897a))
-   - Rename `on_callback_node` to `recursive_add`
+   - Rename `on_callback_node` to `recursive_add` ([461d34e9fb293347ca0b38aa41a18511c25b857c](https://github.com/hearot/pyrubrum/commit/461d34e9fb293347ca0b38aa41a18511c25b857c))
    - `BaseDatabase.get` always returns a string (resolve #2) ([b1d0dac010d2d0cd46a4bcc41d2f07c2099d6ac9](https://github.com/hearot/pyrubrum/commit/b1d0dac010d2d0cd46a4bcc41d2f07c2099d6ac9))
 
 ## v0.1a1.dev5 - 2020-06-12

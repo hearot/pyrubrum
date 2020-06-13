@@ -17,3 +17,5 @@
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
 from .node import Node  # noqa
+from .node import recursive_add  # noqa
+from .node import transform  # noqa

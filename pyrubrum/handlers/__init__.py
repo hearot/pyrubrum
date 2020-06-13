@@ -19,8 +19,6 @@
 from .base_handler import BaseHandler  # noqa
 from .base_handler import pass_handler  # noqa
 from .handler import Handler  # noqa
-from .handler import recursive_add  # noqa
-from .handler import transform  # noqa
 from .parameterized_base_handler import ParameterizedBaseHandler  # noqa
 from .parameterized_base_handler import pass_handler_and_clean  # noqa
 from .parameterized_handler import ParameterizedHandler  # noqa
