@@ -16,7 +16,6 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
-from dataclasses import dataclass
 from functools import lru_cache
 from typing import Optional
 from typing import Set
@@ -31,13 +30,12 @@ from .base_handler import BaseHandler
 from .base_handler import pass_handler
 
 
-@dataclass(eq=False, init=False, repr=True)
 class Handler(BaseHandler):
     """Implementation of a simple handler for non parameterized menus which has
     got, by definition, a main node whose linked menu is displayed to the user
     whenever a message is being handled.
 
-    Attributes:
+    Parameters:
         main_node (Node): The node whose linked menu is used when the user
             texts the bot (i.e. when a `Message` object is being handled).
             In other words, it represents the ``/start`` menu.
@@ -48,16 +46,7 @@ class Handler(BaseHandler):
         supports such feature (e.g. `ParameterizedHandler`).
     """
 
-    main_node: Node
-
     def __init__(self, main_node: Node):
-        """Initialize the object.
-
-        Args:
-            main_node (Node): The node whose linked menu is used when the user
-                texts the bot (i.e. when a `Message` object is being handled).
-                In other words, it represents the ``/start`` menu.
-        """
         self.main_node = main_node
 
     @lru_cache
@@ -70,7 +59,7 @@ class Handler(BaseHandler):
         return its family, if matched. On failure, it will return a tuple of
         length two filled with null values (i.e. ``None``).
 
-        Args:
+        Parameters:
             menu_id (str): The identifier which must be matched.
 
         Returns:
@@ -99,7 +88,7 @@ class Handler(BaseHandler):
         messages. If a message is being handled, the menu which is linked to
         the main node of this instance will be displayed.
 
-        Args:
+        Parameters:
             client (Client): The client you are setting up. It must be a bot
                 instance in order to work.
         """

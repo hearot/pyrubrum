@@ -139,5 +139,5 @@ unknown_errors.txt
 # Pyrubrum private examples
 *_private.py
 
-# Assets
-assets/
+# Pyrubrum documentation
+docs/build

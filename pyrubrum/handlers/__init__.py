@@ -17,7 +17,9 @@
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
 from .base_handler import BaseHandler  # noqa
+from .base_handler import Callback  # noqa
 from .base_handler import pass_handler  # noqa
+from .base_handler import PyrogramCallback  # noqa
 from .handler import Handler  # noqa
 from .parameterized_base_handler import ParameterizedBaseHandler  # noqa
 from .parameterized_base_handler import pass_handler_and_clean  # noqa

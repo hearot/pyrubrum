@@ -1,0 +1,3 @@
+[submodule "docs/source/_static/assets"]
+	path = docs/source/_static/assets
+	url = https://github.com/hearot/pyrubrum-assets

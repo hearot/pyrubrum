@@ -17,13 +17,11 @@
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
 from copy import deepcopy
-from dataclasses import dataclass
 from typing import Any
 from typing import Optional
 from typing import Dict
 
 
-@dataclass(init=False)
 class Button:
     """Representation of a button which belongs to an inline keyboard and has got,
     by definition, a unique identifier, which actually represents the menu this
@@ -32,15 +30,24 @@ class Button:
     referring to, if any), a name, which is displayed inside the text field of
     the inline button, and a dictionary of parameters.
 
-    Attributes:
-        button_id (str): The unique identifier of the button, which is the same
-            as the one of the menu the button is referring to.
-        element_id (str): The unique identifier of the `Element` the button is
-            carrying, if any. Defaults to an empty string.
-        name (str): The name which is displayed inside the text field of the
-            inline button this object will be converted to.
-        parameters (Dict[str, Any]): The parameters that will be passed to the
-            menu this button is referring to.
+    The dictionary that is passed as argument for representing parameters is
+    always deep copied, if not ``None``.
+
+    Parameters:
+        name (str): The name which is displayed inside the text field of
+            the inline button this object will be converted to.
+        button_id (str): The unique identifier of the button, which is the
+            same as the one of the menu the button is referring to.
+        parameters (Optional[Dict[str, Any]]): The parameters that will be
+            passed to the menu this button is referring to. Defaults to
+            ``None`` (i.e. the handler does not support parameterization).
+        element_id (Optional[str]): The unique identifier of the `Element`
+            the button is carrying, if any. Defaults to an empty string.
+        same_menu (Optional[bool]): If the button is referring to the same
+            menu by which it was initialized. Defaults to ``False``.
+        **kwargs: Arbitrary keyword arguments which can be used as a way to
+            define a new parameter (``key=value``) that will be added to
+            the dictionary of parameters.
 
     Warning:
         There is a special group of names which are not available for being
@@ -50,13 +57,8 @@ class Button:
         callback query (see `ParameterizedBaseHandler.process_keyboard`),
         ``element_id`` does not maintain its type and will always be
         initialized as a string. Keys starting with ``page_`` shall be
-        avoided accordingly to `PageMenu.keyboard.
+        avoided accordingly to `PageMenu.keyboard`.
     """
-
-    button_id: str
-    element_id: Optional[str] = ""
-    name: str
-    parameters: Optional[Dict[str, Any]] = None
 
     def __init__(
         self,
@@ -67,26 +69,6 @@ class Button:
         same_menu: Optional[bool] = False,
         **kwargs
     ):
-        """Initialize the button by setting the attributes of this object and deep
-        copying the dictionary of parameters.
-
-        Args:
-            name (str): The name which is displayed inside the text field of
-                the inline button this object will be converted to.
-            button_id (str): The unique identifier of the button, which is the
-                same as the one of the menu the button is referring to.
-            parameters (Optional[Dict[str, Any]]): The parameters that will be
-                passed to the menu this button is referring to. Defaults to
-                ``None`` (i.e. the handler does not support parameterization).
-            element_id (Optional[str]): The unique identifier of the `Element`
-                the button is carrying, if any. Defaults to an empty string.
-            same_menu (Optional[bool]): If the button is referring to the same
-                menu by which it was initialized. Defaults to ``False``.
-            **kwargs: Arbitrary keyword arguments which can be used as a way to
-                define a new parameter (``key=value``) that will be added to
-                the dictionary of parameters.
-        """
-
         self.button_id = button_id
         self.element_id = element_id
         self.name = name

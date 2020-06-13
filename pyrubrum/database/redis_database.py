@@ -34,19 +34,15 @@ except (ImportError, ModuleNotFoundError):
 class RedisDatabase(BaseDatabase):
     """Implementation of a database using a Redis server.
 
-    Attributes:
-        encoding (Optional[str]): The encoding format which shall be used to
-            decode the content that is retrieved from the Redis server.
-            Defaults to "utf-8".
-        default_expire (Optional[Expire]): The expire which is set by default.
-            If it is ``False``, no expire shall be set. Defaults to 86400
-            seconds (i.e. a day).
+    Parameters:
         server (redis.Redis): The Redis instance which is being used.
+        encoding (Optional[str]): The encoding format which shall be used
+            to decode the content that is retrieved from the Redis server.
+            Defaults to "utf-8".
+        default_expire (Expire): The expire which is set by default. If it
+            is ``False``, no expire shall be set. Defaults to 86400 seconds
+            (i.e. a day).
     """
-
-    encoding: Optional[str] = "utf-8"
-    default_expire: Optional[Expire] = 86400
-    server: "redis.Redis"
 
     def __init__(
         self,
@@ -54,28 +50,17 @@ class RedisDatabase(BaseDatabase):
         encoding: Optional[str] = "utf-8",
         default_expire: Optional[Expire] = 86400,
     ):
-        """Initialize the database.
-
-        Args:
-            server (redis.Redis): The Redis instance which is being used.
-            encoding (Optional[str]): The encoding format which shall be used
-                to decode the content that is retrieved from the Redis server.
-                Defaults to "utf-8".
-            default_expire (Expire): The expire which is set by default. If it
-                is ``False``, no expire shall be set. Defaults to 86400 seconds
-                (i.e. a day).
-        """
         self.default_expire = default_expire
         self.encoding = encoding
         self.server = server
 
     def get(self, key: str) -> str:
         """Get the value which is associated to a certain key inside the database.
-        If no key is found, ``NotFoundError``is raised.
+        If no key is found, `NotFoundError` is raised.
 
         This method will query the key using `redis.Redis.get`.
 
-        Args:
+        Parameters:
             key (str): The key you are retrieving the value of from the
                 Redis database.
 
@@ -101,7 +86,7 @@ class RedisDatabase(BaseDatabase):
         This method will assign the provided value to the key using
         `redis.Redis.set` and mark the expire flag with `redis.Redis.expire`.
 
-        Args:
+        Parameters:
             key (str): The key you are adding or updating the value of.
             value (str): The value which is being assigned to the key.
             expire (Optional[Expire]): The expire in seconds or as a
@@ -133,7 +118,7 @@ class RedisDatabase(BaseDatabase):
         This method will delete the provided key from the database using
         `redis.Redis.delete`.
 
-        Args:
+        Parameters:
             key (str): The key which is being deleted from the database,
                 together with its linked data.
 

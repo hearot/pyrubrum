@@ -29,11 +29,10 @@ class DictDatabase(dict, BaseDatabase):
 
     Warning:
         It not recommended to use this in production, as it does not implement
-        expires, while other implementations, such as `RedisDatabase`, does.
-        In addition, any stored data will be erased as soon as the program
-        stops executing.
-        This implementation might be useful only in development and testing
-        mode.
+        expires, while other implementations, such as `pyrubrum.RedisDatabase`,
+        does. In addition, any stored data will be erased as soon as the
+        program stops executing. This implementation might be useful only in
+        development and testing mode.
     """
 
     def get(self, key: str) -> str:
@@ -42,7 +41,7 @@ class DictDatabase(dict, BaseDatabase):
         This method will query the key using `dict.get`. If the key is not
         defined within the dictionary, `NotFoundError` is raised.
 
-        Args:
+        Parameters:
             key (str): The key you are retrieving the value of from the
                 dictionary.
 
@@ -65,7 +64,7 @@ class DictDatabase(dict, BaseDatabase):
         This method will assign the provided value to the key using
         `dict.update`.
 
-        Args:
+        Parameters:
             key (str): The key you are adding or updating the value of.
             value (str): The value which is being assigned to the key.
             expire (Optional[Expire]): It gets ignored by this implementation.
@@ -80,7 +79,7 @@ class DictDatabase(dict, BaseDatabase):
         This method will delete the provided key from the database using
         `dict.pop`.
 
-        Args:
+        Parameters:
             key (str): The key which is being deleted from the database,
                 together with its linked data.
 

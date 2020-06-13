@@ -32,7 +32,7 @@ class BaseDatabase(ABC):
     The purpose of this class is to give a general interface for a database,
     as it does not implement anything.
 
-    A sample implementation of this interface is `RedisDatabase`.
+    A sample implementation of this interface is `~pyrubrum.RedisDatabase`.
 
     Note:
         In order to create a subclass or to access this interface, you will
@@ -45,7 +45,7 @@ class BaseDatabase(ABC):
         """This abstract method is intended to be implemented in order to get the value
         which is stored with a certain key inside the database.
 
-        Args:
+        Parameters:
             key (str): The key you are retrieving the value of.
 
         Returns:
@@ -66,7 +66,7 @@ class BaseDatabase(ABC):
         an expire as to avoid having too much unused data stored inside the
         database.
 
-        Args:
+        Parameters:
             key (str): The key you are adding or updating the value of.
             value (str): The value which is being assigned to the key.
             expire (Optional[Expire]): The expire in seconds or as a
@@ -86,7 +86,7 @@ class BaseDatabase(ABC):
         """This abstract method is intended to be implemented in order to delete a
         certain key from the database, together with its stored value.
 
-        Args:
+        Parameters:
             key (str): The key which is being deleted from the database,
                 together with its linked data.
 

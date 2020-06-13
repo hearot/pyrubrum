@@ -18,7 +18,6 @@
 
 from abc import ABC
 from abc import abstractmethod
-from dataclasses import dataclass
 from typing import Any
 from typing import Dict
 from typing import Optional
@@ -34,7 +33,6 @@ from pyrubrum.handlers import BaseHandler
 from pyrubrum.keyboard import Button
 
 
-@dataclass(eq=False, init=False, repr=True)
 class BaseMenu(ABC):
     """Basic represention of a menu, which is an entity that has got by definition
     at least a name and a unique identifier.
@@ -45,7 +43,7 @@ class BaseMenu(ABC):
 
     A sample implementation of this interface is `Menu`.
 
-    Attributes:
+    Parameters:
         name (str): The name you give to the menu, which will be used as the
             text of callback button, if needed.
         menu_id (str): The unique identifier given to the menu, which will
@@ -55,16 +53,13 @@ class BaseMenu(ABC):
     Note:
         In order to create a subclass or to access this interface, you will
         need to implement all the defined abstract methods, which are
-        `get_content`, `keyboard, `on_callback`, `on_message`. Otherwise, you
+        `get_content`, `keyboard`, `on_callback`, `on_message`. Otherwise, you
         will get an error.
 
     Warning:
         Avoid using the same identifier for other entities, as it will result
         in ambiguity.
     """
-
-    name: str
-    menu_id: str
 
     def __hash__(self) -> int:
         """The hash generator of a menu, relying on the unique identifier
@@ -76,15 +71,6 @@ class BaseMenu(ABC):
         return hash(self.menu_id)
 
     def __init__(self, name: str, menu_id: str):
-        """Initialize the class with a custom name and unique identifier.
-
-        Args:
-            name (str): The name you give to the menu, which will be used as
-                the text of callback button, if needed.
-            menu_id (str): The unique identifier given to the menu, which will
-                refer unequivocally to this entity. The hash for this class is
-                generated relying on the content of this field.
-        """
         self.name = name
         self.menu_id = menu_id
 
@@ -99,7 +85,7 @@ class BaseMenu(ABC):
         the content of the text field and `menu_id` as the unique identifier
         of the `Button` object.
 
-        Args:
+        Parameters:
             handler (BaseHandler): The handler which coordinates the management
                 of the menus.
             client (Client): The client which is linked to the handler.
@@ -125,7 +111,7 @@ class BaseMenu(ABC):
         for the content of the menu (i.e. what the user will see after clicking
         on the inline button or referencing to the menu using a bot command).
 
-        Args:
+        Parameters:
             handler (BaseHandler): The handler which coordinates the management
                 of the menus.
             client (Client): The client which is linked to the handler.
@@ -136,8 +122,8 @@ class BaseMenu(ABC):
 
         Returns:
             Union[InputMedia, str]: The content of the menu, which is then
-                displayed to the user as a media (if it is a subclass of
-                `InputMedia`) or a message (if it is just a string).
+            displayed to the user as a media (if it is a subclass of
+            `InputMedia`) or a message (if it is just a string).
         """
         raise NotImplementedError
 
@@ -152,7 +138,7 @@ class BaseMenu(ABC):
         """This abstract method is intended to be implemented as a generator
         for the keyboard of the menu (aka the inline keyboard).
 
-        Args:
+        Parameters:
             handler (BaseHandler): The handler which coordinates the management
                 of the menus.
             client (Client): The client which is linked to the handler.
@@ -163,7 +149,7 @@ class BaseMenu(ABC):
 
         Returns:
             InlineKeyboardMarkup: The generated inline keyboard, which is then
-                displayed to the user.
+            displayed to the user.
         """
         raise NotImplementedError
 
@@ -178,7 +164,7 @@ class BaseMenu(ABC):
         """This abstract method is intended to be implemented and is called
         whenever a callback query is handled and refers to this menu.
 
-        Args:
+        Parameters:
             handler (BaseHandler): The handler which coordinates the management
                 of the menus.
             client (Client): The client which is linked to the handler.
@@ -200,7 +186,7 @@ class BaseMenu(ABC):
         """This abstract method is intended to be implemented and is called
         whenever a message is handled and refers to this menu.
 
-        Args:
+        Parameters:
             handler (BaseHandler): The handler which coordinates the management
                 of the menus.
             client (Client): The client which is linked to the handler.

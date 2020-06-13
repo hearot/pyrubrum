@@ -16,7 +16,6 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
-from dataclasses import dataclass
 from itertools import islice
 from typing import Any
 from typing import Callable
@@ -63,35 +62,41 @@ Preliminary = Optional[
 ]
 
 
-@dataclass(eq=False, init=False, repr=True)
 class Menu(BaseMenu):
     """Implementation of a menu who has got, by definition, a content to display
     (i.e. what the user will see by accessing it), a limit of buttons displayed
     per row and a custom text displayed for going back to the parent menu, if
     any.
 
-    Attributes:
+    Parameters:
+        name (str): The name you give to the menu, which will be used as
+            the text of callback button, if needed. See `BaseMenu` for more
+            information.
+        menu_id (str): The unique identifier given to the menu, which will
+            refer unequivocally to this entity. The hash for this class is
+            generated relying on the content of this field. See `BaseMenu`
+            for more information.
+        content (Content): What will be displayed whenever a user accesses
+            this menu. Both text and media can be provided. A function can
+            be provided as well and must follow the following arguments
+            pattern::
+
+                func(handler, client, context, parameters)
+
         back_button_text (Optional[str]): The text which will be displayed
-            inside the button that lets the user go back to the parent menu.
-            Defaults to "🔙".
-        content (Content): What will be displayed whenever a user accesses this
-            menu. Both text and media can be provided. A function can be
-            provided as well and must follow the following arguments pattern:
-                ``func(handler, client, context, parameters)``
+            inside the button that lets the user go back to the parent
+            menu. Defaults to "🔙".
         limit (Optional[int]): The limit of buttons per row. Defaults to 2.
         preliminary (Preliminary): A function which is executed each time
-            before doing anything else in `on_callback` and `on_message`. You
-            can provide a list of such functions as well, which will be
-            executed following the same order as the one of the list. Defaults
-            to ``None``, which means that no function is going to be executed.
+            before doing anything else in `on_callback` and `on_message`.
+            You can provide a list of such functions as well, which will be
+            executed following the same order as the one of the list.
+            Defaults to ``None``, which means that no function is going to
+            be executed.
 
     Note:
         This implementation is compatible with a non parameterized handler.
     """
-
-    back_button_text: Optional[str] = "🔙"
-    content: Content
-    limit: Optional[int] = 2
 
     def __init__(
         self,
@@ -113,33 +118,6 @@ class Menu(BaseMenu):
         limit: Optional[int] = 2,
         preliminary: Preliminary = None,
     ):
-        """Initialize the object.
-
-        Args:
-            name (str): The name you give to the menu, which will be used as
-                the text of callback button, if needed. See `BaseMenu` for more
-                information.
-            menu_id (str): The unique identifier given to the menu, which will
-                refer unequivocally to this entity. The hash for this class is
-                generated relying on the content of this field. See `BaseMenu`
-                for more information.
-            content (Content): What will be displayed whenever a user accesses
-                this menu. Both text and media can be provided. A function can
-                be provided as well and must follow the following arguments
-                pattern:
-                    ``func(handler, client, context, parameters)``
-            back_button_text (Optional[str]): The text which will be displayed
-                inside the button that lets the user go back to the parent
-                menu. Defaults to "🔙".
-            limit (Optional[int]): The limit of buttons per row. Defaults to 2.
-            preliminary (Preliminary): A function which is executed each time
-                before doing anything else in `on_callback` and `on_message`.
-                You can provide a list of such functions as well, which will be
-                executed following the same order as the one of the list.
-                Defaults to ``None``, which means that no function is going to
-                be executed.
-        """
-
         BaseMenu.__init__(self, name, menu_id)
         self.back_button_text = back_button_text
         self.content = content
@@ -156,7 +134,7 @@ class Menu(BaseMenu):
         """Get the content of the menu, if defined. Otherwise call an already provided
         function and returns its value.
 
-        Args:
+        Parameters:
             handler (BaseHandler): The handler which coordinates the management
                 of the menus.
             client (Client): The client which is linked to the handler.
@@ -167,8 +145,8 @@ class Menu(BaseMenu):
 
         Returns:
             Union[InputMedia, str]: The content of the menu, which is then
-                displayed to the user as a media (if it is a subclass of
-                `InputMedia`) or a message (if it is just a string).
+            displayed to the user as a media (if it is a subclass of
+            `InputMedia`) or a message (if it is just a string).
         """
         if callable(self.content):
             if isinstance(parameters, dict):
@@ -198,7 +176,7 @@ class Menu(BaseMenu):
         text) or `CallbackQuery.edit_message_media` (if the content is an
         instance of `InputMedia`, i.e. a media).
 
-        Args:
+        Parameters:
             handler (BaseHandler): The handler which coordinates the management
                 of the menus.
             client (Client): The client which is linked to the handler.
@@ -249,7 +227,7 @@ class Menu(BaseMenu):
         a string, i.e. a text) or `Message.reply_cached_media` (if the content
         is an instance of `InputMedia`, i.e. a media).
 
-        Args:
+        Parameters:
             handler (BaseHandler): The handler which coordinates the management
                 of the menus.
             client (Client): The client which is linked to the handler.
@@ -296,7 +274,7 @@ class Menu(BaseMenu):
         that are linked to the children of this menu node and a special button
         for linking the user to the parent menu, if any.
 
-        Args:
+        Parameters:
             handler (BaseHandler): The handler which coordinates the management
                 of the menus.
             client (Client): The client which is linked to the handler.
@@ -307,7 +285,7 @@ class Menu(BaseMenu):
 
         Returns:
             InlineKeyboardMarkup: The generated inline keyboard, which is then
-                displayed to the user.
+            displayed to the user.
         """
 
         parent, children = handler.get_family(self.menu_id)

@@ -18,7 +18,6 @@
 
 from abc import ABC
 from abc import abstractmethod
-from dataclasses import dataclass
 from typing import Callable
 from typing import List
 from typing import Set
@@ -38,12 +37,11 @@ Callback = Union[
     Callable[["BaseHandler", Client, Message], None],
 ]
 
-PyrogramHandlerCallback = Union[
+PyrogramCallback = Union[
     Callable[[Client, CallbackQuery], None], Callable[[Client, Message], None],
 ]
 
 
-@dataclass(eq=False, init=False, repr=True)
 class BaseHandler(ABC):
     """Basic representation of an handler, which is an entity that manages the
     setup of a `Client` instance (i.e. the bot).
@@ -78,7 +76,7 @@ class BaseHandler(ABC):
         unique identifier for the callback, generate a Pyrogram-compatible
         inline keyboard.
 
-        Args:
+        Parameters:
             keyboard (List[List[Button]]): The inline keyboard you want to
                 process.
             callback_query_id (str): The unique identifier of the callback
@@ -103,14 +101,15 @@ class BaseHandler(ABC):
         catch all their identifiers to it. It also calls `pass_handler`, which
         lets the callback functions get this handler as argument.
 
-        Args:
+        Parameters:
             client (Client): The client which is being set up.
 
         Warning:
             The functions the handlers make use of are not set up in the
             same way objects added using Pyrogram handlers are. Pyrubrum
-            implements the following pattern:
-                ``callback(handler, client, context, parameters)``
+            implements the following pattern::
+
+                callback(handler, client, context, parameters)
         """
         for menu in self.get_menus():
             client.add_handler(
@@ -123,11 +122,11 @@ class BaseHandler(ABC):
 
 def pass_handler(
     callback: Callback, handler: BaseHandler,
-) -> PyrogramHandlerCallback:
+) -> PyrogramCallback:
     """Generate a function which, whenever it is called, subsequently calls
     `callback`, passing the handler from which this object was generated.
 
-    Args:
+    Parameters:
         callback (Callback): The callback function which
             automatically gets called by the generated function.
         handler (BaseHandler): The handler object which made use of this
@@ -135,14 +134,15 @@ def pass_handler(
             Pyrogram handler.
 
     Returns:
-        PyrogramHandlerCallback: The function which is being added to
+        PyrogramCallback: The function which is being added to
             a Pyrogram handler.
 
     Warning:
         The functions the handlers make use of are not set up in the
         same way objects added using Pyrogram handlers are. Pyrubrum
-        implements the following pattern:
-            ``callback(handler, client, context, parameters)``
+        implements the following pattern::
+
+            callback(handler, client, context, parameters)
     """
 
     def on_callback(client: Client, context):

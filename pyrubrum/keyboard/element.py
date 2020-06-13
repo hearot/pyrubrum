@@ -16,20 +16,18 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
-from dataclasses import dataclass
 
-
-@dataclass
 class Element:
     """Representation of a general flag which refers to a particular state of a
     menu. Its unique identifier can be passed as an argument to `Button`.
 
-    Attributes:
+    Parameters:
         name (str): The text which will be displayed in the text field of a
             button inside an inline keyboard.
         element_id (str): The unique identifier for this object which makes a
             menu recognise it.
     """
 
-    name: str
-    element_id: str
+    def __init__(self, name: str, element_id: str):
+        self.element_id = element_id
+        self.name = name

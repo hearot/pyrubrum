@@ -16,7 +16,6 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
-from dataclasses import dataclass
 from functools import lru_cache
 from typing import Any
 from typing import Dict
@@ -32,21 +31,18 @@ Family = Tuple[Optional[BaseMenu], Optional[Set[BaseMenu]]]
 MenuIterable = Union[Dict[BaseMenu, Any], Iterable[BaseMenu]]
 
 
-@dataclass(eq=False, init=False, repr=True)
 class Node:
     """Representation of a single object in a tree, which might have defined a
     parent (i.e. the `Node` object it is child of) and a set of other nodes,
     which are its children. Each `Node` instance is linked to a subclass of
     `BaseMenu`.
 
-    Attributes:
-        menu (BaseMenu): The menu the node is linked to.
-        children (Optional[Set[Node]]): The nodes whose parent is this
-            instance. Defaults to an empty set on initialization.
+    Parameters:
+        menu (BaseMenu): The menu this node is being linked to.
+        children (Optional[Set[Node]]): The nodes whose parent is going
+            to be this instance. Defaults to ``None``, which makes the
+            children set an empty one.
     """
-
-    menu: BaseMenu
-    children: Optional[Set["Node"]]
 
     def __hash__(self) -> int:
         """The hash generator for a node, relying on the hash of the linked
@@ -58,21 +54,13 @@ class Node:
         return hash(self.menu)
 
     def __init__(self, menu: BaseMenu, children: Optional[Set["Node"]] = None):
-        """Initialize a node by defining its children and linking it to a menu.
-
-        Args:
-            menu (BaseMenu): The menu this node is being linked to.
-            children (Optional[Set[Node]]): The nodes whose parent is going
-                to be this instance. Defaults to ``None``, which makes the
-                children set an empty one.
-        """
         self.children = children if children else set()
         self.menu = menu
 
     def add_child(self, node: "Node"):
         """Add a `Node` instance to the set of children.
 
-        Args:
+        Parameters:
             node (Node): The node which is being added as a child of this
                 object.
         """
@@ -97,7 +85,7 @@ class Node:
         if matched. On failure, it will return a tuple of length two filled
         with null values (i.e. ``None``).
 
-        Args:
+        Parameters:
             menu_id (str): The identifier which must be matched.
             parent (Optional[Node]): The parent this ``Node`` comes from.
 
@@ -146,7 +134,7 @@ def recursive_add(menus: MenuIterable, parent: Node):
     called in a recursive way in order to link its elements to its parent
     `Node`.
 
-    Args:
+    Parameters:
         menus (MenuIterable): The provided iterable of the menus which are
             being added to the parent node. If it is a dictionary, the stored
             value for each key, if iterable, will be recursively provided as
@@ -167,7 +155,7 @@ def transform(menus: MenuIterable) -> Node:
     dictionary is provided as argument, its values will be transformed as
     well and added as children using ``recursive_add``.
 
-    Args:
+    Parameters:
         menus (Union[Dict[BaseMenu, Any], Iterable[BaseMenu]]): The iterable
             whose elements are `BaseMenu` instances.
 
