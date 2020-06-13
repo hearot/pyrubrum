@@ -29,7 +29,11 @@ from .database import DictDatabase  # noqa
 from .database import RedisDatabase  # noqa
 from .handlers import BaseHandler  # noqa
 from .handlers import Handler  # noqa
+from .handlers import on_callback_node  # noqa
+from .handlers import ParameterizedBaseHandler  # noqa
 from .handlers import ParameterizedHandler  # noqa
+from .handlers import pass_handler  # noqa
+from .handlers import pass_handler_and_clean  # noqa
 from .handlers import transform  # noqa
 from .keyboard import Button  # noqa
 from .keyboard import Element  # noqa
