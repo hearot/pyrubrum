@@ -16,9 +16,14 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
-from .delete_error import DeleteError  # noqa
-from .error import DatabaseError  # noqa
-from .expire_error import ExpireError  # noqa
-from .get_error import GetError  # noqa
-from .not_found_error import NotFoundError  # noqa
-from .set_error import SetError  # noqa
+from .error import DatabaseError
+
+
+class GetError(DatabaseError):
+    """Exception which is raised whenever an error occurs while getting a certain
+    key from the database"""
+
+    def __init__(self):
+        super().__init__(
+            "An error occured while getting a key from the database"
+        )

@@ -1,6 +1,6 @@
 ### New features
 
-   - Import all the public functions
+   - Import all the public functions ([c0a7deb30fbe75d6b8c37f71dcaaa49ba8b3ab8f](https://github.com/hearot/pyrubrum/commit/c0a7deb30fbe75d6b8c37f71dcaaa49ba8b3ab8f))
 
 ### Other changes
 
@@ -10,3 +10,4 @@
 ### ‼️ Breaking changes
 
    - Create specific directories for module entities ([25593e6d40fa34dbc47528ff3fa6fdc30c0a41b9](https://github.com/hearot/pyrubrum/commit/25593e6d40fa34dbc47528ff3fa6fdc30c0a41b9))
+   - `BaseDatabase.get` always returns a string (resolve #2)

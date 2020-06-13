@@ -41,10 +41,9 @@ class BaseDatabase(ABC):
     """
 
     @abstractmethod
-    def get(self, key: str) -> Optional[str]:
+    def get(self, key: str) -> str:
         """This abstract method is intended to be implemented in order to get the value
-        which is stored with a certain key inside the database, if any.
-        Otherwise, it will just return ``None``.
+        which is stored with a certain key inside the database.
 
         Args:
             key (str): The key you are retrieving the value of.
@@ -52,6 +51,11 @@ class BaseDatabase(ABC):
         Returns:
             Optional[str]: The value which is associated to the key, if any.
                 Otherwise, it is set to be ``None``.
+
+        Raises:
+            GetError: If an error occured while retrieving the key from the
+                database.
+            NotFoundError: If the provided key is not found.
         """
         raise NotImplementedError
 
@@ -88,5 +92,6 @@ class BaseDatabase(ABC):
 
         Raises:
             DeleteError: If an error occured while deleting the key.
+            NotFoundError: If the provided key is not found.
         """
         raise NotImplementedError

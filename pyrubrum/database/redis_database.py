@@ -22,6 +22,7 @@ from .base_database import BaseDatabase
 from .base_database import Expire
 from .errors import DeleteError
 from .errors import ExpireError
+from .errors import NotFoundError
 from .errors import SetError
 
 try:
@@ -68,9 +69,9 @@ class RedisDatabase(BaseDatabase):
         self.encoding = encoding
         self.server = server
 
-    def get(self, key: str) -> Optional[str]:
-        """Get the value which is stored with a certain key inside the database,
-        if any. Otherwise, it will just return ``None``.
+    def get(self, key: str) -> str:
+        """Get the value which is associated to a certain key inside the database.
+        If no key is found, ``NotFoundError``is raised.
 
         This method will query the key using `redis.Redis.get`.
 
@@ -81,9 +82,16 @@ class RedisDatabase(BaseDatabase):
         Returns:
             Optional[str]: The value which is associated to the key in the
                 database, if any. Otherwise, it is set to be ``None``.
+
+        Raises:
+            NotFoundError: If the provided key is not found.
         """
         content = self.server.get(key)
-        return content.decode(self.encoding) if content else None
+
+        if not content:
+            raise NotFoundError(key)
+
+        return content.decode(self.encoding)
 
     def set(self, key: str, value: str, expire: Expire = None):
         """Assign a value to a certain key inside the database. If no expire is
@@ -131,8 +139,10 @@ class RedisDatabase(BaseDatabase):
 
         Raises:
             DeleteError: If an error occured while deleting the key.
+            NotFoundError: If the provided key is not found.
         """
         try:
-            self.server.delete(key)
+            if not self.server.delete(key):
+                raise NotFoundError(key)
         except redis.RedisError:
             raise DeleteError

@@ -20,7 +20,7 @@ from typing import Optional
 
 from .base_database import BaseDatabase
 from .base_database import Expire
-from .errors import DeleteError
+from .errors import NotFoundError
 
 
 class DictDatabase(dict, BaseDatabase):
@@ -36,12 +36,11 @@ class DictDatabase(dict, BaseDatabase):
         mode.
     """
 
-    def get(self, key: str) -> Optional[str]:
-        """Get the value which is stored with a certain key inside the database,
-        if any. Otherwise, it will just return ``None``.
+    def get(self, key: str) -> str:
+        """Get the value which is associated to a certain key inside the database.
 
-        This method will query the key using `dict.get`, which automatically
-        returns ``None`` if the key has not been found.
+        This method will query the key using `dict.get`. If the key is not
+        defined within the dictionary, `NotFoundError` is raised.
 
         Args:
             key (str): The key you are retrieving the value of from the
@@ -50,7 +49,13 @@ class DictDatabase(dict, BaseDatabase):
         Returns:
             Optional[str]: The value which is associated to the key in the
                 dictionary, if any. Otherwise, it is set to be ``None``.
+
+        Raises:
+            NotFoundError: If the provided key is not found.
         """
+        if key not in self:
+            raise NotFoundError(key)
+
         return dict.get(self, key)
 
     def set(self, key: str, value: str, expire: Optional[Expire] = None):
@@ -80,9 +85,9 @@ class DictDatabase(dict, BaseDatabase):
                 together with its linked data.
 
         Raises:
-            DeleteError: If no key was found.
+            NotFoundError: If the provided key is not found.
         """
         try:
             self.pop(key)
         except KeyError:
-            raise DeleteError
+            raise NotFoundError(key)
