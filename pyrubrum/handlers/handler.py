@@ -116,7 +116,7 @@ class Handler(BaseHandler):
         )
 
 
-def on_callback_node(menus: MenuIterable, parent: Node):
+def recursive_add(menus: MenuIterable, parent: Node):
     """Link the provided menus to `Node` instances and add these ones to a provided
     parent. Finally, for each found value which is iterable, this function is
     called in a recursive way in order to link its elements to its parent
@@ -135,13 +135,13 @@ def on_callback_node(menus: MenuIterable, parent: Node):
         parent.add_child(node)
 
         if isinstance(menus, dict) and isinstance(menus[menu], Iterable):
-            on_callback_node(menus[menu], node)
+            recursive_add(menus[menu], node)
 
 
 def transform(menus: MenuIterable) -> Node:
     """Transform an iterable compounded of menus into a `Node` object. If a
     dictionary is provided as argument, its values will be transformed as
-    well and added as children using ``on_callback_node``.
+    well and added as children using ``recursive_add``.
 
     Args:
         menus (Union[Dict[BaseMenu, Any], Iterable[BaseMenu]]): The iterable
@@ -155,6 +155,6 @@ def transform(menus: MenuIterable) -> Node:
     main_value = list(menus.values())[0] if isinstance(menus, dict) else None
 
     if main_value:
-        on_callback_node(main_value, main_node)
+        recursive_add(main_value, main_node)
 
     return main_node

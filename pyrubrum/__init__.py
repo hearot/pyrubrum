@@ -35,7 +35,7 @@ from .database.errors import NotFoundError  # noqa
 from .database.errors import SetError  # noqa
 from .handlers import BaseHandler  # noqa
 from .handlers import Handler  # noqa
-from .handlers import on_callback_node  # noqa
+from .handlers import recursive_add  # noqa
 from .handlers import ParameterizedBaseHandler  # noqa
 from .handlers import ParameterizedHandler  # noqa
 from .handlers import pass_handler  # noqa
