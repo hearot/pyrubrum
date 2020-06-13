@@ -114,7 +114,7 @@ class Menu(BaseMenu):
 
     def get_content(
         self,
-        tree: "Handler",  # noqa
+        handler: "Handler",  # noqa
         client: Client,
         context: Union[CallbackQuery, Message],
         parameters: Dict[str, Any],
@@ -137,13 +137,13 @@ class Menu(BaseMenu):
                 `InputMedia`) or a message (if it is just a string).
         """
         if callable(self.content):
-            return self.content(tree, client, context, parameters)
+            return self.content(handler, client, context, parameters)
 
         return self.content
 
     def on_callback(
         self,
-        tree: "Handler",  # noqa
+        handler: "Handler",  # noqa
         client: Client,
         callback: CallbackQuery,
         parameters: Optional[Dict[str, Any]] = None,
@@ -172,25 +172,29 @@ class Menu(BaseMenu):
         if not parameters:
             parameters = {}
 
-        self.preliminary(tree, client, callback, parameters)
-        content = self.get_content(tree, client, callback, parameters)
+        self.preliminary(handler, client, callback, parameters)
+        content = self.get_content(handler, client, callback, parameters)
 
         if isinstance(content, InputMedia):
             callback.edit_message_media(
                 content,
-                reply_markup=self.keyboard(tree, client, callback, parameters),
+                reply_markup=self.keyboard(
+                    handler, client, callback, parameters
+                ),
             )
         elif isinstance(content, str):
             callback.edit_message_text(
                 content,
-                reply_markup=self.keyboard(tree, client, callback, parameters),
+                reply_markup=self.keyboard(
+                    handler, client, callback, parameters
+                ),
             )
         else:
             raise TypeError("content must be of type InputMedia or str")
 
     def on_message(
         self,
-        tree: "Handler",  # noqa
+        handler: "Handler",  # noqa
         client: Client,
         message: Message,
         parameters: Optional[Dict[str, Any]] = None,
@@ -215,27 +219,31 @@ class Menu(BaseMenu):
         if not parameters:
             parameters = {}
 
-        self.preliminary(tree, client, message, parameters)
-        content = self.get_content(tree, client, message, parameters)
+        self.preliminary(handler, client, message, parameters)
+        content = self.get_content(handler, client, message, parameters)
 
         if isinstance(content, InputMedia):
             message.reply_cached_media(
                 file_id=content.media,
                 file_ref=content.file_ref,
                 caption=content.caption,
-                reply_markup=self.keyboard(tree, client, message, parameters),
+                reply_markup=self.keyboard(
+                    handler, client, message, parameters
+                ),
             )
         elif isinstance(content, str):
             message.reply_text(
                 content,
-                reply_markup=self.keyboard(tree, client, message, parameters),
+                reply_markup=self.keyboard(
+                    handler, client, message, parameters
+                ),
             )
         else:
             raise TypeError("content must be of type InputMedia or str")
 
     def keyboard(
         self,
-        tree: "Handler",  # noqa
+        handler: "Handler",  # noqa
         client: Client,
         context: Union[CallbackQuery, Message],
         parameters: Dict[str, Any],
@@ -258,7 +266,7 @@ class Menu(BaseMenu):
                 displayed to the user.
         """
 
-        parent, children = tree.get_family(self.menu_id)
+        parent, children = handler.get_family(self.menu_id)
 
         keyboard = []
 
@@ -269,7 +277,7 @@ class Menu(BaseMenu):
                     lambda: list(
                         map(
                             lambda child: child.button(
-                                tree, client, context, parameters
+                                handler, client, context, parameters
                             ),
                             islice(iterable, self.limit),
                         )
@@ -279,7 +287,7 @@ class Menu(BaseMenu):
             )
 
         if parent:
-            parent_button = parent.button(tree, client, context, parameters)
+            parent_button = parent.button(handler, client, context, parameters)
             parent_button.name = self.back_button_text
 
             keyboard = keyboard + [[parent_button]]
@@ -288,18 +296,20 @@ class Menu(BaseMenu):
             return (
                 Keyboard(
                     keyboard,
-                    tree,
+                    handler,
                     str(context.message_id) + str(context.from_user.id),
                 )
                 if keyboard
                 else None
             )
         elif isinstance(context, CallbackQuery):
-            return Keyboard(keyboard, tree, context.id) if keyboard else None
+            return (
+                Keyboard(keyboard, handler, context.id) if keyboard else None
+            )
 
     def preliminary(
         self,
-        tree: "Handler",  # noqa
+        handler: "Handler",  # noqa
         client: Client,
         context: Union[CallbackQuery, Message],
         parameters: Dict[str, Any],

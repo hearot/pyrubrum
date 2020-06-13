@@ -140,7 +140,7 @@ class PageMenu(Menu):
 
     def keyboard(
         self,
-        tree: "ParameterizedHandler",  # noqa
+        handler: "ParameterizedHandler",  # noqa
         client: Client,
         context: Union[CallbackQuery, Message],
         parameters: Dict[str, Any],
@@ -183,7 +183,7 @@ class PageMenu(Menu):
             InlineKeyboardMarkup: The generated inline keyboard, which is then
                 displayed to the user.
         """
-        parent, children = tree.get_family(self.menu_id)
+        parent, children = handler.get_family(self.menu_id)
 
         keyboard = []
         items = []
@@ -200,7 +200,7 @@ class PageMenu(Menu):
             page_item_menu = next(iterable)
 
             if callable(self.items):
-                items = self.items(tree, client, context, parameters)
+                items = self.items(handler, client, context, parameters)
             elif isinstance(self.items, list):
                 items = self.items
             else:
@@ -229,7 +229,7 @@ class PageMenu(Menu):
                     lambda: list(
                         map(
                             lambda child: child.button(
-                                tree, client, context, parameters
+                                handler, client, context, parameters
                             ),
                             islice(iterable, self.limit),
                         )
@@ -276,7 +276,7 @@ class PageMenu(Menu):
             keyboard += [teleport_row]
 
         if parent:
-            parent_button = parent.button(tree, client, context, parameters)
+            parent_button = parent.button(handler, client, context, parameters)
             parent_button.name = self.back_button_text
 
             keyboard = keyboard + [[parent_button]]
@@ -285,11 +285,13 @@ class PageMenu(Menu):
             return (
                 Keyboard(
                     keyboard,
-                    tree,
+                    handler,
                     str(context.message_id) + str(context.from_user.id),
                 )
                 if keyboard
                 else None
             )
         elif isinstance(context, CallbackQuery):
-            return Keyboard(keyboard, tree, context.id) if keyboard else None
+            return (
+                Keyboard(keyboard, handler, context.id) if keyboard else None
+            )

@@ -15,7 +15,8 @@
 
 ### Other changes
 
-   - Update version to 0.1a1.dev6
+   - Rename all variables named `tree`to `handler`
+   - Update version to 0.1a1.dev6 ([477293742e2cc5b238d3bea9503045f2f41f8514](https://github.com/hearot/pyrubrum/commit/477293742e2cc5b238d3bea9503045f2f41f8514))
 
 ### ‼️ Breaking changes
 

@@ -34,7 +34,7 @@ from pyrubrum import RedisDatabase
 from pyrubrum import transform
 
 
-def generate_days(tree, client, context, parameters):
+def generate_days(handler, client, context, parameters):
     month = int(parameters["month_id"])
     year = int(parameters["year_id"])
 
@@ -52,7 +52,7 @@ def generate_years(start: int, end: int):
     return [Element(str(year), str(year)) for year in range(start, end + 1)]
 
 
-def tell_about_the_day(tree, client, context, parameters):
+def tell_about_the_day(handler, client, context, parameters):
     day = int(parameters["day_id"])
     month = int(parameters["month_id"])
     year = int(parameters["year_id"])
