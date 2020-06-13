@@ -124,6 +124,8 @@ class PageMenu(Menu):
                 if any. Defaults to "▶️".
             preliminary (Preliminary): A function which is executed each time
                 before doing anything else in `on_callback` and `on_message`.
+                You can provide a list of such functions as well, which will be
+                executed following the same order as the one of the list.
                 Defaults to ``None``, which means that no function is going to
                 be executed.
             previous_page_button_text (Optional[str]): The text which is

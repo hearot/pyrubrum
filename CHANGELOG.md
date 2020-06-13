@@ -15,12 +15,13 @@
 
 ### Fixes
 
-   - Delete `Menu.preliminary` in favour of the eponymous attribute
+   - Delete `Menu.preliminary` in favour of the eponymous attribute ([a4023312360a6295f4748dd08349dde99b3805bd](https://github.com/hearot/pyrubrum/commit/a4023312360a6295f4748dd08349dde99b3805bd))
 
 ### New features
 
    - Import all the public functions ([c0a7deb30fbe75d6b8c37f71dcaaa49ba8b3ab8f](https://github.com/hearot/pyrubrum/commit/c0a7deb30fbe75d6b8c37f71dcaaa49ba8b3ab8f))
    - Import database errors by default ([eb6bb8b5320676e1f474097e3738d54ddddb31e7](https://github.com/hearot/pyrubrum/commit/eb6bb8b5320676e1f474097e3738d54ddddb31e7))
+   - Support providing multiple preliminary functions
 
 ### Other changes
 

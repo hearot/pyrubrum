@@ -21,6 +21,7 @@ from itertools import islice
 from typing import Any
 from typing import Callable
 from typing import Dict
+from typing import List
 from typing import Optional
 from typing import Union
 
@@ -42,9 +43,22 @@ Content = Union[
 ]
 
 Preliminary = Optional[
-    Callable[
-        ["Handler", Client, Union[CallbackQuery, Message], Dict[str, Any]],
-        None,
+    Union[
+        Callable[
+            ["Handler", Client, Union[CallbackQuery, Message], Dict[str, Any]],
+            None,
+        ],
+        List[
+            Callable[
+                [
+                    "Handler",
+                    Client,
+                    Union[CallbackQuery, Message],
+                    Dict[str, Any],
+                ],
+                None,
+            ]
+        ],
     ]
 ]
 
@@ -66,9 +80,10 @@ class Menu(BaseMenu):
                 ``func(handler, client, context, parameters)``
         limit (Optional[int]): The limit of buttons per row. Defaults to 2.
         preliminary (Preliminary): A function which is executed each time
-            before doing anything else in `on_callback` and `on_message`.
-            Defaults to ``None``, which means that no function is going to
-            be executed.
+            before doing anything else in `on_callback` and `on_message`. You
+            can provide a list of such functions as well, which will be
+            executed following the same order as the one of the list. Defaults
+            to ``None``, which means that no function is going to be executed.
 
     Note:
         This implementation is compatible with a non parameterized handler.
@@ -119,6 +134,8 @@ class Menu(BaseMenu):
             limit (Optional[int]): The limit of buttons per row. Defaults to 2.
             preliminary (Preliminary): A function which is executed each time
                 before doing anything else in `on_callback` and `on_message`.
+                You can provide a list of such functions as well, which will be
+                executed following the same order as the one of the list.
                 Defaults to ``None``, which means that no function is going to
                 be executed.
         """
@@ -241,6 +258,9 @@ class Menu(BaseMenu):
 
         if callable(self.preliminary):
             self.preliminary(handler, client, message, parameters)
+        elif isinstance(self.preliminary, list):
+            for func in self.preliminary:
+                func(handler, client, message, parameters)
 
         content = self.get_content(handler, client, message, parameters)
 
