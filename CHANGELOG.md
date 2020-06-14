@@ -1,6 +1,12 @@
 # Changelog
 
-## v0.1a1.dev6
+## v0.1a1.dev7
+
+### Other changes
+
+   - Update version to 0.1a1.dev7
+
+## v0.1a1.dev6 - 2020-06-14
 
 ### Documentation
 
@@ -14,7 +20,7 @@
 
    - Delete `Menu.preliminary` in favour of the eponymous attribute ([a4023312360a6295f4748dd08349dde99b3805bd](https://github.com/hearot/pyrubrum/commit/a4023312360a6295f4748dd08349dde99b3805bd))
    - Edit documentation for `Menu.default` ([003137fdda1de337e6aa7fb0e81c7fcdfc4337d9](https://github.com/hearot/pyrubrum/commit/003137fdda1de337e6aa7fb0e81c7fcdfc4337d9))
-   - Upload correct changelog links to PyPi
+   - Upload correct changelog links to PyPi ([b9b4cdeb01d449f4c18322ce6c8a5f8f0ab47051](https://github.com/hearot/pyrubrum/commit/b9b4cdeb01d449f4c18322ce6c8a5f8f0ab47051))
 
 ### New features
 
