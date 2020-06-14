@@ -1,5 +1,5 @@
 DatabaseError
 =============
 
-.. autoclass:: pyrubrum.DatabaseError
+.. autoexception:: pyrubrum.DatabaseError
     :members:

@@ -1,21 +1,11 @@
 # Changelog
 
-## Table of contents
-
-   * [Current version](#Current-version)
-   * [v0.1a1.dev5 - 2020-06-12](#v01a1dev5---2020-06-12)
-   * [v0.1a1.dev4 - 2020-06-09](#v01a1dev4---2020-06-09)
-   * [v0.1a1.dev3 - 2020-06-09](#v01a1dev3---2020-06-09)
-   * [v0.1a1.dev2 - 2020-06-09](#v01a1dev2---2020-06-09)
-   * [v0.1a1.dev1 - 2020-06-09](#v01a1dev1---2020-06-09)
-   * [v0.1a1.dev0 - 2020-06-09](#v01a1dev0---2020-06-09)
-   * [v0.1a0 - 2020-06-09](#v01a0---2020-06-09)
-
-## Current version
+## v0.1a1.dev6
 
 ### Documentation
 
-   - Add Sphinx integration and stop using`dataclasses`
+   - Add Sphinx integration and stop using`dataclasses` ([63b3ad54ab218ec41c72cdf65086ff1e07a64200](https://github.com/hearot/pyrubrum/commit/63b3ad54ab218ec41c72cdf65086ff1e07a64200))
+   - Automatically copy files from the main directory
 
 ### Fixes
 

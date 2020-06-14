@@ -64,10 +64,10 @@ class Handler(BaseHandler):
 
         Returns:
             Tuple[Optional[BaseMenu], Optional[Set[BaseMenu]]]: A tuple of
-                length two, whose first element is the parent node of the
-                matched node while the second one is a set of all its children
-                If no `Node` is found, the tuple will be filled with null
-                values (i.e. ``None``).
+            length two, whose first element is the parent node of the
+            matched node while the second one is a set of all its children
+            If no `Node` is found, the tuple will be filled with null
+            values (i.e. ``None``).
         """
         return self.main_node.get_family(menu_id, None)
 

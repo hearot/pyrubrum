@@ -27,6 +27,8 @@ from collections import defaultdict
 from git import Repo
 from pathlib import Path
 
+import pyrubrum
+
 CHANGELOG_FILE = "CHANGELOG.md"
 COMMIT_URL_FORMAT = "https://github.com/%s/%s/commit/%%s"
 COMMIT_URL = ""
@@ -67,9 +69,7 @@ def add_date(repo: Repo, version: str) -> str:
 
 def commit_amend(repo: Repo):
     try:
-        repo.git.add(CHANGELOG_FILE)
-        repo.git.add(FEATURES_FILE)
-        repo.git.commit("--amend", "--no-edit", "--no-verify", "-S")
+        repo.git.commit("--amend", "--no-edit", "--no-verify", "-S", "-a")
     finally:
         os.remove(TEMP_FILE)
 
@@ -83,6 +83,9 @@ def generate_changelog(repo: Repo):
     tags = iter(tags_list)
     tag = ""
     next_tag = str(next(repo.iter_commits(max_count=1, max_parents=0)))
+
+    if "v" + pyrubrum.__version__ not in list(map(str, tags_list)):
+        CURRENT_VERSION = "v" + pyrubrum.__version__
 
     try:
         while True:
@@ -144,18 +147,19 @@ def generate_changelog(repo: Repo):
     )
 
     with open(changelog_file, "w", encoding="utf-8") as f:
-        f.write("# Changelog\n\n## Table of contents\n\n")
+        f.write("# Changelog\n")
 
-        for version in map(str, reversed(tags_list)):
-            version = version if version else CURRENT_VERSION
+        # f.write("\n## Table of contents\n\n")
+        # for version in map(str, reversed(tags_list)):
+        #     version = version if version else CURRENT_VERSION
 
-            if version != CURRENT_VERSION:
-                version = add_date(repo, version)
+        #     if version != CURRENT_VERSION:
+        #         version = add_date(repo, version)
 
-            f.write(
-                "   * [%s](#%s)\n"
-                % (version, version.replace(".", "").replace(" ", "-"))
-            )
+        #     f.write(
+        #         "   * [%s](#%s)\n"
+        #         % (version, version.replace(".", "").replace(" ", "-"))
+        #     )
 
         for version in map(str, reversed(tags_list)):
             version = version if version else CURRENT_VERSION

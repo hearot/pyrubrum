@@ -55,16 +55,16 @@ In order to make use of the proposed examples, you need to create your own envir
 
 ### Changelog
 
-> *See [CHANGELOG.md](./CHANGELOG.md).*
-> *Find new features in [FEATURES.md](./FEATURES.md).*
+> See [CHANGELOG.md](./CHANGELOG.md).
+> Find new features in [FEATURES.md](./FEATURES.md).
 
 ### Commit messages
 
-> *See [Conventional Commits](https://www.conventionalcommits.org).*
+> See [Conventional Commits](https://www.conventionalcommits.org).
 
 ### Versioning
 
-> *See [PEP 440](https://www.python.org/dev/peps/pep-0440/).*
+> See [PEP 440](https://www.python.org/dev/peps/pep-0440/).
 
 ### Thanks
 
@@ -73,7 +73,7 @@ In order to make use of the proposed examples, you need to create your own envir
 
 ### Branding
 
-> *See [hearot/pyrubrum-assets](https://github.com/hearot/pyrubrum-assets).*
+> See [hearot/pyrubrum-assets](https://github.com/hearot/pyrubrum-assets).
 
 ### Copyright & License
 

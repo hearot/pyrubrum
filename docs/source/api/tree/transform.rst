@@ -1,0 +1,4 @@
+transform
+=========
+
+.. autofunction:: pyrubrum.transform

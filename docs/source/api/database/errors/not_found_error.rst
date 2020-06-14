@@ -1,5 +1,5 @@
 NotFoundError
 =============
 
-.. autoclass:: pyrubrum.NotFoundError
+.. autoexception:: pyrubrum.NotFoundError
     :members:

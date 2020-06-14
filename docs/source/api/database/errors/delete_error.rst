@@ -1,5 +1,5 @@
 DeleteError
 ===========
 
-.. autoclass:: pyrubrum.DeleteError
+.. autoexception:: pyrubrum.DeleteError
     :members:

@@ -1,0 +1,4 @@
+Expire
+======
+
+.. autodata:: pyrubrum.Expire

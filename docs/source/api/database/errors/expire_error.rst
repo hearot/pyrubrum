@@ -1,5 +1,5 @@
 ExpireError
 ===========
 
-.. autoclass:: pyrubrum.ExpireError
+.. autoexception:: pyrubrum.ExpireError
     :members:

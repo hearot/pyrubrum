@@ -8,8 +8,19 @@ Welcome to Pyrubrum
     api/database/index
     api/database/errors/index
     api/handlers/index
+    api/keyboard/index
     api/menus/index
-    api/utils/index
+    api/tree/index
+    api/types/index
+
+.. toctree::
+    :hidden:
+    :caption: References
+
+    CHANGELOG
+    Code of Conduct <CODE_OF_CONDUCT>
+    Read me <README>
+    SECURITY
 
 .. raw:: html
 

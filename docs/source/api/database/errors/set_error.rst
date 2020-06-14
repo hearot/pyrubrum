@@ -1,5 +1,5 @@
 SetError
 ========
 
-.. autoclass:: pyrubrum.SetError
+.. autoexception:: pyrubrum.SetError
     :members:

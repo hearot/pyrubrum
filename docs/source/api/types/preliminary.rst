@@ -1,0 +1,4 @@
+Preliminary
+===========
+
+.. autodata:: pyrubrum.Preliminary

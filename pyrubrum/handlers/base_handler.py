@@ -65,7 +65,7 @@ class BaseHandler(ABC):
 
         Returns:
             Set[BaseMenu]: The set of the menus that were collected during
-                the lookup process.
+            the lookup process.
         """
         raise NotImplementedError
 
@@ -84,7 +84,7 @@ class BaseHandler(ABC):
 
         Returns:
             List[List[InlineKeyboardButton]]: The generated keyboard in a
-                Pyrogram-compatible type.
+            Pyrogram-compatible type.
         """
         return [
             [
@@ -135,7 +135,7 @@ def pass_handler(
 
     Returns:
         PyrogramCallback: The function which is being added to
-            a Pyrogram handler.
+        a Pyrogram handler.
 
     Warning:
         The functions the handlers make use of are not set up in the

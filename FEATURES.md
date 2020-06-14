@@ -1,6 +1,7 @@
 ### Documentation
 
-   - Add Sphinx integration and stop using`dataclasses`
+   - Add Sphinx integration and stop using`dataclasses` ([63b3ad54ab218ec41c72cdf65086ff1e07a64200](https://github.com/hearot/pyrubrum/commit/63b3ad54ab218ec41c72cdf65086ff1e07a64200))
+   - Automatically copy files from the main directory
 
 ### Fixes
 

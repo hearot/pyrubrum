@@ -141,3 +141,14 @@ unknown_errors.txt
 
 # Pyrubrum documentation
 docs/build
+
+# Documentation copied files
+docs/source/CHANGELOG.md
+docs/source/CODE_OF_CONDUCT.md
+docs/source/FEATURES.md
+docs/source/LICENSE
+docs/source/NOTICE
+docs/source/README.md
+docs/source/SECURITY.md
+docs/source/_static/*
+!docs/source/_static/assets

@@ -19,6 +19,7 @@
 import inspect
 import os
 import re
+import shutil
 from collections import defaultdict
 
 import pyrubrum
@@ -34,15 +35,25 @@ INDEX_TEMPLATE = """
 
 {tree}
 """
-SPECIAL_ENTITIES = ["Button", "Element", "Keyboard", "Node"]
+KEYBOARD_ENTITIES = ["Button", "Element", "Keyboard"]
 TEMPLATE = """{title}
 {separators}
 
 .. auto{object_type}:: pyrubrum.{name}
 {attributes}
 """
+TEMP_FILE = ".temp_post_commit"
+TREE_ENTITIES = ["Node", "recursive_add", "transform"]
+
+if os.path.isfile(TEMP_FILE):
+    exit()
 
 entities = defaultdict(list)
+
+try:
+    shutil.rmtree("docs/source/api")
+except (OSError, PermissionError):
+    pass
 
 
 def get_file_name(s: str) -> str:
@@ -58,12 +69,16 @@ for entity in filter(lambda e: not e.startswith("_"), dir(pyrubrum)):
     attributes = " " * 4
 
     if inspect.isclass(variable):
-        object_type = "class"
+        if issubclass(variable, Exception):
+            object_type = "exception"
+        else:
+            object_type = "class"
+
         attributes += CLASS_ATTRIBUTES
     elif inspect.isfunction(variable):
         object_type = "function"
-    elif isinstance(variable, Exception):
-        object_type = "exception"
+    else:
+        object_type = "data"
 
     content = TEMPLATE.format(
         attributes=attributes.rstrip(),
@@ -74,23 +89,33 @@ for entity in filter(lambda e: not e.startswith("_"), dir(pyrubrum)):
     ).strip()
     filename = get_file_name(entity) + FILE_EXTENSION
     dirname = os.path.dirname(os.path.realpath(__file__))
+    name = entity.lower()
 
-    if "Error" in entity:
+    if "error" in name:
         directory = "database/errors"
-    elif "Database" in entity:
+    elif "database" in name:
         directory = "database"
-    elif "Handler" in entity:
+    elif "handler" in name:
         directory = "handlers"
-    elif "Menu" in entity:
+    elif "menu" in name:
         directory = "menus"
-    elif entity[0].lower() == entity[0] or entity in SPECIAL_ENTITIES:
-        directory = "utils"
+    elif entity in KEYBOARD_ENTITIES:
+        directory = "keyboard"
+    elif entity in TREE_ENTITIES:
+        directory = "tree"
     else:
-        continue
+        directory = "types"
 
     entities[directory].append(entity)
 
-    path = os.path.join(dirname, "docs", "source", "api", directory, filename)
+    path = os.path.join(dirname, "docs", "source", "api", directory)
+
+    try:
+        os.makedirs(path, exist_ok=True)
+    except (FileNotFoundError, OSError, PermissionError):
+        pass
+
+    path = os.path.join(path, filename)
 
     with open(path, mode="w") as text:
         text.write(content)
@@ -106,9 +131,14 @@ for directory, elements in entities.items():
         title=title, separators="=" * len(title), tree=tree
     )
 
-    path = os.path.join(
-        dirname, "docs", "source", "api", directory, "index.rst"
-    )
+    path = os.path.join(dirname, "docs", "source", "api", directory)
+
+    try:
+        os.makedirs(path, exist_ok=True)
+    except (FileNotFoundError, OSError, PermissionError):
+        pass
+
+    path = os.path.join(path, "index.rst")
 
     with open(path, mode="w") as text:
         text.write(index.strip())

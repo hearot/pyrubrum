@@ -14,6 +14,9 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
+from os import listdir
+from shutil import copyfile
+
 import pyrubrum
 
 # -- Project information -----------------------------------------------------
@@ -21,6 +24,26 @@ import pyrubrum
 project = pyrubrum.__package__
 copyright = "2020, Hearot"
 author = pyrubrum.__author__
+
+root_files = ["CHANGELOG.md", "CODE_OF_CONDUCT.md", "README.md", "SECURITY.md"]
+copies = root_files + ["FEATURES.md"]
+
+for root_file in root_files:
+    copyfile("../../" + root_file, root_file)
+
+for root_file in copies:
+    copyfile("../../" + root_file, "_static/" + root_file)
+
+for example in filter(lambda f: f.endswith(".py"), listdir("../../examples")):
+    copyfile("../../examples/" + example, "_static/examples/" + example)
+
+copyfile("../../examples/sample.env", "_static/examples/sample.env")
+
+with open("README.md", "r", encoding="utf-8") as readme:
+    content = readme.read().replace("./", "_static/")
+
+with open("README.md", "w", encoding="utf-8") as readme:
+    readme.write(content)
 
 # The full version, including alpha/beta/rc tags
 release = pyrubrum.__version__
@@ -42,6 +65,7 @@ default_role = "py:obj"
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    "m2r",
     "sphinx.ext.intersphinx",
     "sphinx.ext.napoleon",
     "sphinx_rtd_theme",
