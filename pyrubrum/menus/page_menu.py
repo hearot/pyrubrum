@@ -18,9 +18,7 @@
 
 from itertools import islice
 from typing import Any
-from typing import Callable
 from typing import Dict
-from typing import List
 from typing import Optional
 from typing import Union
 
@@ -31,23 +29,9 @@ from pyrogram import InputMedia
 from pyrogram import Message
 
 from pyrubrum.keyboard import Button
-from pyrubrum.keyboard import Element
 from pyrubrum.keyboard import Keyboard
+from pyrubrum.types import Types
 from .menu import Menu
-from .menu import Preliminary
-
-Items = Union[
-    List[Element],
-    Callable[
-        [
-            "ParameterizedHandler",
-            Client,
-            Union[CallbackQuery, Message],
-            Dict[str, Any],
-        ],
-        List[Element],
-    ],
-]
 
 
 class PageMenu(Menu):
@@ -65,16 +49,16 @@ class PageMenu(Menu):
             refer unequivocally to this entity. The hash for this class is
             generated relying on the content of this field. See `BaseMenu`
             for more information.
-        content (Content): What will be displayed whenever a user accesses
-            this menu. Both text and media can be provided. A function can
-            be provided as well and must follow the following arguments
-            pattern::
+        content (Types.Content): What will be displayed whenever a user
+            accesses this menu. Both text and media can be provided. A
+            function can be provided as well and must follow the following
+            arguments pattern::
 
                 func(handler, client, context, parameters)
 
             See `Menu` for more information.
-        items (Items): The list of elements the menu is compounded of or a
-            function which returns such type of value.
+        items (types.Items): The list of elements the menu is compounded of or
+            a function which returns such type of value.
         back_button_text (Optional[str]): The text which will be displayed
             inside the button that lets the user go back to the parent
             menu. Defaults to "🔙". See `Menu` for more information.
@@ -85,7 +69,7 @@ class PageMenu(Menu):
         next_page_button_text (Optional[str]): The text which is displayed
             inside the button that lets the user move on to the next page,
             if any. Defaults to "▶️".
-        preliminary (Preliminary): A function which is executed each time
+        preliminary (Types.Preliminary): A function which is executed each time
             before doing anything else in `on_callback` and `on_message`.
             You can provide a list of such functions as well, which will be
             executed following the same order as the one of the list.
@@ -105,12 +89,12 @@ class PageMenu(Menu):
         name: str,
         menu_id: str,
         content: Union[InputMedia, str],
-        items: Items,
+        items: Types.Items,
         back_button_text: Optional[str] = "🔙",
         limit: Optional[int] = 2,
         limit_page: Optional[int] = 4,
         next_page_button_text: Optional[str] = "▶️",
-        preliminary: Preliminary = None,
+        preliminary: Types.Preliminary = None,
         previous_page_button_text: Optional[str] = "◀️",
     ):
         Menu.__init__(

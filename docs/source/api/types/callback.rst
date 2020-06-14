@@ -1,4 +1,0 @@
-Callback
-========
-
-.. autodata:: pyrubrum.Callback

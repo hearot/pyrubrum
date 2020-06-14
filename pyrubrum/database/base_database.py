@@ -18,11 +18,9 @@
 
 from abc import ABC
 from abc import abstractmethod
-from datetime import timedelta
 from typing import Optional
-from typing import Union
 
-Expire = Optional[Union[bool, int, timedelta]]
+from pyrubrum.types import Types
 
 
 class BaseDatabase(ABC):
@@ -60,7 +58,7 @@ class BaseDatabase(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def set(self, key: str, value: str, expire: Optional[Expire] = None):
+    def set(self, key: str, value: str, expire: Optional[Types.Expire] = None):
         """This abstract method is intended to be implemented in order to assign a
         value to a certain key inside the database. It may even be marked with
         an expire as to avoid having too much unused data stored inside the
@@ -69,7 +67,7 @@ class BaseDatabase(ABC):
         Parameters:
             key (str): The key you are adding or updating the value of.
             value (str): The value which is being assigned to the key.
-            expire (Optional[Expire]): The expire in seconds or as a
+            expire (Optional[Types.Expire]): The expire in seconds or as a
                 `timedelta` object. A key is set not to expire if ``False`` is
                 provided for this argument. Defaults to ``None``.
 

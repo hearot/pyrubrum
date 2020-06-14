@@ -28,9 +28,8 @@ from pyrogram.client.filters.filters import Filter
 
 from pyrubrum.keyboard import Button
 from pyrubrum.database import BaseDatabase
+from pyrubrum.types import Types
 from .base_handler import BaseHandler
-from .base_handler import Callback
-from .base_handler import PyrogramCallback
 
 try:
     import orjson as json  # noqa
@@ -217,8 +216,8 @@ class ParameterizedBaseHandler(BaseHandler):
 
 
 def pass_handler_and_clean(
-    func: Callback, handler: ParameterizedBaseHandler
-) -> PyrogramCallback:
+    func: Types.Callback, handler: ParameterizedBaseHandler
+) -> Types.PyrogramCallback:
     """Generate a function which, whenever it is called, subsequently calls
     `callback`, passing the handler from which this object was generated, and
     then deletes the key which is associated to the handled query from the
@@ -226,14 +225,14 @@ def pass_handler_and_clean(
     provided in order to work.
 
     Parameters:
-        callback (Callback): The callback function which
+        callback (Types.Callback): The callback function which
             automatically gets called by the generated function.
         handler (ParameterizedBaseHandler): The handler object which made
             use of this function in order to provide this one as a callback
             to a Pyrogram handler.
 
     Returns:
-        PyrogramCallback: The function which is being added to
+        Types.PyrogramCallback: The function which is being added to
         a Pyrogram handler.
 
     Warning:

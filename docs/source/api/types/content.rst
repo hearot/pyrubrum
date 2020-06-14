@@ -1,4 +1,0 @@
-Content
-=======
-
-.. autodata:: pyrubrum.Content

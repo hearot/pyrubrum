@@ -1,4 +1,0 @@
-PyrogramCallback
-================
-
-.. autodata:: pyrubrum.PyrogramCallback

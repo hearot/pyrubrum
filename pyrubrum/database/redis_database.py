@@ -19,11 +19,12 @@
 from typing import Optional
 
 from .base_database import BaseDatabase
-from .base_database import Expire
 from .errors import DeleteError
 from .errors import ExpireError
 from .errors import NotFoundError
 from .errors import SetError
+
+from pyrubrum.types import Types
 
 try:
     import redis
@@ -39,8 +40,8 @@ class RedisDatabase(BaseDatabase):
         encoding (Optional[str]): The encoding format which shall be used
             to decode the content that is retrieved from the Redis server.
             Defaults to "utf-8".
-        default_expire (Expire): The expire which is set by default. If it
-            is ``False``, no expire shall be set. Defaults to 86400 seconds
+        default_expire (Types.Expire): The expire which is set by default. If
+            it is ``False``, no expire shall be set. Defaults to 86400 seconds
             (i.e. a day).
     """
 
@@ -48,7 +49,7 @@ class RedisDatabase(BaseDatabase):
         self,
         server: "redis.Redis",
         encoding: Optional[str] = "utf-8",
-        default_expire: Optional[Expire] = 86400,
+        default_expire: Optional[Types.Expire] = 86400,
     ):
         self.default_expire = default_expire
         self.encoding = encoding
@@ -78,7 +79,7 @@ class RedisDatabase(BaseDatabase):
 
         return content.decode(self.encoding)
 
-    def set(self, key: str, value: str, expire: Expire = None):
+    def set(self, key: str, value: str, expire: Types.Expire = None):
         """Assign a value to a certain key inside the database. If no expire is
         provided, it will automatically provide one from `default_expire`. If
         the expire is set to be ``False``, no expire flag will be assigned.
@@ -89,7 +90,7 @@ class RedisDatabase(BaseDatabase):
         Parameters:
             key (str): The key you are adding or updating the value of.
             value (str): The value which is being assigned to the key.
-            expire (Optional[Expire]): The expire in seconds or as a
+            expire (Optional[Types.Expire]): The expire in seconds or as a
                 `timedelta` object. A key is set not to expire if ``False`` is
                 provided for this argument. Defaults to ``None``, which
                 automatically provides a default expire from `default_expire`.

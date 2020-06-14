@@ -20,7 +20,6 @@ from itertools import islice
 from typing import Any
 from typing import Callable
 from typing import Dict
-from typing import List
 from typing import Optional
 from typing import Union
 
@@ -31,35 +30,8 @@ from pyrogram import InputMedia
 from pyrogram import Message
 
 from pyrubrum.keyboard import Keyboard
+from pyrubrum.types import Types
 from .base_menu import BaseMenu
-
-Content = Union[
-    Union[InputMedia, str],
-    Callable[
-        ["Handler", Client, Union[CallbackQuery, Message], Dict[str, Any]],
-        Union[InputMedia, str],
-    ],
-]
-
-Preliminary = Optional[
-    Union[
-        Callable[
-            ["Handler", Client, Union[CallbackQuery, Message], Dict[str, Any]],
-            None,
-        ],
-        List[
-            Callable[
-                [
-                    "Handler",
-                    Client,
-                    Union[CallbackQuery, Message],
-                    Dict[str, Any],
-                ],
-                None,
-            ]
-        ],
-    ]
-]
 
 
 class Menu(BaseMenu):
@@ -76,10 +48,10 @@ class Menu(BaseMenu):
             refer unequivocally to this entity. The hash for this class is
             generated relying on the content of this field. See `BaseMenu`
             for more information.
-        content (Content): What will be displayed whenever a user accesses
-            this menu. Both text and media can be provided. A function can
-            be provided as well and must follow the following arguments
-            pattern::
+        content (Types.Content): What will be displayed whenever a user
+            accesses this menu. Both text and media can be provided. A
+            function can be provided as well and must follow the following
+            arguments pattern::
 
                 func(handler, client, context, parameters)
 
@@ -87,7 +59,7 @@ class Menu(BaseMenu):
             inside the button that lets the user go back to the parent
             menu. Defaults to "🔙".
         limit (Optional[int]): The limit of buttons per row. Defaults to 2.
-        preliminary (Preliminary): A function which is executed each time
+        preliminary (Types.Preliminary): A function which is executed each time
             before doing anything else in `on_callback` and `on_message`.
             You can provide a list of such functions as well, which will be
             executed following the same order as the one of the list.
@@ -116,7 +88,7 @@ class Menu(BaseMenu):
         ],
         back_button_text: Optional[str] = "🔙",
         limit: Optional[int] = 2,
-        preliminary: Preliminary = None,
+        preliminary: Types.Preliminary = None,
     ):
         BaseMenu.__init__(self, name, menu_id)
         self.back_button_text = back_button_text

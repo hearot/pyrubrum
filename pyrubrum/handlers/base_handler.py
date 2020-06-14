@@ -18,28 +18,16 @@
 
 from abc import ABC
 from abc import abstractmethod
-from typing import Callable
 from typing import List
 from typing import Set
-from typing import Union
 
-from pyrogram import CallbackQuery
 from pyrogram import CallbackQueryHandler
 from pyrogram import Client
-from pyrogram import Message
 from pyrogram import Filters
 from pyrogram import InlineKeyboardButton
 
 from pyrubrum.keyboard import Button
-
-Callback = Union[
-    Callable[["BaseHandler", Client, CallbackQuery], None],
-    Callable[["BaseHandler", Client, Message], None],
-]
-
-PyrogramCallback = Union[
-    Callable[[Client, CallbackQuery], None], Callable[[Client, Message], None],
-]
+from pyrubrum.types import Types
 
 
 class BaseHandler(ABC):
@@ -121,20 +109,20 @@ class BaseHandler(ABC):
 
 
 def pass_handler(
-    callback: Callback, handler: BaseHandler,
-) -> PyrogramCallback:
+    callback: Types.Callback, handler: BaseHandler,
+) -> Types.PyrogramCallback:
     """Generate a function which, whenever it is called, subsequently calls
     `callback`, passing the handler from which this object was generated.
 
     Parameters:
-        callback (Callback): The callback function which
+        callback (Types.Callback): The callback function which
             automatically gets called by the generated function.
         handler (BaseHandler): The handler object which made use of this
             function in order to provide this one as a callback to a
             Pyrogram handler.
 
     Returns:
-        PyrogramCallback: The function which is being added to
+        Types.PyrogramCallback: The function which is being added to
         a Pyrogram handler.
 
     Warning:

@@ -1,4 +1,0 @@
-Items
-=====
-
-.. autodata:: pyrubrum.Items

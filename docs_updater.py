@@ -20,6 +20,7 @@ import inspect
 import os
 import re
 import shutil
+import sys
 from collections import defaultdict
 
 import pyrubrum
@@ -45,7 +46,7 @@ TEMPLATE = """{title}
 TEMP_FILE = ".temp_post_commit"
 TREE_ENTITIES = ["Node", "recursive_add", "transform"]
 
-if os.path.isfile(TEMP_FILE):
+if os.path.isfile(TEMP_FILE) and sys.argv[-1] != "generate":
     exit()
 
 entities = defaultdict(list)

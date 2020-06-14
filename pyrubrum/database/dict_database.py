@@ -19,8 +19,9 @@
 from typing import Optional
 
 from .base_database import BaseDatabase
-from .base_database import Expire
 from .errors import NotFoundError
+
+from pyrubrum.types import Types
 
 
 class DictDatabase(dict, BaseDatabase):
@@ -57,7 +58,7 @@ class DictDatabase(dict, BaseDatabase):
 
         return dict.get(self, key)
 
-    def set(self, key: str, value: str, expire: Optional[Expire] = None):
+    def set(self, key: str, value: str, expire: Optional[Types.Expire] = None):
         """Assign a value to a certain key inside the database. Note that this
         implementation ignores the setting of any expires.
 
@@ -67,8 +68,8 @@ class DictDatabase(dict, BaseDatabase):
         Parameters:
             key (str): The key you are adding or updating the value of.
             value (str): The value which is being assigned to the key.
-            expire (Optional[Expire]): It gets ignored by this implementation.
-                Defaults to ``None``.
+            expire (Optional[Types.Expire]): It gets ignored by this
+                implementation. Defaults to ``None``.
         """
 
         self.update({key: value})
