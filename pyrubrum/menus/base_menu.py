@@ -48,7 +48,9 @@ class BaseMenu(ABC):
             text of callback button, if needed.
         menu_id (str): The unique identifier given to the menu, which will
             refer unequivocally to this entity. The hash for this class is
-            generated relying on the content of this field.
+            generated relying on the content of this field. Avoid using ``0``
+            as it is used for buttons whose purpose is only related to design
+            (i.e. they do not point to any menu).
 
     Note:
         In order to create a subclass or to access this interface, you will

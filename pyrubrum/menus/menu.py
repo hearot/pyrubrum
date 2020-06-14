@@ -47,7 +47,9 @@ class Menu(BaseMenu):
             information.
         menu_id (str): The unique identifier given to the menu, which will
             refer unequivocally to this entity. The hash for this class is
-            generated relying on the content of this field. See `BaseMenu`
+            generated relying on the content of this field. Avoid using ``0``
+            as it is used for buttons whose purpose is only related to
+            design (i.e. they do not point to any menu). See `BaseMenu`
             for more information.
         content (Types.Content): What will be displayed whenever a user
             accesses this menu. Both text and media can be provided. A
@@ -79,7 +81,7 @@ class Menu(BaseMenu):
             be executed.
 
     Note:
-        This implementation is compatible with a non parameterized handler.
+        This implementation is compatible with a non-parameterized handler.
     """
 
     def __init__(

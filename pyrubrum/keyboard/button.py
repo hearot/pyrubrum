@@ -79,3 +79,5 @@ class Button:
 
             self.parameters["button_id"] = button_id
             self.parameters["same_menu"] = same_menu
+        else:
+            self.parameters = None

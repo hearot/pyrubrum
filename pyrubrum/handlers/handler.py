@@ -32,7 +32,7 @@ from .base_handler import pass_handler
 
 
 class Handler(BaseHandler):
-    """Implementation of a simple handler for non parameterized menus which has
+    """Implementation of a simple handler for non-parameterized menus which has
     got, by definition, multiple top-level nodes whose linked menus are
     displayed to the user whenever a message is being handled and matches one
     of their filters.

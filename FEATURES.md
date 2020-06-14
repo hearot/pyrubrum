@@ -9,10 +9,11 @@
 ### Fixes
 
    - Delete `Menu.preliminary` in favour of the eponymous attribute ([a4023312360a6295f4748dd08349dde99b3805bd](https://github.com/hearot/pyrubrum/commit/a4023312360a6295f4748dd08349dde99b3805bd))
-   - Edit documentation for `Menu.default`
+   - Edit documentation for `Menu.default` ([003137fdda1de337e6aa7fb0e81c7fcdfc4337d9](https://github.com/hearot/pyrubrum/commit/003137fdda1de337e6aa7fb0e81c7fcdfc4337d9))
 
 ### New features
 
+   - Add `PageStyle` for customizing `PageMenu` layouts
    - Do not pass parameters to content functions if not supported ([dad5907521d635701cbea12ac736b4f0362e41e6](https://github.com/hearot/pyrubrum/commit/dad5907521d635701cbea12ac736b4f0362e41e6))
    - Import all the public functions ([c0a7deb30fbe75d6b8c37f71dcaaa49ba8b3ab8f](https://github.com/hearot/pyrubrum/commit/c0a7deb30fbe75d6b8c37f71dcaaa49ba8b3ab8f))
    - Import database errors by default ([eb6bb8b5320676e1f474097e3738d54ddddb31e7](https://github.com/hearot/pyrubrum/commit/eb6bb8b5320676e1f474097e3738d54ddddb31e7))

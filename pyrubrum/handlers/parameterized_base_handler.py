@@ -160,8 +160,10 @@ class ParameterizedBaseHandler(BaseHandler):
             for button in row:
                 content[button.button_id] = {
                     "callback_query_id": str(callback_query_id),
-                    **button.parameters,
                 }
+
+                if isinstance(button.parameters, dict):
+                    content[button.button_id].update(button.parameters)
 
         self.database.set(callback_query_id, json.dumps(content))
 

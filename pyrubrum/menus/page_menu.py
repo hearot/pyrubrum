@@ -17,6 +17,7 @@
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
 from itertools import islice
+from math import ceil
 from typing import Any
 from typing import Dict
 from typing import Optional
@@ -33,6 +34,7 @@ from pyrubrum.keyboard import Button
 from pyrubrum.keyboard import Keyboard
 from pyrubrum.types import Types
 from .menu import Menu
+from .styles import PageStyle
 
 
 class PageMenu(Menu):
@@ -48,8 +50,10 @@ class PageMenu(Menu):
             information.
         menu_id (str): The unique identifier given to the menu, which will
             refer unequivocally to this entity. The hash for this class is
-            generated relying on the content of this field. See `BaseMenu`
-            for more information.
+            generated relying on the content of this field. Avoid using ``0``
+            as it is used for buttons whose purpose is only related to design
+            (i.e. they do not point to any menu). See `BaseMenu` for more
+            information.
         content (Types.Content): What will be displayed whenever a user
             accesses this menu. Both text and media can be provided. A
             function can be provided as well and must follow the following
@@ -81,6 +85,9 @@ class PageMenu(Menu):
         next_page_button_text (Optional[str]): The text which is displayed
             inside the button that lets the user move on to the next page,
             if any. Defaults to "▶️".
+        page_style (Optional[int]): The chosen style for displaying the page.
+            See `PageStyle`. Defaults to
+            `PageStyle.SHOW_PAGE | PageStyle.HIDE_ON_SINGLE_PAGE`.
         preliminary (Types.Preliminary): A function which is executed each time
             before doing anything else in `on_callback` and `on_message`.
             You can provide a list of such functions as well, which will be
@@ -92,7 +99,7 @@ class PageMenu(Menu):
             previous page, if any. Defaults to "◀️".
 
     Warning:
-        This implementation is not compatible with a non parameterized handler.
+        This implementation is not compatible with a non-parameterized handler.
         An handler that supports parameterization is required.
     """
 
@@ -108,6 +115,8 @@ class PageMenu(Menu):
         limit_page: Optional[int] = 4,
         message_filter: Optional[Filter] = None,
         next_page_button_text: Optional[str] = "▶️",
+        page_style: Optional[int] = PageStyle.SHOW_PAGE
+        | PageStyle.HIDE_ON_SINGLE_PAGE,
         preliminary: Types.Preliminary = None,
         previous_page_button_text: Optional[str] = "◀️",
     ):
@@ -126,6 +135,7 @@ class PageMenu(Menu):
         self.items = items
         self.limit_page = limit_page
         self.next_page_button_text = next_page_button_text
+        self.page_style = page_style
         self.previous_page_button_text = previous_page_button_text
 
     def keyboard(
@@ -230,6 +240,7 @@ class PageMenu(Menu):
             )
 
         teleport_row = []
+        pages = ceil(len(items) / self.limit_page)
 
         if parameters[page_id] > 0:
             previous_page_button = Button(
@@ -246,6 +257,22 @@ class PageMenu(Menu):
                 ] = parameters[self.menu_id + "_id"]
 
             teleport_row.append(previous_page_button)
+
+        if self.page_style != PageStyle.NO_PAGE and (
+            self.page_style % 2 != 1 or not pages <= 1
+        ):
+            if self.page_style >= PageStyle.SHOW_COUNTER:
+                page_button = Button(
+                    "%d/%d" % (parameters[page_id] + 1, pages),
+                    str(parameters[page_id]),
+                    "0",
+                )
+
+                teleport_row.append(page_button)
+            else:
+                page_button = Button(str(parameters[page_id] + 1), "0")
+
+                teleport_row.append(page_button)
 
         if (parameters[page_id] + 1) * self.limit_page < len(items):
             next_page_button = Button(

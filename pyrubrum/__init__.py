@@ -45,6 +45,7 @@ from .keyboard import Keyboard  # noqa
 from .menus import BaseMenu  # noqa
 from .menus import Menu  # noqa
 from .menus import PageMenu  # noqa
+from .menus import PageStyle  # noqa
 from .types import Types  # noqa
 from .tree import Node  # noqa
 from .tree import recursive_add  # noqa

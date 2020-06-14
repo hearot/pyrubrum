@@ -69,7 +69,9 @@ def add_date(repo: Repo, version: str) -> str:
 
 def commit_amend(repo: Repo):
     try:
-        repo.git.commit("--amend", "--no-edit", "--no-verify", "-S", "-a")
+        repo.git.add(CHANGELOG_FILE)
+        repo.git.add(FEATURES_FILE)
+        repo.git.commit("--amend", "--no-edit", "--no-verify", "-S")
     finally:
         os.remove(TEMP_FILE)
 
