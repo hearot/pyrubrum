@@ -20,7 +20,6 @@ import inspect
 import os
 import re
 import shutil
-import sys
 from collections import defaultdict
 
 import pyrubrum
@@ -43,11 +42,7 @@ TEMPLATE = """{title}
 .. auto{object_type}:: pyrubrum.{name}
 {attributes}
 """
-TEMP_FILE = ".temp_post_commit"
 TREE_ENTITIES = ["Node", "recursive_add", "transform"]
-
-if os.path.isfile(TEMP_FILE) and sys.argv[-1] != "generate":
-    exit()
 
 entities = defaultdict(list)
 
@@ -94,6 +89,8 @@ for entity in filter(lambda e: not e.startswith("_"), dir(pyrubrum)):
 
     if "error" in name:
         directory = "database/errors"
+    elif "style" in name:
+        directory = "styles"
     elif "database" in name:
         directory = "database"
     elif "handler" in name:

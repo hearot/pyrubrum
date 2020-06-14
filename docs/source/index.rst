@@ -10,6 +10,7 @@ Welcome to Pyrubrum
     api/handlers/index
     api/keyboard/index
     api/menus/index
+    api/styles/index
     api/tree/index
     api/types/index
 

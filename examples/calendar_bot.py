@@ -30,6 +30,7 @@ from pyrubrum import Element
 from pyrubrum import Menu
 from pyrubrum import Node
 from pyrubrum import PageMenu
+from pyrubrum import PageStyle
 from pyrubrum import ParameterizedHandler
 from pyrubrum import RedisDatabase
 from pyrubrum import transform
@@ -69,24 +70,21 @@ tree = transform(
             "📅 Choose a year.",
             generate_years(1970, 2044),
             default=True,
-            limit_page=15,
-            limit=4,
+            style=PageStyle(limit=4, limit_items=15),
         ): {
             PageMenu(
                 "Month menu",
                 "year",
                 "📅 Choose a month.",
                 generate_months(),
-                limit=5,
-                limit_page=12,
+                style=PageStyle(limit=5, limit_items=12),
             ): {
                 PageMenu(
                     "Day menu",
                     "month",
                     "📅 Choose a day.",
                     generate_days,
-                    limit_page=31,
-                    limit=5,
+                    style=PageStyle(limit=5, limit_items=31),
                 ): {Menu("Choose day menu", "day", tell_about_the_day)}
             }
         }

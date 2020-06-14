@@ -16,26 +16,6 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
-from enum import IntFlag
-
-
-class PageStyle(IntFlag):
-    NO_PAGE = 0
-    """Do just show the arrows for moving on to the next menu or going
-    back to the previous menu.
-    """
-
-    HIDE_ON_SINGLE_PAGE = 1
-    """Hide the page counter if there is only one page.
-    """
-
-    SHOW_PAGE = 2
-    """Show the arrows for moving on to the next menu or going back to
-    the previous menu with the number of the current page between them.
-    """
-
-    SHOW_COUNTER = 4
-    """Show the arrows for moving on to the next menu or going back to
-    the previous menu with the number of the current page and the number
-    of total pages between them.
-    """
+from .base_style import BaseStyle  # noqa
+from .menu_style import MenuStyle  # noqa
+from .page_style import PageStyle  # noqa

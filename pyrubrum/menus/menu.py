@@ -16,7 +16,6 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
-from itertools import islice
 from typing import Any
 from typing import Callable
 from typing import Dict
@@ -31,6 +30,8 @@ from pyrogram import Message
 from pyrogram.client.filters.filters import Filter
 
 from pyrubrum.keyboard import Keyboard
+from pyrubrum.menus.styles import MenuStyle
+from pyrubrum.menus.styles import BaseStyle
 from pyrubrum.types import Types
 from .base_menu import BaseMenu
 
@@ -40,6 +41,13 @@ class Menu(BaseMenu):
     (i.e. what the user will see by accessing it), a limit of buttons displayed
     per row and a custom text displayed for going back to the parent menu, if
     any.
+
+    See Also:
+        For complete examples of styles you can make use of:
+
+        * `MenuStyle`
+        * `PageStyle` (although it is recommended to just use
+          `PageMenu` instead)
 
     Parameters:
         name (str): The name you give to the menu, which will be used as
@@ -58,13 +66,9 @@ class Menu(BaseMenu):
 
                 func(handler, client, context, parameters)
 
-        back_button_text (Optional[str]): The text which will be displayed
-            inside the button that lets the user go back to the parent
-            menu. Defaults to "🔙".
         default (Optional[bool]): If this menu shall be displayed if no
             other top-level menu has been matched. It works only if this
             menu is a top-level one.
-        limit (Optional[int]): The limit of buttons per row. Defaults to 2.
         message_filter (Optional[Filter]): A filter for telling Pyrogram
             when a message should be associated to this menu. It works only
             for top-level menus (see `Handler.setup`). Defaults to ``None``,
@@ -79,6 +83,8 @@ class Menu(BaseMenu):
             executed following the same order as the one of the list.
             Defaults to ``None``, which means that no function is going to
             be executed.
+        style (BaseStyle): The class which generates the keyboard for this
+            function following a certain style. Defaults to `MenuStyle()`.
 
     Note:
         This implementation is compatible with a non-parameterized handler.
@@ -100,19 +106,22 @@ class Menu(BaseMenu):
                 Union[InputMedia, str],
             ],
         ],
-        back_button_text: Optional[str] = "🔙",
         default: Optional[bool] = False,
-        limit: Optional[int] = 2,
         message_filter: Optional[Filter] = None,
         preliminary: Types.Preliminary = None,
+        style: BaseStyle = MenuStyle(),
+        **kwargs
     ):
         BaseMenu.__init__(self, name, menu_id)
-        self.back_button_text = back_button_text
         self.content = content
         self.default = default
-        self.limit = limit
         self.message_filter = message_filter
         self.preliminary = preliminary
+        self.style = style
+
+        for argument in kwargs:
+            if not hasattr(self, argument):
+                setattr(self, argument, kwargs[argument])
 
     def get_content(
         self,
@@ -260,9 +269,7 @@ class Menu(BaseMenu):
         context: Union[CallbackQuery, Message],
         parameters: Optional[Dict[str, Any]] = None,
     ) -> InlineKeyboardMarkup:
-        """Provide a keyboard, filled with all the buttons which refer to the menus
-        that are linked to the children of this menu node and a special button
-        for linking the user to the parent menu, if any.
+        """Provide a keyboard using the chosen style in `Menu.style`.
 
         Parameters:
             handler (BaseHandler): The handler which coordinates the management
@@ -278,31 +285,9 @@ class Menu(BaseMenu):
             displayed to the user.
         """
 
-        parent, children = handler.get_family(self.menu_id)
-
-        keyboard = []
-
-        if children:
-            iterable = iter(children)
-            keyboard = list(
-                iter(
-                    lambda: list(
-                        map(
-                            lambda child: child.button(
-                                handler, client, context, parameters
-                            ),
-                            islice(iterable, self.limit),
-                        )
-                    ),
-                    [],
-                )
-            )
-
-        if parent:
-            parent_button = parent.button(handler, client, context, parameters)
-            parent_button.name = self.back_button_text
-
-            keyboard = keyboard + [[parent_button]]
+        keyboard = self.style.generate(
+            handler, client, context, parameters, self
+        )
 
         if isinstance(context, Message):
             return (
