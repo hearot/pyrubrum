@@ -63,8 +63,9 @@ class PageMenu(Menu):
         back_button_text (Optional[str]): The text which will be displayed
             inside the button that lets the user go back to the parent
             menu. Defaults to "🔙". See `Menu` for more information.
-        default (Optional[bool]): If the message shall be displayed by default
-            if if doesn't match any other menu.
+        default (Optional[bool]): If this menu shall be displayed if no
+            other top-level menu has been matched. It works only if this
+            menu is a top-level one.
         limit (Optional[int]): The limit of buttons per row. Defaults to 2.
             See `Menu` for more information.
         limit_page (Optional[int]): The limit of elements per page.

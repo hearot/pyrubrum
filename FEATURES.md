@@ -9,6 +9,7 @@
 ### Fixes
 
    - Delete `Menu.preliminary` in favour of the eponymous attribute ([a4023312360a6295f4748dd08349dde99b3805bd](https://github.com/hearot/pyrubrum/commit/a4023312360a6295f4748dd08349dde99b3805bd))
+   - Edit documentation for `Menu.default`
 
 ### New features
 
@@ -26,7 +27,7 @@
 
 ### ‼️ Breaking changes
 
-   - Add support for having multiple text commands (resolve #4)
+   - Add support for having multiple text commands (resolve #4) ([80bfb7d0360091f0e4126b7c4709823e82f1191e](https://github.com/hearot/pyrubrum/commit/80bfb7d0360091f0e4126b7c4709823e82f1191e))
    - Create specific directories for module entities ([25593e6d40fa34dbc47528ff3fa6fdc30c0a41b9](https://github.com/hearot/pyrubrum/commit/25593e6d40fa34dbc47528ff3fa6fdc30c0a41b9))
    - Move `recursive_add` and `transform`to `pyrubrum.tree.node` ([74fa78d207cac97c7f01fcdc562c75b0bc81db7c](https://github.com/hearot/pyrubrum/commit/74fa78d207cac97c7f01fcdc562c75b0bc81db7c))
    - Move `types` to a brand new directory ([7d6b33b3af33a7a69999966aa4caf6728ade7598](https://github.com/hearot/pyrubrum/commit/7d6b33b3af33a7a69999966aa4caf6728ade7598))
