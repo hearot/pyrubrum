@@ -82,7 +82,7 @@ exclude_patterns = []
 
 # -- Options for HTML output -------------------------------------------------
 
-html_favicon = "_static/assets/icon.ico"
+html_favicon = "_static/assets/pink_icon.ico"
 
 html_logo = "_static/assets/mark_logo.png"
 

@@ -34,9 +34,20 @@ from pyrubrum.keyboard.element import Element
 
 class Types:
     Callback = Union[
-        Callable[["BaseHandler", Client, CallbackQuery], None],
-        Callable[["BaseHandler", Client, Message], None],
+        Callable[
+            ["BaseHandler", Client, CallbackQuery, Optional[Dict[str, Any]]],
+            None,
+        ],
+        Callable[
+            ["BaseHandler", Client, Message, Optional[Dict[str, Any]]], None
+        ],
     ]
+    """This type defines the possible values for functions that work as
+    callbacks in Pyrubrum (e.g. `on_callback`, `on_message`). They must
+    implement the following pattern to be valid::
+
+        callback(handler, client, context, parameters=None)
+    """
 
     Content = Union[
         Union[InputMedia, str],
@@ -45,8 +56,22 @@ class Types:
             Union[InputMedia, str],
         ],
     ]
+    """This type defines the possible values for the content that is provided as
+    argument to a menu. A string of an instance of `InputMedia
+    <pyrogram.InputMedia>` is suitable for this type to be valid.
+    A function that returns such values is valid as well and must follow this
+    pattern::
+
+        content(handler, client, context, parameters)
+    """
 
     Expire = Optional[Union[bool, int, timedelta]]
+    """This type defines the possible values for an expire (see `BaseDatabase`).
+    A positive integer is suitable and indicates how many seconds a value can
+    be kept in database. A `datetime.timedelta` can be provided and is valid as
+    well. In order to indicate that there is no expire, ``False`` shall be
+    provided.
+    """
 
     Items = Union[
         List[Element],
@@ -60,6 +85,14 @@ class Types:
             List[Element],
         ],
     ]
+    """This type defines the possible values for items that are provided as
+    argument to `PageMenu`. A list of `Element` is suitable for this type.
+    A function that returns such list is valid as well and must follow this
+    pattern::
+
+
+        items(handler, client, context, parameters)
+    """
 
     Preliminary = Optional[
         Union[
@@ -85,8 +118,19 @@ class Types:
             ],
         ]
     ]
+    """This type defines the possible values which can be passed for a
+    preliminary function. All the provided functions for this type must
+    follow this pattern::
 
-    PyrogramCallback = Union[
-        Callable[[Client, CallbackQuery], None],
-        Callable[[Client, Message], None],
-    ]
+        preliminary(handler, client, context, parameters)
+
+    A list of such functions can be provided as well for this type to
+    be valid.
+    """
+
+    PyrogramCallback = Callable[[Client, Any], None]
+    """This type describes the pattern of functions which are added to
+    a Pyrogram handler, being it::
+
+        callback(client, context)
+    """
