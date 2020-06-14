@@ -22,6 +22,8 @@ import re
 from setuptools import find_packages
 from setuptools import setup
 
+GITHUB_REPOSITORY = "https://github.com/hearot/pyrubrum/blob/v%s/"
+
 
 with open("fast-requirements.txt", encoding="utf-8") as r:
     fast_requirements = [p.strip() for p in r]
@@ -30,7 +32,7 @@ with open("pyrubrum/__init__.py", encoding="utf-8") as f:
     version = re.findall(r"__version__ = \"(.+)\"", f.read())[0]
 
 with open("README.md", encoding="utf-8") as f:
-    long_description = f.read()
+    long_description = f.read().replace("./", GITHUB_REPOSITORY % version)
 
 with open("requirements.txt", encoding="utf-8") as r:
     requirements = [p.strip() for p in r]
