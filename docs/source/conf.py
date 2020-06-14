@@ -84,7 +84,7 @@ exclude_patterns = []
 
 html_favicon = "_static/assets/icon.ico"
 
-html_logo = "_static/assets/compressed_mark_logo.png"
+html_logo = "_static/assets/mark_logo.png"
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
