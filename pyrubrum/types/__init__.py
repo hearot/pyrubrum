@@ -24,23 +24,15 @@ from typing import Optional
 from typing import List
 from typing import Union
 
-from pyrogram import CallbackQuery
 from pyrogram import Client
 from pyrogram import InputMedia
-from pyrogram import Message
 
 from pyrubrum.keyboard.element import Element
 
 
 class Types:
-    Callback = Union[
-        Callable[
-            ["BaseHandler", Client, CallbackQuery, Optional[Dict[str, Any]]],
-            None,
-        ],
-        Callable[
-            ["BaseHandler", Client, Message, Optional[Dict[str, Any]]], None
-        ],
+    Callback = Callable[
+        ["BaseHandler", Client, Any, Optional[Dict[str, Any]]], None
     ]
     """This type defines the possible values for functions that work as
     callbacks in Pyrubrum (e.g. `on_callback`, `on_message`). They must
@@ -52,8 +44,7 @@ class Types:
     Content = Union[
         Union[InputMedia, str],
         Callable[
-            ["Handler", Client, Union[CallbackQuery, Message], Dict[str, Any]],
-            Union[InputMedia, str],
+            ["Handler", Client, Any, Dict[str, Any]], Union[InputMedia, str],
         ],
     ]
     """This type defines the possible values for the content that is provided as
@@ -76,12 +67,7 @@ class Types:
     Items = Union[
         List[Element],
         Callable[
-            [
-                "ParameterizedHandler",
-                Client,
-                Union[CallbackQuery, Message],
-                Dict[str, Any],
-            ],
+            ["ParameterizedHandler", Client, Any, Dict[str, Any]],
             List[Element],
         ],
     ]
@@ -96,26 +82,8 @@ class Types:
 
     Preliminary = Optional[
         Union[
-            Callable[
-                [
-                    "Handler",
-                    Client,
-                    Union[CallbackQuery, Message],
-                    Dict[str, Any],
-                ],
-                None,
-            ],
-            List[
-                Callable[
-                    [
-                        "Handler",
-                        Client,
-                        Union[CallbackQuery, Message],
-                        Dict[str, Any],
-                    ],
-                    None,
-                ]
-            ],
+            Callable[["Handler", Client, Any, Dict[str, Any]], None],
+            List[Callable[["Handler", Client, Any, Dict[str, Any]], None]],
         ]
     ]
     """This type defines the possible values which can be passed for a

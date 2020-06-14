@@ -5,7 +5,7 @@
 ### Documentation
 
    - Add Sphinx integration and stop using`dataclasses` ([63b3ad54ab218ec41c72cdf65086ff1e07a64200](https://github.com/hearot/pyrubrum/commit/63b3ad54ab218ec41c72cdf65086ff1e07a64200))
-   - Add docstrings to `Types`
+   - Add docstrings to `Types` ([9482313b2e8adae5e9271bd7f451413065b94a4a](https://github.com/hearot/pyrubrum/commit/9482313b2e8adae5e9271bd7f451413065b94a4a))
    - Add the Types class to the documentation ([880c52c04e1d3feab948d23fb8651393c9072d37](https://github.com/hearot/pyrubrum/commit/880c52c04e1d3feab948d23fb8651393c9072d37))
    - Automatically copy files from the main directory ([6474feee10ca1dcf1ebc58a49770063f5c931ab9](https://github.com/hearot/pyrubrum/commit/6474feee10ca1dcf1ebc58a49770063f5c931ab9))
    - Update assets ([9d6ca77f936e12b1d851c34ae1ddc39376107063](https://github.com/hearot/pyrubrum/commit/9d6ca77f936e12b1d851c34ae1ddc39376107063))
@@ -24,6 +24,7 @@
 
 ### Other changes
 
+   - Do not restrict callbacks to `Message` and `CallbackQuery`
    - Rename all variables named `tree`to `handler` ([b9acc90cc899cf4c08315a7123017cf8e7169106](https://github.com/hearot/pyrubrum/commit/b9acc90cc899cf4c08315a7123017cf8e7169106))
    - Update version to 0.1a1.dev6 ([477293742e2cc5b238d3bea9503045f2f41f8514](https://github.com/hearot/pyrubrum/commit/477293742e2cc5b238d3bea9503045f2f41f8514))
 
