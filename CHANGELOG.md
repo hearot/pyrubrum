@@ -5,6 +5,7 @@
 ### Documentation
 
    - Add Sphinx integration and stop using`dataclasses` ([63b3ad54ab218ec41c72cdf65086ff1e07a64200](https://github.com/hearot/pyrubrum/commit/63b3ad54ab218ec41c72cdf65086ff1e07a64200))
+   - Add the Types class to the documentation
    - Automatically copy files from the main directory ([6474feee10ca1dcf1ebc58a49770063f5c931ab9](https://github.com/hearot/pyrubrum/commit/6474feee10ca1dcf1ebc58a49770063f5c931ab9))
 
 ### Fixes
@@ -28,7 +29,7 @@
 
    - Create specific directories for module entities ([25593e6d40fa34dbc47528ff3fa6fdc30c0a41b9](https://github.com/hearot/pyrubrum/commit/25593e6d40fa34dbc47528ff3fa6fdc30c0a41b9))
    - Move `recursive_add` and `transform`to `pyrubrum.tree.node` ([74fa78d207cac97c7f01fcdc562c75b0bc81db7c](https://github.com/hearot/pyrubrum/commit/74fa78d207cac97c7f01fcdc562c75b0bc81db7c))
-   - Move `types` in a brand new directory
+   - Move `types` in a brand new directory ([c894984f43752d3a0ca9ccfd64aa4ec8aff13f70](https://github.com/hearot/pyrubrum/commit/c894984f43752d3a0ca9ccfd64aa4ec8aff13f70))
    - Preliminary functions are now passed as arguments (resolve #6) ([45687a4a0a2b407b8085ec78d008536bd598897a](https://github.com/hearot/pyrubrum/commit/45687a4a0a2b407b8085ec78d008536bd598897a))
    - Rename `on_callback_node` to `recursive_add` ([461d34e9fb293347ca0b38aa41a18511c25b857c](https://github.com/hearot/pyrubrum/commit/461d34e9fb293347ca0b38aa41a18511c25b857c))
    - `BaseDatabase.get` always returns a string (resolve #2) ([b1d0dac010d2d0cd46a4bcc41d2f07c2099d6ac9](https://github.com/hearot/pyrubrum/commit/b1d0dac010d2d0cd46a4bcc41d2f07c2099d6ac9))
