@@ -20,12 +20,13 @@
 
 ### Other changes
 
-   - Do not restrict callbacks to `Message` and `CallbackQuery`
+   - Do not restrict callbacks to `Message` and `CallbackQuery` ([ec6bab8600efa7015964a79839046c46a91ebe29](https://github.com/hearot/pyrubrum/commit/ec6bab8600efa7015964a79839046c46a91ebe29))
    - Rename all variables named `tree`to `handler` ([b9acc90cc899cf4c08315a7123017cf8e7169106](https://github.com/hearot/pyrubrum/commit/b9acc90cc899cf4c08315a7123017cf8e7169106))
    - Update version to 0.1a1.dev6 ([477293742e2cc5b238d3bea9503045f2f41f8514](https://github.com/hearot/pyrubrum/commit/477293742e2cc5b238d3bea9503045f2f41f8514))
 
 ### ‼️ Breaking changes
 
+   - Add support for having multiple text commands (resolve #4)
    - Create specific directories for module entities ([25593e6d40fa34dbc47528ff3fa6fdc30c0a41b9](https://github.com/hearot/pyrubrum/commit/25593e6d40fa34dbc47528ff3fa6fdc30c0a41b9))
    - Move `recursive_add` and `transform`to `pyrubrum.tree.node` ([74fa78d207cac97c7f01fcdc562c75b0bc81db7c](https://github.com/hearot/pyrubrum/commit/74fa78d207cac97c7f01fcdc562c75b0bc81db7c))
    - Move `types` to a brand new directory ([7d6b33b3af33a7a69999966aa4caf6728ade7598](https://github.com/hearot/pyrubrum/commit/7d6b33b3af33a7a69999966aa4caf6728ade7598))

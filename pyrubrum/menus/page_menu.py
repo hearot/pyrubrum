@@ -27,6 +27,7 @@ from pyrogram import Client
 from pyrogram import InlineKeyboardMarkup
 from pyrogram import InputMedia
 from pyrogram import Message
+from pyrogram.client.filters.filters import Filter
 
 from pyrubrum.keyboard import Button
 from pyrubrum.keyboard import Keyboard
@@ -62,10 +63,20 @@ class PageMenu(Menu):
         back_button_text (Optional[str]): The text which will be displayed
             inside the button that lets the user go back to the parent
             menu. Defaults to "🔙". See `Menu` for more information.
+        default (Optional[bool]): If the message shall be displayed by default
+            if if doesn't match any other menu.
         limit (Optional[int]): The limit of buttons per row. Defaults to 2.
             See `Menu` for more information.
         limit_page (Optional[int]): The limit of elements per page.
             Defaults to 4.
+        message_filter (Optional[Filter]): A filter for telling Pyrogram
+            when a message should be associated to this menu. It works only
+            for top-level menus (see `Handler.setup`). Defaults to ``None``,
+            which automatically makes this menu reachable when the user texts
+            a message that follows this pattern::
+
+                /[MENU_ID]
+
         next_page_button_text (Optional[str]): The text which is displayed
             inside the button that lets the user move on to the next page,
             if any. Defaults to "▶️".
@@ -91,8 +102,10 @@ class PageMenu(Menu):
         content: Union[InputMedia, str],
         items: Types.Items,
         back_button_text: Optional[str] = "🔙",
+        default: Optional[bool] = False,
         limit: Optional[int] = 2,
         limit_page: Optional[int] = 4,
+        message_filter: Optional[Filter] = None,
         next_page_button_text: Optional[str] = "▶️",
         preliminary: Types.Preliminary = None,
         previous_page_button_text: Optional[str] = "◀️",
@@ -103,7 +116,9 @@ class PageMenu(Menu):
             menu_id,
             content,
             back_button_text=back_button_text,
+            default=default,
             limit=limit,
+            message_filter=message_filter,
             preliminary=preliminary,
         )
 

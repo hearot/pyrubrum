@@ -16,7 +16,10 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Set
+
 from pyrogram import Client
+from pyrogram import Filters
 from pyrogram import MessageHandler
 
 from pyrubrum.database import BaseDatabase
@@ -28,23 +31,21 @@ from .parameterized_base_handler import pass_handler_and_clean
 
 class ParameterizedHandler(Handler, ParameterizedBaseHandler):
     """Implementation of an handler which mixes the features of `Handler` and
-    `ParameterizedBaseHandler` and has got, by definition, a main node whose
-    linked menu is displayed to the user whenever a message is being handled
-    and a database with which it is able to perform parameterization (i.e.
-    it supports parameters).
+    `ParameterizedBaseHandler` and has got, by definition, multiple top-level
+    nodes whose linked menu are displayed to the user whenever a message is
+    being handled and matches one of their filters, and a database with which
+    it is possible to perform parameterization (i.e. it supports parameters).
 
-    Parameters:
-        main_node (Node): The node whose linked menu is used when the user
-            texts the bot (i.e. when a `Message` object is being handled).
-            In other words, it represents the ``/start`` menu. See
-            `Handler` for more information.
+        nodes (Set[Node]): The top-level nodes, which represent the text
+            commands that are available to the user. See `Handler` for more
+            information
         database (BaseDatabase): The storage for all the query parameters.
             It is used to pass parameters between menus. See
             `ParameterizedBaseHandler` for more information.
     """
 
-    def __init__(self, main_node: Node, database: BaseDatabase):
-        Handler.__init__(self, main_node)
+    def __init__(self, nodes: Set[Node], database: BaseDatabase):
+        Handler.__init__(self, nodes)
         ParameterizedBaseHandler.__init__(self, database)
 
     def setup(self, client: Client):
@@ -56,8 +57,8 @@ class ParameterizedHandler(Handler, ParameterizedBaseHandler):
         handled callback queries from the database relying on the passed
         identifiers.
 
-        Finally, it makes the main menu (i.e. the menu which is linked to the
-        main node) reachable whenever a message is sent to the bot.
+        Finally, it makes the top-level menus reachable whenever a message is
+        sent to the bot and matches one of their filters.
 
         Parameters:
             client (Client): The client which is being set up.
@@ -70,9 +71,25 @@ class ParameterizedHandler(Handler, ParameterizedBaseHandler):
                 callback(handler, client, context, parameters)
         """
         ParameterizedBaseHandler.setup(self, client)
+        default_menu = None
 
-        client.add_handler(
-            MessageHandler(
-                pass_handler_and_clean(self.main_node.menu.on_message, self)
+        for node in self.nodes:
+            if not node.menu.message_filter:
+                node.menu.message_filter = Filters.command(node.menu.menu_id)
+
+            if node.menu.default:
+                default_menu = node.menu
+
+            client.add_handler(
+                MessageHandler(
+                    pass_handler_and_clean(node.menu.on_message, self),
+                    node.menu.message_filter,
+                )
             )
-        )
+
+        if default_menu:
+            client.add_handler(
+                MessageHandler(
+                    pass_handler_and_clean(default_menu.on_message, self)
+                )
+            )

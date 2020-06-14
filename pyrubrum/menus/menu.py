@@ -28,6 +28,7 @@ from pyrogram import Client
 from pyrogram import InlineKeyboardMarkup
 from pyrogram import InputMedia
 from pyrogram import Message
+from pyrogram.client.filters.filters import Filter
 
 from pyrubrum.keyboard import Keyboard
 from pyrubrum.types import Types
@@ -58,7 +59,17 @@ class Menu(BaseMenu):
         back_button_text (Optional[str]): The text which will be displayed
             inside the button that lets the user go back to the parent
             menu. Defaults to "🔙".
+        default (Optional[bool]): If the message shall be displayed by default
+            if if doesn't match any other menu.
         limit (Optional[int]): The limit of buttons per row. Defaults to 2.
+        message_filter (Optional[Filter]): A filter for telling Pyrogram
+            when a message should be associated to this menu. It works only
+            for top-level menus (see `Handler.setup`). Defaults to ``None``,
+            which automatically makes this menu reachable when the user texts
+            a message that follows this pattern::
+
+                /[MENU_ID]
+
         preliminary (Types.Preliminary): A function which is executed each time
             before doing anything else in `on_callback` and `on_message`.
             You can provide a list of such functions as well, which will be
@@ -87,13 +98,17 @@ class Menu(BaseMenu):
             ],
         ],
         back_button_text: Optional[str] = "🔙",
+        default: Optional[bool] = False,
         limit: Optional[int] = 2,
+        message_filter: Optional[Filter] = None,
         preliminary: Types.Preliminary = None,
     ):
         BaseMenu.__init__(self, name, menu_id)
         self.back_button_text = back_button_text
         self.content = content
+        self.default = default
         self.limit = limit
+        self.message_filter = message_filter
         self.preliminary = preliminary
 
     def get_content(

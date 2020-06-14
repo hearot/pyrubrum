@@ -150,7 +150,7 @@ def recursive_add(menus: MenuIterable, parent: Node):
             recursive_add(menus[menu], node)
 
 
-def transform(menus: MenuIterable) -> Node:
+def transform(menus: MenuIterable) -> Set[Node]:
     """Transform an iterable compounded of menus into a `Node` object. If a
     dictionary is provided as argument, its values will be transformed as
     well and added as children using ``recursive_add``.
@@ -162,11 +162,13 @@ def transform(menus: MenuIterable) -> Node:
     Returns:
         Node: The `Node` object which collects all the menus as children.
     """
+    nodes = set()
 
-    main_node = Node(list(menus)[0])
-    main_value = list(menus.values())[0] if isinstance(menus, dict) else None
+    for menu in menus:
+        node = Node(menu)
+        nodes.add(node)
 
-    if main_value:
-        recursive_add(main_value, main_node)
+        if isinstance(menus, dict) and menus[menu]:
+            recursive_add(menus[menu], node)
 
-    return main_node
+    return nodes

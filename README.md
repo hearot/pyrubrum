@@ -31,7 +31,7 @@ bot = Client(...)
 
 handler = Handler(transform(
     {
-        Menu("Main", "main", "Hello!"): {
+        Menu("Start", "start", "Hello!", default=True): {
             Menu("About me", "about_me", "I'm just a bot!"),
             Menu("Thoughts", "thoughts",
                  "I'm a bot, I cannot think properly...")

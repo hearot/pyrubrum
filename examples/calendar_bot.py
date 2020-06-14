@@ -18,6 +18,7 @@
 
 from calendar import monthrange
 from datetime import datetime
+from typing import Set
 from typing import Union
 
 from environs import Env
@@ -63,10 +64,11 @@ def tell_about_the_day(handler, client, context, parameters):
 tree = transform(
     {
         PageMenu(
-            "Main menu",
-            "main",
+            "Start",
+            "start",
             "📅 Choose a year.",
             generate_years(1970, 2044),
+            default=True,
             limit_page=15,
             limit=4,
         ): {
@@ -98,7 +100,7 @@ def main(
     bot_token: str,
     database: Union[DictDatabase, RedisDatabase],
     session_name: str,
-    tree: Node,
+    tree: Set[Node],
 ):
     bot = Client(
         session_name, api_hash=api_hash, api_id=api_id, bot_token=bot_token

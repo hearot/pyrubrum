@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Set
+
 from environs import Env
 from pyrogram import Client
 
@@ -26,7 +28,7 @@ from pyrubrum import transform
 
 tree = transform(
     {
-        Menu("Main", "main", "Hello!"): {
+        Menu("Start", "start", "Hello!", default=True): {
             Menu("About me", "about_me", "I'm just a bot!"),
             Menu(
                 "Thoughts", "thoughts", "I'm a bot, I cannot think properly..."
@@ -37,7 +39,11 @@ tree = transform(
 
 
 def main(
-    api_hash: str, api_id: int, bot_token: str, session_name: str, tree: Node
+    api_hash: str,
+    api_id: int,
+    bot_token: str,
+    session_name: str,
+    tree: Set[Node],
 ):
     bot = Client(
         session_name, api_hash=api_hash, api_id=api_id, bot_token=bot_token

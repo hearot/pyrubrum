@@ -49,7 +49,7 @@ def main(
 
     tree = transform(
         {
-            Menu("Main", "main", answer_image_id): {
+            Menu("Start", "start", answer_image_id, default=True): {
                 Menu("🌌 Get the answer", "forty_two", forty_two_image_id),
             }
         }
