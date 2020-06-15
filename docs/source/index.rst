@@ -26,10 +26,11 @@ Welcome to Pyrubrum
 
 .. toctree::
     :hidden:
-    :caption: References
+    :caption: Meta
 
     CHANGELOG
     Code of Conduct <CODE_OF_CONDUCT>
+    glossary
     Read me <README>
     SECURITY
 
