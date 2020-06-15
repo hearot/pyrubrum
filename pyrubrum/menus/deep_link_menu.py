@@ -35,7 +35,7 @@ class DeepLinkMenu(BaseMenu):
     given a parameter that shall be passed.
 
     See also:
-        `What the Bot API documentation says about deep-linking
+        `What the Bot API documentation says about deep-linking.
         <https://core.telegram.org/bots#deep-linking>`_
 
     Parameters:

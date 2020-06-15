@@ -36,10 +36,39 @@ DEEP_LINK_FILTER_TEMPLATE = "/start %s"
 
 
 def command_filter(command: str) -> Filter:
+    """Generate a filter that matches all the text messages following this
+    pattern::
+
+        /[COMMAND]
+
+    Where ``COMMAND`` is the provided command. Unlike `Filters.command
+    <pyrogram.Filters.command>`, it does not match any deep-linked or
+    parameterized command.
+
+    Parameters:
+        command (str): The command that has to be matched, without
+        the prefix ``/``.
+
+    Returns:
+        Filter: The generated filter.
+    """
     return create(lambda _, m: m.text == "/" + command, "DeepLinkFilter")
 
 
 def deep_link_filter(payload: str) -> Filter:
+    """Generate a filter that matches all the text messages following this
+    pattern::
+
+        /start [PAYLOAD]
+
+    Where ``PAYLOAD``is the provided payload.
+
+    Parameters:
+        payload (str): The payload that has to be matched.
+
+    Returns:
+        Filter: The generated filter.
+    """
     match = DEEP_LINK_FILTER_TEMPLATE % payload
     return create(lambda _, m: m.text == match, "DeepLinkFilter")
 
