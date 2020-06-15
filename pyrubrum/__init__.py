@@ -43,6 +43,7 @@ from .keyboard import Button  # noqa
 from .keyboard import Element  # noqa
 from .keyboard import Keyboard  # noqa
 from .menus import BaseMenu  # noqa
+from .menus import DeepLinkMenu  # noqa
 from .menus import LinkMenu  # noqa
 from .menus import Menu  # noqa
 from .menus import PageMenu  # noqa

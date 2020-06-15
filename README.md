@@ -31,11 +31,11 @@ bot = Client(...)
 
 handler = Handler(transform(
     {
-        Menu("Start", "start", "Hello!", default=True): {
+        Menu("Start", "start", "Hello!", default=True): [
             Menu("About me", "about_me", "I'm just a bot!"),
             Menu("Thoughts", "thoughts",
-                 "I'm a bot, I cannot think properly...")
-        }
+                 "I'm a bot, I cannot think properly..."),
+        ]
     }
 ))
 

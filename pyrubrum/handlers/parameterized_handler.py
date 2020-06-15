@@ -19,11 +19,12 @@
 from typing import Set
 
 from pyrogram import Client
-from pyrogram import Filters
 from pyrogram import MessageHandler
 
 from pyrubrum.database import BaseDatabase
 from pyrubrum.tree import Node
+from .handler import command_filter
+from .handler import deep_link_filter
 from .handler import Handler
 from .parameterized_base_handler import ParameterizedBaseHandler
 from .parameterized_base_handler import pass_handler_and_clean
@@ -78,7 +79,10 @@ class ParameterizedHandler(Handler, ParameterizedBaseHandler):
                 continue
 
             if not node.menu.message_filter:
-                node.menu.message_filter = Filters.command(node.menu.menu_id)
+                node.menu.message_filter = command_filter(node.menu.menu_id)
+
+            if node.menu.deep_link:
+                node.menu.message_filter |= deep_link_filter(node.menu.menu_id)
 
             if node.menu.default:
                 default_menu = node.menu

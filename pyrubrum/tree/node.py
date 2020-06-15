@@ -67,14 +67,14 @@ class Node:
         self.children.add(node)
 
     @lru_cache(maxsize=1)
-    def get_children_menus(self) -> Set[BaseMenu]:
+    def get_children_menus(self) -> Iterable[BaseMenu]:
         """Get all the menus that are linked to the children belonging to
         this instance.
 
         Returns:
             Set[BaseMenu]: The set of the retrieved menus.
         """
-        children = set(child.menu for child in self.children)
+        children = tuple(child.menu for child in self.children)
         return children if children else None
 
     @lru_cache

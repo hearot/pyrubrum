@@ -216,6 +216,9 @@ class ParameterizedBaseHandler(BaseHandler):
                 callback(handler, client, context, parameters)
         """
         for menu in self.get_menus():
+            if menu.is_link:
+                continue
+
             client.add_handler(
                 CallbackQueryHandler(
                     pass_handler_and_clean(menu.on_callback, self),

@@ -66,6 +66,9 @@ class Menu(BaseMenu):
 
                 func(handler, client, context, parameters)
 
+        deep_link (Optional[bool]): If this menu shall be reached by a
+            deep-link whose payload is the identifier of this instance.
+            Defaults to ``False``.
         default (Optional[bool]): If this menu shall be displayed if no
             other top-level menu has been matched. It works only if this
             menu is a top-level one.
@@ -106,6 +109,7 @@ class Menu(BaseMenu):
                 Union[InputMedia, str],
             ],
         ],
+        deep_link: Optional[bool] = False,
         default: Optional[bool] = False,
         message_filter: Optional[Filter] = None,
         preliminary: Types.Preliminary = None,
@@ -114,6 +118,7 @@ class Menu(BaseMenu):
     ):
         BaseMenu.__init__(self, name, menu_id)
         self.content = content
+        self.deep_link = deep_link
         self.default = default
         self.message_filter = message_filter
         self.preliminary = preliminary

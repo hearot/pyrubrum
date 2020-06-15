@@ -17,6 +17,7 @@
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
 from .base_menu import BaseMenu  # noqa
+from .deep_link_menu import DeepLinkMenu  # noqa
 from .link_menu import LinkMenu  # noqa
 from .menu import Menu  # noqa
 from .page_menu import PageMenu  # noqa

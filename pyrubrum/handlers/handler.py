@@ -17,18 +17,31 @@
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
 from functools import lru_cache
+from typing import Iterable
 from typing import Optional
 from typing import Set
 from typing import Tuple
 
 from pyrogram import Client
-from pyrogram import Filters
 from pyrogram import MessageHandler
+from pyrogram.client.filters.filters import create
+from pyrogram.client.filters.filters import Filter
 
 from pyrubrum.menus import BaseMenu
 from pyrubrum.tree import Node
 from .base_handler import BaseHandler
 from .base_handler import pass_handler
+
+DEEP_LINK_FILTER_TEMPLATE = "/start %s"
+
+
+def command_filter(command: str) -> Filter:
+    return create(lambda _, m: m.text == "/" + command, "DeepLinkFilter")
+
+
+def deep_link_filter(payload: str) -> Filter:
+    match = DEEP_LINK_FILTER_TEMPLATE % payload
+    return create(lambda _, m: m.text == match, "DeepLinkFilter")
 
 
 class Handler(BaseHandler):
@@ -53,7 +66,7 @@ class Handler(BaseHandler):
     @lru_cache
     def get_family(
         self, menu_id: str
-    ) -> Tuple[Optional[BaseMenu], Optional[Set[BaseMenu]]]:
+    ) -> Tuple[Optional[BaseMenu], Optional[Iterable[BaseMenu]]]:
         """Retrieve the menus which are linked to both parent and children of the
         top-level nodes of this instance if this instance matches the provided
         identifier. Otherwise it will search the menu matching it in the
@@ -113,7 +126,10 @@ class Handler(BaseHandler):
                 continue
 
             if not node.menu.message_filter:
-                node.menu.message_filter = Filters.command(node.menu.menu_id)
+                node.menu.message_filter = command_filter(node.menu.menu_id)
+
+            if node.menu.deep_link:
+                node.menu.message_filter |= deep_link_filter(node.menu.menu_id)
 
             if node.menu.default:
                 default_menu = node.menu

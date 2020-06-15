@@ -92,6 +92,18 @@ class Types:
         link(handler, client, context, parameters=None)
     """
 
+    Payload = Union[
+        str, Callable[["Handler", Client, Any, Dict[str, Any]], str],
+    ]
+    """This type defines the possible values for the parameter that is passed
+    to the bot using a deep-link. A string is suitable for this type to be
+    valid.
+    A function that returns such value is valid as well and must follow this
+    pattern::
+
+        payload(handler, client, context, parameters=None)
+    """
+
     Preliminary = Optional[
         Union[
             Callable[["Handler", Client, Any, Dict[str, Any]], None],

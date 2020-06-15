@@ -60,6 +60,9 @@ class PageMenu(Menu):
             See `Menu` for more information.
         items (types.Items): The list of elements the menu is compounded of or
             a function which returns such type of value.
+        deep_link (Optional[bool]): If this menu shall be reached by a
+            deep-link whose payload is the identifier of this instance.
+            Defaults to ``False``.
         default (Optional[bool]): If this menu shall be displayed if no
             other top-level menu has been matched. It works only if this
             menu is a top-level one.
@@ -91,6 +94,7 @@ class PageMenu(Menu):
         menu_id: str,
         content: Union[InputMedia, str],
         items: Types.Items,
+        deep_link: Optional[bool] = False,
         default: Optional[bool] = False,
         message_filter: Optional[Filter] = None,
         preliminary: Types.Preliminary = None,
@@ -106,6 +110,7 @@ class PageMenu(Menu):
             name,
             menu_id,
             content,
+            deep_link=deep_link,
             default=default,
             message_filter=message_filter,
             preliminary=preliminary,

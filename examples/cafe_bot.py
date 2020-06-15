@@ -23,6 +23,7 @@ from typing import Union
 from environs import Env
 from pyrogram import Client
 
+from pyrubrum import DeepLinkMenu
 from pyrubrum import DictDatabase
 from pyrubrum import Element
 from pyrubrum import Menu
@@ -76,18 +77,23 @@ tree = transform(
             "start",
             "ℹ️ Have a drink or a snack by saying /drink or /snack",
             default=True,
-        ): None,
+        ): [
+            DeepLinkMenu("🍷 Drink", "link_drink", "drink"),
+            DeepLinkMenu("🍬 Snack", "link_snack", "snack"),
+        ],
         PageMenu(
             "Drink",
             "drink",
             "🍷 Choose the drink you want!",
             make_elements(drinks),
+            deep_link=True,
         ): {Menu("Choose drink", "choose_drink", "🍹 Here you go!")},
         PageMenu(
             "Snack",
             "snack",
             "🍬 Choose the snack you want!",
             make_elements(snacks),
+            deep_link=True,
         ): {Menu("Choose snack", "choose_snack", "🥨 Here you go!")},
     }
 )

@@ -12,5 +12,6 @@
 
 ### ‼️ Breaking changes
 
-   - Add `LinkMenu`
+   - Add `LinkMenu` ([2776ae7fd71649cb5fc2756665d931755379c678](https://github.com/hearot/pyrubrum/commit/2776ae7fd71649cb5fc2756665d931755379c678))
    - Add `pyrubrum.menus.styles` and the `style` argument ([fbcfe0f63c4ecbab228f28942177d17d59d3dcb9](https://github.com/hearot/pyrubrum/commit/fbcfe0f63c4ecbab228f28942177d17d59d3dcb9))
+   - Support deep-linking

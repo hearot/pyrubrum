@@ -26,9 +26,17 @@ from pyrubrum.keyboard.button import Button
 from pyrubrum.types import Types
 from .base_menu import BaseMenu
 
+DEEP_LINK_TEMPLATE = "https://t.me/{username}?{deep_link_type}={payload}"
+USERNAMES = {}
 
-class LinkMenu(BaseMenu):
-    """Implementation of a menu which represents a link to a website.
+
+class DeepLinkMenu(BaseMenu):
+    """Implementation of a menu which automatically create a deep-link,
+    given a parameter that shall be passed.
+
+    See also:
+        `What the Bot API documentation says about deep-linking
+        <https://core.telegram.org/bots#deep-linking>`_
 
     Parameters:
         name (str): The name you give to the menu, which will be used as
@@ -40,18 +48,27 @@ class LinkMenu(BaseMenu):
             as it is used for buttons whose purpose is only related to
             design (i.e. they do not point to any menu). See `BaseMenu`
             for more information.
-        link (Types.Content): What will be displayed whenever a user
-            accesses this menu. A function can be provided as well and must
-            follow the following arguments pattern::
+        payload (Types.Payload): What will be passed to as payload using the
+            deep-linking. A function can be provided as well and must follow
+            the following arguments pattern::
 
                 func(handler, client, context, parameters)
-
+        deep_link_type (Optional[str]): The type of deep-link that is being
+            generated, which must be either ``start``or ``startgroup``.
+            Defaults to ``start``.
     """
 
-    def __init__(self, name: str, menu_id: str, link: Types.Link):
+    def __init__(
+        self,
+        name: str,
+        menu_id: str,
+        payload: Types.Payload,
+        deep_link_type: Optional[str] = "start",
+    ):
         BaseMenu.__init__(self, name, menu_id, is_link=True)
 
-        self.link = link
+        self.payload = payload
+        self.deep_link_type = deep_link_type
 
     def button(
         self,
@@ -60,8 +77,9 @@ class LinkMenu(BaseMenu):
         context: Any,
         parameters: Optional[Dict[str, Any]] = None,
     ) -> Button:
-        """Create an inline button which redirects to a website retrieved from
-        `LinkMenu.link`, using `name` as the content of the text field.
+        """Create an inline button which makes use of deep-linking, following
+        the defined `DeepLinkMenu.deep_link_type` and passing the parameter
+        retrieved from `DeepLinkMenu.payload`.
 
         Parameters:
             handler (BaseHandler): The handler which coordinates the management
@@ -75,11 +93,31 @@ class LinkMenu(BaseMenu):
         Returns:
             Button: The generated button.
         """
-        if callable(self.link):
+        client_hash = hash(client)
+
+        if client_hash in USERNAMES:
+            username = USERNAMES[client_hash]
+        else:
+            username = client.get_me().username
+            USERNAMES[client_hash] = username
+
+        if callable(self.payload):
             return Button(
                 self.name,
                 self.menu_id,
-                link=self.link(handler, client, context, parameters),
+                link=DEEP_LINK_TEMPLATE.format(
+                    deep_link_type=self.deep_link_type,
+                    payload=self.payload(handler, client, context, parameters),
+                    username=username,
+                ),
             )
 
-        return Button(self.name, self.menu_id, link=self.link)
+        return Button(
+            self.name,
+            self.menu_id,
+            link=DEEP_LINK_TEMPLATE.format(
+                deep_link_type=self.deep_link_type,
+                payload=self.payload,
+                username=username,
+            ),
+        )
