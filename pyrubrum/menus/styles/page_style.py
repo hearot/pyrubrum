@@ -231,8 +231,8 @@ class PageStyle(BaseStyle):
                     self.previous_page_text,
                     menu.menu_id,
                     parameters,
-                    parameters[page_id] - 1,
-                    True,
+                    element_id=parameters[page_id] - 1,
+                    same_menu=True,
                 )
 
                 if menu.menu_id + "_id" in parameters:
@@ -267,8 +267,8 @@ class PageStyle(BaseStyle):
                     self.next_page_text,
                     menu.menu_id,
                     parameters,
-                    parameters[page_id] + 1,
-                    True,
+                    element_id=parameters[page_id] + 1,
+                    same_menu=True,
                 )
 
                 if menu.menu_id + "_id" in parameters:

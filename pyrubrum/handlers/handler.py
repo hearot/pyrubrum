@@ -109,6 +109,9 @@ class Handler(BaseHandler):
         default_menu = None
 
         for node in self.nodes:
+            if node.menu.is_link:
+                continue
+
             if not node.menu.message_filter:
                 node.menu.message_filter = Filters.command(node.menu.menu_id)
 

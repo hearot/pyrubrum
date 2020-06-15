@@ -1,6 +1,6 @@
 ### Documentation
 
-   - Include examples in the toctree
+   - Include examples in the toctree ([737c1223e9ef4c95d9cac78c43e8820f7210069f](https://github.com/hearot/pyrubrum/commit/737c1223e9ef4c95d9cac78c43e8820f7210069f))
 
 ### New features
 
@@ -12,4 +12,5 @@
 
 ### ‼️ Breaking changes
 
+   - Add `LinkMenu`
    - Add `pyrubrum.menus.styles` and the `style` argument ([fbcfe0f63c4ecbab228f28942177d17d59d3dcb9](https://github.com/hearot/pyrubrum/commit/fbcfe0f63c4ecbab228f28942177d17d59d3dcb9))

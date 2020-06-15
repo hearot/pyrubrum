@@ -21,11 +21,18 @@ from pyrogram import Client
 from pyrogram import InputMediaPhoto
 
 from pyrubrum import Handler
+from pyrubrum import LinkMenu
 from pyrubrum import Menu
 from pyrubrum import transform
 
 answer_image_link = "https://i.imgur.com/ZsDhqqt.png"
 forty_two_image_link = "https://i.imgur.com/q0mZf3z.png"
+wikipedia_link = (
+    "https://en.wikipedia.org/wiki/Phrases_from"
+    "_The_Hitchhiker%27s_Guide_to_the_Galaxy#The"
+    "_Answer_to_the_Ultimate_Question_of_Life,_th"
+    "e_Universe,_and_Everything_is_42"
+)
 
 
 def main(
@@ -50,7 +57,9 @@ def main(
     tree = transform(
         {
             Menu("Start", "start", answer_image_id, default=True): {
-                Menu("🌌 Get the answer", "forty_two", forty_two_image_id),
+                Menu("🌌 Get the answer", "forty_two", forty_two_image_id): {
+                    LinkMenu("❓ Meaning", "meaning", wikipedia_link),
+                },
             }
         }
     )

@@ -82,7 +82,7 @@ tree = transform(
             "drink",
             "🍷 Choose the drink you want!",
             make_elements(drinks),
-        ): {Menu("Choose snack", "choose_snack", "🍹 Here you go!")},
+        ): {Menu("Choose drink", "choose_drink", "🍹 Here you go!")},
         PageMenu(
             "Snack",
             "snack",

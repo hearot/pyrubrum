@@ -43,6 +43,10 @@ class Button:
             ``None`` (i.e. the handler does not support parameterization).
         element_id (Optional[str]): The unique identifier of the `Element`
             the button is carrying, if any. Defaults to an empty string.
+        link (Optional[str]): The website this button is referring to, if any.
+            If provided, all the other arguments are ignored and this button
+            is set to represent a button which redirects to a certain URL,
+            which is the provided string itself.
         same_menu (Optional[bool]): If the button is referring to the same
             menu by which it was initialized. Defaults to ``False``.
         **kwargs: Arbitrary keyword arguments which can be used as a way to
@@ -57,7 +61,7 @@ class Button:
         callback query (see `ParameterizedBaseHandler.process_keyboard`),
         ``element_id`` does not maintain its type and will always be
         initialized as a string. Keys starting with ``page_`` shall be
-        avoided accordingly to `PageMenu.keyboard`.
+        avoided according to `PageMenu.keyboard`.
     """
 
     def __init__(
@@ -66,12 +70,18 @@ class Button:
         button_id: str,
         parameters: Optional[Dict[str, Any]] = None,
         element_id: Optional[str] = "",
+        link: Optional[str] = None,
         same_menu: Optional[bool] = False,
         **kwargs
     ):
+        self.name = name
+        self.link = link
+
+        if link:
+            return
+
         self.button_id = button_id
         self.element_id = element_id
-        self.name = name
 
         if isinstance(parameters, dict):
             self.parameters = deepcopy(parameters)

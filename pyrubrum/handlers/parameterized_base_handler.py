@@ -158,6 +158,9 @@ class ParameterizedBaseHandler(BaseHandler):
 
         for row in keyboard:
             for button in row:
+                if button.link:
+                    continue
+
                 content[button.button_id] = {
                     "callback_query_id": str(callback_query_id),
                 }
@@ -169,20 +172,24 @@ class ParameterizedBaseHandler(BaseHandler):
 
         return [
             [
-                InlineKeyboardButton(
-                    button.name,
-                    " ".join(
-                        map(
-                            str,
-                            [
-                                callback_query_id,
-                                button.button_id,
-                                button.element_id,
-                            ],
+                (
+                    InlineKeyboardButton(
+                        button.name,
+                        callback_data=" ".join(
+                            map(
+                                str,
+                                [
+                                    callback_query_id,
+                                    button.button_id,
+                                    button.element_id,
+                                ],
+                            )
                         )
+                        .strip()
+                        .rstrip(),
                     )
-                    .strip()
-                    .rstrip(),
+                    if not button.link
+                    else InlineKeyboardButton(button.name, url=button.link)
                 )
                 for button in row
             ]

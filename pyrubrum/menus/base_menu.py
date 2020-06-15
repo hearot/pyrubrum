@@ -17,17 +17,11 @@
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
 from abc import ABC
-from abc import abstractmethod
 from typing import Any
 from typing import Dict
 from typing import Optional
-from typing import Union
 
-from pyrogram import CallbackQuery
 from pyrogram import Client
-from pyrogram import InlineKeyboardMarkup
-from pyrogram import InputMedia
-from pyrogram import Message
 
 from pyrubrum.handlers import BaseHandler
 from pyrubrum.keyboard import Button
@@ -35,13 +29,22 @@ from pyrubrum.keyboard import Button
 
 class BaseMenu(ABC):
     """Basic represention of a menu, which is an entity that has got by definition
-    at least a name and a unique identifier.
+    at least a name, a unique identifier and an associated button, which can
+    be arbitrarily generated.
+
+    A menu can represent a link as well (see `BaseMenu.is_link`), although it
+    doesn't by default.
 
     The purpose of this class is to give a general interface for a menu, as it
     doesn't implement anything except for the generation of both buttons and
     hashes.
 
-    A sample implementation of this interface is `Menu`.
+    See Also:
+        For complete implementations of this class:
+
+        * `LinkMenu`
+        * `Menu`
+        * `PageMenu`
 
     Parameters:
         name (str): The name you give to the menu, which will be used as the
@@ -51,12 +54,7 @@ class BaseMenu(ABC):
             generated relying on the content of this field. Avoid using ``0``
             as it is used for buttons whose purpose is only related to design
             (i.e. they do not point to any menu).
-
-    Note:
-        In order to create a subclass or to access this interface, you will
-        need to implement all the defined abstract methods, which are
-        `get_content`, `keyboard`, `on_callback`, `on_message`. Otherwise, you
-        will get an error.
+        is_link (Optional[bool]): If this menu represents a link.
 
     Warning:
         Avoid using the same identifier for other entities, as it will result
@@ -72,7 +70,10 @@ class BaseMenu(ABC):
         """
         return hash(self.menu_id)
 
-    def __init__(self, name: str, menu_id: str):
+    def __init__(
+        self, name: str, menu_id: str, is_link: Optional[bool] = False
+    ):
+        self.is_link = is_link
         self.name = name
         self.menu_id = menu_id
 
@@ -80,7 +81,7 @@ class BaseMenu(ABC):
         self,
         handler: BaseHandler,
         client: Client,
-        context: Union[CallbackQuery, Message],
+        context: Any,
         parameters: Optional[Dict[str, Any]] = None,
     ) -> Button:
         """Create an inline button which refers to this menu, using `name` as
@@ -100,100 +101,3 @@ class BaseMenu(ABC):
             Button: The generated button.
         """
         return Button(self.name, self.menu_id, parameters)
-
-    @abstractmethod
-    def get_content(
-        self,
-        handler: BaseHandler,
-        client: Client,
-        context: Union[CallbackQuery, Message],
-        parameters: Optional[Dict[str, Any]] = None,
-    ) -> Union[InputMedia, str]:
-        """This abstract method is intended to be implemented as a generator
-        for the content of the menu (i.e. what the user will see after clicking
-        on the inline button or referencing to the menu using a bot command).
-
-        Parameters:
-            handler (BaseHandler): The handler which coordinates the management
-                of the menus.
-            client (Client): The client which is linked to the handler.
-            context (Union[CallbackQuery, Message]): The context for which the
-                button is generated.
-            parameters (Optional[Dict[str, Any]]): The parameters which were
-                passed to the handler. Defaults to ``None``.
-
-        Returns:
-            Union[InputMedia, str]: The content of the menu, which is then
-            displayed to the user as a media (if it is a subclass of
-            `InputMedia`) or a message (if it is just a string).
-        """
-        raise NotImplementedError
-
-    @abstractmethod
-    def keyboard(
-        self,
-        handler: BaseHandler,
-        client: Client,
-        context: Union[CallbackQuery, Message],
-        parameters: Optional[Dict[str, Any]] = None,
-    ) -> InlineKeyboardMarkup:
-        """This abstract method is intended to be implemented as a generator
-        for the keyboard of the menu (aka the inline keyboard).
-
-        Parameters:
-            handler (BaseHandler): The handler which coordinates the management
-                of the menus.
-            client (Client): The client which is linked to the handler.
-            context (Union[CallbackQuery, Message]): The context for which the
-                button is generated.
-            parameters (Optional[Dict[str, Any]]): The parameters which were
-                passed to the handler. Defaults to ``None``.
-
-        Returns:
-            InlineKeyboardMarkup: The generated inline keyboard, which is then
-            displayed to the user.
-        """
-        raise NotImplementedError
-
-    @abstractmethod
-    def on_callback(
-        self,
-        handler: BaseHandler,
-        client: Client,
-        callback: CallbackQuery,
-        parameters: Optional[Dict[str, Any]] = None,
-    ):
-        """This abstract method is intended to be implemented and is called
-        whenever a callback query is handled and refers to this menu.
-
-        Parameters:
-            handler (BaseHandler): The handler which coordinates the management
-                of the menus.
-            client (Client): The client which is linked to the handler.
-            callback (CallbackQuery): The callback query for which the button
-                is generated.
-            parameters (Optional[Dict[str, Any]]): The parameters which were
-                passed to to the handler. Defaults to ``None``.
-        """
-        raise NotImplementedError
-
-    @abstractmethod
-    def on_message(
-        self,
-        handler: BaseHandler,
-        client: Client,
-        message: Message,
-        parameters: Optional[Dict[str, Any]] = None,
-    ):
-        """This abstract method is intended to be implemented and is called
-        whenever a message is handled and refers to this menu.
-
-        Parameters:
-            handler (BaseHandler): The handler which coordinates the management
-                of the menus.
-            client (Client): The client which is linked to the handler.
-            message (Message): The message for which the button is generated.
-            parameters (Optional[Dict[str, Any]]): The parameters which were
-                passed to to the handler. Defaults to ``None``.
-        """
-        raise NotImplementedError

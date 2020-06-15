@@ -38,7 +38,11 @@ class BaseHandler(ABC):
     even if it already implements both a sample setup and a keyboard processing
     function.
 
-    A sample implementation of this interface is `Handler`.
+    See Also:
+        For complete implementations of this class:
+
+        * `Handler`
+        * `ParameterizedHandler`
 
     Note:
         In order to create a subclass or to access this interface, you will
@@ -76,8 +80,12 @@ class BaseHandler(ABC):
         """
         return [
             [
-                InlineKeyboardButton(
-                    button.name, callback_data=button.button_id
+                (
+                    InlineKeyboardButton(
+                        button.name, callback_data=button.button_id
+                    )
+                    if not button.link
+                    else InlineKeyboardButton(button.name, url=button.link)
                 )
                 for button in row
             ]
@@ -100,6 +108,9 @@ class BaseHandler(ABC):
                 callback(handler, client, context, parameters)
         """
         for menu in self.get_menus():
+            if menu.is_link:
+                continue
+
             client.add_handler(
                 CallbackQueryHandler(
                     pass_handler(menu.on_callback, self),

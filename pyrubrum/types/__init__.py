@@ -48,12 +48,12 @@ class Types:
         ],
     ]
     """This type defines the possible values for the content that is provided as
-    argument to a menu. A string of an instance of `InputMedia
+    argument to a menu. A string or an instance of `InputMedia
     <pyrogram.InputMedia>` is suitable for this type to be valid.
     A function that returns such values is valid as well and must follow this
     pattern::
 
-        content(handler, client, context, parameters)
+        content(handler, client, context, parameters=None)
     """
 
     Expire = Optional[Union[bool, int, timedelta]]
@@ -80,6 +80,18 @@ class Types:
         items(handler, client, context, parameters)
     """
 
+    Link = Union[
+        str, Callable[["Handler", Client, Any, Dict[str, Any]], str],
+    ]
+    """This type defines the possible values for the link that is used to build
+    an inline button that redirects to a website. A string is suitable for this
+    type to be valid.
+    A function that returns such value is valid as well and must follow this
+    pattern::
+
+        link(handler, client, context, parameters=None)
+    """
+
     Preliminary = Optional[
         Union[
             Callable[["Handler", Client, Any, Dict[str, Any]], None],
@@ -90,7 +102,7 @@ class Types:
     preliminary function. All the provided functions for this type must
     follow this pattern::
 
-        preliminary(handler, client, context, parameters)
+        preliminary(handler, client, context, parameters=None)
 
     A list of such functions can be provided as well for this type to
     be valid.
