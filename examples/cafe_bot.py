@@ -16,8 +16,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
-from calendar import monthrange
-from datetime import datetime
+from typing import List
 from typing import Set
 from typing import Union
 
@@ -29,7 +28,6 @@ from pyrubrum import Element
 from pyrubrum import Menu
 from pyrubrum import Node
 from pyrubrum import PageMenu
-from pyrubrum import PageStyle
 from pyrubrum import ParameterizedHandler
 from pyrubrum import RedisDatabase
 from pyrubrum import transform
@@ -39,59 +37,58 @@ try:
 except (ImportError, ModuleNotFoundError):
     pass
 
+drinks = [
+    "Beer",
+    "Cider",
+    "Coffee",
+    "Coke",
+    "French wine",
+    "Gin",
+    "Hard soda",
+    "Irish beer",
+    "Italian wine",
+    "Liquor",
+    "Water",
+    "Wine",
+]
+snacks = [
+    "Bubblegum",
+    "Candies",
+    "Chocolate bar",
+    "Crisps",
+    "Cracker nuts",
+    "Crêpe",
+    "Pancake",
+    "Pizza",
+    "Pretzel",
+    "Waffle",
+]
 
-def generate_days(handler, client, context, parameters):
-    month = int(parameters["month_id"])
-    year = int(parameters["year_id"])
 
-    return [
-        Element(str(day + 1), str(day + 1))
-        for day in range(monthrange(year, month)[1])
-    ]
-
-
-def generate_months():
-    return [Element(str(month + 1), str(month + 1)) for month in range(12)]
-
-
-def generate_years(start: int, end: int):
-    return [Element(str(year), str(year)) for year in range(start, end + 1)]
-
-
-def tell_about_the_day(handler, client, context, parameters):
-    day = int(parameters["day_id"])
-    month = int(parameters["month_id"])
-    year = int(parameters["year_id"])
-
-    return "📅 " + datetime(year, month, day).strftime("%d/%m/%Y is a %A.")
+def make_elements(elements: List[str]) -> List[Element]:
+    return [Element(name, index) for index, name in enumerate(elements)]
 
 
 tree = transform(
     {
-        PageMenu(
+        Menu(
             "Start",
             "start",
-            "📅 Choose a year.",
-            generate_years(1970, 2044),
+            "ℹ️ Have a drink or a snack by saying /drink or /snack",
             default=True,
-            style=PageStyle(limit=4, limit_items=15),
-        ): {
-            PageMenu(
-                "Month menu",
-                "year",
-                "📅 Choose a month.",
-                generate_months(),
-                style=PageStyle(limit=5, limit_items=12),
-            ): {
-                PageMenu(
-                    "Day menu",
-                    "month",
-                    "📅 Choose a day.",
-                    generate_days,
-                    style=PageStyle(limit=5, limit_items=31),
-                ): {Menu("Choose day menu", "day", tell_about_the_day)}
-            }
-        }
+        ): None,
+        PageMenu(
+            "Drink",
+            "drink",
+            "🍷 Choose the drink you want!",
+            make_elements(drinks),
+        ): {Menu("Choose snack", "choose_snack", "🍹 Here you go!")},
+        PageMenu(
+            "Snack",
+            "snack",
+            "🍬 Choose the snack you want!",
+            make_elements(snacks),
+        ): {Menu("Choose snack", "choose_snack", "🥨 Here you go!")},
     }
 )
 
