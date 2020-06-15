@@ -15,11 +15,25 @@
 # sys.path.insert(0, os.path.abspath('.'))
 
 from os import listdir
+from os import mkdir
 from shutil import copyfile
 
 import pyrubrum
 
 # -- Project information -----------------------------------------------------
+
+EXAMPLE_TEMPLATE = """
+{title}
+{separators}
+
+.. note::
+    In order to make use of the proposed example, you need to
+    set your own environment file by creating a file named ``.env``
+    and configuring all the variables from :doc:`sample.env <sample>`.
+
+.. literalinclude:: ../_static/examples/{filename}
+"""
+EXAMPLE_TITLES = {"cafe_bot.py": "Café Bot"}
 
 project = pyrubrum.__package__
 copyright = "2020, Hearot"
@@ -34,8 +48,28 @@ for root_file in root_files:
 for root_file in copies:
     copyfile("../../" + root_file, "_static/" + root_file)
 
+try:
+    mkdir("examples/")
+except (FileNotFoundError, OSError, PermissionError):
+    pass
+
+
 for example in filter(lambda f: f.endswith(".py"), listdir("../../examples")):
     copyfile("../../examples/" + example, "_static/examples/" + example)
+
+    with open(
+        "examples/" + example.replace(".py", ".rst"), "w", encoding="utf-8"
+    ) as example_rst:
+        if example in EXAMPLE_TITLES:
+            title = EXAMPLE_TITLES[example]
+        else:
+            title = example.replace("_", " ").replace(".py", "").title()
+
+        example_rst.write(
+            EXAMPLE_TEMPLATE.lstrip().format(
+                filename=example, title=title, separators="=" * len(title)
+            )
+        )
 
 copyfile("../../examples/sample.env", "_static/examples/sample.env")
 

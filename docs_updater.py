@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 # Pyrubrum - An intuitive framework for creating Telegram bots
 # Copyright (C) 2020 Hearot <https://github.com/hearot>
 #

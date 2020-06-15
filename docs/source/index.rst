@@ -3,6 +3,16 @@ Welcome to Pyrubrum
 
 .. toctree::
     :hidden:
+    :caption: Examples
+
+    examples/sample
+    examples/cafe_bot
+    examples/calendar_bot
+    examples/hitchhiker_bot
+    examples/sample_bot
+
+.. toctree::
+    :hidden:
     :caption: API Reference
 
     api/database/index

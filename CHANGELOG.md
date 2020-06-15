@@ -2,9 +2,13 @@
 
 ## v0.1a1.dev7
 
+### Documentation
+
+   - Include examples in the toctree
+
 ### New features
 
-   - Add `cafe_bot.py` as an example for multiple commands
+   - Add `cafe_bot.py` as an example for multiple commands ([bacce5d540c3e4f36070ce4b554089381aa151fc](https://github.com/hearot/pyrubrum/commit/bacce5d540c3e4f36070ce4b554089381aa151fc))
 
 ### Other changes
 
