@@ -43,5 +43,5 @@ Terms
     Top-level menu
         A menu which is reachable by texting the bot a command.
 
-    Top-level nodes
+    Top-level node
         A node which is linked to a :term:`Top-level menu`.

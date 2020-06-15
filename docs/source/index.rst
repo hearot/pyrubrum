@@ -1,39 +1,6 @@
 Welcome to Pyrubrum
 ===================
 
-.. toctree::
-    :hidden:
-    :caption: Examples
-
-    examples/sample
-    examples/cafe_bot
-    examples/calendar_bot
-    examples/hitchhiker_bot
-    examples/sample_bot
-
-.. toctree::
-    :hidden:
-    :caption: API Reference
-
-    api/database/index
-    api/database/errors/index
-    api/handlers/index
-    api/keyboard/index
-    api/menus/index
-    api/styles/index
-    api/tree/index
-    api/types/index
-
-.. toctree::
-    :hidden:
-    :caption: Meta
-
-    CHANGELOG
-    Code of Conduct <CODE_OF_CONDUCT>
-    glossary
-    Read me <README>
-    SECURITY
-
 .. raw:: html
 
     <p align="center">
@@ -78,3 +45,43 @@ Welcome to Pyrubrum
 
     handler.setup(bot)
     bot.run()
+
+
+.. toctree::
+    :caption: Quickstart
+
+    quickstart/installation
+    quickstart/overview
+
+.. toctree::
+    :caption: Examples
+
+    examples/sample
+    examples/cafe_bot
+    examples/calendar_bot
+    examples/hitchhiker_bot
+    examples/sample_bot
+
+.. toctree::
+    :caption: API Reference
+    :hidden:
+
+    api/database/index
+    api/database/errors/index
+    api/handlers/index
+    api/keyboard/index
+    api/menus/index
+    api/styles/index
+    api/tree/index
+    api/types/index
+
+.. toctree::
+    :caption: Meta
+    :maxdepth: 1
+
+    Assets <https://github.com/hearot/pyrubrum-assets>
+    CHANGELOG
+    Code of Conduct <CODE_OF_CONDUCT>
+    glossary
+    Read me <README>
+    SECURITY

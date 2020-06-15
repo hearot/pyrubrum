@@ -4,7 +4,8 @@
 
 ### Documentation
 
-   - Add a simple glossary
+   - Add a simple glossary ([0000e5ecc76f27f66833a28ef67836b5a338a353](https://github.com/hearot/pyrubrum/commit/0000e5ecc76f27f66833a28ef67836b5a338a353))
+   - Add a simple quickstart menu
    - Add docstrings to `command_filter` and `deep_link_filter` ([b61629afa1d85f80fea4ec5030ab756d47714fea](https://github.com/hearot/pyrubrum/commit/b61629afa1d85f80fea4ec5030ab756d47714fea))
    - Include examples in the toctree ([737c1223e9ef4c95d9cac78c43e8820f7210069f](https://github.com/hearot/pyrubrum/commit/737c1223e9ef4c95d9cac78c43e8820f7210069f))
 
