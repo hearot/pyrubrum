@@ -20,5 +20,5 @@ from .base_handler import BaseHandler  # noqa
 from .base_handler import pass_handler  # noqa
 from .handler import Handler  # noqa
 from .parameterized_base_handler import ParameterizedBaseHandler  # noqa
-from .parameterized_base_handler import pass_handler_and_clean  # noqa
+from .parameterized_base_handler import pass_parameterized_handler  # noqa
 from .parameterized_handler import ParameterizedHandler  # noqa

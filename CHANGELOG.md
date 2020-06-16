@@ -18,13 +18,14 @@
 
 ### Other changes
 
-   - Delete references to LGPLv3
+   - Delete references to LGPLv3 ([a7334b1a32b369239db8f1ec997cf2467d3c9420](https://github.com/hearot/pyrubrum/commit/a7334b1a32b369239db8f1ec997cf2467d3c9420))
    - Update version to 0.1a1.dev7 ([f9190b87c11822203511b8784e5f4248313a59e4](https://github.com/hearot/pyrubrum/commit/f9190b87c11822203511b8784e5f4248313a59e4))
 
 ### ‼️ Breaking changes
 
    - Add `LinkMenu` ([2776ae7fd71649cb5fc2756665d931755379c678](https://github.com/hearot/pyrubrum/commit/2776ae7fd71649cb5fc2756665d931755379c678))
    - Add `pyrubrum.menus.styles` and the `style` argument ([fbcfe0f63c4ecbab228f28942177d17d59d3dcb9](https://github.com/hearot/pyrubrum/commit/fbcfe0f63c4ecbab228f28942177d17d59d3dcb9))
+   - Implement md5 encryption for parameterized handlers
    - Support deep-linking ([c70cd3010b739d8b0f3bd013dfdb70faedb4ab8e](https://github.com/hearot/pyrubrum/commit/c70cd3010b739d8b0f3bd013dfdb70faedb4ab8e))
 
 ## v0.1a1.dev6 - 2020-06-14

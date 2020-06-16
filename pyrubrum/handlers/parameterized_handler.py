@@ -27,7 +27,7 @@ from .handler import command_filter
 from .handler import deep_link_filter
 from .handler import Handler
 from .parameterized_base_handler import ParameterizedBaseHandler
-from .parameterized_base_handler import pass_handler_and_clean
+from .parameterized_base_handler import pass_parameterized_handler
 
 
 class ParameterizedHandler(Handler, ParameterizedBaseHandler):
@@ -53,8 +53,8 @@ class ParameterizedHandler(Handler, ParameterizedBaseHandler):
         """Make all the defined menus reachable by the client by adding handlers that
         catch all their identifiers to it. It adds support to parameterization
         by applying `ParameterizedBaseHandler.filter` to all the handled
-        callback queries. It also calls `pass_handler_and_clean`, which lets
-        the callback functions get this handler as argument and deletes
+        callback queries. It also calls `pass_parameterized_handler`, which
+        lets the callback functions get this handler as argument and deletes
         handled callback queries from the database relying on the passed
         identifiers.
 
@@ -89,7 +89,7 @@ class ParameterizedHandler(Handler, ParameterizedBaseHandler):
 
             client.add_handler(
                 MessageHandler(
-                    pass_handler_and_clean(node.menu.on_message, self),
+                    pass_parameterized_handler(node.menu.on_message, self),
                     node.menu.message_filter,
                 )
             )
@@ -97,6 +97,6 @@ class ParameterizedHandler(Handler, ParameterizedBaseHandler):
         if default_menu:
             client.add_handler(
                 MessageHandler(
-                    pass_handler_and_clean(default_menu.on_message, self)
+                    pass_parameterized_handler(default_menu.on_message, self)
                 )
             )

@@ -38,7 +38,7 @@ from .handlers import Handler  # noqa
 from .handlers import ParameterizedBaseHandler  # noqa
 from .handlers import ParameterizedHandler  # noqa
 from .handlers import pass_handler  # noqa
-from .handlers import pass_handler_and_clean  # noqa
+from .handlers import pass_parameterized_handler  # noqa
 from .keyboard import Button  # noqa
 from .keyboard import Element  # noqa
 from .keyboard import Keyboard  # noqa

@@ -36,7 +36,7 @@ class Button:
     Parameters:
         name (str): The name which is displayed inside the text field of
             the inline button this object will be converted to.
-        button_id (str): The unique identifier of the button, which is the
+        menu_id (str): The unique identifier of the button, which is the
             same as the one of the menu the button is referring to.
         parameters (Optional[Dict[str, Any]]): The parameters that will be
             passed to the menu this button is referring to. Defaults to
@@ -55,7 +55,7 @@ class Button:
 
     Warning:
         There is a special group of names which are not available for being
-        used as keys for parameters. These are ``button_id``,
+        used as keys for parameters. These are ``menu_id``,
         ``callback_query_id`` and ``same_menu``. If provided, they will be
         overwritten. As a result of being passed as parameter inside a
         callback query (see `ParameterizedBaseHandler.process_keyboard`),
@@ -67,7 +67,7 @@ class Button:
     def __init__(
         self,
         name: str,
-        button_id: str,
+        menu_id: str,
         parameters: Optional[Dict[str, Any]] = None,
         element_id: Optional[str] = "",
         link: Optional[str] = None,
@@ -80,14 +80,12 @@ class Button:
         if link:
             return
 
-        self.button_id = button_id
+        self.menu_id = menu_id
         self.element_id = element_id
+        self.same_menu = same_menu
 
         if isinstance(parameters, dict):
             self.parameters = deepcopy(parameters)
             self.parameters.update(kwargs)
-
-            self.parameters["button_id"] = button_id
-            self.parameters["same_menu"] = same_menu
         else:
             self.parameters = None

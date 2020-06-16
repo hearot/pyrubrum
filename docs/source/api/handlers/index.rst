@@ -9,4 +9,4 @@ Handlers
     parameterized_base_handler
     parameterized_handler
     pass_handler
-    pass_handler_and_clean
+    pass_parameterized_handler

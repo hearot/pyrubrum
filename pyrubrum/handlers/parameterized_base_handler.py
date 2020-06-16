@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Pyrubrum. If not, see <https://www.gnu.org/licenses/>.
 
+from hashlib import md5
 from json import JSONDecodeError
 from typing import List
 
@@ -28,6 +29,7 @@ from pyrogram.client.filters.filters import Filter
 
 from pyrubrum.keyboard import Button
 from pyrubrum.database import BaseDatabase
+from pyrubrum.database.errors import DatabaseError
 from pyrubrum.types import Types
 from .base_handler import BaseHandler
 
@@ -88,37 +90,27 @@ class ParameterizedBaseHandler(BaseHandler):
         """
 
         def func(_, callback: CallbackQuery):
-            parameters = callback.data.split()
-
-            if parameters[1] != menu_id:
-                return False
-
-            result = self.database.get(parameters[0])
-
-            if result:
+            if not hasattr(callback, "_result_data"):
                 try:
-                    content = json.loads(result)
-
-                    if parameters[1] in content:
-                        callback.parameters = content[parameters[1]]
-                        callback.parameters["callback_query_id"] = parameters[
-                            0
-                        ]
-                        callback.parameters["menu_id"] = parameters[1]
-
-                        if len(parameters) > 2:
-                            callback.parameters["element_id"] = parameters[2]
-
-                            if not callback.parameters["same_menu"]:
-                                callback.parameters[
-                                    parameters[1] + "_id"
-                                ] = parameters[2]
-
-                        return True
-
+                    callback._result_data = json.loads(
+                        self.database.get(callback.data)
+                    )
+                    self.database.delete(callback.data)
+                except (DatabaseError, JSONDecodeError):
                     return False
-                except JSONDecodeError:
-                    return False
+
+            if callback._result_data["menu_id"] == menu_id:
+                callback.parameters = callback._result_data
+
+                if (
+                    not callback.parameters["same_menu"]
+                    and callback.parameters["element_id"]
+                ):
+                    callback.parameters[menu_id + "_id"] = callback.parameters[
+                        "element_id"
+                    ]
+
+                return True
 
             return False
 
@@ -154,54 +146,55 @@ class ParameterizedBaseHandler(BaseHandler):
             Pyrogram-compatible type.
         """
 
-        content = {}
+        processed_keyboard = []
 
         for row in keyboard:
+            processed_row = []
+            processed_keyboard.append(processed_row)
+
             for button in row:
                 if button.link:
+                    processed_row.append(
+                        InlineKeyboardButton(button.name, url=button.link)
+                    )
                     continue
 
-                content[button.button_id] = {
-                    "callback_query_id": str(callback_query_id),
-                }
+                key = md5(
+                    (
+                        str(callback_query_id)
+                        + button.menu_id
+                        + str(button.element_id)
+                    ).encode("utf-8")
+                ).hexdigest()
 
-                if isinstance(button.parameters, dict):
-                    content[button.button_id].update(button.parameters)
-
-        self.database.set(callback_query_id, json.dumps(content))
-
-        return [
-            [
-                (
-                    InlineKeyboardButton(
-                        button.name,
-                        callback_data=" ".join(
-                            map(
-                                str,
-                                [
-                                    callback_query_id,
-                                    button.button_id,
-                                    button.element_id,
-                                ],
-                            )
-                        )
-                        .strip()
-                        .rstrip(),
-                    )
-                    if not button.link
-                    else InlineKeyboardButton(button.name, url=button.link)
+                content = (
+                    button.parameters
+                    if isinstance(button.parameters, dict)
+                    else {}
                 )
-                for button in row
-            ]
-            for row in keyboard
-        ]
+
+                content.update(
+                    {
+                        "element_id": button.element_id,
+                        "menu_id": button.menu_id,
+                        "same_menu": button.same_menu,
+                    }
+                )
+
+                processed_row.append(
+                    InlineKeyboardButton(button.name, callback_data=key,)
+                )
+
+                self.database.set(key, json.dumps(content))
+
+        return processed_keyboard
 
     def setup(self, client: Client):
         """Make all the defined menus reachable by the client by adding handlers that
         catch all their identifiers to it. It adds support to parameterization
         by applying `ParameterizedBaseHandler.filter` to all the handled
-        callback queries. It also calls `pass_handler_and_clean`, which lets
-        the callback functions get this handler as argument and deletes
+        callback queries. It also calls `pass_parameterized_handler`, which
+        lets the callback functions get this handler as argument and deletes
         handled callback queries from the database relying on the passed
         identifiers.
 
@@ -221,13 +214,13 @@ class ParameterizedBaseHandler(BaseHandler):
 
             client.add_handler(
                 CallbackQueryHandler(
-                    pass_handler_and_clean(menu.on_callback, self),
+                    pass_parameterized_handler(menu.on_callback, self),
                     self.filter(menu.menu_id),
                 )
             )
 
 
-def pass_handler_and_clean(
+def pass_parameterized_handler(
     func: Types.Callback, handler: ParameterizedBaseHandler
 ) -> Types.PyrogramCallback:
     """Generate a function which, whenever it is called, subsequently calls
@@ -258,7 +251,6 @@ def pass_handler_and_clean(
     def on_callback(client: Client, context):
         if isinstance(context, CallbackQuery):
             func(handler, client, context, context.parameters)
-            handler.database.delete(context.parameters["callback_query_id"])
         else:
             func(handler, client, context, {})
 

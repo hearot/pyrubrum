@@ -82,7 +82,7 @@ class BaseHandler(ABC):
             [
                 (
                     InlineKeyboardButton(
-                        button.name, callback_data=button.button_id
+                        button.name, callback_data=button.menu_id
                     )
                     if not button.link
                     else InlineKeyboardButton(button.name, url=button.link)
