@@ -22,18 +22,31 @@ import pyrubrum
 
 # -- Project information -----------------------------------------------------
 
+FIGURE_TEMPLATE = """
+Structure
+---------
+
+.. figure:: ../_static/flowcharts/{filename}.png
+
+"""
 EXAMPLE_TEMPLATE = """
 {title}
 {separators}
 
 .. note::
     In order to make use of the proposed example, you need to
-    set your own environment file by creating a file named ``.env``
+    set your own environment by creating a file named ``.env``
     and configuring all the variables from :doc:`sample.env <sample>`.
+{figure}
+
+Source code
+-----------
 
 .. literalinclude:: ../_static/examples/{filename}
 """
 EXAMPLE_TITLES = {"cafe_bot.py": "Café Bot"}
+
+FIGURES = {"cafe_bot.py": "cafe_bot"}
 
 project = pyrubrum.__package__
 copyright = "2020, Hearot"
@@ -65,9 +78,17 @@ for example in filter(lambda f: f.endswith(".py"), listdir("../../examples")):
         else:
             title = example.replace("_", " ").replace(".py", "").title()
 
+        if example in FIGURES:
+            figure = FIGURE_TEMPLATE.format(filename=FIGURES[example])
+        else:
+            figure = ""
+
         example_rst.write(
             EXAMPLE_TEMPLATE.lstrip().format(
-                filename=example, title=title, separators="=" * len(title)
+                figure=figure,
+                filename=example,
+                title=title,
+                separators="=" * len(title),
             )
         )
 

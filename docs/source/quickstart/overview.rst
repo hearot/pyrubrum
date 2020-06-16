@@ -5,7 +5,7 @@ Writing your first bot
     :align: center
     :width: 200px
 
-    An example of what you can build using Pyrubrum.
+    An example of what you can build using Pyrubrum (see :doc:`Calendar Bot <../examples/calendar_bot>`).
 
 Your first menu
 ---------------

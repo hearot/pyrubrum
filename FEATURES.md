@@ -1,10 +1,11 @@
 ### Documentation
 
+   - Add a flowchart for `cafe_bot.py`
    - Add a simple glossary ([0000e5ecc76f27f66833a28ef67836b5a338a353](https://github.com/hearot/pyrubrum/commit/0000e5ecc76f27f66833a28ef67836b5a338a353))
    - Add a simple quickstart menu ([3b4e5c7581ec4457bc8427068524954ec4920418](https://github.com/hearot/pyrubrum/commit/3b4e5c7581ec4457bc8427068524954ec4920418))
    - Add docstrings to `command_filter` and `deep_link_filter` ([b61629afa1d85f80fea4ec5030ab756d47714fea](https://github.com/hearot/pyrubrum/commit/b61629afa1d85f80fea4ec5030ab756d47714fea))
    - Add flowcharts ([c170d6aa8630e2f0575e79e0b10dcb5bab84a119](https://github.com/hearot/pyrubrum/commit/c170d6aa8630e2f0575e79e0b10dcb5bab84a119))
-   - Finish writing the tutorial
+   - Finish writing the tutorial ([3ed75930ab0a57d84dad25880bdde86e1e7d66f4](https://github.com/hearot/pyrubrum/commit/3ed75930ab0a57d84dad25880bdde86e1e7d66f4))
    - Include examples in the toctree ([737c1223e9ef4c95d9cac78c43e8820f7210069f](https://github.com/hearot/pyrubrum/commit/737c1223e9ef4c95d9cac78c43e8820f7210069f))
 
 ### New features

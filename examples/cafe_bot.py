@@ -87,14 +87,14 @@ tree = transform(
             "🍷 Choose the drink you want!",
             make_elements(drinks),
             deep_link=True,
-        ): {Menu("Choose drink", "choose_drink", "🍹 Here you go!")},
+        ): {Menu("After drink choice", "drink_chosen", "🍹 Here you go!")},
         PageMenu(
             "Snack",
             "snack",
             "🍬 Choose the snack you want!",
             make_elements(snacks),
             deep_link=True,
-        ): {Menu("Choose snack", "choose_snack", "🥨 Here you go!")},
+        ): {Menu("After snack choice", "snack_chosen", "🥨 Here you go!")},
     }
 )
 
