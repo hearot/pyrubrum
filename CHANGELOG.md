@@ -4,7 +4,7 @@
 
 ### Documentation
 
-   - Add a flowchart for `cafe_bot.py`
+   - Add a flowchart for `cafe_bot.py` ([3664a0ad9f51c434c00fd6e4cf2d603e6953b530](https://github.com/hearot/pyrubrum/commit/3664a0ad9f51c434c00fd6e4cf2d603e6953b530))
    - Add a simple glossary ([0000e5ecc76f27f66833a28ef67836b5a338a353](https://github.com/hearot/pyrubrum/commit/0000e5ecc76f27f66833a28ef67836b5a338a353))
    - Add a simple quickstart menu ([3b4e5c7581ec4457bc8427068524954ec4920418](https://github.com/hearot/pyrubrum/commit/3b4e5c7581ec4457bc8427068524954ec4920418))
    - Add docstrings to `command_filter` and `deep_link_filter` ([b61629afa1d85f80fea4ec5030ab756d47714fea](https://github.com/hearot/pyrubrum/commit/b61629afa1d85f80fea4ec5030ab756d47714fea))
@@ -18,6 +18,7 @@
 
 ### Other changes
 
+   - Delete references to LGPLv3
    - Update version to 0.1a1.dev7 ([f9190b87c11822203511b8784e5f4248313a59e4](https://github.com/hearot/pyrubrum/commit/f9190b87c11822203511b8784e5f4248313a59e4))
 
 ### ‼️ Breaking changes
