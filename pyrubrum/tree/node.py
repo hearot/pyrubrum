@@ -54,7 +54,7 @@ class Node:
         return hash(self.menu)
 
     def __init__(self, menu: BaseMenu, children: Optional[Set["Node"]] = None):
-        self.children = children if children else set()
+        self.children = children if children else tuple()
         self.menu = menu
 
     def add_child(self, node: "Node"):
@@ -64,7 +64,7 @@ class Node:
             node (Node): The node which is being added as a child of this
                 object.
         """
-        self.children.add(node)
+        self.children += (node,)
 
     @lru_cache(maxsize=1)
     def get_children_menus(self) -> Iterable[BaseMenu]:

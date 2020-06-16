@@ -8,6 +8,10 @@
    - Finish writing the tutorial ([3ed75930ab0a57d84dad25880bdde86e1e7d66f4](https://github.com/hearot/pyrubrum/commit/3ed75930ab0a57d84dad25880bdde86e1e7d66f4))
    - Include examples in the toctree ([737c1223e9ef4c95d9cac78c43e8820f7210069f](https://github.com/hearot/pyrubrum/commit/737c1223e9ef4c95d9cac78c43e8820f7210069f))
 
+### Fixes
+
+   - Preserve order while adding a new child to a node
+
 ### New features
 
    - Add `cafe_bot.py` as an example for multiple commands ([bacce5d540c3e4f36070ce4b554089381aa151fc](https://github.com/hearot/pyrubrum/commit/bacce5d540c3e4f36070ce4b554089381aa151fc))
@@ -21,5 +25,5 @@
 
    - Add `LinkMenu` ([2776ae7fd71649cb5fc2756665d931755379c678](https://github.com/hearot/pyrubrum/commit/2776ae7fd71649cb5fc2756665d931755379c678))
    - Add `pyrubrum.menus.styles` and the `style` argument ([fbcfe0f63c4ecbab228f28942177d17d59d3dcb9](https://github.com/hearot/pyrubrum/commit/fbcfe0f63c4ecbab228f28942177d17d59d3dcb9))
-   - Implement md5 encryption for parameterized handlers
+   - Implement md5 encryption for parameterized handlers ([2f790256744a41b21956ae9acc867f1eb33a1496](https://github.com/hearot/pyrubrum/commit/2f790256744a41b21956ae9acc867f1eb33a1496))
    - Support deep-linking ([c70cd3010b739d8b0f3bd013dfdb70faedb4ab8e](https://github.com/hearot/pyrubrum/commit/c70cd3010b739d8b0f3bd013dfdb70faedb4ab8e))
