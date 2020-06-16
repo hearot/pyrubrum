@@ -29,6 +29,8 @@ from pyrogram import InlineKeyboardButton
 from pyrubrum.keyboard import Button
 from pyrubrum.types import Types
 
+NULL_POINTER = "0"
+
 
 class BaseHandler(ABC):
     """Basic representation of an handler, which is an entity that manages the

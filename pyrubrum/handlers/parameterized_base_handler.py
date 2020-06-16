@@ -32,6 +32,7 @@ from pyrubrum.database import BaseDatabase
 from pyrubrum.database.errors import DatabaseError
 from pyrubrum.types import Types
 from .base_handler import BaseHandler
+from .base_handler import NULL_POINTER
 
 try:
     import orjson as json  # noqa
@@ -143,6 +144,14 @@ class ParameterizedBaseHandler(BaseHandler):
                     )
                     continue
 
+                if button.menu_id == NULL_POINTER:
+                    processed_row.append(
+                        InlineKeyboardButton(
+                            button.name, callback_data=NULL_POINTER
+                        )
+                    )
+                    continue
+
                 key = md5(
                     (
                         str(callback_query_id)
@@ -166,7 +175,7 @@ class ParameterizedBaseHandler(BaseHandler):
                 )
 
                 processed_row.append(
-                    InlineKeyboardButton(button.name, callback_data=key,)
+                    InlineKeyboardButton(button.name, callback_data=key)
                 )
 
                 self.database.set(key, json.dumps(content))

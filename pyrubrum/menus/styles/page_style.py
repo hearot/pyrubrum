@@ -25,6 +25,7 @@ from typing import Optional
 
 from pyrogram import Client
 
+from pyrubrum.handlers.base_handler import NULL_POINTER
 from pyrubrum.keyboard.button import Button
 from .base_style import BaseStyle
 
@@ -243,7 +244,7 @@ class PageStyle(BaseStyle):
                 teleport_row.append(previous_page_button)
             else:
                 previous_page_button = Button(
-                    EMPTY_CHARACTER, str(parameters[page_id]), "0",
+                    EMPTY_CHARACTER, str(parameters[page_id]), NULL_POINTER,
                 )
 
                 teleport_row.append(previous_page_button)
@@ -253,12 +254,14 @@ class PageStyle(BaseStyle):
                     page_button = Button(
                         "%d/%d" % (parameters[page_id] + 1, pages),
                         str(parameters[page_id]),
-                        "0",
+                        NULL_POINTER,
                     )
 
                     teleport_row.append(page_button)
                 else:
-                    page_button = Button(str(parameters[page_id] + 1), "0")
+                    page_button = Button(
+                        str(parameters[page_id] + 1), NULL_POINTER
+                    )
 
                     teleport_row.append(page_button)
 
@@ -279,7 +282,7 @@ class PageStyle(BaseStyle):
                 teleport_row.append(next_page_button)
             else:
                 next_page_button = Button(
-                    EMPTY_CHARACTER, str(parameters[page_id]), "0",
+                    EMPTY_CHARACTER, str(parameters[page_id]), NULL_POINTER,
                 )
 
                 teleport_row.append(next_page_button)

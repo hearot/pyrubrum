@@ -7,7 +7,7 @@
    - Add flowcharts ([c170d6aa8630e2f0575e79e0b10dcb5bab84a119](https://github.com/hearot/pyrubrum/commit/c170d6aa8630e2f0575e79e0b10dcb5bab84a119))
    - Finish writing the tutorial ([3ed75930ab0a57d84dad25880bdde86e1e7d66f4](https://github.com/hearot/pyrubrum/commit/3ed75930ab0a57d84dad25880bdde86e1e7d66f4))
    - Include examples in the toctree ([737c1223e9ef4c95d9cac78c43e8820f7210069f](https://github.com/hearot/pyrubrum/commit/737c1223e9ef4c95d9cac78c43e8820f7210069f))
-   - Update docstrings for `pass_parameterized_handler`
+   - Update docstrings for `pass_parameterized_handler` ([aa5a7a7b884db15a0c1c83b6d43bbf078fa58d4d](https://github.com/hearot/pyrubrum/commit/aa5a7a7b884db15a0c1c83b6d43bbf078fa58d4d))
 
 ### Fixes
 
@@ -16,6 +16,7 @@
 ### New features
 
    - Add `cafe_bot.py` as an example for multiple commands ([bacce5d540c3e4f36070ce4b554089381aa151fc](https://github.com/hearot/pyrubrum/commit/bacce5d540c3e4f36070ce4b554089381aa151fc))
+   - Do not store parameters related to null-pointer buttons
 
 ### Other changes
 
