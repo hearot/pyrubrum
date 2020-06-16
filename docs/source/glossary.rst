@@ -21,6 +21,9 @@ Terms
     Constant bot
         A bot whose menus are static and which does not support :term:`parameterization <Parameterization>`
 
+    Forest
+        The collection of all the :term:`top-level nodes <Top-level node>`.
+
     Inline button
         See `Bot API Documentation <https://core.telegram.org/bots/api#inlinekeyboardbutton>`_.
 

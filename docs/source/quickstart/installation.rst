@@ -1,7 +1,7 @@
 Installation
 ============
 
-In order to make use of Pyrubrum, you will have to install the library.
+In order to make use of Pyrubrum, you will have to install it.
 
 .. important::
     Pyrubrum supports Python starting from version **3.6** only.
@@ -25,6 +25,6 @@ For example::
 From source
 -----------
 
-You can even install Pyrubrum by installing its source by yourself, after having it downloaded from `GitHub <https://github.com/hearot/pyrubrum>`_::
+You can even install Pyrubrum by installing it from its source, after having it downloaded from `GitHub <https://github.com/hearot/pyrubrum>`_::
 
     pip install git+https://github.com/hearot/pyrubrum
