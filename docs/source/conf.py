@@ -49,6 +49,7 @@ EXAMPLE_TITLES = {"cafe_bot.py": "Café Bot"}
 FIGURES = {
     "cafe_bot.py": "cafe_bot",
     "calendar_bot.py": "calendar_bot",
+    "hitchhiker_bot.py": "hitchhiker_bot",
 }
 
 project = pyrubrum.__package__
