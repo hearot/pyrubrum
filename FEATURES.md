@@ -2,7 +2,8 @@
 
    - Add a flowchart for `cafe_bot.py` ([3664a0ad9f51c434c00fd6e4cf2d603e6953b530](https://github.com/hearot/pyrubrum/commit/3664a0ad9f51c434c00fd6e4cf2d603e6953b530))
    - Add a flowchart for `calendar_bot.py` ([f7b41b594d62a2874a280bb93b4b1ea419ea35d1](https://github.com/hearot/pyrubrum/commit/f7b41b594d62a2874a280bb93b4b1ea419ea35d1))
-   - Add a flowchart for `hitchhiker_bot.py`
+   - Add a flowchart for `hitchhiker_bot.py` ([3f7057244f3e1c868e0e7b00f04e39d481468a6d](https://github.com/hearot/pyrubrum/commit/3f7057244f3e1c868e0e7b00f04e39d481468a6d))
+   - Add a flowchart for `sample_bot.py`
    - Add a simple glossary ([0000e5ecc76f27f66833a28ef67836b5a338a353](https://github.com/hearot/pyrubrum/commit/0000e5ecc76f27f66833a28ef67836b5a338a353))
    - Add a simple quickstart menu ([3b4e5c7581ec4457bc8427068524954ec4920418](https://github.com/hearot/pyrubrum/commit/3b4e5c7581ec4457bc8427068524954ec4920418))
    - Add docstrings to `command_filter` and `deep_link_filter` ([b61629afa1d85f80fea4ec5030ab756d47714fea](https://github.com/hearot/pyrubrum/commit/b61629afa1d85f80fea4ec5030ab756d47714fea))

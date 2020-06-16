@@ -50,6 +50,7 @@ FIGURES = {
     "cafe_bot.py": "cafe_bot",
     "calendar_bot.py": "calendar_bot",
     "hitchhiker_bot.py": "hitchhiker_bot",
+    "sample_bot.py": "sample_bot",
 }
 
 project = pyrubrum.__package__
