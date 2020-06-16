@@ -10,6 +10,7 @@
    - Add a flowchart for `sample_bot.py` ([a698a4f1c7b85640011f861b9f2ae6ffa5dbd001](https://github.com/hearot/pyrubrum/commit/a698a4f1c7b85640011f861b9f2ae6ffa5dbd001))
    - Add a simple glossary ([0000e5ecc76f27f66833a28ef67836b5a338a353](https://github.com/hearot/pyrubrum/commit/0000e5ecc76f27f66833a28ef67836b5a338a353))
    - Add a simple quickstart menu ([3b4e5c7581ec4457bc8427068524954ec4920418](https://github.com/hearot/pyrubrum/commit/3b4e5c7581ec4457bc8427068524954ec4920418))
+   - Add a tip for opening a feature request
    - Add docstrings to `command_filter` and `deep_link_filter` ([b61629afa1d85f80fea4ec5030ab756d47714fea](https://github.com/hearot/pyrubrum/commit/b61629afa1d85f80fea4ec5030ab756d47714fea))
    - Add flowcharts ([c170d6aa8630e2f0575e79e0b10dcb5bab84a119](https://github.com/hearot/pyrubrum/commit/c170d6aa8630e2f0575e79e0b10dcb5bab84a119))
    - Finish writing the tutorial ([3ed75930ab0a57d84dad25880bdde86e1e7d66f4](https://github.com/hearot/pyrubrum/commit/3ed75930ab0a57d84dad25880bdde86e1e7d66f4))
@@ -28,7 +29,7 @@
 ### Other changes
 
    - Delete references to LGPLv3 ([a7334b1a32b369239db8f1ec997cf2467d3c9420](https://github.com/hearot/pyrubrum/commit/a7334b1a32b369239db8f1ec997cf2467d3c9420))
-   - Exclude generated reStructuredText files
+   - Exclude generated reStructuredText files ([4767232558cd0dc9788796d908294a783762e792](https://github.com/hearot/pyrubrum/commit/4767232558cd0dc9788796d908294a783762e792))
    - Update version to 0.1a1.dev7 ([f9190b87c11822203511b8784e5f4248313a59e4](https://github.com/hearot/pyrubrum/commit/f9190b87c11822203511b8784e5f4248313a59e4))
 
 ### ‼️ Breaking changes

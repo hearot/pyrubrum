@@ -159,3 +159,4 @@ docs/source/_static/NOTICE
 docs/source/_static/README.md
 docs/source/_static/SECURITY.md
 docs/source/examples
+!docs/source/examples/sample.rst

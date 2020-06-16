@@ -46,6 +46,8 @@ Welcome to Pyrubrum
     handler.setup(bot)
     bot.run()
 
+.. tip::
+    If you think something should be added to the documentation, feel free to make a proposal by opening an `issue <https://github.com/hearot/pyrubrum/issues/new?assignees=hearot&labels=enhancement-request&template=feature_request.md&title=%5BFeature%5D>`_ on GitHub.
 
 .. toctree::
     :caption: Quickstart
