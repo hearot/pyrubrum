@@ -150,5 +150,11 @@ docs/source/LICENSE
 docs/source/NOTICE
 docs/source/README.md
 docs/source/SECURITY.md
-docs/source/_static/*
-!docs/source/_static/assets
+docs/source/_static/examples
+docs/source/_static/CHANGELOG.md
+docs/source/_static/CODE_OF_CONDUCT.md
+docs/source/_static/FEATURES.md
+docs/source/_static/LICENSE
+docs/source/_static/NOTICE
+docs/source/_static/README.md
+docs/source/_static/SECURITY.md
