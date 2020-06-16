@@ -46,7 +46,10 @@ Source code
 """
 EXAMPLE_TITLES = {"cafe_bot.py": "Café Bot"}
 
-FIGURES = {"cafe_bot.py": "cafe_bot"}
+FIGURES = {
+    "cafe_bot.py": "cafe_bot",
+    "calendar_bot.py": "calendar_bot",
+}
 
 project = pyrubrum.__package__
 copyright = "2020, Hearot"

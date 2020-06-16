@@ -5,6 +5,7 @@
 ### Documentation
 
    - Add a flowchart for `cafe_bot.py` ([3664a0ad9f51c434c00fd6e4cf2d603e6953b530](https://github.com/hearot/pyrubrum/commit/3664a0ad9f51c434c00fd6e4cf2d603e6953b530))
+   - Add a flowchart for `calendar_bot.py`
    - Add a simple glossary ([0000e5ecc76f27f66833a28ef67836b5a338a353](https://github.com/hearot/pyrubrum/commit/0000e5ecc76f27f66833a28ef67836b5a338a353))
    - Add a simple quickstart menu ([3b4e5c7581ec4457bc8427068524954ec4920418](https://github.com/hearot/pyrubrum/commit/3b4e5c7581ec4457bc8427068524954ec4920418))
    - Add docstrings to `command_filter` and `deep_link_filter` ([b61629afa1d85f80fea4ec5030ab756d47714fea](https://github.com/hearot/pyrubrum/commit/b61629afa1d85f80fea4ec5030ab756d47714fea))
@@ -31,7 +32,7 @@
 
    - Add `LinkMenu` ([2776ae7fd71649cb5fc2756665d931755379c678](https://github.com/hearot/pyrubrum/commit/2776ae7fd71649cb5fc2756665d931755379c678))
    - Add `pyrubrum.menus.styles` and the `style` argument ([fbcfe0f63c4ecbab228f28942177d17d59d3dcb9](https://github.com/hearot/pyrubrum/commit/fbcfe0f63c4ecbab228f28942177d17d59d3dcb9))
-   - Consider valid only the queries sent from the same user
+   - Consider valid only the queries sent from the same user ([6f8d9310c7bf52fc3f9f888061f84d7394453b17](https://github.com/hearot/pyrubrum/commit/6f8d9310c7bf52fc3f9f888061f84d7394453b17))
    - Implement md5 encryption for parameterized handlers ([2f790256744a41b21956ae9acc867f1eb33a1496](https://github.com/hearot/pyrubrum/commit/2f790256744a41b21956ae9acc867f1eb33a1496))
    - Support deep-linking ([c70cd3010b739d8b0f3bd013dfdb70faedb4ab8e](https://github.com/hearot/pyrubrum/commit/c70cd3010b739d8b0f3bd013dfdb70faedb4ab8e))
 

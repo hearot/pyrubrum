@@ -77,19 +77,19 @@ tree = transform(
             style=PageStyle(limit=4, limit_items=15),
         ): {
             PageMenu(
-                "Month menu",
+                "After year choice",
                 "year",
                 "📅 Choose a month.",
                 generate_months(),
                 style=PageStyle(limit=5, limit_items=12),
             ): {
                 PageMenu(
-                    "Day menu",
+                    "After month choice",
                     "month",
                     "📅 Choose a day.",
                     generate_days,
                     style=PageStyle(limit=5, limit_items=31),
-                ): {Menu("Choose day menu", "day", tell_about_the_day)}
+                ): {Menu("After day choice", "day", tell_about_the_day)}
             }
         }
     }
