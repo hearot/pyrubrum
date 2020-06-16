@@ -62,20 +62,8 @@ class ParameterizedBaseHandler(BaseHandler):
         filter callback queries relying on the content of the provided menu
         identifier.
 
-        A callback query is valid if its content follows the following
-        pattern::
-
-            [CALLBACK_QUERY_ID] [MENU_ID] [ELEMENT_ID, optional]
-
-        If the query that is being handled matches ``MENU_ID``, database is
-        queried with the content of ``CALLBACK_QUERY_ID``. If a valid match
-        is found, its content is converted from JSON and then parameters are
-        collected and stored in ``callback.parameters``.
-
-        If ``ELEMENT_ID`` is provided, ``element_id`` is set to be equal to it
-        in ``callback.parameters``. If ``same_menu`` in ``callback.parameters``
-        is ``False``, a new key named ``[MENU_ID]_id`` is set to be equal to
-        ``ELEMENT_ID`` in ``callback.parameters``.
+        The content of the callback query is always a MD5 hash which behaves
+        as the key for the parameters we're looking for.
 
         The filter returns ``True`` if the query is valid and matches
         ``menu_id``. Otherwise, it returns ``False``.
@@ -121,19 +109,15 @@ class ParameterizedBaseHandler(BaseHandler):
     ) -> List[List[InlineKeyboardButton]]:
         """Given a list of a list of buttons which represents an inline keyboard and a
         unique identifier for the callback, generate a Pyrogram-compatible
-        inline keyboard. It also creates a dictionary ``content``, whose keys
-        represent the identifiers of the menu collected in the keyboard and
-        values their own parameters. Finally, it converts ``content`` to JSON
-        and stores it inside the database using the provided query identifier
-        as key.
+        inline keyboard.
 
-        The returned inline keyboard does not store any parameters. Instead,
-        its buttons stores the data needed to get the parameters from the
-        database, in accordance with the following pattern::
+        It generates a MD5 hash key for each button by following this pattern::
 
-            [CALLBACK_QUERY_ID] [MENU_ID] [ELEMENT_ID, optional]
+            [CALLBACK_QUERY_ID][MENU_ID][ELEMENT_ID]
 
-        See `ParameterizedBaseHandler.filter` for more information.
+        After having generated a key, it sets it to be equal to the
+        parameters of the button, which have been previously converted
+        to JSON.
 
         Parameters:
             keyboard (List[List[Button]]): The inline keyboard you want to
@@ -224,9 +208,9 @@ def pass_parameterized_handler(
     func: Types.Callback, handler: ParameterizedBaseHandler
 ) -> Types.PyrogramCallback:
     """Generate a function which, whenever it is called, subsequently calls
-    `callback`, passing the handler from which this object was generated, and
-    then deletes the key which is associated to the handled query from the
-    database. It requires a subclass of `ParameterizedBaseHandler` to be
+    `callback`, passing the handler from which this object was generated and
+    the retrieved parameters (it creates an empty dictionary if non existent).
+    It requires a subclass of `ParameterizedBaseHandler` to be
     provided in order to work.
 
     Parameters:

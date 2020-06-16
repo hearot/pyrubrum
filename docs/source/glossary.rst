@@ -13,13 +13,16 @@ Terms
     :sorted:
 
     Children menu
-        A menu which is subordinate to certain menu.
+        A menu which is subordinate to a certain menu.
 
     Children node
         A node which is linked to a certain :term:`children menu <Children menu>`.
 
     Constant bot
         A bot whose menus are static and which does not support :term:`parameterization <Parameterization>`
+
+    Dynamic bot
+        A bot which is not :term:`static <Static bot>`.
 
     Forest
         The collection of all the :term:`top-level nodes <Top-level node>`.

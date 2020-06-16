@@ -11,10 +11,11 @@
    - Add flowcharts ([c170d6aa8630e2f0575e79e0b10dcb5bab84a119](https://github.com/hearot/pyrubrum/commit/c170d6aa8630e2f0575e79e0b10dcb5bab84a119))
    - Finish writing the tutorial ([3ed75930ab0a57d84dad25880bdde86e1e7d66f4](https://github.com/hearot/pyrubrum/commit/3ed75930ab0a57d84dad25880bdde86e1e7d66f4))
    - Include examples in the toctree ([737c1223e9ef4c95d9cac78c43e8820f7210069f](https://github.com/hearot/pyrubrum/commit/737c1223e9ef4c95d9cac78c43e8820f7210069f))
+   - Update docstrings for `pass_parameterized_handler`
 
 ### Fixes
 
-   - Preserve order while adding a new child to a node
+   - Preserve order while adding a new child to a node ([8a0980c41c18b67d98830d00db10b77c59a85c07](https://github.com/hearot/pyrubrum/commit/8a0980c41c18b67d98830d00db10b77c59a85c07))
 
 ### New features
 
