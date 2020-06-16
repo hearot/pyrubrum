@@ -64,7 +64,10 @@ class BaseHandler(ABC):
         raise NotImplementedError
 
     def process_keyboard(
-        self, keyboard: List[List[Button]], callback_query_id: str
+        self,
+        keyboard: List[List[Button]],
+        callback_query_id: str,
+        chat_id: int,
     ) -> List[List[InlineKeyboardButton]]:
         """Given a list of a list of buttons which represents an inline keyboard and a
         unique identifier for the callback, generate a Pyrogram-compatible
@@ -75,6 +78,8 @@ class BaseHandler(ABC):
                 process.
             callback_query_id (str): The unique identifier of the callback
                 for which the keyboard is generated.
+            chat_id (int): The identifier of the chat from which the query has
+                been sent.
 
         Returns:
             List[List[InlineKeyboardButton]]: The generated keyboard in a

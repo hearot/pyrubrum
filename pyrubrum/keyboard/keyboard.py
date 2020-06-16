@@ -39,6 +39,8 @@ class Keyboard(InlineKeyboardMarkup):
         callback_query_id (str): The unique identifier of the query, which
             will be used to make the call that is made by the inline
             buttons unique.
+        chat_id (int): The identifier of the chat from which the query has
+            been sent.
     """
 
     def __init__(
@@ -46,7 +48,10 @@ class Keyboard(InlineKeyboardMarkup):
         inline_keyboard: List[List[Button]],
         handler: "BaseHandler",  # noqa
         callback_query_id: str,
+        chat_id: int,
     ):
         super().__init__(
-            handler.process_keyboard(inline_keyboard, str(callback_query_id))
+            handler.process_keyboard(
+                inline_keyboard, callback_query_id, chat_id
+            )
         )

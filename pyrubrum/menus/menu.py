@@ -300,11 +300,16 @@ class Menu(BaseMenu):
                     keyboard,
                     handler,
                     str(context.message_id) + str(context.from_user.id),
+                    context.chat.id,
                 )
                 if keyboard
                 else None
             )
         elif isinstance(context, CallbackQuery):
             return (
-                Keyboard(keyboard, handler, context.id) if keyboard else None
+                Keyboard(
+                    keyboard, handler, context.id, context.message.chat.id
+                )
+                if keyboard
+                else None
             )

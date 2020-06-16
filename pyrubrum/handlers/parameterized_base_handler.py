@@ -66,6 +66,10 @@ class ParameterizedBaseHandler(BaseHandler):
         The content of the callback query is always a MD5 hash which behaves
         as the key for the parameters we're looking for.
 
+        If the identifier of the chat from which the query was sent does not
+        match the one defined in the retrieved parameters, the callback is
+        considered invalid.
+
         The filter returns ``True`` if the query is valid and matches
         ``menu_id``. Otherwise, it returns ``False``.
 
@@ -84,9 +88,20 @@ class ParameterizedBaseHandler(BaseHandler):
                     callback._result_data = json.loads(
                         self.database.get(callback.data)
                     )
-                    self.database.delete(callback.data)
+
+                    if (
+                        callback._result_data["from_chat_id"]
+                        == callback.message.chat.id
+                    ):
+                        self.database.delete(callback.data)
                 except (DatabaseError, JSONDecodeError):
                     return False
+
+            if (
+                callback._result_data["from_chat_id"]
+                != callback.message.chat.id
+            ):
+                return False
 
             if callback._result_data["menu_id"] == menu_id:
                 callback.parameters = callback._result_data
@@ -106,7 +121,10 @@ class ParameterizedBaseHandler(BaseHandler):
         return create(func, "ParameterizedCallbackData")
 
     def process_keyboard(
-        self, keyboard: List[List[Button]], callback_query_id: str
+        self,
+        keyboard: List[List[Button]],
+        callback_query_id: str,
+        chat_id: int,
     ) -> List[List[InlineKeyboardButton]]:
         """Given a list of a list of buttons which represents an inline keyboard and a
         unique identifier for the callback, generate a Pyrogram-compatible
@@ -118,13 +136,17 @@ class ParameterizedBaseHandler(BaseHandler):
 
         After having generated a key, it sets it to be equal to the
         parameters of the button, which have been previously converted
-        to JSON.
+        to JSON and include ``from_chat_id``, the identifier of the chat
+        from which the query was sent, ``element_id``, ``menu_id`` and
+        ``same_menu``.
 
         Parameters:
             keyboard (List[List[Button]]): The inline keyboard you want to
                 process.
             callback_query_id (str): The unique identifier of the callback
                 for which the keyboard is generated.
+            chat_id (int): The identifier of the chat from which the query has
+                been sent.
 
         Returns:
             List[List[InlineKeyboardButton]]: The generated keyboard in a
@@ -168,6 +190,7 @@ class ParameterizedBaseHandler(BaseHandler):
 
                 content.update(
                     {
+                        "from_chat_id": chat_id,
                         "element_id": button.element_id,
                         "menu_id": button.menu_id,
                         "same_menu": button.same_menu,

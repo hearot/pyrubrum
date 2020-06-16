@@ -56,9 +56,9 @@ class Button:
     Warning:
         There is a special group of names which are not available for being
         used as keys for parameters (not for arguments!). These are
-        ``menu_id``, ``element_id`` and ``same_menu``. If provided, they
-        will be overwritten. Keys starting with ``page_`` shall be
-        avoided according to `PageMenu.keyboard`.
+        ``from_chat_id``, ``menu_id``, ``element_id`` and ``same_menu``.
+        If provided, they will be overwritten. Keys starting with ``page_``
+        should be avoided according to `PageMenu.keyboard`.
     """
 
     def __init__(
