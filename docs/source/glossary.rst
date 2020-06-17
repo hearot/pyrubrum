@@ -12,11 +12,11 @@ Terms
 .. glossary::
     :sorted:
 
-    Children menu
+    Child menu
         A menu which is subordinate to a certain menu.
 
-    Children node
-        A node which is linked to a certain :term:`children menu <Children menu>`.
+    Child node
+        A node which is linked to a certain :term:`child menu <Child menu>`.
 
     Constant bot
         A bot whose menus are static and which does not support :term:`parameterization <Parameterization>`
@@ -32,7 +32,7 @@ Terms
 
     Null-pointer button
         An inline button that points to no where, whose content is ``0``.
-        It is most used for design purposes.
+        It is mostly used for design purposes.
 
     Parameterization
         The process of accepting parameters from *callbacks*.
@@ -41,7 +41,10 @@ Terms
         A bot which supports :term:`parameterization <Parameterization>`.
 
     Parent menu
-        A menu of which a certain menu is a :term:`children menu <Children menu>`.
+        A menu of which a certain menu is a :term:`child menu <Child menu>`.
+
+    Parent node
+        A node which is linked to a certain :term:`parent menu <Parent menu>`.
 
     Static bot
         See :term:`Constant bot`.

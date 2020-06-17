@@ -8,6 +8,7 @@
    - Add a simple quickstart menu ([3b4e5c7581ec4457bc8427068524954ec4920418](https://github.com/hearot/pyrubrum/commit/3b4e5c7581ec4457bc8427068524954ec4920418))
    - Add a tip for opening a feature request ([909dfff2923e8b551d4500f48223659cd1d97ec4](https://github.com/hearot/pyrubrum/commit/909dfff2923e8b551d4500f48223659cd1d97ec4))
    - Add docstrings to `command_filter` and `deep_link_filter` ([b61629afa1d85f80fea4ec5030ab756d47714fea](https://github.com/hearot/pyrubrum/commit/b61629afa1d85f80fea4ec5030ab756d47714fea))
+   - Add flowchart guidelines
    - Add flowcharts ([c170d6aa8630e2f0575e79e0b10dcb5bab84a119](https://github.com/hearot/pyrubrum/commit/c170d6aa8630e2f0575e79e0b10dcb5bab84a119))
    - Finish writing the tutorial ([3ed75930ab0a57d84dad25880bdde86e1e7d66f4](https://github.com/hearot/pyrubrum/commit/3ed75930ab0a57d84dad25880bdde86e1e7d66f4))
    - Flowcharts are now transparent ([0c32a87eb5610b4b4304ab43eea4b706da69f224](https://github.com/hearot/pyrubrum/commit/0c32a87eb5610b4b4304ab43eea4b706da69f224))
@@ -16,7 +17,7 @@
 
 ### Fixes
 
-   - Make all the flowcharts follow the guidelines
+   - Make all the flowcharts follow the guidelines ([5e308d275e81617b2ce2cb89181e43f2d086db94](https://github.com/hearot/pyrubrum/commit/5e308d275e81617b2ce2cb89181e43f2d086db94))
    - Preserve order while adding a new child to a node ([8a0980c41c18b67d98830d00db10b77c59a85c07](https://github.com/hearot/pyrubrum/commit/8a0980c41c18b67d98830d00db10b77c59a85c07))
 
 ### New features
