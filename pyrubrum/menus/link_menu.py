@@ -38,8 +38,8 @@ class LinkMenu(BaseMenu):
             refer unequivocally to this entity. The hash for this class is
             generated relying on the content of this field. Avoid using ``0``
             as it is used for buttons whose purpose is only related to
-            design (i.e. they do not point to any menu). See `BaseMenu`
-            for more information.
+            design (i.e. they do not point to any menu, see
+            :term:`Null-pointer button`). See `BaseMenu` for more information.
         link (Types.Content): What will be displayed whenever a user
             accesses this menu. A function can be provided as well and must
             follow the following arguments pattern::

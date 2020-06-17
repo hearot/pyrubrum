@@ -53,7 +53,8 @@ class BaseMenu(ABC):
             refer unequivocally to this entity. The hash for this class is
             generated relying on the content of this field. Avoid using ``0``
             as it is used for buttons whose purpose is only related to design
-            (i.e. they do not point to any menu).
+            (i.e. they do not point to any menu, see :term:`Null-pointer
+            button`).
         is_link (Optional[bool]): If this menu represents a link.
 
     Warning:

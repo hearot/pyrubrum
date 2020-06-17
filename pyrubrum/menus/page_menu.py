@@ -30,15 +30,12 @@ from .menu import Menu
 
 class PageMenu(Menu):
     """Implementation of a menu which automatically, given a list of items, manages
-    paging and the setting of parameters. It has got, by definition, a list of
-    items, which can be provided using a custom function as well, a limit of
-    displayed elements per page and custom texts for the buttons which let the
-    user change the displayed page.
+    paging and the setting of parameters. It has got, by definition, all the
+    parameters defined in `Menu` plus a list of items that will be displayed
+    to the user.
 
     See Also:
-        For understanding how the keyboard is being generated:
-
-        * `PageStyle`
+        For understanding how the keyboard is being generated, see `PageStyle`.
 
     Parameters:
         name (str): The name you give to the menu, which will be used as
@@ -48,8 +45,8 @@ class PageMenu(Menu):
             refer unequivocally to this entity. The hash for this class is
             generated relying on the content of this field. Avoid using ``0``
             as it is used for buttons whose purpose is only related to design
-            (i.e. they do not point to any menu). See `BaseMenu` for more
-            information.
+            (i.e. they do not point to any menu, see :term:`Null-pointer
+            button`). See `BaseMenu` for more information.
         content (Types.Content): What will be displayed whenever a user
             accesses this menu. Both text and media can be provided. A
             function can be provided as well and must follow the following

@@ -58,7 +58,7 @@ class Button:
         used as keys for parameters (not for arguments!). These are
         ``from_chat_id``, ``menu_id``, ``element_id`` and ``same_menu``.
         If provided, they will be overwritten. Keys starting with ``page_``
-        should be avoided according to `PageMenu.keyboard`.
+        should be avoided according to `PageStyle.generate_page_id`.
     """
 
     def __init__(

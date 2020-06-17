@@ -40,9 +40,9 @@ class PageStyle(BaseStyle):
         back_text (Optional[str]): The text which will be displayed
             inside the button that lets the user go back to the parent
             menu. Defaults to "🔙".
-        limit (Optional[int]): The limit of buttons per row. Defaults to 2.
+        limit (Optional[int]): The limit of buttons per row. Defaults to ``2``.
         limit_items (Optional[int]): The limit of elements per page.
-            Defaults to 4.
+            Defaults to ``4``.
         next_page_text (Optional[str]): The text which is displayed
             inside the button that lets the user move on to the next page,
             if any. Defaults to "▶️".
@@ -138,7 +138,7 @@ class PageStyle(BaseStyle):
         equal to ``element_id``, which represents the page itself.
 
         As a result of this, during the build of the the teleport buttons (i.e.
-        the buttons for moving between pages) the ``element_id`` is set to be
+        the buttons for moving between pages) ``element_id`` is set to be
         equal to the page the buttons refer to (e.g. page plus one for "Go to
         the next page").
 

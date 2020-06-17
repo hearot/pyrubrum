@@ -59,9 +59,9 @@ class Types:
     Expire = Optional[Union[bool, int, timedelta]]
     """This type defines the possible values for an expire (see `BaseDatabase`).
     A positive integer is suitable and indicates how many seconds a value can
-    be kept in database. A `datetime.timedelta` can be provided and is valid as
-    well. In order to indicate that there is no expire, ``False`` shall be
-    provided.
+    be kept within database. A `datetime.timedelta` can be provided and is
+    valid as well. In order to indicate that there is no expire, ``False``
+    shall be provided.
     """
 
     Items = Union[

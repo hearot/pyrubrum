@@ -36,7 +36,7 @@ class MenuStyle(BaseStyle):
         back_text (Optional[str]): The text which will be displayed
             inside the button that lets the user go back to the parent
             menu. Defaults to "🔙".
-        limit (Optional[int]): The limit of buttons per row. Defaults to 2.
+        limit (Optional[int]): The limit of buttons per row. Defaults to ``2``.
     """
 
     def __init__(
@@ -54,7 +54,7 @@ class MenuStyle(BaseStyle):
         menu: "Menu",  # noqa
     ) -> List[List["Button"]]:
         """Provide a keyboard, filled with all the buttons which refer to the
-        childre menu and a special button for linking the user to the parent
+        children menus and a special button for linking the user to the parent
         menu, if any.
 
         Parameters:
@@ -68,8 +68,8 @@ class MenuStyle(BaseStyle):
             menu (Menu): The menu the keyboard is being built for.
 
         Returns:
-            InlineKeyboardMarkup: The generated inline keyboard, which is then
-            displayed to the user.
+            pyrogram.InlineKeyboardMarkup: The generated inline keyboard,
+            which is then displayed to the user.
         """
         parent, children = handler.get_family(menu.menu_id)
 

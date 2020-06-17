@@ -53,7 +53,7 @@ class BaseStyle(ABC):
             menu (Menu): The menu the keyboard is being built for.
 
         Returns:
-            InlineKeyboardMarkup: The generated inline keyboard, which is then
-            displayed to the user.
+            pyrogram.InlineKeyboardMarkup: The generated inline keyboard,
+            which is then displayed to the user.
         """
         raise NotImplementedError

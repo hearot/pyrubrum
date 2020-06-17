@@ -31,7 +31,7 @@ USERNAMES = {}
 
 
 class DeepLinkMenu(BaseMenu):
-    """Implementation of a menu which automatically create a deep-link,
+    """Implementation of a menu which automatically creates a deep-link,
     given a parameter that shall be passed.
 
     See also:
@@ -46,15 +46,15 @@ class DeepLinkMenu(BaseMenu):
             refer unequivocally to this entity. The hash for this class is
             generated relying on the content of this field. Avoid using ``0``
             as it is used for buttons whose purpose is only related to
-            design (i.e. they do not point to any menu). See `BaseMenu`
-            for more information.
+            design (i.e. they do not point to any menu, see
+            :term:`Null-pointer button`). See `BaseMenu` for more information.
         payload (Types.Payload): What will be passed to as payload using the
             deep-linking. A function can be provided as well and must follow
             the following arguments pattern::
 
                 func(handler, client, context, parameters)
         deep_link_type (Optional[str]): The type of deep-link that is being
-            generated, which must be either ``start``or ``startgroup``.
+            generated, which must be either ``start`` or ``startgroup``.
             Defaults to ``start``.
     """
 

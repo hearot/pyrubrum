@@ -38,16 +38,14 @@ from .base_menu import BaseMenu
 
 class Menu(BaseMenu):
     """Implementation of a menu who has got, by definition, a content to display
-    (i.e. what the user will see by accessing it), a limit of buttons displayed
-    per row and a custom text displayed for going back to the parent menu, if
-    any.
+    (i.e. what the user will see by accessing it), a name and a style.
 
     See Also:
         For complete examples of styles you can make use of:
 
         * `MenuStyle`
-        * `PageStyle` (although it is recommended to just use
-          `PageMenu` instead)
+        * `PageStyle` (although it is recommended to use it only
+          with `PageMenu`)
 
     Parameters:
         name (str): The name you give to the menu, which will be used as
@@ -57,12 +55,13 @@ class Menu(BaseMenu):
             refer unequivocally to this entity. The hash for this class is
             generated relying on the content of this field. Avoid using ``0``
             as it is used for buttons whose purpose is only related to
-            design (i.e. they do not point to any menu). See `BaseMenu`
-            for more information.
+            design (i.e. they do not point to any menu,
+            see :term:`Null-pointer button`). See `BaseMenu` for more
+            information.
         content (Types.Content): What will be displayed whenever a user
             accesses this menu. Both text and media can be provided. A
-            function can be provided as well and must follow the following
-            arguments pattern::
+            function that returns such values can be provided as well
+            and must follow the this arguments pattern::
 
                 func(handler, client, context, parameters)
 
@@ -136,8 +135,7 @@ class Menu(BaseMenu):
         context: Union[CallbackQuery, Message],
         parameters: Optional[Dict[str, Any]] = None,
     ) -> Union[InputMedia, str]:
-        """Get the content of the menu, if defined. Otherwise call an already provided
-        function and returns its value.
+        """Get the content which will be displayed to the user.
 
         Parameters:
             handler (BaseHandler): The handler which coordinates the management
@@ -151,7 +149,7 @@ class Menu(BaseMenu):
         Returns:
             Union[InputMedia, str]: The content of the menu, which is then
             displayed to the user as a media (if it is a subclass of
-            `InputMedia`) or a message (if it is just a string).
+            `pyrogram.InputMedia`) or a message (if it is just a string).
         """
         if callable(self.content):
             if isinstance(parameters, dict):
@@ -171,15 +169,11 @@ class Menu(BaseMenu):
         """Each time a callback query is handled, this function calls the preliminary
         function (i.e. `Menu.preliminary`), if callable, then gets the content
         that is going to be provided to the user (both text and media are
-        compatible), sets up an inline keyboard filled with all the references
-        to the menus that are linked to the children of this menu node,
-        including a special button for going back to the parent menu, whose
-        text is defined using `Menu.back_button_text`, which overwrites the
-        text of the parent menu which usually should be displayed (see
-        `Menu.keyboard`), and finally edits the message with
+        compatible), sets up an inline keyboard using the style defined in
+        `Menu.style` and finally edits the message with
         `CallbackQuery.edit_message_text` (if the content is a string, i.e. a
-        text) or `CallbackQuery.edit_message_media` (if the content is an
-        instance of `InputMedia`, i.e. a media).
+        text) or `CallbackQuery.edit_message_media`
+        (if the content is an instance of `pyrogram.InputMedia`, i.e. a media).
 
         Parameters:
             handler (BaseHandler): The handler which coordinates the management
@@ -226,11 +220,11 @@ class Menu(BaseMenu):
         """Each time a message is handled, this function calls the preliminary
         function (i.e. `Menu.preliminary`), if callable, then gets the content
         that is going to be provided to the user (both text and media are
-        compatible), sets up an inline keyboard filled with all the references
-        to the menus that are linked to the children of this menu node), and
-        finally sends the message with `Message.reply_text` (if the content is
-        a string, i.e. a text) or `Message.reply_cached_media` (if the content
-        is an instance of `InputMedia`, i.e. a media).
+        compatible), sets up an inline keyboard using the style defined in
+        `Menu.style` and finally sends the message with `Message.reply_text`
+        (if the content is a string, i.e. a text) or
+        `Message.reply_cached_media` (if the content is an instance of
+        `pyrogram.InputMedia`, i.e. a media).
 
         Parameters:
             handler (BaseHandler): The handler which coordinates the management
@@ -287,8 +281,8 @@ class Menu(BaseMenu):
                 the handler.
 
         Returns:
-            InlineKeyboardMarkup: The generated inline keyboard, which is then
-            displayed to the user.
+            pyrogram.InlineKeyboardMarkup: The generated inline keyboard,
+            which is then displayed to the user.
         """
 
         keyboard = self.style.generate(
