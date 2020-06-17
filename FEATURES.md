@@ -4,6 +4,7 @@
    - Add a flowchart for `calendar_bot.py` ([f7b41b594d62a2874a280bb93b4b1ea419ea35d1](https://github.com/hearot/pyrubrum/commit/f7b41b594d62a2874a280bb93b4b1ea419ea35d1))
    - Add a flowchart for `hitchhiker_bot.py` ([3f7057244f3e1c868e0e7b00f04e39d481468a6d](https://github.com/hearot/pyrubrum/commit/3f7057244f3e1c868e0e7b00f04e39d481468a6d))
    - Add a flowchart for `sample_bot.py` ([a698a4f1c7b85640011f861b9f2ae6ffa5dbd001](https://github.com/hearot/pyrubrum/commit/a698a4f1c7b85640011f861b9f2ae6ffa5dbd001))
+   - Add a reference to the author's GPG public key
    - Add a simple glossary ([0000e5ecc76f27f66833a28ef67836b5a338a353](https://github.com/hearot/pyrubrum/commit/0000e5ecc76f27f66833a28ef67836b5a338a353))
    - Add a simple quickstart menu ([3b4e5c7581ec4457bc8427068524954ec4920418](https://github.com/hearot/pyrubrum/commit/3b4e5c7581ec4457bc8427068524954ec4920418))
    - Add a tip for opening a feature request ([909dfff2923e8b551d4500f48223659cd1d97ec4](https://github.com/hearot/pyrubrum/commit/909dfff2923e8b551d4500f48223659cd1d97ec4))
@@ -19,7 +20,7 @@
 ### Fixes
 
    - Make all the flowcharts follow the guidelines ([5e308d275e81617b2ce2cb89181e43f2d086db94](https://github.com/hearot/pyrubrum/commit/5e308d275e81617b2ce2cb89181e43f2d086db94))
-   - Make the documentation consistent by deleting wrong content
+   - Make the documentation consistent by deleting wrong content ([48c8efaf0efe95e86cc25decf0670920441781fe](https://github.com/hearot/pyrubrum/commit/48c8efaf0efe95e86cc25decf0670920441781fe))
    - Preserve order while adding a new child to a node ([8a0980c41c18b67d98830d00db10b77c59a85c07](https://github.com/hearot/pyrubrum/commit/8a0980c41c18b67d98830d00db10b77c59a85c07))
 
 ### New features
