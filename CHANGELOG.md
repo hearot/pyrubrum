@@ -14,12 +14,13 @@
    - Add docstrings to `command_filter` and `deep_link_filter` ([b61629afa1d85f80fea4ec5030ab756d47714fea](https://github.com/hearot/pyrubrum/commit/b61629afa1d85f80fea4ec5030ab756d47714fea))
    - Add flowcharts ([c170d6aa8630e2f0575e79e0b10dcb5bab84a119](https://github.com/hearot/pyrubrum/commit/c170d6aa8630e2f0575e79e0b10dcb5bab84a119))
    - Finish writing the tutorial ([3ed75930ab0a57d84dad25880bdde86e1e7d66f4](https://github.com/hearot/pyrubrum/commit/3ed75930ab0a57d84dad25880bdde86e1e7d66f4))
-   - Flowcharts are now transparent
+   - Flowcharts are now transparent ([0c32a87eb5610b4b4304ab43eea4b706da69f224](https://github.com/hearot/pyrubrum/commit/0c32a87eb5610b4b4304ab43eea4b706da69f224))
    - Include examples in the toctree ([737c1223e9ef4c95d9cac78c43e8820f7210069f](https://github.com/hearot/pyrubrum/commit/737c1223e9ef4c95d9cac78c43e8820f7210069f))
    - Update docstrings for `pass_parameterized_handler` ([aa5a7a7b884db15a0c1c83b6d43bbf078fa58d4d](https://github.com/hearot/pyrubrum/commit/aa5a7a7b884db15a0c1c83b6d43bbf078fa58d4d))
 
 ### Fixes
 
+   - Make all the flowcharts follow the guidelines
    - Preserve order while adding a new child to a node ([8a0980c41c18b67d98830d00db10b77c59a85c07](https://github.com/hearot/pyrubrum/commit/8a0980c41c18b67d98830d00db10b77c59a85c07))
 
 ### New features

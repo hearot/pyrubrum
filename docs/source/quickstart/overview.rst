@@ -27,7 +27,7 @@ This can be effortlessly converted to a Pyrubrum tree:
 
     {
         Menu("Main menu", "start", "Welcome to my brand new bot."): [
-            LinkMenu("Website link", "https://example.com"),
+            LinkMenu("Website link", "website_link", "https://example.com"),
             Menu("About me", "about_me",
                  "My name is John."),
         ]
@@ -57,7 +57,7 @@ Which translates to:
 
     {
         Menu("Main menu", "start", "Welcome to my brand new bot."): [
-            LinkMenu("Website link", "https://example.com"),
+            LinkMenu("Website link", "website_link", "https://example.com"),
             Menu("About me", "about_me",
                  "My name is John."),
         ],
@@ -82,7 +82,7 @@ That's what we will write:
 
     forest = transform({
         Menu("Main menu", "start", "Welcome to my brand new bot."): [
-            LinkMenu("Website link", "https://example.com"),
+            LinkMenu("Website link", "website_link", "https://example.com"),
             Menu("About me", "about_me",
                  "My name is John."),
         ],
@@ -119,7 +119,7 @@ Our example is then going to look like this:
 
     handler = Handler(transform({
         Menu("Main menu", "start", "Welcome to my brand new bot."): [
-            LinkMenu("Website link", "https://example.com"),
+            LinkMenu("Website link", "website_link", "https://example.com"),
             Menu("About me", "about_me",
                  "My name is John."),
         ],
@@ -131,19 +131,23 @@ And now we're done with the programming part related to Pyrubrum.
 Creating a bot
 --------------
 
-In order to access Telegram APIs, we need to have an authorization token, which you can retrieve by talking to `BotFather <https://core.telegram.org/bots#6-botfather>`_.
-As soon as you get your authorization token, we can start by importing the `Pyrogram <https://docs.pyrogram.org>`_ library and creating a `pyrogram.Client` instance using our brand new token:
+In order to access Telegram APIs, we need to have an authorization token that links to the bot you want to make use of, which you can retrieve by talking to `BotFather <https://core.telegram.org/bots#6-botfather>`_. You will also need to create your own API credentials (see https://my.telegram.org/apps).
+As soon as you get your credentials, we can start by importing the `Pyrogram <https://docs.pyrogram.org>`_ library and creating a `pyrogram.Client` instance:
 
 .. code-block:: python
 
     from pyrogram import Client
-    from pyrubrum import LinkMenu, Menu, transform
+    from pyrubrum import Handler, LinkMenu, Menu, transform
 
-    bot = Client("ExampleBot", bot_token="<YOUR_BOT_TOKEN_GOES_HERE>")
+    bot = Client("ExampleBot",
+                 api_hash="<YOUR_API_HASH_GOES_HERE>",
+                 api_id="<YOUR_API_ID_GOES_HERE>",
+                 bot_token="<YOUR_BOT_TOKEN_GOES_HERE>"
+    )
 
     handler = Handler(transform({
         Menu("Main menu", "start", "Welcome to my brand new bot."): [
-            LinkMenu("Website link", "https://example.com"),
+            LinkMenu("Website link", "website_link", "https://example.com"),
             Menu("About me", "about_me",
                  "My name is John."),
         ],
@@ -161,13 +165,17 @@ It is then built in this way:
 .. code-block:: python
 
     from pyrogram import Client
-    from pyrubrum import LinkMenu, Menu, transform
+    from pyrubrum import Handler, LinkMenu, Menu, transform
 
-    bot = Client("ExampleBot", bot_token="<YOUR_API_KEY_GOT_HERE>")
+    bot = Client("ExampleBot",
+                 api_hash="<YOUR_API_HASH_GOES_HERE>",
+                 api_id="<YOUR_API_ID_GOES_HERE>",
+                 bot_token="<YOUR_BOT_TOKEN_GOES_HERE>"
+    )
 
     handler = Handler(transform({
         Menu("Main menu", "start", "Welcome to my brand new bot."): [
-            LinkMenu("Website link", "https://example.com"),
+            LinkMenu("Website link", "website_link", "https://example.com"),
             Menu("About me", "about_me",
                  "My name is John."),
         ],
