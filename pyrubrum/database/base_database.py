@@ -47,8 +47,7 @@ class BaseDatabase(ABC):
             key (str): The key you are retrieving the value of.
 
         Returns:
-            Optional[str]: The value which is associated to the key, if any.
-                Otherwise, it is set to be ``None``.
+            Optional[str]: The value which is associated to the key.
 
         Raises:
             GetError: If an error occured while retrieving the key from the

@@ -145,12 +145,12 @@ class PageStyle(BaseStyle):
         No teleport keyboard is generated if the number of total pages is equal
         to one. Otherwise, three buttons are generated. The first one is built
         in order to let the user go back to the previous page, if any, else a
-        null-pointer button is created, with its content being an empty
-        character. The second one is generated if and only if
-        `PageStyle.show_menu` is set to be ``True``, with its text being the
-        current number of page (concatenated to the number of total pages if
-        `PageStyle.show_counter` is set to be ``True``). The third one is
-        designed for moving on to the next page, if any, and it is built
+        :term:`null-pointer button <Null-pointer button>` is created, with its
+        content being an empty character. The second one is generated if and
+        only if `PageStyle.show_menu` is set to be ``True``, with its text
+        being the current number of page (concatenated to the number of total
+        pages if `PageStyle.show_counter` is set to be ``True``). The third
+        one is designed for moving on to the next page, if any, and it is built
         following the same rules that were respected by the first button.
 
         In the end, the keyboard is filled with all the buttons which refer to

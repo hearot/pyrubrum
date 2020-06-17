@@ -21,7 +21,8 @@ from .error import DatabaseError
 
 class ExpireError(DatabaseError):
     """Exception which is raised whenever an error occurs while setting an expire
-    to a certain key inside a database"""
+    to a certain key inside a database.
+    """
 
     def __init__(self):
         super().__init__(

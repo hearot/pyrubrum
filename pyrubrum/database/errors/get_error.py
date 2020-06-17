@@ -21,7 +21,8 @@ from .error import DatabaseError
 
 class GetError(DatabaseError):
     """Exception which is raised whenever an error occurs while getting a certain
-    key from the database"""
+    key from the database.
+    """
 
     def __init__(self):
         super().__init__(

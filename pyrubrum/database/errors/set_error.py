@@ -20,6 +20,10 @@ from .error import DatabaseError
 
 
 class SetError(DatabaseError):
+    """Exception which is raised whenever an error occurs during the
+    assignment of value inside the database.
+    """
+
     def __init__(self):
         super().__init__(
             "An error occured while setting a value to a certain key inside"

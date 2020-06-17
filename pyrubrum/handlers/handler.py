@@ -75,13 +75,13 @@ def deep_link_filter(payload: str) -> Filter:
 
 class Handler(BaseHandler):
     """Implementation of a simple handler for non-parameterized menus which has
-    got, by definition, multiple top-level nodes whose linked menus are
-    displayed to the user whenever a message is being handled and matches one
-    of their filters.
+    got, by definition, multiple :term:`top-level nodes <Top-level node>`
+    whose linked menus are displayed to the user whenever a message is being
+    handled and matches one of their filters.
 
     Parameters:
-        nodes (Set[Node]): The top-level nodes, which represent the text
-            commands that are available to the user.
+        nodes (Set[Node]): The :term:`top-level nodes <Top-level node>`,
+            which represent the text commands that are available to the user.
 
     Note:
         In order to make use of parameterized menus (e.g. `PageMenu`) or to
@@ -97,19 +97,20 @@ class Handler(BaseHandler):
         self, menu_id: str
     ) -> Tuple[Optional[BaseMenu], Optional[Iterable[BaseMenu]]]:
         """Retrieve the menus which are linked to both parent and children of the
-        top-level nodes of this instance if this instance matches the provided
-        identifier. Otherwise it will search the menu matching it in the
-        children of the top-level nodes and will return their own families,
-        if matched. On failure, it will return a tuple of length two filled
-        with null values (i.e. ``None``).
+        :term:`top-level nodes <Top-level node>` of this instance if this
+        instance matches the provided identifier. Otherwise it will search the
+        menu matching it in the children of the
+        :term:top-level nodes <Top-level node>` and will return their own
+        families, if matched. On failure, it will return a tuple of length two
+        filled with null values (i.e. ``None``).
 
         Parameters:
             menu_id (str): The identifier which must be matched.
 
         Returns:
-            Tuple[Optional[BaseMenu], Optional[Set[BaseMenu]]]: A tuple of
+            Tuple[Optional[BaseMenu], Optional[Iterable[BaseMenu]]]: A tuple of
             length two, whose first element is the parent node of the
-            matched node while the second one is a set of all its children
+            matched node while the second one is a tuple of all its children
             If no `Node` is found, the tuple will be filled with null
             values (i.e. ``None``).
         """
@@ -124,9 +125,10 @@ class Handler(BaseHandler):
     @lru_cache(maxsize=1)
     def get_menus(self) -> Set[BaseMenu]:
         """Retrieve the set of all the menus which are linked to the nodes belonging
-        to the descent of the top-level nodes of this class (i.e. the children,
-        the children of the children, etc...). In other words, it retrieves all
-        the menus which were defined at the initialization of this instance.
+        to the descent of the :term:`top-level nodes <Top-level node>` of this
+        class (i.e. the children, the children of the children, etc...). In
+        other words, it retrieves all the menus which were defined at the
+        initialization of this instance.
 
         Returns:
             Set[BaseMenu]: The set of all the retrieved menus.

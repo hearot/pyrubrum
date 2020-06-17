@@ -19,6 +19,7 @@
 
 class DatabaseError(Exception):
     """General exception which catches all the errors related to database
-    issues"""
+    issues.
+    """
 
     pass

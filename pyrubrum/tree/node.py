@@ -72,7 +72,7 @@ class Node:
         this instance.
 
         Returns:
-            Set[BaseMenu]: The set of the retrieved menus.
+            Iterable[BaseMenu]: A tuple that contains all the retrieved menus.
         """
         children = tuple(child.menu for child in self.children)
         return children if children else None
@@ -90,11 +90,11 @@ class Node:
             parent (Optional[Node]): The parent this ``Node`` comes from.
 
         Returns:
-            Tuple[Optional[BaseMenu], Optional[Set[BaseMenu]]]: A tuple of
-                length two, whose first element is the parent node of the
-                matched node while the second one is a set of all its children
-                If no `Node` is found, the tuple will be filled with null
-                values (i.e. ``None``).
+            Tuple[Optional[BaseMenu], Optional[Tuple[BaseMenu]]]: A tuple of
+            length two, whose first element is the parent node of the
+            matched node while the second one is a tuple of all its children
+            If no `Node` is found, the tuple will be filled with null
+            values (i.e. ``None``).
         """
         if self.menu.menu_id == menu_id:
             return (

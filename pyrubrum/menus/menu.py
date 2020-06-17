@@ -70,13 +70,14 @@ class Menu(BaseMenu):
             deep-link whose payload is the identifier of this instance.
             Defaults to ``False``.
         default (Optional[bool]): If this menu shall be displayed if no
-            other top-level menu has been matched. It works only if this
-            menu is a top-level one.
+            other :term:`top-level menu <Top-level menu>` has been matched.
+            It works only if this menu is a :term:`top-level <Top-level menu>`
+            one.
         message_filter (Optional[Filter]): A filter for telling Pyrogram
             when a message should be associated to this menu. It works only
-            for top-level menus (see `Handler.setup`). Defaults to ``None``,
-            which automatically makes this menu reachable when the user texts
-            a message that follows this pattern::
+            for :term:`top-level menus <Top-level menu>` (see `Handler.setup`).
+            Defaults to ``None``, which automatically makes this menu reachable
+            when the user texts a message that follows this pattern::
 
                 /[MENU_ID]
 

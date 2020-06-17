@@ -39,10 +39,10 @@ class RedisDatabase(BaseDatabase):
         server (redis.Redis): The Redis instance which is being used.
         encoding (Optional[str]): The encoding format which shall be used
             to decode the content that is retrieved from the Redis server.
-            Defaults to "utf-8".
+            Defaults to ``utf-8``.
         default_expire (Types.Expire): The expire which is set by default. If
-            it is ``False``, no expire shall be set. Defaults to 86400 seconds
-            (i.e. a day).
+            it is ``False``, no expire shall be set. Defaults to ``86400``
+            seconds (i.e. a day).
     """
 
     def __init__(
@@ -67,7 +67,7 @@ class RedisDatabase(BaseDatabase):
 
         Returns:
             Optional[str]: The value which is associated to the key in the
-                database, if any. Otherwise, it is set to be ``None``.
+            database.
 
         Raises:
             NotFoundError: If the provided key is not found.

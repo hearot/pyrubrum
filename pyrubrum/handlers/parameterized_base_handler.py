@@ -42,8 +42,8 @@ except (ImportError, ModuleNotFoundError):
 
 class ParameterizedBaseHandler(BaseHandler):
     """Basic implementation of an handler which has got, by definition, a database,
-    with which it is able to perform parameterization (i.e. it supports
-    parameters).
+    with which it is able to perform
+    :term:`parameterization <Parameterization>` (i.e. it supports parameters).
 
     The purpose of this class is to give a general interface for an handler
     which supports parameterization, as it doesn't implement anything except
@@ -64,7 +64,8 @@ class ParameterizedBaseHandler(BaseHandler):
         identifier.
 
         The content of the callback query is always a MD5 hash which behaves
-        as the key for the parameters we're looking for.
+        as the key for the parameters that are associated to the query the
+        user made.
 
         If the identifier of the chat from which the query was sent does not
         match the one defined in the retrieved parameters, the callback is
@@ -126,7 +127,7 @@ class ParameterizedBaseHandler(BaseHandler):
         callback_query_id: str,
         chat_id: int,
     ) -> List[List[InlineKeyboardButton]]:
-        """Given a list of a list of buttons which represents an inline keyboard and a
+        """Given a list which represents an inline keyboard and a
         unique identifier for the callback, generate a Pyrogram-compatible
         inline keyboard.
 
@@ -134,11 +135,11 @@ class ParameterizedBaseHandler(BaseHandler):
 
             [CALLBACK_QUERY_ID][MENU_ID][ELEMENT_ID]
 
-        After having generated a key, it sets it to be equal to the
-        parameters of the button, which have been previously converted
-        to JSON and include ``from_chat_id``, the identifier of the chat
-        from which the query was sent, ``element_id``, ``menu_id`` and
-        ``same_menu``.
+        After having generated a key, it sets it to be equal, inside the
+        database, to the parameters of the button, which have been
+        previously converted to JSON and include ``from_chat_id``, the
+        identifier of the chat from which the query was sent, ``element_id``,
+        ``menu_id`` and ``same_menu``.
 
         Parameters:
             keyboard (List[List[Button]]): The inline keyboard you want to
@@ -149,8 +150,8 @@ class ParameterizedBaseHandler(BaseHandler):
                 been sent.
 
         Returns:
-            List[List[InlineKeyboardButton]]: The generated keyboard in a
-            Pyrogram-compatible type.
+            List[List[pyrogram.InlineKeyboardButton]]: The generated keyboard
+            in a Pyrogram-compatible type.
         """
 
         processed_keyboard = []

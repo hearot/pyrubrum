@@ -21,7 +21,8 @@ from .error import DatabaseError
 
 class NotFoundError(DatabaseError):
     """Exception which is raised whenever a key is not found inside the
-    database"""
+    database.
+    """
 
     def __init__(self, key: str):
         super().__init__("%s was not found inside the database" % key)

@@ -34,7 +34,7 @@ NULL_POINTER = "0"
 
 class BaseHandler(ABC):
     """Basic representation of an handler, which is an entity that manages the
-    setup of a `Client` instance (i.e. the bot).
+    setup of a `Client <pyrogram.Client>` instance (i.e. the bot).
 
     The purpose of this class is to give a general interface for an handler,
     even if it already implements both a sample setup and a keyboard processing
@@ -69,9 +69,9 @@ class BaseHandler(ABC):
         callback_query_id: str,
         chat_id: int,
     ) -> List[List[InlineKeyboardButton]]:
-        """Given a list of a list of buttons which represents an inline keyboard and a
-        unique identifier for the callback, generate a Pyrogram-compatible
-        inline keyboard.
+        """Given a list which represents an inline keyboard, a unique identifier
+        for the callback and one for the chat from which the query was called,
+        generate a Pyrogram-compatible inline keyboard.
 
         Parameters:
             keyboard (List[List[Button]]): The inline keyboard you want to
@@ -82,8 +82,8 @@ class BaseHandler(ABC):
                 been sent.
 
         Returns:
-            List[List[InlineKeyboardButton]]: The generated keyboard in a
-            Pyrogram-compatible type.
+            List[List[pyrogram.InlineKeyboardButton]]: The generated keyboard
+            in a Pyrogram-compatible type.
         """
         return [
             [

@@ -12,7 +12,7 @@ Your first menu
 
 Pyrubrum is based on menus and `tree <https://en.wikipedia.org/wiki/Tree_structure>`_ structures, which let the user build a bot in a very simple and intuitive way.
 
-For example, we want to create a bot that has got a main menu, from which you can access two other menus, one for linking the user to your website and the other one for getting more information about what you do.
+For example, we want to create a bot that has got a main menu, callable using the command ``/start``, from which you can access two other menus, one for linking the user to your website and the other one for getting more information about what you do.
 The structure is then designed like this:
 
 .. figure:: ../_static/flowcharts/overview.png
@@ -33,7 +33,7 @@ This can be effortlessly converted to a Pyrubrum tree:
         ]
     }
 
-Intuitive, isn't it? You can get more information about the classes we've just used within `LinkMenu` and `Menu`.
+Intuitive, isn't it? You can get more information about the classes we've just used at :py:class:`LinkMenu <pyrubrum.LinkMenu>` and :py:class:`Menu <pyrubrum.Menu>`.
 
 Introduction to the forest data structure
 -----------------------------------------
@@ -41,7 +41,7 @@ Introduction to the forest data structure
 You may have noticed it actually isn't a tree, as the main menu is within a set as well. The fact is that Pyrubrum does actually work with `forest <https://magoosh.com/data-science/what-is-forest-data-structure/>`_ data structures, which are just a collection of multiple trees.
 That means you can define multiple :term:`top-level menus <Top-level menu>`!
 
-Let's say we want to create two :term:`top-level menus <Top-level menu>`: we already defined one of them before and we now decide to create a new one for contacting you.
+Let's say we want to create two :term:`top-level menus <Top-level menu>`: we've already defined one of them before and we now decide to create a new one for contacting you using the command ``/contact``.
 
 Then the structure has changed to this:
 
@@ -64,13 +64,13 @@ Which translates to:
         Menu("Contact me", "contact", "Email me at me@example.com"): [],
     }
 
-Congratulations! You've just wrote your first :term:`forest <Forest>`!
+Congratulations! You've just written your first :term:`forest <Forest>`!
 
 Linking menus to nodes
 ----------------------
 
 Since Pyrubrum needs each menu to be linked to a `node <https://en.wikipedia.org/wiki/Node_(computer_science)>`_, we have to modify what we have previously written.
-Being Pyrubrum *"batteries included"*, a function that applies to this case is already defined and available and it is none other than `transform`.
+Being Pyrubrum *"batteries included"*, a function that applies to this case is already defined and available and it is none other than `transform <pyrubrum.transform>`.
 
 That's what we will write:
 

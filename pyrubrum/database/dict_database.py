@@ -30,10 +30,10 @@ class DictDatabase(dict, BaseDatabase):
 
     Warning:
         It not recommended to use this in production, as it does not implement
-        expires, while other implementations, such as `pyrubrum.RedisDatabase`,
-        does. In addition, any stored data will be erased as soon as the
-        program stops executing. This implementation might be useful only in
-        development and testing mode.
+        expires, while other implementations, such as `RedisDatabase
+        <pyrubrum.RedisDatabase>`, do. In addition, any stored data will be
+        erased as soon as the program stops executing. This implementation
+        might be useful only in development and testing mode.
     """
 
     def get(self, key: str) -> str:
@@ -48,7 +48,7 @@ class DictDatabase(dict, BaseDatabase):
 
         Returns:
             Optional[str]: The value which is associated to the key in the
-                dictionary, if any. Otherwise, it is set to be ``None``.
+            dictionary.
 
         Raises:
             NotFoundError: If the provided key is not found.
@@ -60,7 +60,7 @@ class DictDatabase(dict, BaseDatabase):
 
     def set(self, key: str, value: str, expire: Optional[Types.Expire] = None):
         """Assign a value to a certain key inside the database. Note that this
-        implementation ignores the setting of any expires.
+        implementation ignores the setting of any expire.
 
         This method will assign the provided value to the key using
         `dict.update`.

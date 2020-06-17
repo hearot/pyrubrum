@@ -32,14 +32,17 @@ from .parameterized_base_handler import pass_parameterized_handler
 
 class ParameterizedHandler(Handler, ParameterizedBaseHandler):
     """Implementation of an handler which mixes the features of `Handler` and
-    `ParameterizedBaseHandler` and has got, by definition, multiple top-level
-    nodes whose linked menu are displayed to the user whenever a message is
-    being handled and matches one of their filters, and a database with which
-    it is possible to perform parameterization (i.e. it supports parameters).
+    `ParameterizedBaseHandler` and has got, by definition, multiple
+    :term:`top-level nodes <Top-level node>` whose linked menu are
+    displayed to the user whenever a message is being handled and matches
+    one of their filters, and a database with which it is possible to
+    perform :term:`parameterization <Parameterization>`
+    (i.e. it supports parameters).
 
-        nodes (Set[Node]): The top-level nodes, which represent the text
-            commands that are available to the user. See `Handler` for more
-            information
+    Parameters:
+        nodes (Set[Node]): The :term:`top-level nodes <Top-level node>`,
+            which represent the text commands that are available to the user.
+            See `Handler` for more information.
         database (BaseDatabase): The storage for all the query parameters.
             It is used to pass parameters between menus. See
             `ParameterizedBaseHandler` for more information.
@@ -58,8 +61,9 @@ class ParameterizedHandler(Handler, ParameterizedBaseHandler):
         handled callback queries from the database relying on the passed
         identifiers.
 
-        Finally, it makes the top-level menus reachable whenever a message is
-        sent to the bot and matches one of their filters.
+        Finally, it makes the :term:`top-level menus <Top-level menu>`
+        reachable whenever a message is sent to the bot and matches one of
+        their filters.
 
         Parameters:
             client (Client): The client which is being set up.
