@@ -27,6 +27,7 @@ from pyrubrum.types import Types
 from .base_menu import BaseMenu
 
 DEEP_LINK_TEMPLATE = "https://t.me/{username}?{deep_link_type}={payload}"
+PERMITTED_TYPES = {"start", "startgroup"}
 USERNAMES = {}
 
 
@@ -65,6 +66,11 @@ class DeepLinkMenu(BaseMenu):
         payload: Types.Payload,
         deep_link_type: Optional[str] = "start",
     ):
+        if deep_link_type not in PERMITTED_TYPES:
+            raise ValueError(
+                "deep_link_type must be either " "'start' or 'startgroup'"
+            )
+
         BaseMenu.__init__(self, name, menu_id, is_link=True)
 
         self.payload = payload
