@@ -41,7 +41,8 @@
 
 ### Testing changes
 
-   - Add multiple tests for `Node` and `transform`
+   - Add multiple tests for `DictDatabase`
+   - Add multiple tests for `Node` and `transform` ([7d9fa0a1a874316993a2ee8c50f5deeb22931abf](https://github.com/hearot/pyrubrum/commit/7d9fa0a1a874316993a2ee8c50f5deeb22931abf))
 
 ### ‼️ Breaking changes
 
