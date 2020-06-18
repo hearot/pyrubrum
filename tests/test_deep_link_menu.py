@@ -46,3 +46,14 @@ def test_button():
     button = menu.button(None, client_test, None)
 
     assert button.link == expected_deep_link
+    assert not hasattr(button, "menu_id")
+    assert button.name == "Test"
+
+
+def test_button_with_function():
+    menu = DeepLinkMenu("Test", "test", lambda a, b, c, d: payload)
+    button = menu.button(None, client_test, None)
+
+    assert button.link == expected_deep_link
+    assert not hasattr(button, "menu_id")
+    assert button.name == "Test"
