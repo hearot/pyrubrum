@@ -86,5 +86,6 @@ Welcome to Pyrubrum
     Code of Conduct <CODE_OF_CONDUCT>
     flowchart
     glossary
+    license
     Read me <README>
     SECURITY

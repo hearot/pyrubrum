@@ -62,7 +62,14 @@ project = pyrubrum.__package__
 copyright = "2020, Hearot"
 author = pyrubrum.__author__
 
-root_files = ["CHANGELOG.md", "CODE_OF_CONDUCT.md", "README.md", "SECURITY.md"]
+root_files = [
+    "CHANGELOG.md",
+    "CODE_OF_CONDUCT.md",
+    "LICENSE",
+    "NOTICE",
+    "README.md",
+    "SECURITY.md",
+]
 copies = root_files + ["FEATURES.md"]
 
 for root_file in root_files:
@@ -150,6 +157,7 @@ exclude_patterns = []
 html_favicon = "_static/assets/pink_icon.ico"
 
 html_logo = "_static/assets/mark_logo.png"
+latex_logo = "_static/assets/mark_logo.png"
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
@@ -161,6 +169,10 @@ html_theme_options = {"style_nav_header_background": "pink"}
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
+html_show_sourcelink = True
+
+html_show_copyright = True
+
 html_static_path = ["_static"]
 
 intersphinx_mapping = {
@@ -168,3 +180,5 @@ intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
     "redis": ("https://redis-py.readthedocs.io/en/stable/", None),
 }
+
+latex_engine = "xelatex"
