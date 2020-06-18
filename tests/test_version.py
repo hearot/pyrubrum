@@ -21,9 +21,9 @@ from packaging import version
 import pyrubrum
 
 
-class TestVersion:
-    def test_type(self):
-        assert isinstance(pyrubrum.__version__, str)
+def test_type():
+    assert isinstance(pyrubrum.__version__, str)
 
-    def test_pattern(self):
-        version.Version(pyrubrum.__version__)
+
+def test_pattern():
+    version.Version(pyrubrum.__version__)
