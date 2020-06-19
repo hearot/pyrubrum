@@ -81,6 +81,8 @@ def upper_first_letter(text: str) -> str:
 
 
 def generate_changelog(repo: Repo):
+    global CURRENT_VERSION
+
     tags_list = sorted(repo.tags, key=lambda t: t.commit.committed_date) + [""]
     tags = iter(tags_list)
     tag = ""
