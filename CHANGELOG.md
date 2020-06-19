@@ -43,7 +43,8 @@
 
    - Add multiple tests for `DeepLinkMenu` ([b92f22086d0f958a895e487b6de3b8f199de537f](https://github.com/hearot/pyrubrum/commit/b92f22086d0f958a895e487b6de3b8f199de537f))
    - Add multiple tests for `DictDatabase` ([4682b54f227b5cbd4f9ce7d968188a9e8021781d](https://github.com/hearot/pyrubrum/commit/4682b54f227b5cbd4f9ce7d968188a9e8021781d))
-   - Add multiple tests for `LinkMenu`
+   - Add multiple tests for `LinkMenu` ([929622547de7795afb2619d4ea4a19b1891434c7](https://github.com/hearot/pyrubrum/commit/929622547de7795afb2619d4ea4a19b1891434c7))
+   - Add multiple tests for `Menu`
    - Add multiple tests for `Node` and `transform` ([7d9fa0a1a874316993a2ee8c50f5deeb22931abf](https://github.com/hearot/pyrubrum/commit/7d9fa0a1a874316993a2ee8c50f5deeb22931abf))
 
 ### ‼️ Breaking changes
