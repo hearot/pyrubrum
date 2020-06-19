@@ -65,6 +65,7 @@ author = pyrubrum.__author__
 root_files = [
     "CHANGELOG.md",
     "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
     "LICENSE",
     "NOTICE",
     "README.md",
@@ -111,11 +112,12 @@ for example in filter(lambda f: f.endswith(".py"), listdir("../../examples")):
 
 copyfile("../../examples/sample.env", "_static/examples/sample.env")
 
-with open("README.md", "r", encoding="utf-8") as readme:
-    content = readme.read().replace("./", "_static/")
+for root_file in root_files:
+    with open(root_file, "r", encoding="utf-8") as markdown_file:
+        content = markdown_file.read().replace("./", "_static/")
 
-with open("README.md", "w", encoding="utf-8") as readme:
-    readme.write(content)
+    with open(root_file, "w", encoding="utf-8") as markdown_file:
+        markdown_file.write(content)
 
 # The full version, including alpha/beta/rc tags
 release = pyrubrum.__version__

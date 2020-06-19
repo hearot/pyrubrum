@@ -84,6 +84,7 @@ Welcome to Pyrubrum
     Assets <https://github.com/hearot/pyrubrum-assets>
     CHANGELOG
     Code of Conduct <CODE_OF_CONDUCT>
+    CONTRIBUTING
     flowchart
     glossary
     license

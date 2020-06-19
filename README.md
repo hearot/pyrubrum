@@ -63,6 +63,10 @@ In order to make use of the proposed examples, you need to create your own envir
 
 > See [Conventional Commits](https://www.conventionalcommits.org).
 
+### Contributing
+
+> See [CONTRIBUTING.md](./CONTRIBUTING.md).
+
 ### Versioning
 
 > See [PEP 440](https://www.python.org/dev/peps/pep-0440/).
