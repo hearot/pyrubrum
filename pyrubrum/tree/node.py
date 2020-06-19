@@ -77,7 +77,7 @@ class Node:
         children = tuple(child.menu for child in self.children)
         return children if children else None
 
-    @lru_cache
+    @lru_cache()
     def get_family(self, menu_id: str, parent: Optional["Node"]) -> Family:
         """Retrieve the menus which are linked to both parent and children of this
         instance if this instance matches the provided identifier. Otherwise it

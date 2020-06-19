@@ -92,7 +92,7 @@ class Handler(BaseHandler):
     def __init__(self, nodes: Set[Node]):
         self.nodes = nodes
 
-    @lru_cache
+    @lru_cache()
     def get_family(
         self, menu_id: str
     ) -> Tuple[Optional[BaseMenu], Optional[Iterable[BaseMenu]]]:

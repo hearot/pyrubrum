@@ -1,10 +1,20 @@
 # Changelog
 
-## v0.1a1
+## v0.1a2
+
+### Fixes
+
+   - Use `lru_cache` in a compatible way with Python 3.6
+
+### Other changes
+
+   - Go from pre-alpha to alpha ([5741b021e100054fd799609a09e20d819f5de43e](https://github.com/hearot/pyrubrum/commit/5741b021e100054fd799609a09e20d819f5de43e))
+
+## v0.1a1 - 2020-06-19
 
 ### Documentation
 
-   - Add contributing guidelines
+   - Add contributing guidelines ([5474eb251a807e76ed00b05fb3d49024ca654525](https://github.com/hearot/pyrubrum/commit/5474eb251a807e76ed00b05fb3d49024ca654525))
 
 ## v0.1a1.dev7 - 2020-06-19
 
