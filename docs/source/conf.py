@@ -189,3 +189,5 @@ intersphinx_mapping = {
 }
 
 latex_engine = "xelatex"
+
+master_doc = "index"
