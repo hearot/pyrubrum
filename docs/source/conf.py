@@ -84,6 +84,11 @@ try:
 except (FileNotFoundError, OSError, PermissionError):
     pass
 
+try:
+    mkdir("_static/examples/")
+except (FileNotFoundError, OSError, PermissionError):
+    pass
+
 
 for example in filter(lambda f: f.endswith(".py"), listdir("../../examples")):
     copyfile("../../examples/" + example, "_static/examples/" + example)
