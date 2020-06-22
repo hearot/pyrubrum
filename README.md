@@ -45,6 +45,21 @@ bot.run()
 
 **Pyrubrum** ([*/ˈpaɪɹˈuːbɹəm/*](http://ipa-reader.xyz/?text=%CB%88pa%C9%AA%C9%B9%CB%88u%CB%90b%C9%B9%C9%99m&voice=Russell)) is a versatile, charming framework for creating [Telegram bots](https://core.telegram.org/bots), jointly with [Pyrogram](https://github.com/pyrogram/pyrogram).
 
+### Features
+
+   - Automatic [deep-link](https://core.telegram.org/bots#deep-linking) generation with `DeepLinkMenu`
+   - Built-in support for [Redis](https://redis.io/)
+   - [Complete documentation](https://pyrubrum.readthedocs.io/)
+   - Custom styles for inline keyboards
+   - Database integration
+   - Fast & optimized using [MTProto](https://core.telegram.org/mtproto) jointly with [Pyrogram](https://github.com/pyrogram/pyrogram)
+   - Fully encrypted parameters
+   - Intuitive creation of inline keyboards
+   - LRU caching with [functools.lru_cache](https://docs.python.org/3/library/functools.html#functools.lru_cache)
+   - Native support for the *"Go back"* button
+   - No limit for `callback_data` (see [Telegram Bot API](https://core.telegram.org/bots/api#inlinekeyboardbutton))
+   - Paging integration with `PageMenu`
+
 ### Examples
 
 In order to make use of the proposed examples, you need to create your own environment file by renaming [sample.env](./examples/sample.env) into `.env` and editing all the necessary variables.
