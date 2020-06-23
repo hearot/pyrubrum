@@ -1,6 +1,7 @@
 ### Documentation
 
    - Add a features list ([e0155add9888f3efc6b2113701f512265c54b4ac](https://github.com/hearot/pyrubrum/commit/e0155add9888f3efc6b2113701f512265c54b4ac))
+   - Add docstrings to `User`
 
 ### Fixes
 
@@ -11,4 +12,4 @@
 
 ### New features
 
-   - Add `User`
+   - Add `User` ([17c92f73dd7409729acad316bd8b819ef0cb5e95](https://github.com/hearot/pyrubrum/commit/17c92f73dd7409729acad316bd8b819ef0cb5e95))
