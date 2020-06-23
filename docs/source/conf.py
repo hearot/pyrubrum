@@ -90,7 +90,10 @@ except (FileNotFoundError, OSError, PermissionError):
     pass
 
 
-for example in filter(lambda f: f.endswith(".py"), listdir("../../examples")):
+for example in filter(
+    lambda f: f.endswith(".py") and not f.endswith("_private.py"),
+    listdir("../../examples"),
+):
     copyfile("../../examples/" + example, "_static/examples/" + example)
 
     with open(

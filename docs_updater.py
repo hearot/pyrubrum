@@ -38,6 +38,7 @@ INDEX_TEMPLATE = """
 {tree}
 """
 KEYBOARD_ENTITIES = ["Button", "Element", "Keyboard"]
+OBJECT_ENTITIES = ["User"]
 TEMPLATE = """{title}
 {separators}
 
@@ -103,6 +104,8 @@ for entity in filter(lambda e: not e.startswith("_"), dir(pyrubrum)):
         directory = "keyboard"
     elif entity in TREE_ENTITIES:
         directory = "tree"
+    elif entity in OBJECT_ENTITIES:
+        directory = "objects"
     else:
         directory = "types"
 
