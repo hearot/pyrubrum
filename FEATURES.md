@@ -10,6 +10,7 @@
    - Do not raise `UnboundLocalError` anymore ([ce46b4f4a094cede204f01275fa9973b4a90e0cc](https://github.com/hearot/pyrubrum/commit/ce46b4f4a094cede204f01275fa9973b4a90e0cc))
    - Keep backwards compatibility for `sphinx` ([f6a5e9c3163c619abe5dc199545879bd4d0ddccf](https://github.com/hearot/pyrubrum/commit/f6a5e9c3163c619abe5dc199545879bd4d0ddccf))
    - Set `master_doc` to `index` ([0042b2e78e1e9f4b299fb81eb8eb167e4b8287d4](https://github.com/hearot/pyrubrum/commit/0042b2e78e1e9f4b299fb81eb8eb167e4b8287d4))
+   - The changelog generator now supports URLs ending in .git
 
 ### New features
 
@@ -21,4 +22,4 @@
 
 ### ‼️ Breaking changes
 
-   - Update to Pyrogram 1.0
+   - Update to Pyrogram 1.0 ([937164ce11a2d7e85e8e2e7551dffe3c10194dd8](https://github.com/hearot/pyrubrum/commit/937164ce11a2d7e85e8e2e7551dffe3c10194dd8))

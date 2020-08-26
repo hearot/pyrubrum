@@ -32,7 +32,7 @@ import pyrubrum
 CHANGELOG_FILE = "CHANGELOG.md"
 COMMIT_URL_FORMAT = "https://github.com/%s/%s/commit/%%s"
 COMMIT_URL = ""
-COMMIT_URL_REGEX = r"git@github.com:(.+)\/(.+).git"
+COMMIT_URL_REGEX = r"git@github.com:([A-Za-z_]+)\/([A-Za-z_]+)(?:\.git)?"
 CURRENT_VERSION = "Current version"
 FEATURES_FILE = "FEATURES.md"
 CONVENTIONAL_COMMITS_REGEX = r"^([a-z]+)(!)?(?:\([a-z]+\)+)?: ([^\n]+)+$"
