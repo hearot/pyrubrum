@@ -17,15 +17,10 @@
 # along with Pyrubrum. If not, see <https://www.gnu.org/licenses/>.
 
 from datetime import timedelta
-from typing import Any
-from typing import Callable
-from typing import Dict
-from typing import Optional
-from typing import List
-from typing import Union
+from typing import Any, Callable, Dict, List, Optional, Union
 
 from pyrogram import Client
-from pyrogram import InputMedia
+from pyrogram.types import InputMedia
 
 from pyrubrum.keyboard.element import Element
 

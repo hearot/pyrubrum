@@ -20,19 +20,17 @@ from hashlib import md5
 from json import JSONDecodeError
 from typing import List
 
-from pyrogram import CallbackQuery
-from pyrogram import CallbackQueryHandler
 from pyrogram import Client
-from pyrogram import InlineKeyboardButton
-from pyrogram.client.filters.filters import create
-from pyrogram.client.filters.filters import Filter
+from pyrogram.filters import Filter, create
+from pyrogram.handlers import CallbackQueryHandler
+from pyrogram.types import CallbackQuery, InlineKeyboardButton
 
-from pyrubrum.keyboard import Button
 from pyrubrum.database import BaseDatabase
 from pyrubrum.database.errors import DatabaseError
+from pyrubrum.keyboard import Button
 from pyrubrum.types import Types
-from .base_handler import BaseHandler
-from .base_handler import NULL_POINTER
+
+from .base_handler import NULL_POINTER, BaseHandler
 
 try:
     import orjson as json  # noqa
@@ -83,7 +81,7 @@ class ParameterizedBaseHandler(BaseHandler):
             being handled.
         """
 
-        def func(_, callback: CallbackQuery):
+        def func(_, __, callback: CallbackQuery):
             if not hasattr(callback, "_result_data"):
                 try:
                     callback._result_data = json.loads(

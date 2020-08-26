@@ -17,13 +17,7 @@
 # along with Pyrubrum. If not, see <https://www.gnu.org/licenses/>.
 
 from functools import lru_cache
-from typing import Any
-from typing import Dict
-from typing import Iterable
-from typing import Optional
-from typing import Set
-from typing import Tuple
-from typing import Union
+from typing import Any, Dict, Iterable, Optional, Set, Tuple, Union
 
 from pyrubrum.menus import BaseMenu
 

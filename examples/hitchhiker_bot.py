@@ -18,12 +18,9 @@
 
 from environs import Env
 from pyrogram import Client
-from pyrogram import InputMediaPhoto
+from pyrogram.types import InputMediaPhoto
 
-from pyrubrum import Handler
-from pyrubrum import LinkMenu
-from pyrubrum import Menu
-from pyrubrum import transform
+from pyrubrum import Handler, LinkMenu, Menu, transform
 
 answer_image_link = "https://i.imgur.com/ZsDhqqt.png"
 forty_two_image_link = "https://i.imgur.com/q0mZf3z.png"

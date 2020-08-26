@@ -18,7 +18,7 @@
 
 from typing import List
 
-from pyrogram import InlineKeyboardMarkup
+from pyrogram.types import InlineKeyboardMarkup
 
 from .button import Button
 

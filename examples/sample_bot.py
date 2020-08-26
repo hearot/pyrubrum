@@ -21,10 +21,7 @@ from typing import Set
 from environs import Env
 from pyrogram import Client
 
-from pyrubrum import Handler
-from pyrubrum import Menu
-from pyrubrum import Node
-from pyrubrum import transform
+from pyrubrum import Handler, Menu, Node, transform
 
 tree = transform(
     {

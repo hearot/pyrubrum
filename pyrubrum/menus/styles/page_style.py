@@ -18,15 +18,13 @@
 
 from itertools import islice
 from math import ceil
-from typing import Any
-from typing import Dict
-from typing import List
-from typing import Optional
+from typing import Any, Dict, List, Optional
 
 from pyrogram import Client
 
 from pyrubrum.handlers.base_handler import NULL_POINTER
 from pyrubrum.keyboard.button import Button
+
 from .base_style import BaseStyle
 
 EMPTY_CHARACTER = "‎"

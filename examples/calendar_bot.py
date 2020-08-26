@@ -18,21 +18,22 @@
 
 from calendar import monthrange
 from datetime import datetime
-from typing import Set
-from typing import Union
+from typing import Set, Union
 
 from environs import Env
 from pyrogram import Client
 
-from pyrubrum import DictDatabase
-from pyrubrum import Element
-from pyrubrum import Menu
-from pyrubrum import Node
-from pyrubrum import PageMenu
-from pyrubrum import PageStyle
-from pyrubrum import ParameterizedHandler
-from pyrubrum import RedisDatabase
-from pyrubrum import transform
+from pyrubrum import (
+    DictDatabase,
+    Element,
+    Menu,
+    Node,
+    PageMenu,
+    PageStyle,
+    ParameterizedHandler,
+    RedisDatabase,
+    transform,
+)
 
 try:
     from redis import Redis

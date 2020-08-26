@@ -22,7 +22,7 @@ __copyright__ = "Copyright (C) 2020 Hearot <https://github.com/hearot>"
 __license__ = "GNU General Public License v3"
 __package__ = "pyrubrum"
 __url__ = "https://github.com/hearot/pyrubrum"
-__version__ = "0.1a2"
+__version__ = "0.1a3"
 
 from .database import BaseDatabase  # noqa
 from .database import DictDatabase  # noqa
@@ -39,7 +39,6 @@ from .handlers import ParameterizedBaseHandler  # noqa
 from .handlers import ParameterizedHandler  # noqa
 from .handlers import pass_handler  # noqa
 from .handlers import pass_parameterized_handler  # noqa
-from .objects import User  # noqa
 from .keyboard import Button  # noqa
 from .keyboard import Element  # noqa
 from .keyboard import Keyboard  # noqa
@@ -51,7 +50,8 @@ from .menus import PageMenu  # noqa
 from .menus.styles import BaseStyle  # noqa
 from .menus.styles import MenuStyle  # noqa
 from .menus.styles import PageStyle  # noqa
-from .types import Types  # noqa
+from .objects import User  # noqa
 from .tree import Node  # noqa
 from .tree import recursive_add  # noqa
 from .tree import transform  # noqa
+from .types import Types  # noqa

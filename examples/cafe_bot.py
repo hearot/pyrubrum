@@ -16,22 +16,22 @@
 # You should have received a copy of the GNU General Public License
 # along with Pyrubrum. If not, see <https://www.gnu.org/licenses/>.
 
-from typing import List
-from typing import Set
-from typing import Union
+from typing import List, Set, Union
 
 from environs import Env
 from pyrogram import Client
 
-from pyrubrum import DeepLinkMenu
-from pyrubrum import DictDatabase
-from pyrubrum import Element
-from pyrubrum import Menu
-from pyrubrum import Node
-from pyrubrum import PageMenu
-from pyrubrum import ParameterizedHandler
-from pyrubrum import RedisDatabase
-from pyrubrum import transform
+from pyrubrum import (
+    DeepLinkMenu,
+    DictDatabase,
+    Element,
+    Menu,
+    Node,
+    PageMenu,
+    ParameterizedHandler,
+    RedisDatabase,
+    transform,
+)
 
 try:
     from redis import Redis

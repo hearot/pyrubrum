@@ -17,20 +17,16 @@
 # along with Pyrubrum. If not, see <https://www.gnu.org/licenses/>.
 
 from functools import lru_cache
-from typing import Iterable
-from typing import Optional
-from typing import Set
-from typing import Tuple
+from typing import Iterable, Optional, Set, Tuple
 
 from pyrogram import Client
-from pyrogram import MessageHandler
-from pyrogram.client.filters.filters import create
-from pyrogram.client.filters.filters import Filter
+from pyrogram.filters import Filter, create
+from pyrogram.handlers import MessageHandler
 
 from pyrubrum.menus import BaseMenu
 from pyrubrum.tree import Node
-from .base_handler import BaseHandler
-from .base_handler import pass_handler
+
+from .base_handler import BaseHandler, pass_handler
 
 DEEP_LINK_FILTER_TEMPLATE = "/start %s"
 
@@ -52,7 +48,7 @@ def command_filter(command: str) -> Filter:
     Returns:
         Filter: The generated filter.
     """
-    return create(lambda _, m: m.text == "/" + command, "DeepLinkFilter")
+    return create(lambda _, __, m: m.text == "/" + command, "DeepLinkFilter")
 
 
 def deep_link_filter(payload: str) -> Filter:
@@ -70,7 +66,7 @@ def deep_link_filter(payload: str) -> Filter:
         Filter: The generated filter.
     """
     match = DEEP_LINK_FILTER_TEMPLATE % payload
-    return create(lambda _, m: m.text == match, "DeepLinkFilter")
+    return create(lambda _, __, m: m.text == match, "DeepLinkFilter")
 
 
 class Handler(BaseHandler):

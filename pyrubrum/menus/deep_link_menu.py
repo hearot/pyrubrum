@@ -16,14 +16,13 @@
 # You should have received a copy of the GNU General Public License
 # along with Pyrubrum. If not, see <https://www.gnu.org/licenses/>.
 
-from typing import Any
-from typing import Dict
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from pyrogram import Client
 
 from pyrubrum.keyboard.button import Button
 from pyrubrum.types import Types
+
 from .base_menu import BaseMenu
 
 DEEP_LINK_TEMPLATE = "https://t.me/{username}?{deep_link_type}={payload}"

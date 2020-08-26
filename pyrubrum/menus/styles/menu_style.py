@@ -17,13 +17,9 @@
 # along with Pyrubrum. If not, see <https://www.gnu.org/licenses/>.
 
 from itertools import islice
-from typing import Any
-from typing import Dict
-from typing import List
-from typing import Optional
+from typing import Any, Dict, List, Optional
 
 from pyrogram import Client
-
 
 from .base_style import BaseStyle
 

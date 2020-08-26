@@ -16,15 +16,14 @@
 # You should have received a copy of the GNU General Public License
 # along with Pyrubrum. If not, see <https://www.gnu.org/licenses/>.
 
-from typing import Optional
-from typing import Union
+from typing import Optional, Union
 
-from pyrogram import InputMedia
-from pyrogram.client.filters.filters import Filter
+from pyrogram.filters import Filter
+from pyrogram.types import InputMedia
 
-from pyrubrum.menus.styles import BaseStyle
-from pyrubrum.menus.styles import PageStyle
+from pyrubrum.menus.styles import BaseStyle, PageStyle
 from pyrubrum.types import Types
+
 from .menu import Menu
 
 

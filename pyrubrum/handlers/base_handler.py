@@ -16,20 +16,22 @@
 # You should have received a copy of the GNU General Public License
 # along with Pyrubrum. If not, see <https://www.gnu.org/licenses/>.
 
-from abc import ABC
-from abc import abstractmethod
-from typing import List
-from typing import Set
+from abc import ABC, abstractmethod
+from typing import List, Set
 
-from pyrogram import CallbackQueryHandler
 from pyrogram import Client
-from pyrogram import Filters
-from pyrogram import InlineKeyboardButton
+from pyrogram.filters import Filter, create
+from pyrogram.handlers import CallbackQueryHandler
+from pyrogram.types import InlineKeyboardButton
 
 from pyrubrum.keyboard import Button
 from pyrubrum.types import Types
 
 NULL_POINTER = "0"
+
+
+def callback_data_filter(match: str) -> Filter:
+    return create(lambda _, __, m: m.data == match, "CallbackDataFilter")
 
 
 class BaseHandler(ABC):
@@ -121,7 +123,7 @@ class BaseHandler(ABC):
             client.add_handler(
                 CallbackQueryHandler(
                     pass_handler(menu.on_callback, self),
-                    Filters.callback_data(menu.menu_id),
+                    callback_data_filter(menu.menu_id),
                 )
             )
 

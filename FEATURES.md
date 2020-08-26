@@ -1,6 +1,6 @@
 ### Documentation
 
-   - Add `User` to the documentation
+   - Add `User` to the documentation ([2539f70e0ffc292ed57bf14e2f2c134f3fad234a](https://github.com/hearot/pyrubrum/commit/2539f70e0ffc292ed57bf14e2f2c134f3fad234a))
    - Add a features list ([e0155add9888f3efc6b2113701f512265c54b4ac](https://github.com/hearot/pyrubrum/commit/e0155add9888f3efc6b2113701f512265c54b4ac))
    - Add docstrings to `User` ([9e7c1e6cb545fafef724eeebb3fc8589aa6eca7c](https://github.com/hearot/pyrubrum/commit/9e7c1e6cb545fafef724eeebb3fc8589aa6eca7c))
 
@@ -14,3 +14,11 @@
 ### New features
 
    - Add `User` ([17c92f73dd7409729acad316bd8b819ef0cb5e95](https://github.com/hearot/pyrubrum/commit/17c92f73dd7409729acad316bd8b819ef0cb5e95))
+
+### Other changes
+
+   - Update (deps): bump sphinx from 3.1.1 to 3.1.2 ([fc9a1a125c40f25439b916f65d41fe4fbd4fc1df](https://github.com/hearot/pyrubrum/commit/fc9a1a125c40f25439b916f65d41fe4fbd4fc1df))
+
+### ‼️ Breaking changes
+
+   - Update to Pyrogram 1.0

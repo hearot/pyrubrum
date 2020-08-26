@@ -16,23 +16,21 @@
 # You should have received a copy of the GNU General Public License
 # along with Pyrubrum. If not, see <https://www.gnu.org/licenses/>.
 
-from typing import Any
-from typing import Callable
-from typing import Dict
-from typing import Optional
-from typing import Union
+from typing import Any, Callable, Dict, Optional, Union
 
-from pyrogram import CallbackQuery
 from pyrogram import Client
-from pyrogram import InlineKeyboardMarkup
-from pyrogram import InputMedia
-from pyrogram import Message
-from pyrogram.client.filters.filters import Filter
+from pyrogram.filters import Filter
+from pyrogram.types import (
+    CallbackQuery,
+    InlineKeyboardMarkup,
+    InputMedia,
+    Message,
+)
 
 from pyrubrum.keyboard import Keyboard
-from pyrubrum.menus.styles import MenuStyle
-from pyrubrum.menus.styles import BaseStyle
+from pyrubrum.menus.styles import BaseStyle, MenuStyle
 from pyrubrum.types import Types
+
 from .base_menu import BaseMenu
 
 

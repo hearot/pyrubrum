@@ -19,15 +19,16 @@
 from typing import Set
 
 from pyrogram import Client
-from pyrogram import MessageHandler
+from pyrogram.handlers import MessageHandler
 
 from pyrubrum.database import BaseDatabase
 from pyrubrum.tree import Node
-from .handler import command_filter
-from .handler import deep_link_filter
-from .handler import Handler
-from .parameterized_base_handler import ParameterizedBaseHandler
-from .parameterized_base_handler import pass_parameterized_handler
+
+from .handler import Handler, command_filter, deep_link_filter
+from .parameterized_base_handler import (
+    ParameterizedBaseHandler,
+    pass_parameterized_handler,
+)
 
 
 class ParameterizedHandler(Handler, ParameterizedBaseHandler):

@@ -17,9 +17,7 @@
 # along with Pyrubrum. If not, see <https://www.gnu.org/licenses/>.
 
 from copy import deepcopy
-from typing import Any
-from typing import Optional
-from typing import Dict
+from typing import Any, Dict, Optional
 
 
 class Button:

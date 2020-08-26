@@ -17,9 +17,7 @@
 # along with Pyrubrum. If not, see <https://www.gnu.org/licenses/>.
 
 from abc import ABC
-from typing import Any
-from typing import Dict
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from pyrogram import Client
 

@@ -18,13 +18,10 @@
 
 from typing import Optional
 
-from .base_database import BaseDatabase
-from .errors import DeleteError
-from .errors import ExpireError
-from .errors import NotFoundError
-from .errors import SetError
-
 from pyrubrum.types import Types
+
+from .base_database import BaseDatabase
+from .errors import DeleteError, ExpireError, NotFoundError, SetError
 
 try:
     import redis

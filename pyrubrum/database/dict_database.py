@@ -18,10 +18,10 @@
 
 from typing import Optional
 
+from pyrubrum.types import Types
+
 from .base_database import BaseDatabase
 from .errors import NotFoundError
-
-from pyrubrum.types import Types
 
 
 class DictDatabase(dict, BaseDatabase):

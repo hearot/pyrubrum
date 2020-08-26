@@ -16,8 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Pyrubrum. If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Any
-from typing import Dict
+from typing import Any, Dict
 
 from pyrogram import Client
 
