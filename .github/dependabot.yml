@@ -9,7 +9,7 @@ updates:
     reviewers:
       - "hearot"
     commit-message:
-      prefix: "chore: update "
+      prefix: "chore"
       include: "scope"
     labels:
       - "dependencies"
