@@ -8,10 +8,6 @@
     <i>Create your own bot in less than 100 lines!</i>
     <br>
     <br>
-    <a href="https://t.me/pyrubrum">
-        <img src="https://img.shields.io/badge/Channel-@pyrubrum-red.svg" alt="Channel: @pyrubrum"/>
-    </a>
-    •
     <a href="https://t.me/hearot">
         <img src="https://img.shields.io/badge/Developer-@hearot-blue.svg" alt="Developer: @hearot"/>
     </a>
