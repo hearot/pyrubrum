@@ -1,3 +1,3 @@
 git+https://github.com/crossnox/m2r
-Sphinx==8.1.0
+Sphinx==8.1.3
 sphinx-rtd-theme
